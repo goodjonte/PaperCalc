@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using PaperCalc.Data;
 using PaperCalc.Models;
 
-namespace PaperCalc.Pages.Variable.Paper
+namespace PaperCalc.Pages.Paper
 {
     public class IndexModel : PageModel
     {
@@ -20,13 +20,11 @@ namespace PaperCalc.Pages.Variable.Paper
         }
 
         public IList<PaperCalc.Models.Paper> Paper { get;set; } = default!;
-        public IList<PaperCalc.Models.Size> Size { get; set; } = default!;
 
         public async Task OnGetAsync()
         {
             if (_context.Paper != null)
             {
-                Size = await _context.Size.ToListAsync();
                 Paper = await _context.Paper.ToListAsync();
             }
         }

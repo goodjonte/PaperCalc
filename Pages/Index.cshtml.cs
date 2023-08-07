@@ -18,40 +18,17 @@ namespace PaperCalc.Pages
         }
 
         public IList<PaperCalc.Models.Paper> Paper { get; set; } = default!;
-        public IList<PaperCalc.Models.Size> Size { get; set; } = default!;
-        public IList<PaperCalc.Models.Colour> Colour { get; set; } = default!;
-        public IList<PaperCalc.Models.Clicks> Clicks { get; set; } = default!;
-        public IList<PaperCalc.Models.Finishings> Finishings { get; set; } = default!;
-        public Quote Quote { get; set; } = default!;
+      
 
         public async Task OnGetAsync()
         {
             if (_context.Paper != null)
             {
                 Paper = await _context.Paper.ToListAsync();
-                Colour = await _context.Colour.ToListAsync();
-                Size = await _context.Size.ToListAsync();
-                Clicks = await _context.Clicks.ToListAsync();
-                Finishings = await _context.Finishings.ToListAsync();
             }
         }
 
-        public async Task OnPostAsync()
-        {
-            if (_context.Paper != null)
-            {
-                Paper = await _context.Paper.ToListAsync();
-                Colour = await _context.Colour.ToListAsync();
-                Size = await _context.Size.ToListAsync();
-                Clicks = await _context.Clicks.ToListAsync();
-                Finishings = await _context.Finishings.ToListAsync();
-            }
-
-
-            await Quote.SetObjects(_context);
-            ViewData["total"] = Quote.GetTotal();
-            //ViewData["TotalWarning"]
-        }
+        
     }
 
 }

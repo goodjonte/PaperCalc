@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using PaperCalc.Data;
 using PaperCalc.Models;
 
-namespace PaperCalc.Pages.Variable.Finishings
+namespace PaperCalc.Pages.Paper
 {
     public class CreateModel : PageModel
     {
@@ -25,18 +25,18 @@ namespace PaperCalc.Pages.Variable.Finishings
         }
 
         [BindProperty]
-        public PaperCalc.Models.Finishings Finishings { get; set; } = default!;
+        public PaperCalc.Models.Paper Paper { get; set; } = default!;
         
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid || _context.Finishings == null || Finishings == null)
+          if (!ModelState.IsValid || _context.Paper == null || Paper == null)
             {
                 return Page();
             }
 
-            _context.Finishings.Add(Finishings);
+            _context.Paper.Add(Paper);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

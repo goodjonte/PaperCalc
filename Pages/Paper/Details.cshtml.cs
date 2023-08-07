@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using PaperCalc.Data;
 using PaperCalc.Models;
 
-namespace PaperCalc.Pages.Variable.Colour
+namespace PaperCalc.Pages.Paper
 {
     public class DetailsModel : PageModel
     {
@@ -19,23 +19,23 @@ namespace PaperCalc.Pages.Variable.Colour
             _context = context;
         }
 
-      public PaperCalc.Models.Colour Colour { get; set; } = default!; 
+      public PaperCalc.Models.Paper Paper { get; set; } = default!; 
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
-            if (id == null || _context.Colour == null)
+            if (id == null || _context.Paper == null)
             {
                 return NotFound();
             }
 
-            var colour = await _context.Colour.FirstOrDefaultAsync(m => m.Id == id);
-            if (colour == null)
+            var paper = await _context.Paper.FirstOrDefaultAsync(m => m.Id == id);
+            if (paper == null)
             {
                 return NotFound();
             }
             else 
             {
-                Colour = colour;
+                Paper = paper;
             }
             return Page();
         }

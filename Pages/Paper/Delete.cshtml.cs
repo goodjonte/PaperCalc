@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using PaperCalc.Data;
 using PaperCalc.Models;
 
-namespace PaperCalc.Pages.Variable.Clicks
+namespace PaperCalc.Pages.Paper
 {
     public class DeleteModel : PageModel
     {
@@ -20,40 +20,40 @@ namespace PaperCalc.Pages.Variable.Clicks
         }
 
         [BindProperty]
-      public PaperCalc.Models.Clicks Clicks { get; set; } = default!;
+      public PaperCalc.Models.Paper Paper { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
-            if (id == null || _context.Clicks == null)
+            if (id == null || _context.Paper == null)
             {
                 return NotFound();
             }
 
-            var clicks = await _context.Clicks.FirstOrDefaultAsync(m => m.Id == id);
+            var paper = await _context.Paper.FirstOrDefaultAsync(m => m.Id == id);
 
-            if (clicks == null)
+            if (paper == null)
             {
                 return NotFound();
             }
             else 
             {
-                Clicks = clicks;
+                Paper = paper;
             }
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync(Guid? id)
         {
-            if (id == null || _context.Clicks == null)
+            if (id == null || _context.Paper == null)
             {
                 return NotFound();
             }
-            var clicks = await _context.Clicks.FindAsync(id);
+            var paper = await _context.Paper.FindAsync(id);
 
-            if (clicks != null)
+            if (paper != null)
             {
-                Clicks = clicks;
-                _context.Clicks.Remove(Clicks);
+                Paper = paper;
+                _context.Paper.Remove(Paper);
                 await _context.SaveChangesAsync();
             }
 

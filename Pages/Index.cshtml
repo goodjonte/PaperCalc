@@ -6,46 +6,5 @@
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    @if (Model.Paper != null)
-    {
-    <form method="post">
-        <label>Quantity:</label>
-        <input type="text" asp-for="Quote.Quantity">
-        <select asp-for="Quote.PaperId">
-            @foreach (var item in Model.Paper)
-            {
-                @Html.DisplayFor(modelItem => item.Name)
-                <option value="@item.Id">
-                    @item.Name <span>@item.Gsm</span>gsm
-                    @foreach (var size in Model.Size)
-                    {
-                        if (size.Id == item.SizeId)
-                        {
-                            @size.Name
-                        }
-                    }
-                </option>
-            }
-        </select>
-        <select asp-for="Quote.ColourId">
-            @foreach (var item in Model.Colour)
-            {
-                <option value="@item.Id">@item.Name</option>
-            })
-        </select>
-
-        <select>
-            @foreach (var item in Model.Finishings)
-            {
-                <option value="@item.Id">@item.FinishingName</option>
-            })
-        </select>
-
-        <div class="form-group">
-            <input type="submit" value="Create" class="btn btn-primary" />
-        </div>
-
-    </form>
-    }
-    @ViewData["total"]
+   
 </div>

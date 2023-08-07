@@ -1,0 +1,80 @@
+﻿@page
+@model PaperCalc.Pages.Paper.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Paper</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Paper.Company" class="control-label"></label>
+                <input asp-for="Paper.Company" class="form-control" />
+                <span asp-validation-for="Paper.Company" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Paper.Brand" class="control-label"></label>
+                <input asp-for="Paper.Brand" class="form-control" />
+                <span asp-validation-for="Paper.Brand" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Paper.Size" class="control-label"></label>
+                <select asp-for="Paper.Size" class="form-control">
+                    <option value="">Select a Size...</option>
+                    <option value="SRA3">SRA3</option>
+                    <option value="A4">A4</option>
+                    <option value="A3">A3</option>
+                    <option value="SRA4">SRA4</option>
+                    <option value="SRA2">SRA2</option>
+                    <option value="SRA1">SRA1</option>
+                    <option value="A2">A2</option>
+                    <option value="A1">A1</option>
+                </select>
+                <span asp-validation-for="Paper.Size" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Paper.Weight" class="control-label"></label>
+                <input asp-for="Paper.Weight" class="form-control" />
+                <span asp-validation-for="Paper.Weight" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Paper.Type" class="control-label"></label>
+                <select asp-for="Paper.Type" class="form-control">
+                    <option value="">Select a Type...</option>
+                    <option value="0">Adhesive</option>
+                    <option value="1">Coated</option>
+                    <option value="2">Uncoated</option>
+                    <option value="3">Synthetic</option>
+                </select>
+                <span asp-validation-for="Paper.Type" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Paper.PackCost" class="control-label"></label>
+                <input asp-for="Paper.PackCost" class="form-control" />
+                <span asp-validation-for="Paper.PackCost" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Paper.SheetsPerPack" class="control-label"></label>
+                <input asp-for="Paper.SheetsPerPack" class="form-control" />
+                <span asp-validation-for="Paper.SheetsPerPack" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

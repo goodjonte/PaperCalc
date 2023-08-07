@@ -1,0 +1,84 @@
+﻿@page
+@model PaperCalc.Pages.Paper.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Paper[0].Company)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Paper[0].Brand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Paper[0].Size)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Paper[0].Weight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Paper[0].Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Paper[0].PackCost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Paper[0].PackCostGstIncluded)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Paper[0].SheetsPerPack)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Paper[0].SheetCost)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Paper) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Company)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Brand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Size)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Weight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PackCost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PackCostGstIncluded)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SheetsPerPack)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SheetCost)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

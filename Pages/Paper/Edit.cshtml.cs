@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using PaperCalc.Data;
 using PaperCalc.Models;
 
-namespace PaperCalc.Pages.Variable.Clicks
+namespace PaperCalc.Pages.Paper
 {
     public class EditModel : PageModel
     {
@@ -21,21 +21,21 @@ namespace PaperCalc.Pages.Variable.Clicks
         }
 
         [BindProperty]
-        public PaperCalc.Models.Clicks Clicks { get; set; } = default!;
+        public PaperCalc.Models.Paper Paper { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
-            if (id == null || _context.Clicks == null)
+            if (id == null || _context.Paper == null)
             {
                 return NotFound();
             }
 
-            var clicks =  await _context.Clicks.FirstOrDefaultAsync(m => m.Id == id);
-            if (clicks == null)
+            var paper =  await _context.Paper.FirstOrDefaultAsync(m => m.Id == id);
+            if (paper == null)
             {
                 return NotFound();
             }
-            Clicks = clicks;
+            Paper = paper;
             return Page();
         }
 
@@ -48,7 +48,7 @@ namespace PaperCalc.Pages.Variable.Clicks
                 return Page();
             }
 
-            _context.Attach(Clicks).State = EntityState.Modified;
+            _context.Attach(Paper).State = EntityState.Modified;
 
             try
             {
@@ -56,7 +56,7 @@ namespace PaperCalc.Pages.Variable.Clicks
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ClicksExists(Clicks.Id))
+                if (!PaperExists(Paper.Id))
                 {
                     return NotFound();
                 }
@@ -69,9 +69,9 @@ namespace PaperCalc.Pages.Variable.Clicks
             return RedirectToPage("./Index");
         }
 
-        private bool ClicksExists(Guid id)
+        private bool PaperExists(Guid id)
         {
-          return (_context.Clicks?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.Paper?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
