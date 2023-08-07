@@ -1,0 +1,20 @@
+﻿@page
+@model PaperCalc.Pages.SettingsModel
+@{
+}
+<form method="post">
+    <input type="hidden" asp-for="Settings.Id" />
+    <input type="hidden" asp-for="Settings.Other" />
+    <label>GST Percentage:</label>
+    <input asp-for="Settings.Gst" step="any" type="number" />
+    <label>Profit Percentage:</label>
+    <input asp-for="Settings.ProfitMargin" step="any" type="number" />
+    <label>Labour Cost:</label>
+    <input asp-for="Settings.Labour" step="any" type="number" />
+
+    <button type="submit">Save</button>
+
+</form>
+<div>
+    <h4>@ViewData["Message"]</h4>
+</div>

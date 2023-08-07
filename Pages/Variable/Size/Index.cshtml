@@ -1,0 +1,60 @@
+﻿@page
+@model PaperCalc.Pages.Variable.Size.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Size[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Size[0].Format)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Size[0].FormatNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Size[0].XAxis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Size[0].YAxis)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Size) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Format)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FormatNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.XAxis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.YAxis)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
