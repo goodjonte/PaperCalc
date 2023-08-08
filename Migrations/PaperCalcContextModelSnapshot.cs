@@ -22,6 +22,38 @@ namespace PaperCalc.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("PaperCalc.Models.Coatings", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Coatings");
+                });
+
+            modelBuilder.Entity("PaperCalc.Models.CoatingsPaper", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CoatingId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("PaperId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CoatingsPapers");
+                });
+
             modelBuilder.Entity("PaperCalc.Models.Paper", b =>
                 {
                     b.Property<Guid>("Id")

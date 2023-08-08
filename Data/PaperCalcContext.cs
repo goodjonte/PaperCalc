@@ -16,5 +16,8 @@ namespace PaperCalc.Data
 
         public DbSet<PaperCalc.Models.Paper> Paper { get; set; } = default!;
 
+        public DbSet<PaperCalc.Models.Coatings> Coatings { get; set; } = default!;
+        public DbSet<PaperCalc.Models.CoatingsPaper> CoatingsPapers { get; set; } = default!;
+
     }
 }

@@ -23,3 +23,9 @@ body {
 .hidden {
   display: none;
 }
+.btn-group {
+    width: 350px !important;
+}
+a {
+    color: darkblue !important;
+}
