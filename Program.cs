@@ -1,16 +1,17 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using PaperCalc.Data;
 
 var builder = WebApplication.CreateBuilder(args);
-
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<PaperCalcContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("PaperCalcContext") ?? throw new InvalidOperationException("Connection string 'PaperCalcContext' not found.")));
-
-
-
+    {
+        options.EnableSensitiveDataLogging();
+        options.UseSqlServer(builder.Configuration.GetConnectionString("PaperCalcContext") ?? throw new InvalidOperationException("Connection string 'PaperCalcContext' not found."));
+    }
+);
 
 
 var app = builder.Build();

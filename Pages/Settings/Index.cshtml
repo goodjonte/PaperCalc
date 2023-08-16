@@ -1,0 +1,138 @@
+﻿@page
+@model PaperCalc.Pages.Settings.IndexModel
+@{
+}
+<script>
+    const formIds = ["AspeosFlatsize", "CreateAspeosFlatsize", "EpsonFlatsize", "CreateEpsonFlatsize"];
+
+    function Unhide(id) {
+        for(let i = 0; i < formIds.length; i++)
+        {
+            document.getElementById(formIds[i]).classList.add("hidden");
+        }   
+        document.getElementById(id).classList.remove("hidden");
+    };
+</script>
+
+<h1>Settings @ViewData["url"]</h1>
+
+<form method="post" asp-page-handler="SaveSettings">
+    <div class="form-group">
+        <label asp-for="Settings.FilehandlingCost" class="control-label"></label>
+        <input asp-for="Settings.FilehandlingCost" class="form-control" />
+        <span asp-validation-for="Settings.FilehandlingCost" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Settings.MarginMultiplier" class="control-label"></label>
+        <input asp-for="Settings.MarginMultiplier" class="form-control" />
+        <span asp-validation-for="Settings.MarginMultiplier" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Save" class="btn btn-primary" />
+    </div>
+</form>
+
+<div class="mt-3">
+    <h2>Flat Sizes</h2>
+    <div>
+        <a onclick="Unhide('AspeosFlatsize')">Edit Aspeos FlatSize Values</a> |
+        <a onclick="Unhide('CreateAspeosFlatsize')">Create Aspeos FlatSize</a>
+    </div>
+    <div>
+        <a onclick="Unhide('EpsonFlatsize')">Edit Epson FlatSize Values</a> |
+        <a onclick="Unhide('CreateEpsonFlatsize')">Create Epson FlatSize </a>
+    </div>
+</div>
+
+<div>
+    <!-- Aspeos Edit -->
+    
+    <div id="AspeosFlatsize" class="hidden customDivTable">
+        <h3>Aspeos Flat Sizes</h3>
+        <p>To delete a flatsize, set name to delete</p>
+        <div class="customDivTableHead">
+            <div>
+                <h5>@Html.DisplayNameFor(model => model.AspeosFlatSizes[0].Name)</h5>
+            </div>
+            <div>
+                <h5>@Html.DisplayNameFor(model => model.AspeosFlatSizes[0].PiecesPerSRA3)</h5>
+            </div>
+            <div>
+                <h5>@Html.DisplayNameFor(model => model.AspeosFlatSizes[0].CutsPerSRA3)</h5>
+            </div>
+            <div>
+                <h5>@Html.DisplayNameFor(model => model.AspeosFlatSizes[0].LaminationCost)</h5>
+            </div>
+            <div>
+            </div>
+        </div>
+
+        <div class="customDivTableBody">
+            @for (int i = 0; i < Model.AspeosFlatSizes.Count; i++)
+            {
+                
+                <form method="post" asp-page-handler="AspeosEdit">
+                    <input asp-for="AspeosFlatSize.Id" value="@Model.AspeosFlatSizes[i].Id" type="hidden"/>
+                    <div>
+                        <input asp-for="AspeosFlatSize.Name" value="@Model.AspeosFlatSizes[i].Name" />
+                    </div>
+                    <div>
+                        <input asp-for="AspeosFlatSize.PiecesPerSRA3" value="@Model.AspeosFlatSizes[i].PiecesPerSRA3" />
+                    </div>
+                    <div>
+                        <input asp-for="AspeosFlatSize.CutsPerSRA3" value="@Model.AspeosFlatSizes[i].CutsPerSRA3" />
+                    </div>
+                    <div>
+                        <input asp-for="AspeosFlatSize.LaminationCost" value="@Model.AspeosFlatSizes[i].LaminationCost" />
+                    </div>
+                    <div>
+                        <input type="submit" value="Save" class="btn btn-primary tbButton" />
+                    </div>
+                </form>
+            }
+        </div>
+    </div>
+        
+    
+
+    <!-- Aspeos Create -->
+    <form method="post" id="CreateAspeosFlatsize" class="hidden" asp-page-handler="AspeosCreate">
+        <input type="hidden" asp-for="AspeosFlatSize.Id" />
+
+        <div class="form-group">
+            <label asp-for="AspeosFlatSize.Name" class="control-label"></label>
+            <input asp-for="AspeosFlatSize.Name" class="form-control" />
+            <span asp-validation-for="AspeosFlatSize.Name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="AspeosFlatSize.PiecesPerSRA3" class="control-label"></label>
+            <input asp-for="AspeosFlatSize.PiecesPerSRA3" class="form-control" />
+            <span asp-validation-for="AspeosFlatSize.PiecesPerSRA3" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="AspeosFlatSize.CutsPerSRA3" class="control-label"></label>
+            <input asp-for="AspeosFlatSize.CutsPerSRA3" class="form-control" />
+            <span asp-validation-for="AspeosFlatSize.CutsPerSRA3" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="AspeosFlatSize.LaminationCost" class="control-label"></label>
+            <input asp-for="AspeosFlatSize.LaminationCost" class="form-control" />
+            <span asp-validation-for="AspeosFlatSize.LaminationCost" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+    </form>
+
+    <!-- Epson Edit -->
+    <form method="post" id="EpsonFlatsize" class="hidden" asp-page-handler="EpsonEdit">
+        <label>Epson Edit</label>
+        <input type="number" />
+    </form>
+
+    <!-- Epson Create -->
+    <form method="post" id="CreateEpsonFlatsize" class="hidden" asp-page-handler="EpsonCreate">
+        <label>Epson Create</label>
+        <input type="number" />
+    </form>
+</div>

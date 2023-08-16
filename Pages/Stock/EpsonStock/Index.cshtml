@@ -1,0 +1,72 @@
+﻿@page
+@model PaperCalc.Pages.EpsonStock.IndexModel
+
+@{
+    ViewData["Title"] = "Epson Stock";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EpsonStock[0].Company)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EpsonStock[0].ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EpsonStock[0].Width)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EpsonStock[0].Weight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EpsonStock[0].CoatType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EpsonStock[0].RollCost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EpsonStock[0].RollsLength)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.EpsonStock) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Company)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Width)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Weight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CoatType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RollCost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RollsLength)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -35,13 +35,20 @@
                             <a class="nav-link text-dark" asp-page="/Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-page="/Paper/Index">Paper</a>
+                            
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Stock
+                            </a>
+                            <div class="dropdown-menu" style="width: 300px;" aria-labelledby="navbarDropdown">
+                                <a class="nav-link text-dark" asp-page="/Stock/AspeosStock/Index">Aspeos Stock</a>
+                                <a class="nav-link text-dark" asp-page="/Stock/AspeosStockCoatings/Index">Aspeos Stock Coatings</a>
+                                <a class="nav-link text-dark" asp-page="/Stock/EpsonStock/Index">Epson Stock</a>
+                            </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-page="/Coatings/Index">Stock Coating</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-page="/Settings">Settings</a>
+                            <a class="nav-link text-dark" asp-page="/Settings/Index">Settings</a>
                         </li>
                     </ul>
                 </div>
@@ -56,7 +63,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2023 - PaperCalc - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            &copy; 2023 - PaperCalc
         </div>
     </footer>
 

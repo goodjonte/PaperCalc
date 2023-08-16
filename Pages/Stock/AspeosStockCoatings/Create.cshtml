@@ -1,0 +1,45 @@
+﻿@page
+@model PaperCalc.Pages.Stock.AspeosStockCoatings.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Aspeos Stock Coatings</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="AspeosStockCoatingsDTO.Name" class="control-label"></label>
+                <input asp-for="AspeosStockCoatingsDTO.Name" class="form-control" />
+                <span asp-validation-for="AspeosStockCoatingsDTO.Name" class="text-danger"></span>
+
+                <label>Assign Paper</label>
+                <select asp-for="AspeosStockCoatingsDTO.Guids" id="multiple-checkboxes" class="width300" multiple="multiple">
+                    @{
+                        foreach (PaperCalc.Models.AspeosStock p in Model.AspeosStock)
+                        {
+                            <option value="@p.Id">@p.Company @p.ProductName @p.CoatType @p.Weight.ToString()gsm @p.Size </option>
+                        }
+                    }
+                </select>
+
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

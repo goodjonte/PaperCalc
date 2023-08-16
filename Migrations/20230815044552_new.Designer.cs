@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PaperCalc.Data;
 
@@ -11,9 +12,11 @@ using PaperCalc.Data;
 namespace PaperCalc.Migrations
 {
     [DbContext(typeof(PaperCalcContext))]
-    partial class PaperCalcContextModelSnapshot : ModelSnapshot
+    [Migration("20230815044552_new")]
+    partial class @new
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -81,19 +84,18 @@ namespace PaperCalc.Migrations
                     b.ToTable("AspeosStock");
                 });
 
-            modelBuilder.Entity("PaperCalc.Models.AspeosStockCoatings", b =>
+            modelBuilder.Entity("PaperCalc.Models.Coatings", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("AspeosStockCoatings");
+                    b.ToTable("Coatings");
                 });
 
             modelBuilder.Entity("PaperCalc.Models.CoatingsPaper", b =>
@@ -158,6 +160,10 @@ namespace PaperCalc.Migrations
                     b.Property<double>("RollsLength")
                         .HasColumnType("float");
 
+                    b.Property<string>("Size")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Weight")
                         .HasColumnType("int");
 
@@ -167,23 +173,6 @@ namespace PaperCalc.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("EpsonStock");
-                });
-
-            modelBuilder.Entity("PaperCalc.Models.Settings", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<double>("FilehandlingCost")
-                        .HasColumnType("float");
-
-                    b.Property<double>("MarginMultiplier")
-                        .HasColumnType("float");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Settings");
                 });
 #pragma warning restore 612, 618
         }

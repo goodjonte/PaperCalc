@@ -1,0 +1,85 @@
+﻿@page
+@model PaperCalc.Pages.AspeosStock.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>AspeosStock</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="AspeosStock.Company" class="control-label"></label>
+                <input asp-for="AspeosStock.Company" class="form-control" />
+                <span asp-validation-for="AspeosStock.Company" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AspeosStock.ProductName" class="control-label"></label>
+                <input asp-for="AspeosStock.ProductName" class="form-control" />
+                <span asp-validation-for="AspeosStock.ProductName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AspeosStock.Size" class="control-label"></label>
+                <select asp-for="AspeosStock.Size" class="form-control custom-select">
+                    <option value="">Select a Size...</option>
+                    <option value="SRA3">SRA3</option>
+                    <option value="A4">A4</option>
+                    <option value="A3">A3</option>
+                    <option value="A2">A2</option>
+                    <option value="A1">A1</option>
+                    <option value="A0">A0</option>
+                    <option value="SRA4">SRA4</option>
+                    <option value="SRA3">SRA3</option>
+                    <option value="SRA2">SRA2</option>
+                    <option value="SRA1">SRA1</option>
+                </select>
+                <span asp-validation-for="AspeosStock.Size" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AspeosStock.Weight" class="control-label">Weight (gsm)</label>
+                <input asp-for="AspeosStock.Weight" class="form-control" />
+                <span asp-validation-for="AspeosStock.Weight" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AspeosStock.CoatType" class="control-label"></label>
+                <select asp-for="AspeosStock.CoatType" class="form-control custom-select">
+                    <option value="">Select a Coating Type...</option>
+                    <option value="Adhesive">Adhesive</option>
+                    <option value="Coated">Coated</option>
+                    <option value="Uncoated">Uncoated</option>
+                    <option value="Synthetic">Synthetic</option>
+                    <option value="Matt">Matt</option>
+                    <option value="Satin">Satin</option>
+                    <option value="Gloss">Gloss</option>
+                </select>
+                <span asp-validation-for="AspeosStock.CoatType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AspeosStock.PackCost" class="control-label"></label>
+                <input asp-for="AspeosStock.PackCost" class="form-control" />
+                <span asp-validation-for="AspeosStock.PackCost" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AspeosStock.SheetsPerPack" class="control-label"></label>
+                <input asp-for="AspeosStock.SheetsPerPack" class="form-control" />
+                <span asp-validation-for="AspeosStock.SheetsPerPack" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

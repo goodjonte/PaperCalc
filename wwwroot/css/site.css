@@ -20,6 +20,9 @@ html {
 body {
   margin-bottom: 60px;
 }
+footer {
+    position: relative !important;
+}
 .hidden {
   display: none;
 }
@@ -27,5 +30,56 @@ body {
     width: 350px !important;
 }
 a {
-    color: darkblue !important;
+    color: rgb(0, 0, 255) !important;
+}
+.nav-link, .navbar-brand {
+    color: black !important;
+}
+td, th {
+    text-align: center !important;
+    vertical-align: middle !important;
+}
+.multiselect-container {
+    height: 400px !important;
+    overflow-y: scroll !important;
+}
+.customDivTable {
+    width: 100%;
+    margin: 25px 0;
+}
+.customDivTableHead {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    border-bottom: 2px solid rgb(128, 128, 128);
+}
+.customDivTableHead div {
+    width: 20%;
+}
+.customDivTableHead div h5 {
+    text-align: left;
+    width: 90%;
+    padding-left: 10%;
+    overflow-wrap: break-word;
+}
+.customDivTableBody{
+    max-height: 400px;
+    overflow-y: auto;
+}
+.customDivTableBody form {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding: 10px 0;
+    border-bottom: 1px solid rgb(128, 128, 128);
+}
+.customDivTableBody form div {
+    text-align: center;
+    width: 20%;
+}
+.customDivTableBody form div input {
+    width: 80%;
+}
+.tbButton {
+    width: 50% !important;
 }

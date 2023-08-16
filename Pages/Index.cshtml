@@ -5,6 +5,138 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
+    <h4 class="display-4">Aspeos</h4>
+    <form method="post">
+        <label asp-for="AspeosCalculation.Quantity">Quantity</label>
+        <input asp-for="AspeosCalculation.Quantity" type="number" />
+
+        <label asp-for="AspeosCalculation.FlatSizeId">Flat Size</label>
+        <select asp-for="AspeosCalculation.FlatSizeId">
+            <option value="">Select a Size...</option>
+            @{
+                foreach (PaperCalc.Models.FlatSize fs in Model.FlatSize)
+                {
+                    <option value="@fs.Id">@fs.Name</option>
+                }
+            }
+        </select>
+
+        <label asp-for="AspeosCalculation.CoatingId">Stock Coating</label>
+        <select asp-for="AspeosCalculation.CoatingId">
+            @{
+                foreach (PaperCalc.Models.AspeosStockCoatings coat in Model.Coatings)
+                {
+                    <option value="@coat.Id">@coat.Name</option>
+                }
+            }
+        </select>
+
+        <label asp-for="AspeosCalculation.Colour">Colour</label>
+        <select asp-for="AspeosCalculation.Colour">
+            <option value="">Select a Option...</option>
+            <option value="colour">Colour</option>
+            <option value="black">Black</option>
+        </select>
+
+        <label asp-for="AspeosCalculation.PrintedSides">Printed Sides</label>
+        <select asp-for="AspeosCalculation.PrintedSides">
+            <option value="">Select a Option...</option>
+            <option value="single">Single Sided</option>
+            <option value="double">Double Sided</option>
+        </select>
+
+        <label asp-for="AspeosCalculation.Folds">Folds</label>
+        <select asp-for="AspeosCalculation.Folds">
+            <option value="0">None</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </select>
+
+        <label asp-for="AspeosCalculation.Creasing">Creasing</label>
+        <select asp-for="AspeosCalculation.Creasing">
+            <option value="0">None</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </select>
+
+        <input asp-for="AspeosCalculation.Trimming" type="checkbox" value="true">
+        <label asp-for="AspeosCalculation.Trimming"> Trimming</label><br>
+
+        <input asp-for="AspeosCalculation.HolePunch" type="checkbox" value="true">
+        <label asp-for="AspeosCalculation.HolePunch"> Hole Punch</label><br>
+
+        <input asp-for="AspeosCalculation.Lamination" type="checkbox" value="true">
+        <label asp-for="AspeosCalculation.Lamination"> Lamination</label><br>
+
+        <input asp-for="AspeosCalculation.SmallJob" type="checkbox" value="true">
+        <label asp-for="AspeosCalculation.SmallJob">Small Job</label><br>
+
+        <input asp-for="AspeosCalculation.Urgent" type="checkbox" value="true">
+        <label asp-for="AspeosCalculation.Urgent">Urgent</label><br>
+
+        <input asp-for="AspeosCalculation.FileHandling" type="checkbox" value="true">
+        <label asp-for="AspeosCalculation.FileHandling">File Handling</label><br>
+
+
+        <input type="submit" class="btn btn-success" />
+
+    </form>
+
+    <div>
+        <table>
+            <tr>
+                <th>PER SRA</th>
+                <th>Base Click Rate</th>
+                <th>Click Side Multiplier</th>
+                <th>Click Size Multiplier</th>
+                <th>Click Rate</th>
+                <th>Sheet Price</th>
+                <th>Cuts</th>
+                <th>Hole Punch</th>
+                <th>Lamination</th>
+                <th>Creasing</th>
+                <th>Folding</th>
+            </tr>
+            <tr>
+                <td>@Model.AspeosCalculation.PerSRA</td>
+                <td>@Html.DisplayFor(model => Model.AspeosCalculation.BaseClickRate)</td>
+                <td>@Html.DisplayFor(model => Model.AspeosCalculation.ClickSideMultiplier)</td>
+                <td>@Html.DisplayFor(model => Model.AspeosCalculation.ClickSizeMultiplier)</td>
+                <td>@Html.DisplayFor(model => Model.AspeosCalculation.ClickRate)</td>
+                <td>@Html.DisplayFor(model => Model.AspeosCalculation.SheetPrice)</td>
+                <td>@Model.AspeosCalculation.Cuts</td>
+                <td>@Model.AspeosCalculation.HolePunches</td>
+                <td>@Html.DisplayFor(model => Model.AspeosCalculation.LaminationCost)</td>
+                <td>@Model.AspeosCalculation.CreasingRate</td>
+                <td>@Model.AspeosCalculation.FoldingRate</td>
+            </tr>
+            <tr>
+                <th>Paper Cost</th>
+                <th>Buffer</th>
+                <th>Finishings</th>
+                <th>Multiplier</th>
+                <th>Minimum</th>
+                <th>File Handling</th>
+            </tr>
+            <tr>
+                <td>@Html.DisplayFor(model => Model.AspeosCalculation.PaperCost)</td>
+                <td>@Model.AspeosCalculation.Buffer</td>
+                <td>@Html.DisplayFor(model => Model.AspeosCalculation.FinishingsCost)</td>
+                <td>@Model.AspeosCalculation.Multiplier</td>
+                <td>@Model.AspeosCalculation.Minimum</td>
+                <td>@Model.AspeosCalculation.FileHandlingCost</td>
+            </tr>
+            <tr>
+                <th>Job Cost</th>
+                <th>Cost + GST</th>
+            </tr>
+            <tr>
+                <td>@Html.DisplayFor(model => Model.AspeosCalculation.JobCost)</td>
+                <td>@Html.DisplayFor(model => Model.AspeosCalculation.JobCostGstInc)</td>
+            </tr>
+        </table>
+    </div>
    
 </div>
