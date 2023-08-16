@@ -44,41 +44,45 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.AspeosStock) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Company)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Size)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Weight)<span>gsm</span>
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CoatType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PackCost)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PackCostGstIncluded)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SheetsPerPack)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SheetCost)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> | 
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> | 
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.AspeosStock)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Company)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Size)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Weight)<span>gsm</span>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CoatType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PackCost)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PackCostGstIncluded)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SheetsPerPack)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SheetCost)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+
+

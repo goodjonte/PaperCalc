@@ -105,7 +105,7 @@
                 <td>@Html.DisplayFor(model => Model.AspeosCalculation.ClickSideMultiplier)</td>
                 <td>@Html.DisplayFor(model => Model.AspeosCalculation.ClickSizeMultiplier)</td>
                 <td>@Html.DisplayFor(model => Model.AspeosCalculation.ClickRate)</td>
-                <td>@Html.DisplayFor(model => Model.AspeosCalculation.SheetPrice)</td>
+                <td id="dataSheetPrice">@Html.DisplayFor(model => Model.AspeosCalculation.SheetPrice)</td>
                 <td>@Model.AspeosCalculation.Cuts</td>
                 <td>@Model.AspeosCalculation.HolePunches</td>
                 <td>@Html.DisplayFor(model => Model.AspeosCalculation.LaminationCost)</td>
@@ -121,22 +121,71 @@
                 <th>File Handling</th>
             </tr>
             <tr>
-                <td>@Html.DisplayFor(model => Model.AspeosCalculation.PaperCost)</td>
-                <td>@Model.AspeosCalculation.Buffer</td>
-                <td>@Html.DisplayFor(model => Model.AspeosCalculation.FinishingsCost)</td>
-                <td>@Model.AspeosCalculation.Multiplier</td>
-                <td>@Model.AspeosCalculation.Minimum</td>
-                <td>@Model.AspeosCalculation.FileHandlingCost</td>
+                <td id="dataPaperCost">@Html.DisplayFor(model => Model.AspeosCalculation.PaperCost)</td>
+                <td id="dataBuffer">@Model.AspeosCalculation.Buffer</td>
+                <td id="dataFinishingsCost">@Html.DisplayFor(model => Model.AspeosCalculation.FinishingsCost)</td>
+                <td id="dataMultiplier">@Model.AspeosCalculation.Multiplier</td>
+                <td id="dataMinimum">@Model.AspeosCalculation.Minimum</td>
+                <td id="dataFileHandlingCost">@Model.AspeosCalculation.FileHandlingCost</td>
             </tr>
             <tr>
                 <th>Job Cost</th>
                 <th>Cost + GST</th>
             </tr>
             <tr>
-                <td>@Html.DisplayFor(model => Model.AspeosCalculation.JobCost)</td>
-                <td>@Html.DisplayFor(model => Model.AspeosCalculation.JobCostGstInc)</td>
+                <td id="dataJobCost">@Html.DisplayFor(model => Model.AspeosCalculation.JobCost)</td>
+                <td id="dataJobCostGstInc">@Html.DisplayFor(model => Model.AspeosCalculation.JobCostGstInc)</td>
             </tr>
         </table>
     </div>
-   
+
 </div>
+
+<button onclick="createPdf()">Create PDF</button>
+
+<script src="https://unpkg.com/pdf-lib@1.17.1"></script>
+<script src="https://unpkg.com/downloadjs@1.4.7"></script>
+<script>
+    const { PDFDocument, StandardFonts, rgb } = PDFLib
+    async function createPdf() {
+        const url = 'https://localhost:7019/Template3.pdf'
+        const existingPdfBytes = await fetch(url).then(res => res.arrayBuffer())
+
+        const pdfDoc = await PDFDocument.load(existingPdfBytes)
+        const form = pdfDoc.getForm()
+
+        const date = form.getTextField('date')
+        const title = form.getTextField('title')
+        const stock = form.getTextField('stock')
+        const printed = form.getTextField('printed')
+        const coating = form.getTextField('coating')
+        const extras = form.getTextField('extras')
+        const size = form.getTextField('size')
+        const quantity = form.getTextField('quantity')
+        const unitPrice = form.getTextField('unitPrice')
+        const subtotal = form.getTextField('subtotal')
+        const gst = form.getTextField('gst')
+        const total = form.getTextField('total')
+
+        date.setText("")
+        title.setText('Create Design Studio')
+        stock.setText('280gsm Synthetic Board 270 micron')
+        printed.setText('Digital full colour x 2 sides')
+        coating.setText("")
+        extras.setText('Finishings here')
+        size.setText("A4")
+        quantity.setText(document.getElementById("AspeosCalculation_Quantity").value)
+        unitPrice.setText(document.getElementById("dataSheetPrice").innerText)
+        subtotal.setText(document.getElementById("dataJobCostGstInc").innerText)
+        gst.setText('$'+(document.getElementById("dataJobCostGstInc").innerText.split('$')[1] - document.getElementById("dataJobCost").innerText.split('$')[1]).toFixed(2))
+        total.setText(document.getElementById("dataJobCostGstInc").innerText)
+
+        form.flatten()
+
+        // Serialize the PDFDocument to bytes (a Uint8Array)
+        const pdfBytes = await pdfDoc.save()
+
+        // Trigger the browser to download the PDF document
+        download(pdfBytes, "Quote.pdf", "application/pdf");
+    }
+</script>
