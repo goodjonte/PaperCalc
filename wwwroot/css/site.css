@@ -20,7 +20,7 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
 }
 footer {
     position: relative !important;
@@ -33,6 +33,9 @@ footer {
 }
 a {
     color: rgb(0, 0, 255) !important;
+}
+.btn {
+    color: white !important;
 }
 .nav-link, .navbar-brand {
     color: black !important;
@@ -114,8 +117,8 @@ td, th {
 
 #CalculationValues {
     width: 100%;
-    overflow: auto;
-    margin-top: 15px;
+    overflow-x: auto;
+    margin-top: 15px;   
     border-top: 1px solid grey;
 }
 #CalculationValues table {
@@ -134,5 +137,63 @@ td, th {
 @media only screen and (max-width: 1200px) {
     #CalculationValues {
         overflow: scroll;
+    }
+}
+
+#AspeosForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.AspeosFormRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin: 10px 0;
+}
+.AspeosFormRow div {
+    
+}
+.input-group {
+    max-width: 300px !important;
+}
+.settingsInputLabel {
+    width: 150px !important;
+}
+.inputGroupCustomCheckbox {
+    border: 1px solid #ced4da;
+    padding: 8px;
+    background-color: #E9ECEF;
+    border-top-right-radius: .25rem;
+    border-bottom-right-radius: .25rem;
+}
+.input-group-text {
+    width: 118.45px;
+}
+#AspeosCalculation_Quantity, #Settings_FilehandlingCost, #Settings_MarginMultiplier {
+    border-top-right-radius: 0.25rem !important;
+    border-bottom-right-radius: 0.25rem !important;
+}
+.calcSubmit {
+    width: 150px;
+    margin: 5px auto;
+}
+@media only screen and (max-width: 992px) {
+    .input-group-text {
+        width: auto;
+    }
+    .AspeosFormRow {
+        flex-wrap: wrap;
+    }
+}
+@media only screen and (max-width: 767px) {
+    #Checkboxes {
+        flex-wrap: nowrap;
+        flex-direction: column;
+        align-items: center;
+    }
+    #Checkboxes > .input-group {
+        width:auto;
+        margin: 5px auto;
     }
 }

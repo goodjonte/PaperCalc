@@ -6,86 +6,158 @@
 
 <div id="aspeosCalculator" class="text-center">
     <h4 class="display-4">Aspeos</h4>
-    <form method="post">
-        <label asp-for="AspeosCalculation.Quantity">Quantity</label>
-        <input asp-for="AspeosCalculation.Quantity" type="number" />
+    <form id="AspeosForm" method="post">
+        <div class="AspeosFormRow">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" id="basic-addon1" asp-for="AspeosCalculation.Quantity"></label>
+                </div>
+                <input type="number" class="form-control" asp-for="AspeosCalculation.Quantity">
+            </div>
 
-        <label asp-for="AspeosCalculation.FlatSizeId">Flat Size</label>
-        <select asp-for="AspeosCalculation.FlatSizeId">
-            <option value="">Select a Size...</option>
-            @{
-                foreach (PaperCalc.Models.FlatSize fs in Model.FlatSize)
-                {
-                    <option value="@fs.Id">@fs.Name</option>
-                }
-            }
-        </select>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" asp-for="AspeosCalculation.FlatSizeId">Flat Size</label>
+                </div>
+                <select class="custom-select" asp-for="AspeosCalculation.FlatSizeId">
+                    <option value="">Select a Size...</option>
+                    @{
+                        foreach (PaperCalc.Models.FlatSize fs in Model.FlatSize)
+                        {
+                            <option value="@fs.Id">@fs.Name</option>
+                        }
+                    }
+                </select>
+            </div>
 
-        <label asp-for="AspeosCalculation.CoatingId">Stock Coating</label>
-        <select asp-for="AspeosCalculation.CoatingId">
-            <option value="">Select a Stock Coating...</option>
-            @{
-                foreach (PaperCalc.Models.AspeosStockCoatings coat in Model.Coatings)
-                {
-                    <option value="@coat.Id">@coat.Name</option>
-                }
-            }
-        </select>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" asp-for="AspeosCalculation.CoatingId">Stock Coating</label>
+                </div>
+                <select class="custom-select" asp-for="AspeosCalculation.CoatingId">
+                    <option value="">Select a Coating...</option>
+                    @{
+                        foreach (PaperCalc.Models.AspeosStockCoatings coat in Model.Coatings)
+                        {
+                            <option value="@coat.Id">@coat.Name</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
 
-        <label asp-for="AspeosCalculation.Colour">Colour</label>
-        <select asp-for="AspeosCalculation.Colour">
-            <option value="">Select a Option...</option>
-            <option value="colour">Colour</option>
-            <option value="black">Black</option>
-        </select>
+        <div class="AspeosFormRow">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" asp-for="AspeosCalculation.Colour">Colour</label>
+                </div>
+                <select class="custom-select" asp-for="AspeosCalculation.Colour">
+                    <option value="">Select a Option...</option>
+                    <option value="colour">Colour</option>
+                    <option value="black">Black</option>
+                </select>
+            </div>
 
-        <label asp-for="AspeosCalculation.PrintedSides">Printed Sides</label>
-        <select asp-for="AspeosCalculation.PrintedSides">
-            <option value="">Select a Option...</option>
-            <option value="single">Single Sided</option>
-            <option value="double">Double Sided</option>
-        </select>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" asp-for="AspeosCalculation.PrintedSides">Printed Sides</label>
+                </div>
+                <select class="custom-select" asp-for="AspeosCalculation.PrintedSides">
+                    <option value="">Select a Option...</option>
+                    <option value="single">Single Sided</option>
+                    <option value="double">Double Sided</option>
+                </select>
+            </div>
+        </div>
 
-        <label asp-for="AspeosCalculation.Folds">Folds</label>
-        <select asp-for="AspeosCalculation.Folds">
-            <option value="0">None</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-        </select>
+        <div class="AspeosFormRow">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" asp-for="AspeosCalculation.Folds">Folds</label>
+                </div>
+                <select class="custom-select" asp-for="AspeosCalculation.Folds">
+                    <option value="0">None</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+            </div>
+           
+                
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" asp-for="AspeosCalculation.Creasing">Creasing</label>
+                </div>
+                <select class="custom-select" asp-for="AspeosCalculation.Creasing">
+                    <option value="0">None</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+            </div>
+        </div>
 
-        <label asp-for="AspeosCalculation.Creasing">Creasing</label>
-        <select asp-for="AspeosCalculation.Creasing">
-            <option value="0">None</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-        </select>
+        <div id="Checkboxes" class="AspeosFormRow">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <label asp-for="AspeosCalculation.Trimming"> Trimming</label>
+                    </div>
+                </div>
+                <div class="inputGroupCustomCheckbox"><input asp-for="AspeosCalculation.Trimming" type="checkbox" value="true"></div>
+            </div>
 
-        <input asp-for="AspeosCalculation.Trimming" type="checkbox" value="true">
-        <label asp-for="AspeosCalculation.Trimming"> Trimming</label><br>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <label asp-for="AspeosCalculation.HolePunch">Hole Punch</label>
+                    </div>
+                </div>
+                <div class="inputGroupCustomCheckbox"><input asp-for="AspeosCalculation.HolePunch" type="checkbox" value="true"></div>
+            </div>
 
-        <input asp-for="AspeosCalculation.HolePunch" type="checkbox" value="true">
-        <label asp-for="AspeosCalculation.HolePunch"> Hole Punch</label><br>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <label asp-for="AspeosCalculation.Lamination">Lamination</label>
+                    </div>
+                </div>
+                <div class="inputGroupCustomCheckbox"><input asp-for="AspeosCalculation.Lamination" type="checkbox" value="true"></div>
+            </div>
 
-        <input asp-for="AspeosCalculation.Lamination" type="checkbox" value="true">
-        <label asp-for="AspeosCalculation.Lamination"> Lamination</label><br>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <label asp-for="AspeosCalculation.SmallJob">Small Job</label>
+                    </div>
+                </div>
+                <div class="inputGroupCustomCheckbox"><input asp-for="AspeosCalculation.SmallJob" type="checkbox" value="true"></div>
+            </div>
 
-        <input asp-for="AspeosCalculation.SmallJob" type="checkbox" value="true">
-        <label asp-for="AspeosCalculation.SmallJob">Small Job</label><br>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <label asp-for="AspeosCalculation.Urgent">Urgent</label>
+                    </div>
+                </div>
+                <div class="inputGroupCustomCheckbox"><input asp-for="AspeosCalculation.Urgent" type="checkbox" value="true"></div>
+            </div>
 
-        <input asp-for="AspeosCalculation.Urgent" type="checkbox" value="true">
-        <label asp-for="AspeosCalculation.Urgent">Urgent</label><br>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <label asp-for="AspeosCalculation.FileHandling">File Handling</label>
+                    </div>
+                </div>
+                <div class="inputGroupCustomCheckbox"><input asp-for="AspeosCalculation.FileHandling" type="checkbox" value="true"></div>
+            </div>
+        </div>
 
-        <input asp-for="AspeosCalculation.FileHandling" type="checkbox" value="true">
-        <label asp-for="AspeosCalculation.FileHandling">File Handling</label><br>
-
-
-        <input onclick="CalculationSubmitted()" type="submit" class="btn btn-success" />
+        <input onclick="CalculationSubmitted()" type="submit" class="btn btn-success calcSubmit" />
 
     </form>
 
-    <div id="CalculationValues" class="hidden">
+    <div id="CalculationValues" class="collapse">
         <table>
             <tr>
                 <th>PER SRA</th>
@@ -143,6 +215,7 @@
     </div>
 
 </div>
+
 @{ if(Model.AspeosCalculation.JobCost > 0)
     {
     <div id="calculationPost">
@@ -160,7 +233,7 @@
         </dl>
 
         <div>
-            <button class="btn btn-primary" id="showCalculationsButton" onclick="calculationValuesDisplay()">Show Calculation Values</button>
+            <a class="btn btn-primary" id="showCalculationsButton" data-toggle="collapse" href="#CalculationValues" role="button" aria-expanded="false" aria-controls="CalculationValues">Show Calculation Values</a>
             <button class="btn btn-primary" onclick="generate()">Generate document</button>
         </div>
 
