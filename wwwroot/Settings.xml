@@ -1,5 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Settings>
-  <FilehandlingCost>25</FilehandlingCost>
-  <MarginMultiplier>2</MarginMultiplier>
+  <FilehandlingCost>1</FilehandlingCost>
+  <MarginMultiplier>
+    <SmallOrUrgent>4</SmallOrUrgent>
+    <Standard>3</Standard>
+  </MarginMultiplier>
+  <Buffer>
+    <SmallOrUrgent>6</SmallOrUrgent>
+    <Standard>5</Standard>
+  </Buffer>
+  <SmallOrUrgentMinimum>2</SmallOrUrgentMinimum>
+  <Creasing>
+    <CreasingOneMultiplier>7</CreasingOneMultiplier>
+    <CreasingTwoMultiplier>8</CreasingTwoMultiplier>
+    <CreasingThreeMultiplier>9</CreasingThreeMultiplier>
+  </Creasing>
+  <Folding>
+    <FoldingOneMultiplier>10</FoldingOneMultiplier>
+    <FoldingTwoMultiplier>12</FoldingTwoMultiplier>
+    <FoldingThreeMultiplier>13</FoldingThreeMultiplier>
+  </Folding>
 </Settings>

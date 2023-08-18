@@ -19,16 +19,74 @@
 <form method="post" asp-page-handler="SaveSettings">
     <div class="input-group mb-3">
         <div class="input-group-prepend">
-            <label class="input-group-text settingsInputLabel" id="basic-addon1" asp-for="Settings.FilehandlingCost"></label>
+            <label class="input-group-text" id="basic-addon1" asp-for="Settings.FilehandlingCost"></label>
         </div>
-        <input type="number" class="form-control" asp-for="Settings.FilehandlingCost">
+        <input type="number" class="form-control" step="any" asp-for="Settings.FilehandlingCost">
     </div>
 
     <div class="input-group mb-3">
         <div class="input-group-prepend">
-            <label class="input-group-text settingsInputLabel" id="basic-addon1" asp-for="Settings.MarginMultiplier"></label>
+            <label class="input-group-text" id="basic-addon1" asp-for="Settings.SmallOrUrgentMinimum"></label>
         </div>
-        <input type="number" class="form-control" asp-for="Settings.MarginMultiplier">
+        <input type="number" class="form-control" step="any" asp-for="Settings.SmallOrUrgentMinimum">
+    </div>
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <label class="input-group-text" id="basic-addon1" asp-for="Settings.MarginMultiplier"></label>
+        </div>
+        <input type="number" class="form-control" step="any" asp-for="Settings.MarginMultiplier">
+
+        <div class="input-group-prepend">
+            <label class="input-group-text" id="basic-addon1" asp-for="Settings.MarginMultiplierSmallOrUrgent"></label>
+        </div>
+        <input type="number" class="form-control" step="any" asp-for="Settings.MarginMultiplierSmallOrUrgent">
+    </div>
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <label class="input-group-text" id="basic-addon1" asp-for="Settings.Buffer"></label>
+        </div>
+        <input type="number" class="form-control" step="any" asp-for="Settings.Buffer">
+
+        <div class="input-group-prepend">
+            <label class="input-group-text" id="basic-addon1" asp-for="Settings.BufferSmallOrUrgent"></label>
+        </div>
+        <input type="number" class="form-control" step="any" asp-for="Settings.BufferSmallOrUrgent">
+    </div>
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <label class="input-group-text" id="basic-addon1" asp-for="Settings.Creasing1"></label>
+        </div>
+        <input type="number" class="form-control" step="any" asp-for="Settings.Creasing1">
+
+        <div class="input-group-prepend">
+            <label class="input-group-text" id="basic-addon1" asp-for="Settings.Creasing2"></label>
+        </div>
+        <input type="number" class="form-control" step="any" asp-for="Settings.Creasing2">
+
+        <div class="input-group-prepend">
+            <label class="input-group-text" id="basic-addon1" asp-for="Settings.Creasing3"></label>
+        </div>
+        <input type="number" class="form-control" step="any" asp-for="Settings.Creasing3">
+    </div>
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <label class="input-group-text" id="basic-addon1" asp-for="Settings.Folding1"></label>
+        </div>
+        <input type="number" class="form-control" step="any" asp-for="Settings.Folding1">
+
+        <div class="input-group-prepend">
+            <label class="input-group-text" id="basic-addon1" asp-for="Settings.Folding2"></label>
+        </div>
+        <input type="number" class="form-control" step="any" asp-for="Settings.Folding2">
+
+        <div class="input-group-prepend">
+            <label class="input-group-text" id="basic-addon1" asp-for="Settings.Folding3"></label>
+        </div>
+        <input type="number" class="form-control"  step="any" asp-for="Settings.Folding3">
     </div>
 
     <div class="form-group">

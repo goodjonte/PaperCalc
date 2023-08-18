@@ -21,12 +21,18 @@ namespace PaperCalc.Pages.EpsonStock
 
         public IList<PaperCalc.Models.EpsonStock> EpsonStock { get;set; } = default!;
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
+            var cookieValue = Request.Cookies["PaperCalc"];
+            if (cookieValue == null || !PaperCalc.Models.Login.ValidatePassword(_context, cookieValue))
+            {
+                return Redirect("/Login");
+            }
             if (_context.EpsonStock != null)
             {
                 EpsonStock = await _context.EpsonStock.ToListAsync();
             }
+            return Page();
         }
     }
 }

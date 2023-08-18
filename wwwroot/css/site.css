@@ -151,12 +151,6 @@ td, th {
     justify-content: space-evenly;
     margin: 10px 0;
 }
-.AspeosFormRow div {
-    
-}
-.input-group {
-    max-width: 300px !important;
-}
 .settingsInputLabel {
     width: 150px !important;
 }
@@ -166,9 +160,6 @@ td, th {
     background-color: #E9ECEF;
     border-top-right-radius: .25rem;
     border-bottom-right-radius: .25rem;
-}
-.input-group-text {
-    width: 118.45px;
 }
 #AspeosCalculation_Quantity, #Settings_FilehandlingCost, #Settings_MarginMultiplier {
     border-top-right-radius: 0.25rem !important;

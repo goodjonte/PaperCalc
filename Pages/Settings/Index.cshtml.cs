@@ -30,10 +30,16 @@ namespace PaperCalc.Pages.Settings
         public List<PaperCalc.Models.AspeosFlatSize> AspeosFlatSizes { get; set; }
         [BindProperty]
         public PaperCalc.Models.AspeosFlatSize AspeosFlatSize { get; set; }
-        public void OnGet()
+        public IActionResult OnGet()
         {
+            var cookieValue = Request.Cookies["PaperCalc"];
+            if (cookieValue == null || !PaperCalc.Models.Login.ValidatePassword(_context, cookieValue))
+            {
+                return Redirect("/Login");
+            }
             AspeosFlatSizes = _context.AspeosFlatSizes.ToList();
             Debug.WriteLine(AspeosFlatSizes.Count);
+            return Page();
         }
 
         public ActionResult OnPostSaveSettings()

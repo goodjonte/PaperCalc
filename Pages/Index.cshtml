@@ -82,13 +82,25 @@
                     <option value="3">3</option>
                 </select>
             </div>
-           
-                
+
+
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <label class="input-group-text" asp-for="AspeosCalculation.Creasing">Creasing</label>
                 </div>
                 <select class="custom-select" asp-for="AspeosCalculation.Creasing">
+                    <option value="0">None</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" asp-for="AspeosCalculation.NumOfHolePunches">Hole Punches</label>
+                </div>
+                <select class="custom-select" asp-for="AspeosCalculation.NumOfHolePunches">
                     <option value="0">None</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -107,14 +119,14 @@
                 <div class="inputGroupCustomCheckbox"><input asp-for="AspeosCalculation.Trimming" type="checkbox" value="true"></div>
             </div>
 
-            <div class="input-group mb-3">
+            @*<div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <div class="input-group-text">
                         <label asp-for="AspeosCalculation.HolePunch">Hole Punch</label>
                     </div>
                 </div>
                 <div class="inputGroupCustomCheckbox"><input asp-for="AspeosCalculation.HolePunch" type="checkbox" value="true"></div>
-            </div>
+            </div>*@
 
             <div class="input-group mb-3">
                 <div class="input-group-prepend">

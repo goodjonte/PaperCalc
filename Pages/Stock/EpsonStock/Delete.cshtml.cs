@@ -24,6 +24,11 @@ namespace PaperCalc.Pages.EpsonStock
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
+            var cookieValue = Request.Cookies["PaperCalc"];
+            if (cookieValue == null || !PaperCalc.Models.Login.ValidatePassword(_context, cookieValue))
+            {
+                return Redirect("/Login");
+            }
             if (id == null || _context.EpsonStock == null)
             {
                 return NotFound();

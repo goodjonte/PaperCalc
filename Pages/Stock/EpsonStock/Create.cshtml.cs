@@ -21,6 +21,11 @@ namespace PaperCalc.Pages.EpsonStock
 
         public IActionResult OnGet()
         {
+            var cookieValue = Request.Cookies["PaperCalc"];
+            if (cookieValue == null || !PaperCalc.Models.Login.ValidatePassword(_context, cookieValue))
+            {
+                return Redirect("/Login");
+            }
             return Page();
         }
 

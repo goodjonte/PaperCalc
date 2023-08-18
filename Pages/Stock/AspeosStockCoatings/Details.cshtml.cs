@@ -23,6 +23,11 @@ namespace PaperCalc.Pages.Stock.AspeosStockCoatings
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
+            var cookieValue = Request.Cookies["PaperCalc"];
+            if (cookieValue == null || !PaperCalc.Models.Login.ValidatePassword(_context, cookieValue))
+            {
+                return Redirect("/Login");
+            }
             if (id == null || _context.AspeosStockCoatings == null)
             {
                 return NotFound();

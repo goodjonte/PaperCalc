@@ -22,8 +22,13 @@ namespace PaperCalc.Pages.Stock.AspeosStockCoatings
 
         public List<PaperCalc.DTOs.AspeosStockCoatingsDTO> AspeosStockCoatings { get;set; }
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
+            var cookieValue = Request.Cookies["PaperCalc"];
+            if (cookieValue == null || !PaperCalc.Models.Login.ValidatePassword(_context, cookieValue))
+            {
+                return Redirect("/Login");
+            }
             if (_context.AspeosStockCoatings != null)
             {
                 IList <PaperCalc.Models.AspeosStockCoatings> ASCs = await _context.AspeosStockCoatings.ToListAsync();
@@ -39,6 +44,7 @@ namespace PaperCalc.Pages.Stock.AspeosStockCoatings
                     AspeosStockCoatings.Add(aspDTO);
                 }
             }
+            return Page();
         }
     }
 }

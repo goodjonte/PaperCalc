@@ -6,14 +6,15 @@ namespace PaperCalc.DTOs
 {
     public class AspeosCalculation
     {
+        public Settings? Settings { get; set; }
         public double? Quantity { get; set; }
         public Guid? FlatSizeId { get; set; }
         public AspeosFlatSize? FlatSize { get; set; }
         public Guid? CoatingId { get; set; }
         public string? Colour { get; set;}
-        public string? PrintedSides { get; set;}
+        public string? PrintedSides { get; set; }
+        public int NumOfHolePunches { get; set; }
         public bool Trimming { get; set;}
-        public bool HolePunch { get; set; }
         public bool Lamination { get; set; }
         public bool SmallJob { get; set; }
         public bool Urgent { get; set; }
@@ -34,24 +35,62 @@ namespace PaperCalc.DTOs
         [DisplayFormat(DataFormatString = "{0:c}")]
         public double SheetPrice { get; set; }
         public double Cuts { get { return (FlatSize?.CutsPerSRA3) ?? 0; } }
-        public double? HolePunches { get { return HolePunch ? Quantity / 20 : 0; } }
+        public double? HolePunches { get { return NumOfHolePunches > 0 ? (Quantity / 20)* NumOfHolePunches : 0; } }
         [DisplayFormat(DataFormatString = "{0:c}")]
-        public double? LaminationCost { get { return FlatSize != null ?Lamination ? FlatSize.LaminationCost * Quantity : 0 : 0; } }
-        public double? CreasingRate { get { return Creasing == 0 ? 0 : Creasing == 1 ? Quantity * 0.1 : Creasing == 2 ? Quantity * 0.15 : Creasing == 3 ? Quantity * 0.2 : 0 ; } }
-        public double? FoldingRate { get { return Folds == 0 ? 0 : Folds == 1 ? Quantity * 0.1 : Folds == 2 ? Quantity * 0.15 : Folds == 3 ? Quantity * 0.2 : 0;} }
+        public double? LaminationCost { get { return FlatSize != null ? Lamination ? FlatSize.LaminationCost * Quantity : 0 : 0; } }
+        public double? CreasingRate { get {
+                if(Settings == null)
+                {
+                    return 0;
+                }
+                switch (Creasing)
+                {
+                    case 0:
+                        return 0;
+                    case 1:
+                        return Quantity * Settings.Creasing1;
+                    case 2:
+                        return Quantity * Settings.Creasing2;
+                    case 3:
+                        return Quantity * Settings.Creasing3;
+                    default:
+                        return 0;
+                }
+            }
+        }
+        
+        public double? FoldingRate { get {
+                if (Settings == null)
+                {
+                    return 0;
+                }
+                switch (Folds)
+                {
+                    case 0:
+                        return 0;
+                    case 1:
+                        return Quantity * Settings.Folding1;
+                    case 2:
+                        return Quantity * Settings.Folding2;
+                    case 3:
+                        return Quantity * Settings.Folding3;
+                    default:
+                        return 0;
+                }
+        } }
 
         [DisplayFormat(DataFormatString = "{0:c}")]
         public double? PaperCost { get { return Quantity != null ? ((SheetPrice + ClickRate) / PerSRA )* Quantity : 0; } }
         //Buffer values hard coded - change this
-        public double Buffer { get { return SmallJob || Urgent ? 1.5 : 1.1; } }
+        public double Buffer { get { return Settings != null ? SmallJob || Urgent ? Settings.BufferSmallOrUrgent : Settings.Buffer : 0; } }
         [DisplayFormat(DataFormatString = "{0:c}")]
         public double? FinishingsCost { get { return (Cuts*2)+HolePunches+LaminationCost+CreasingRate+FoldingRate; } }
         //Multiplier values hard coded - change this
-        public double? Multiplier { get { return SmallJob || Urgent ? 2 : 1.4; } }
+        public double? Multiplier { get { return Settings != null ? SmallJob || Urgent ? Settings.MarginMultiplierSmallOrUrgent : Settings.MarginMultiplier : 0; } }
         //Minimum value hard coded - change this
-        public double? Minimum { get { return SmallJob && Urgent ? 15 : 0; } }
+        public double? Minimum { get { return Settings != null ? SmallJob && Urgent ? Settings.SmallOrUrgentMinimum : 0 : 0; } }
         //MiFileHandling value hard coded - change this
-        public double? FileHandlingCost { get { return FileHandling ? 25 : 0; } }
+        public double? FileHandlingCost { get { return FileHandling && Settings != null ? Settings.FilehandlingCost : 0; } }
         [DisplayFormat(DataFormatString = "{0:c}")]
         public double? JobCost { get { return Quantity > 0 ? (((PaperCost * Buffer) + FinishingsCost) * Multiplier) + Minimum + FileHandlingCost : 0; } }
         [DisplayFormat(DataFormatString = "{0:c}")]
@@ -59,8 +98,10 @@ namespace PaperCalc.DTOs
         [DisplayFormat(DataFormatString = "{0:c}")]
         public double? GST { get { return JobCostGstInc > 0 ? JobCostGstInc - JobCost : 0; } }
 
-        public void Calculate(PaperCalc.Data.PaperCalcContext _context)
+        public void Calculate(PaperCalc.Data.PaperCalcContext _context, String path)
         {
+            Settings = new();
+            Settings.SetSettings(path);
             AspeosStockCoatings? aspeosStockCoatings = _context.AspeosStockCoatings.Find(CoatingId);
             if (aspeosStockCoatings != null)
             {
