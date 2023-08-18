@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Settings>
-  <FilehandlingCost>25</FilehandlingCost>
-  <MarginMultiplier>1.4</MarginMultiplier>
+  <FilehandlingCost>12</FilehandlingCost>
+  <MarginMultiplier>2</MarginMultiplier>
 </Settings>

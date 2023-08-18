@@ -9,11 +9,14 @@ namespace PaperCalc.Pages.Settings
     public class IndexModel : PageModel
     {
         private readonly PaperCalc.Data.PaperCalcContext _context;
-        public IndexModel(PaperCalc.Data.PaperCalcContext context)
+        private IWebHostEnvironment _env;
+        public IndexModel(PaperCalc.Data.PaperCalcContext context, IWebHostEnvironment env)
         {
             _context = context;
             AspeosFlatSizes = new();
+            _env = env;
             Settings = new();
+            Settings.SetSettings(_env.ContentRootPath);
             AspeosFlatSize = new()
             {
                 Id = Guid.NewGuid(),
@@ -35,7 +38,7 @@ namespace PaperCalc.Pages.Settings
 
         public ActionResult OnPostSaveSettings()
         {
-            Settings.SaveSettings();
+            Settings.SaveSettings(_env.ContentRootPath);
             return RedirectToPage("./Index");
         }
         public ActionResult OnPostAspeosCreate()
