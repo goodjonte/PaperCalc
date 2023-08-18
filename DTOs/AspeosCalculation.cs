@@ -56,6 +56,8 @@ namespace PaperCalc.DTOs
         public double? JobCost { get { return Quantity > 0 ? (((PaperCost * Buffer) + FinishingsCost) * Multiplier) + Minimum + FileHandlingCost : 0; } }
         [DisplayFormat(DataFormatString = "{0:c}")]
         public double? JobCostGstInc { get { return JobCost > 0 ? JobCost*1.15 : 0; } }
+        [DisplayFormat(DataFormatString = "{0:c}")]
+        public double? GST { get { return JobCostGstInc > 0 ? JobCostGstInc - JobCost : 0; } }
 
         public void Calculate(PaperCalc.Data.PaperCalcContext _context)
         {

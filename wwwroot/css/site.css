@@ -7,7 +7,9 @@ html {
     font-size: 16px;
   }
 }
-
+.RedText {
+    color: red;
+}
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
@@ -24,7 +26,7 @@ footer {
     position: relative !important;
 }
 .hidden {
-  display: none;
+  display: none !important;
 }
 .btn-group {
     width: 350px !important;
@@ -82,4 +84,55 @@ td, th {
 }
 .tbButton {
     width: 50% !important;
+}
+
+#calculationPost {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+#calculationPost > * {
+    margin: 10px;
+}
+#calculationPost div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+#calculationPost div button {
+    margin: 5px;
+}
+#calculationTotals {
+    border: 1px solid grey;
+}
+#calculationTotals dt{
+   margin: 0 5px;
+}
+#calculationTotals dd {
+   margin: 0 5px;
+}
+
+#CalculationValues {
+    width: 100%;
+    overflow: auto;
+    margin-top: 15px;
+    border-top: 1px solid grey;
+}
+#CalculationValues table {
+    width: 1110px;
+}
+#CalculationValues table tr {
+    
+
+}
+
+
+#aspeosCalculator {
+    padding: 15px 0;
+    border-bottom: 1px solid grey;
+}
+@media only screen and (max-width: 1200px) {
+    #CalculationValues {
+        overflow: scroll;
+    }
 }

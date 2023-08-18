@@ -4,7 +4,7 @@
 
 }
 
-<div class="text-center">
+<div id="aspeosCalculator" class="text-center">
     <h4 class="display-4">Aspeos</h4>
     <form method="post">
         <label asp-for="AspeosCalculation.Quantity">Quantity</label>
@@ -23,6 +23,7 @@
 
         <label asp-for="AspeosCalculation.CoatingId">Stock Coating</label>
         <select asp-for="AspeosCalculation.CoatingId">
+            <option value="">Select a Stock Coating...</option>
             @{
                 foreach (PaperCalc.Models.AspeosStockCoatings coat in Model.Coatings)
                 {
@@ -80,11 +81,11 @@
         <label asp-for="AspeosCalculation.FileHandling">File Handling</label><br>
 
 
-        <input type="submit" class="btn btn-success" />
+        <input onclick="CalculationSubmitted()" type="submit" class="btn btn-success" />
 
     </form>
 
-    <div>
+    <div id="CalculationValues" class="hidden">
         <table>
             <tr>
                 <th>PER SRA</th>
@@ -105,7 +106,7 @@
                 <td>@Html.DisplayFor(model => Model.AspeosCalculation.ClickSideMultiplier)</td>
                 <td>@Html.DisplayFor(model => Model.AspeosCalculation.ClickSizeMultiplier)</td>
                 <td>@Html.DisplayFor(model => Model.AspeosCalculation.ClickRate)</td>
-                <td id="dataSheetPrice">@Html.DisplayFor(model => Model.AspeosCalculation.SheetPrice)</td>
+                <td id="SheetPrice">@Html.DisplayFor(model => Model.AspeosCalculation.SheetPrice)</td>
                 <td>@Model.AspeosCalculation.Cuts</td>
                 <td>@Model.AspeosCalculation.HolePunches</td>
                 <td>@Html.DisplayFor(model => Model.AspeosCalculation.LaminationCost)</td>
@@ -121,71 +122,151 @@
                 <th>File Handling</th>
             </tr>
             <tr>
-                <td id="dataPaperCost">@Html.DisplayFor(model => Model.AspeosCalculation.PaperCost)</td>
-                <td id="dataBuffer">@Model.AspeosCalculation.Buffer</td>
-                <td id="dataFinishingsCost">@Html.DisplayFor(model => Model.AspeosCalculation.FinishingsCost)</td>
-                <td id="dataMultiplier">@Model.AspeosCalculation.Multiplier</td>
-                <td id="dataMinimum">@Model.AspeosCalculation.Minimum</td>
-                <td id="dataFileHandlingCost">@Model.AspeosCalculation.FileHandlingCost</td>
+                <td>@Html.DisplayFor(model => Model.AspeosCalculation.PaperCost)</td>
+                <td>@Model.AspeosCalculation.Buffer</td>
+                <td>@Html.DisplayFor(model => Model.AspeosCalculation.FinishingsCost)</td>
+                <td>@Model.AspeosCalculation.Multiplier</td>
+                <td>@Model.AspeosCalculation.Minimum</td>
+                <td>@Model.AspeosCalculation.FileHandlingCost</td>
             </tr>
             <tr>
                 <th>Job Cost</th>
+                <th>GST</th>
                 <th>Cost + GST</th>
             </tr>
             <tr>
-                <td id="dataJobCost">@Html.DisplayFor(model => Model.AspeosCalculation.JobCost)</td>
-                <td id="dataJobCostGstInc">@Html.DisplayFor(model => Model.AspeosCalculation.JobCostGstInc)</td>
+                <td id="JobCost">@Html.DisplayFor(model => Model.AspeosCalculation.JobCost)</td>
+                <td id="GST">@Html.DisplayFor(model => Model.AspeosCalculation.GST)</td>
+                <td id="JobCostGstInc">@Html.DisplayFor(model => Model.AspeosCalculation.JobCostGstInc)</td>
             </tr>
         </table>
     </div>
 
 </div>
+@{ if(Model.AspeosCalculation.JobCost > 0)
+    {
+    <div id="calculationPost">
 
-<button onclick="createPdf()">Create PDF</button>
+        <dl id="calculationTotals">
 
-<script src="https://unpkg.com/pdf-lib@1.17.1"></script>
-<script src="https://unpkg.com/downloadjs@1.4.7"></script>
-<script>
-    const { PDFDocument, StandardFonts, rgb } = PDFLib
-    async function createPdf() {
-        const url = 'https://localhost:7019/Template3.pdf'
-        const existingPdfBytes = await fetch(url).then(res => res.arrayBuffer())
+            <dt>Job Cost:</dt>
+            <dd>@Html.DisplayFor(model => Model.AspeosCalculation.JobCost)</dd>
 
-        const pdfDoc = await PDFDocument.load(existingPdfBytes)
-        const form = pdfDoc.getForm()
+            <dt>GST:</dt>
+            <dd>@Html.DisplayFor(model => Model.AspeosCalculation.GST)</dd>
 
-        const date = form.getTextField('date')
-        const title = form.getTextField('title')
-        const stock = form.getTextField('stock')
-        const printed = form.getTextField('printed')
-        const coating = form.getTextField('coating')
-        const extras = form.getTextField('extras')
-        const size = form.getTextField('size')
-        const quantity = form.getTextField('quantity')
-        const unitPrice = form.getTextField('unitPrice')
-        const subtotal = form.getTextField('subtotal')
-        const gst = form.getTextField('gst')
-        const total = form.getTextField('total')
+            <dt>Job Cost (GST Inc):</dt>
+            <dd>@Html.DisplayFor(model => Model.AspeosCalculation.JobCostGstInc)</dd>
+        </dl>
 
-        date.setText("")
-        title.setText('Create Design Studio')
-        stock.setText('280gsm Synthetic Board 270 micron')
-        printed.setText('Digital full colour x 2 sides')
-        coating.setText("")
-        extras.setText('Finishings here')
-        size.setText("A4")
-        quantity.setText(document.getElementById("AspeosCalculation_Quantity").value)
-        unitPrice.setText(document.getElementById("dataSheetPrice").innerText)
-        subtotal.setText(document.getElementById("dataJobCostGstInc").innerText)
-        gst.setText('$'+(document.getElementById("dataJobCostGstInc").innerText.split('$')[1] - document.getElementById("dataJobCost").innerText.split('$')[1]).toFixed(2))
-        total.setText(document.getElementById("dataJobCostGstInc").innerText)
+        <div>
+            <button class="btn btn-primary" id="showCalculationsButton" onclick="calculationValuesDisplay()">Show Calculation Values</button>
+            <button class="btn btn-primary" onclick="generate()">Generate document</button>
+        </div>
 
-        form.flatten()
-
-        // Serialize the PDFDocument to bytes (a Uint8Array)
-        const pdfBytes = await pdfDoc.save()
-
-        // Trigger the browser to download the PDF document
-        download(pdfBytes, "Quote.pdf", "application/pdf");
+    </div>
     }
+}
+
+<script>
+    function calculationValuesDisplay() {
+        let button = document.getElementById("showCalculationsButton");
+        let table = document.getElementById("CalculationValues");
+
+        if (button.innerText == "Show Calculation Values") {
+            table.classList.remove("hidden");
+            button.innerText = "Hide Calculation Values";
+        } else if (button.innerText == "Hide Calculation Values") {
+            table.classList.add("hidden");
+            button.innerText = "Show Calculation Values";
+        }
+    }
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/docxtemplater/3.37.13/docxtemplater.js"></script>
+<script src="https://unpkg.com/pizzip@3.1.4/dist/pizzip.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.js"></script>
+<script src="https://unpkg.com/pizzip@3.1.4/dist/pizzip-utils.js"></script>
+<script>
+
+    const TemplateUrl = window.location.href + "CreateTemplate.docx";
+
+    function getDateString() {
+        const now = new Date();
+        return (now.getDate() < 10 ? "0" + now.getDate() : now.getDate()) + "/" + ((now.getMonth() + 1) < 10 ? "0" + (now.getMonth() + 1) : (now.getMonth() + 1)) + "/" + now.getFullYear() ;
+    }
+    function loadFile(url, callback) {
+        PizZipUtils.getBinaryContent(url, callback);
+    }
+    function getExtras() {
+        let foldsNum = document.getElementById("AspeosCalculation_Folds").value > 0 ? "Folding, " : "";
+        let creasingNum = document.getElementById("AspeosCalculation_Creasing").value > 0 ? "Creasing, " : "";
+        let trimmingBool = document.getElementById("AspeosCalculation_Trimming").checked ? "Trimming, " : "";
+        let holePunchBool = document.getElementById("AspeosCalculation_HolePunch").checked ? "Hole Punch, " : "";
+        let laminationBool = document.getElementById("AspeosCalculation_Lamination").checked ? "Lamination, " : "";
+        let smallJobBool = document.getElementById("AspeosCalculation_SmallJob").checked ? "Small Job, " : "";
+        let urgentBool = document.getElementById("AspeosCalculation_Urgent").checked ? "Urgency, " : "";
+        let fileHandlingBool = document.getElementById("AspeosCalculation_FileHandling").checked ? "File Handling, " : "";
+
+        let strings = [foldsNum, creasingNum, trimmingBool, holePunchBool, laminationBool, smallJobBool, urgentBool, fileHandlingBool];
+
+        let extrasString = " ";
+        for (let i = 0; i < strings.length; i++) {
+            console.log("wtf")
+            extrasString = extrasString + strings[i];
+        }
+        return extrasString.slice(0, extrasString.length - 2);
+
+    }
+    function getPrinted() {
+        var sides = document.getElementById("AspeosCalculation_PrintedSides").value == "single" ? "Single Sided - " : "Double Sided - ";
+        var colour = document.getElementById("AspeosCalculation_Colour").value == "colour" ? "Colour" : "Black and White";
+        return sides + colour;
+    }
+    
+
+    window.generate = function generate() {
+        loadFile(
+            TemplateUrl,
+            function (error, content) {
+                if (error) {
+                    throw error;
+                }
+                const zip = new PizZip(content);
+                const doc = new window.docxtemplater(zip, {
+                    paragraphLoop: true,
+                    linebreaks: true,
+                });
+
+                // Render the document (Replace {first_name} by John, {last_name} by Doe, ...)
+                doc.render({
+                    date: getDateString(),
+                    stock: document.getElementById("AspeosCalculation_CoatingId").options[document.getElementById("AspeosCalculation_CoatingId").selectedIndex].text,
+                    printed: getPrinted(),
+                    coating: "",
+                    extras: getExtras(),
+                    size: document.getElementById("AspeosCalculation_FlatSizeId").options[document.getElementById("AspeosCalculation_FlatSizeId").selectedIndex].text, 
+                    quantity: document.getElementById("AspeosCalculation_Quantity").value, 
+                    unitPrice: document.getElementById("SheetPrice").innerText,
+                    subtotal: document.getElementById("JobCost").innerText,
+                    gst: document.getElementById("GST").innerText,
+                    total: document.getElementById("JobCostGstInc").innerText,
+                });
+
+                const blob = doc.getZip().generate({
+                    type: "blob",
+                    mimeType:
+                        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                    // compression: DEFLATE adds a compression step.
+                    // For a 50MB output document, expect 500ms additional CPU time
+                    compression: "DEFLATE",
+                });
+                // Output the document using Data-URI
+                saveAs(blob, "output.docx");
+            }
+        );
+    };
+
+
+
 </script>
