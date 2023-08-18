@@ -8,14 +8,14 @@
     <h4 class="display-4">Aspeos</h4>
     <form id="AspeosForm" method="post">
         <div class="AspeosFormRow">
-            <div class="input-group mb-3">
+            <div class="input-group mb-3 aspeosInput">
                 <div class="input-group-prepend">
                     <label class="input-group-text" id="basic-addon1" asp-for="AspeosCalculation.Quantity"></label>
                 </div>
                 <input type="number" class="form-control" asp-for="AspeosCalculation.Quantity">
             </div>
 
-            <div class="input-group mb-3">
+            <div class="input-group mb-3 aspeosInput">
                 <div class="input-group-prepend">
                     <label class="input-group-text" asp-for="AspeosCalculation.FlatSizeId">Flat Size</label>
                 </div>
@@ -30,7 +30,7 @@
                 </select>
             </div>
 
-            <div class="input-group mb-3">
+            <div class="input-group mb-3 aspeosInput">
                 <div class="input-group-prepend">
                     <label class="input-group-text" asp-for="AspeosCalculation.CoatingId">Stock Coating</label>
                 </div>
@@ -47,7 +47,7 @@
         </div>
 
         <div class="AspeosFormRow">
-            <div class="input-group mb-3">
+            <div class="input-group mb-3 aspeosInput">
                 <div class="input-group-prepend">
                     <label class="input-group-text" asp-for="AspeosCalculation.Colour">Colour</label>
                 </div>
@@ -58,7 +58,7 @@
                 </select>
             </div>
 
-            <div class="input-group mb-3">
+            <div class="input-group mb-3 aspeosInput">
                 <div class="input-group-prepend">
                     <label class="input-group-text" asp-for="AspeosCalculation.PrintedSides">Printed Sides</label>
                 </div>
@@ -71,7 +71,7 @@
         </div>
 
         <div class="AspeosFormRow">
-            <div class="input-group mb-3">
+            <div class="input-group mb-3 aspeosInput">
                 <div class="input-group-prepend">
                     <label class="input-group-text" asp-for="AspeosCalculation.Folds">Folds</label>
                 </div>
@@ -84,7 +84,7 @@
             </div>
 
 
-            <div class="input-group mb-3">
+            <div class="input-group mb-3 aspeosInput">
                 <div class="input-group-prepend">
                     <label class="input-group-text" asp-for="AspeosCalculation.Creasing">Creasing</label>
                 </div>
@@ -96,7 +96,7 @@
                 </select>
             </div>
 
-            <div class="input-group mb-3">
+            <div class="input-group mb-3 aspeosInput">
                 <div class="input-group-prepend">
                     <label class="input-group-text" asp-for="AspeosCalculation.NumOfHolePunches">Hole Punches</label>
                 </div>
@@ -118,15 +118,6 @@
                 </div>
                 <div class="inputGroupCustomCheckbox"><input asp-for="AspeosCalculation.Trimming" type="checkbox" value="true"></div>
             </div>
-
-            @*<div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">
-                        <label asp-for="AspeosCalculation.HolePunch">Hole Punch</label>
-                    </div>
-                </div>
-                <div class="inputGroupCustomCheckbox"><input asp-for="AspeosCalculation.HolePunch" type="checkbox" value="true"></div>
-            </div>*@
 
             <div class="input-group mb-3">
                 <div class="input-group-prepend">

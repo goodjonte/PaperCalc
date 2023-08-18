@@ -188,3 +188,31 @@ td, th {
         margin: 5px auto;
     }
 }
+.aspeosInput {
+    width: 300px !important;
+}
+
+.settingsBasicInput {
+    width: 300px !important;
+    margin: 5px auto;
+}
+.settingsSmallUrgentInput {
+    width: 6    00px !important;
+    margin: 5px auto;
+}
+.settings3ValuesInput {
+    width: 600px !important;
+    margin: 5px auto;   
+}
+.settingsSubmit {
+    width: 59px;
+    margin: 5px auto;
+}
+.inputCurve {
+    border-top-right-radius: 0.25rem !important;
+    border-bottom-right-radius: 0.25rem !important;
+}
+.noInputCurve {
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
