@@ -19,6 +19,7 @@ namespace PaperCalc.DTOs
         public bool SmallJob { get; set; }
         public bool Urgent { get; set; }
         public bool FileHandling { get; set; }
+        public double? FileHandlingFee { get; set; }
         public int Creasing { get; set; }
         public int Folds { get; set; }
 
@@ -90,7 +91,11 @@ namespace PaperCalc.DTOs
         //Minimum value hard coded - change this
         public double? Minimum { get { return Settings != null ? SmallJob && Urgent ? Settings.SmallOrUrgentMinimum : 0 : 0; } }
         //MiFileHandling value hard coded - change this
-        public double? FileHandlingCost { get { return FileHandling && Settings != null ? Settings.FilehandlingCost : 0; } }
+        public double? FileHandlingCost { get {
+                
+                return FileHandlingFee;
+            
+        } }
         [DisplayFormat(DataFormatString = "{0:c}")]
         public double? JobCost { get {
                 if (Quantity == null) { return 0; }

@@ -19,8 +19,10 @@ namespace PaperCalc.Pages
         {
             _context = context;
             _env = env;
+            Settings = new();
+            Settings.SetSettings(_env.ContentRootPath);
         }
-
+        public PaperCalc.DTOs.Settings? Settings { get; set; }
         public IList<PaperCalc.Models.AspeosStock> Paper { get; set; } = default!;
         public IList<PaperCalc.Models.AspeosStockCoatings> Coatings { get; set; } = default!;
 
@@ -52,6 +54,11 @@ namespace PaperCalc.Pages
                 AspeosCalculation.Calculate(_context, _env.ContentRootPath);
                 Coatings = _context.AspeosStockCoatings.ToList();
                 FlatSize = _context.AspeosFlatSizes.ToList();
+            }
+            if(AspeosCalculation != null && AspeosCalculation.FileHandlingFee != null)
+            {
+                Settings = new();
+                Settings.FilehandlingCost = (double)AspeosCalculation.FileHandlingFee;
             }
         }
     }
