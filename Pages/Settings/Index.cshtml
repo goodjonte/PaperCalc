@@ -20,6 +20,13 @@
 
     <div class="input-group mb-3 settingsBasicInput">
         <div class="input-group-prepend">
+            <label class="input-group-text" id="basic-addon1" asp-for="Settings.MinimumJobCost"></label>
+        </div>
+        <input type="number" class="form-control inputCurve" step="any" asp-for="Settings.MinimumJobCost">
+    </div>
+
+    <div class="input-group mb-3 settingsBasicInput">
+        <div class="input-group-prepend">
             <label class="input-group-text" id="basic-addon1" asp-for="Settings.FilehandlingCost"></label>
         </div>
         <input type="number" class="form-control inputCurve" step="any" asp-for="Settings.FilehandlingCost">
@@ -87,7 +94,7 @@
         <div class="input-group-prepend">
             <label class="input-group-text" id="basic-addon1" asp-for="Settings.Folding3"></label>
         </div>
-        <input type="number" class="form-control inputCurve"  step="any" asp-for="Settings.Folding3">
+        <input type="number" class="form-control inputCurve" step="any" asp-for="Settings.Folding3">
     </div>
 
     <div class="form-group settingsSubmit">

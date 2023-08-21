@@ -92,7 +92,15 @@ namespace PaperCalc.DTOs
         //MiFileHandling value hard coded - change this
         public double? FileHandlingCost { get { return FileHandling && Settings != null ? Settings.FilehandlingCost : 0; } }
         [DisplayFormat(DataFormatString = "{0:c}")]
-        public double? JobCost { get { return Quantity > 0 ? (((PaperCost * Buffer) + FinishingsCost) * Multiplier) + Minimum + FileHandlingCost : 0; } }
+        public double? JobCost { get {
+                if (Quantity == null) { return 0; }
+                double? jobCost = (((PaperCost * Buffer) + FinishingsCost) * Multiplier) + Minimum + FileHandlingCost;
+                if(jobCost < 15 && Settings != null)
+                {
+                    return Settings.MinimumJobCost;
+                }
+                return jobCost;
+        }}
         [DisplayFormat(DataFormatString = "{0:c}")]
         public double? JobCostGstInc { get { return JobCost > 0 ? JobCost*1.15 : 0; } }
         [DisplayFormat(DataFormatString = "{0:c}")]

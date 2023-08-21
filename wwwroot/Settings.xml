@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Settings>
+  <MinimumJobCost>15</MinimumJobCost>
   <FilehandlingCost>25</FilehandlingCost>
   <MarginMultiplier>
     <SmallOrUrgent>2</SmallOrUrgent>

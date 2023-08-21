@@ -7,6 +7,8 @@ namespace PaperCalc.DTOs
 {
     public class Settings
     {
+        [Display(Name = "Minimum Job Cost ($)")]
+        public double MinimumJobCost { get; set; }
         [Display(Name = "Filehandling Cost ($)")]
         public double FilehandlingCost { get; set; }
         [Display(Name = "Small & Urgent Fee ($)")]
@@ -37,6 +39,7 @@ namespace PaperCalc.DTOs
             XmlDocument doc = new XmlDocument();
             doc.Load(string.Concat(path, "/wwwroot/Settings.xml"));
 
+            XmlNode? minimumJobCost = doc.SelectSingleNode("/Settings/MinimumJobCost");
             XmlNode? fileHandlingCost = doc.SelectSingleNode("/Settings/FilehandlingCost");
             XmlNode? marginMultiplier = doc.SelectSingleNode("/Settings/MarginMultiplier/Standard");
             XmlNode? marginMultiplierSmallOrUrgent = doc.SelectSingleNode("/Settings/MarginMultiplier/SmallOrUrgent");
@@ -50,7 +53,7 @@ namespace PaperCalc.DTOs
             XmlNode? folding2 = doc.SelectSingleNode("/Settings/Folding/FoldingTwoMultiplier");
             XmlNode? folding3 = doc.SelectSingleNode("/Settings/Folding/FoldingThreeMultiplier");
 
-            
+            MinimumJobCost = minimumJobCost != null ? Convert.ToDouble(minimumJobCost.InnerText) : 0;
             FilehandlingCost = fileHandlingCost != null ? Convert.ToDouble(fileHandlingCost.InnerText) : 0;
             MarginMultiplier = marginMultiplier != null ? Convert.ToDouble(marginMultiplier.InnerText) : 0;
             MarginMultiplierSmallOrUrgent = marginMultiplierSmallOrUrgent != null ? Convert.ToDouble(marginMultiplierSmallOrUrgent.InnerText) : 0;
@@ -70,6 +73,7 @@ namespace PaperCalc.DTOs
             XmlDocument doc = new XmlDocument();
             doc.Load(string.Concat(path, "/wwwroot/Settings.xml"));
 
+            XmlNode? minimumJobCost = doc.SelectSingleNode("/Settings/MinimumJobCost");
             XmlNode? fileHandlingCost = doc.SelectSingleNode("/Settings/FilehandlingCost");
             XmlNode? marginMultiplier = doc.SelectSingleNode("/Settings/MarginMultiplier/Standard");
             XmlNode? marginMultiplierSmallOrUrgent = doc.SelectSingleNode("/Settings/MarginMultiplier/SmallOrUrgent");
@@ -83,8 +87,9 @@ namespace PaperCalc.DTOs
             XmlNode? folding2 = doc.SelectSingleNode("/Settings/Folding/FoldingTwoMultiplier");
             XmlNode? folding3 = doc.SelectSingleNode("/Settings/Folding/FoldingThreeMultiplier");
 
-            if (fileHandlingCost != null && marginMultiplier != null && marginMultiplierSmallOrUrgent != null && bufferMultiplier != null && bufferMultiplierSmallOrUrgent != null && smallOrUrgentMinimum != null && creasing1 != null && creasing2 != null && creasing3 != null && folding1 != null && folding2 != null && folding3 != null)
+            if (minimumJobCost != null && fileHandlingCost != null && marginMultiplier != null && marginMultiplierSmallOrUrgent != null && bufferMultiplier != null && bufferMultiplierSmallOrUrgent != null && smallOrUrgentMinimum != null && creasing1 != null && creasing2 != null && creasing3 != null && folding1 != null && folding2 != null && folding3 != null)
             {
+                minimumJobCost.InnerText = MinimumJobCost.ToString();
                 fileHandlingCost.InnerText = FilehandlingCost.ToString();
                 marginMultiplier.InnerText = MarginMultiplier.ToString();
                 marginMultiplierSmallOrUrgent.InnerText = MarginMultiplierSmallOrUrgent.ToString();
