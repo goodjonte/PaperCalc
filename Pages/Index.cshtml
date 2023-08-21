@@ -3,6 +3,21 @@
 @{
 
 }
+<script>
+    function filterStock() {
+        console.log("herhe");
+        var selected = document.getElementById("coatSelect").value;
+        var options = document.getElementById("stockSelect").options;
+        for (var i = 0; i < options.length; i++) {
+            if (options[i].className != selected && selected != "") {
+                options[i].style.display = "none";
+            } else {
+                options[i].style.display = "block";
+            }
+        }
+    }
+</script>
+
 
 <div id="aspeosCalculator" class="text-center">
     <h4 class="display-4">Aspeos</h4>
@@ -30,7 +45,7 @@
                 </select>
             </div>
 
-            <div class="input-group mb-3 aspeosInput">
+            @*<div class="input-group mb-3 aspeosInput">
                 <div class="input-group-prepend">
                     <label class="input-group-text" asp-for="AspeosCalculation.CoatingId">Stock Coating</label>
                 </div>
@@ -40,6 +55,33 @@
                         foreach (PaperCalc.Models.AspeosStockCoatings coat in Model.Coatings)
                         {
                             <option value="@coat.Id">@coat.Name</option>
+                        }
+                    }
+                </select>
+                </div>*@
+            <div class="input-group mb-3 aspeosInput">
+                <div class="input-group-prepend">
+                    <label class="input-group-text">Coating</label>
+                </div>
+                <select onchange="filterStock()" id="coatSelect" class="custom-select" asp-for="AspeosCalculation.CoatType">
+                    <option value="">Select a Option...</option>
+                    <option value="Uncoated">Uncoated</option>
+                    <option value="Coated">Coated</option>
+                    <option value="Adhesive">Adhesive</option>
+                    <option value="Synthetic">Synthetic</option>
+                </select>
+            </div>
+
+            <div class="input-group mb-3 aspeosInput">
+                <div class="input-group-prepend">
+                    <label class="input-group-text">Stock</label>
+                </div>
+                <select id="stockSelect" class="custom-select" asp-for="AspeosCalculation.SheetPrice">
+                    <option value="">Select a Coating...</option>
+                    @{
+                        foreach (PaperCalc.Models.AspeosStock item in Model.Paper)
+                        {
+                            <option class="@item.CoatType" value="@item.SheetCost">@item.Weight<span>gsm</span> @item.Company @item.ProductName</option>
                         }
                     }
                 </select>
@@ -161,6 +203,31 @@
 
     </form>
 
+    @{ if (Model.AspeosCalculation.JobCost > 0)
+        {
+            <div id="calculationPost">
+
+                <dl id="calculationTotals">
+
+                    <dt>Job Cost:</dt>
+                    <dd>@Html.DisplayFor(model => Model.AspeosCalculation.JobCost)</dd>
+
+                    <dt>GST:</dt>
+                    <dd>@Html.DisplayFor(model => Model.AspeosCalculation.GST)</dd>
+
+                    <dt>Job Cost (GST Inc):</dt>
+                    <dd>@Html.DisplayFor(model => Model.AspeosCalculation.JobCostGstInc)</dd>
+                </dl>
+
+                <div>
+                    <a class="btn btn-primary" id="showCalculationsButton" data-toggle="collapse" href="#CalculationValues" role="button" aria-expanded="false" aria-controls="CalculationValues">Show Calculation Values</a>
+                    <button class="btn btn-primary" onclick="generate()">Generate document</button>
+                </div>
+
+            </div>
+        }
+    }
+
     <div id="CalculationValues" class="collapse">
         <table>
             <tr>
@@ -220,30 +287,6 @@
 
 </div>
 
-@{ if(Model.AspeosCalculation.JobCost > 0)
-    {
-    <div id="calculationPost">
-
-        <dl id="calculationTotals">
-
-            <dt>Job Cost:</dt>
-            <dd>@Html.DisplayFor(model => Model.AspeosCalculation.JobCost)</dd>
-
-            <dt>GST:</dt>
-            <dd>@Html.DisplayFor(model => Model.AspeosCalculation.GST)</dd>
-
-            <dt>Job Cost (GST Inc):</dt>
-            <dd>@Html.DisplayFor(model => Model.AspeosCalculation.JobCostGstInc)</dd>
-        </dl>
-
-        <div>
-            <a class="btn btn-primary" id="showCalculationsButton" data-toggle="collapse" href="#CalculationValues" role="button" aria-expanded="false" aria-controls="CalculationValues">Show Calculation Values</a>
-            <button class="btn btn-primary" onclick="generate()">Generate document</button>
-        </div>
-
-    </div>
-    }
-}
 
 <script>
     function calculationValuesDisplay() {
@@ -270,7 +313,7 @@
 
     function getDateString() {
         const now = new Date();
-        return (now.getDate() < 10 ? "0" + now.getDate() : now.getDate()) + "/" + ((now.getMonth() + 1) < 10 ? "0" + (now.getMonth() + 1) : (now.getMonth() + 1)) + "/" + now.getFullYear() ;
+        return (now.getDate() < 10 ? "0" + now.getDate() : now.getDate()) + "/" + ((now.getMonth() + 1) < 10 ? "0" + (now.getMonth() + 1) : (now.getMonth() + 1)) + "/" + now.getFullYear();
     }
     function loadFile(url, callback) {
         PizZipUtils.getBinaryContent(url, callback);
@@ -300,7 +343,7 @@
         var colour = document.getElementById("AspeosCalculation_Colour").value == "colour" ? "Colour" : "Black and White";
         return sides + colour;
     }
-    
+
 
     window.generate = function generate() {
         loadFile(
@@ -322,8 +365,8 @@
                     printed: getPrinted(),
                     coating: "",
                     extras: getExtras(),
-                    size: document.getElementById("AspeosCalculation_FlatSizeId").options[document.getElementById("AspeosCalculation_FlatSizeId").selectedIndex].text, 
-                    quantity: document.getElementById("AspeosCalculation_Quantity").value, 
+                    size: document.getElementById("AspeosCalculation_FlatSizeId").options[document.getElementById("AspeosCalculation_FlatSizeId").selectedIndex].text,
+                    quantity: document.getElementById("AspeosCalculation_Quantity").value,
                     unitPrice: document.getElementById("SheetPrice").innerText,
                     subtotal: document.getElementById("JobCost").innerText,
                     gst: document.getElementById("GST").innerText,

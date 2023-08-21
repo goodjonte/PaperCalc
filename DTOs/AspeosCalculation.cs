@@ -9,8 +9,8 @@ namespace PaperCalc.DTOs
         public Settings? Settings { get; set; }
         public double? Quantity { get; set; }
         public Guid? FlatSizeId { get; set; }
+        public CoatType? CoatType { get; set; }
         public AspeosFlatSize? FlatSize { get; set; }
-        public Guid? CoatingId { get; set; }
         public string? Colour { get; set;}
         public string? PrintedSides { get; set; }
         public int NumOfHolePunches { get; set; }
@@ -115,12 +115,7 @@ namespace PaperCalc.DTOs
         {
             Settings = new();
             Settings.SetSettings(path);
-            AspeosStockCoatings? aspeosStockCoatings = _context.AspeosStockCoatings.Find(CoatingId);
-            if (aspeosStockCoatings != null)
-            {
-                SheetPrice = aspeosStockCoatings.GetAverage(_context);
-                FlatSize = _context.AspeosFlatSizes.Find(FlatSizeId);
-            }
+            FlatSize = _context.AspeosFlatSizes.Find(FlatSizeId);
         }
     }
 }

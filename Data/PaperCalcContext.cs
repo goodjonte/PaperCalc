@@ -13,8 +13,6 @@ namespace PaperCalc.Data
             : base(options)
         {
         }
-        public DbSet<PaperCalc.Models.AspeosStockCoatings> AspeosStockCoatings { get; set; } = default!;
-        public DbSet<PaperCalc.Models.CoatingsPaper> CoatingsPapers { get; set; } = default!;
         public DbSet<PaperCalc.Models.AspeosFlatSize> AspeosFlatSizes { get; set; } = default!;
         public DbSet<PaperCalc.Models.EpsonFlatSize> EpsonFlatSizes { get; set; } = default!;
         public DbSet<PaperCalc.Models.AspeosStock> AspeosStock { get; set; } = default!;

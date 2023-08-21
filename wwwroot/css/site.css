@@ -93,6 +93,9 @@ td, th {
     width: 100%;
     display: flex;
     justify-content: center;
+    margin-top: 10px;
+    psdding-top: 10px;
+    border-top: 1px grey solid;
 }
 #calculationPost > * {
     margin: 10px;
@@ -132,7 +135,6 @@ td, th {
 
 #aspeosCalculator {
     padding: 15px 0;
-    border-bottom: 1px solid grey;
 }
 @media only screen and (max-width: 1200px) {
     #CalculationValues {
