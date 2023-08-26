@@ -46,7 +46,10 @@
 
 <div><img src="/Images/Logo.PNG" /></div>
 <form method="post">
-    <input asp-for="Password" type="password" placeholder="Enter Password" required>
+    <label>Username:</label>
+    <input asp-for="User.UserName" type="text" placeholder="username" required>
+    <label>Password:</label>
+    <input asp-for="User.Password" type="password" placeholder="password" required>
 
     <button class="btn btn-success" type="submit">Login</button>
 </form>

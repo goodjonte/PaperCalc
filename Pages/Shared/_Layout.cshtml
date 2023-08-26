@@ -34,21 +34,22 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-page="/Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Stock
-                            </a>
-                            <div class="dropdown-menu" style="width: 300px;" aria-labelledby="navbarDropdown">
-                                <a class="nav-link text-dark" asp-page="/Stock/AspeosStock/Index">Aspeos Stock</a>
-                                <a class="nav-link text-dark" asp-page="/Stock/EpsonStock/Index">Epson Stock</a>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-page="/Settings/Index">Settings</a>
-                        </li>
+                        @{if (Model.GetType().GetProperty("Admin") == null || Model.Admin)
+                            {
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Stock
+                                    </a>
+                                    <div class="dropdown-menu" style="width: 300px;" aria-labelledby="navbarDropdown">
+                                        <a class="nav-link text-dark" asp-page="/Stock/AspeosStock/Index">Aspeos Stock</a>
+                                        <a class="nav-link text-dark" asp-page="/Stock/EpsonStock/Index">Epson Stock</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-page="/Settings/Index">Settings </a>
+                                </li>
+                            }
+                        }
                     </ul>
                 </div>
             </div>

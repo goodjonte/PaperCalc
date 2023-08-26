@@ -13,10 +13,12 @@ namespace PaperCalc.Pages.EpsonStock
     public class DeleteModel : PageModel
     {
         private readonly PaperCalc.Data.PaperCalcContext _context;
+        private IConfiguration _configuration;
 
-        public DeleteModel(PaperCalc.Data.PaperCalcContext context)
+        public DeleteModel(PaperCalc.Data.PaperCalcContext context, IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
 
         [BindProperty]
@@ -24,8 +26,8 @@ namespace PaperCalc.Pages.EpsonStock
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
-            var cookieValue = Request.Cookies["PaperCalc"];
-            if (cookieValue == null || !PaperCalc.Models.Login.ValidatePassword(_context, cookieValue))
+            var token = Request.Cookies["Parrot"];
+            if (token == null || !PaperCalc.Models.User.VerifyToken(_configuration, token) || !PaperCalc.Models.User.IsAdmin(token))
             {
                 return Redirect("/Login");
             }

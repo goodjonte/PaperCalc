@@ -13,16 +13,18 @@ namespace PaperCalc.Pages.AspeosStock
     public class CreateModel : PageModel
     {
         private readonly PaperCalc.Data.PaperCalcContext _context;
+        private IConfiguration _configuration;
 
-        public CreateModel(PaperCalc.Data.PaperCalcContext context)
+        public CreateModel(PaperCalc.Data.PaperCalcContext context, IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
 
         public IActionResult OnGet()
         {
-            var cookieValue = Request.Cookies["PaperCalc"];
-            if (cookieValue == null || !PaperCalc.Models.Login.ValidatePassword(_context, cookieValue))
+            var token = Request.Cookies["Parrot"];
+            if (token == null || !PaperCalc.Models.User.VerifyToken(_configuration, token) || !PaperCalc.Models.User.IsAdmin(token))
             {
                 return Redirect("/Login");
             }
