@@ -19,10 +19,16 @@ namespace PaperCalc.Pages.Settings
         {
             _context = context;
             AspeosFlatSizes = new();
+            FlatFlatSizes = new();
             _env = env;
             Settings = new();
             NewUser = new();
             AspeosFlatSize = new()
+            {
+                Id = Guid.NewGuid(),
+                Name = ""
+            };
+            FlatFlatSize = new()
             {
                 Id = Guid.NewGuid(),
                 Name = ""
@@ -37,6 +43,12 @@ namespace PaperCalc.Pages.Settings
         public List<PaperCalc.Models.AspeosFlatSize> AspeosFlatSizes { get; set; }
         [BindProperty]
         public PaperCalc.Models.AspeosFlatSize AspeosFlatSize { get; set; }
+        [BindProperty]
+        public List<PaperCalc.Models.FlatFlatSize> FlatFlatSizes { get; set; }
+        [BindProperty]
+        public PaperCalc.Models.FlatFlatSize FlatFlatSize { get; set; }
+
+        //GET Method
         public IActionResult OnGet()
         {
             Settings.SetSettings(_env.ContentRootPath);
@@ -48,17 +60,20 @@ namespace PaperCalc.Pages.Settings
             }
 
             AspeosFlatSizes = _context.AspeosFlatSizes.ToList();
-            Debug.WriteLine(AspeosFlatSizes.Count);
+            FlatFlatSizes = _context.FlatFlatSizes.ToList();
             return Page();
         }
+
+        //Post Methods
         public ActionResult OnPostSaveSettings()
         {
             Settings.SaveSettings(_env.ContentRootPath);
             return RedirectToPage("./Index");
         }
+        //Aspeos Flat size methods
         public ActionResult OnPostAspeosCreate()
         {
-            if(!ModelState.IsValid || AspeosFlatSize == null)
+            if(AspeosFlatSize == null)
             {
                 return Page();
             }
@@ -87,6 +102,39 @@ namespace PaperCalc.Pages.Settings
             return RedirectToPage("./Index");
         }
 
+        //Flat - Flat size methods
+        public ActionResult OnPostFlatCreate()
+        {
+            if (FlatFlatSize == null)
+            {
+                return Page();
+            }
+
+            _context.FlatFlatSizes.Add(FlatFlatSize);
+            _context.SaveChanges();
+
+            return RedirectToPage("./Index");
+        }
+        public ActionResult OnPostFlatEdit()
+        {
+            if (FlatFlatSize == null)
+            {
+                return Page();
+            }
+            if (string.Equals(FlatFlatSize.Name, "delete", StringComparison.OrdinalIgnoreCase))
+            {
+                _context.FlatFlatSizes.Remove(FlatFlatSize);
+                _context.SaveChanges();
+                return RedirectToPage("./Index");
+            }
+
+            _context.Attach(FlatFlatSize).State = EntityState.Modified;
+            _context.SaveChanges();
+
+            return RedirectToPage("./Index");
+        }
+
+        //User methods
         public async Task<IActionResult> OnPostCreateUser()
         {
             if(NewUser.UserName.IsNullOrEmpty() || NewUser.Password.IsNullOrEmpty())

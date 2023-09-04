@@ -16,4 +16,9 @@
         public required string RollLength { get; set; }
         public int CutsPerRoll { get; set; }
     }
+    public class FlatFlatSize : FlatSize
+    {
+        public int? SizeMultiplier { get; set; }
+        public double? LaminationCost { get; set; }
+    }
 }

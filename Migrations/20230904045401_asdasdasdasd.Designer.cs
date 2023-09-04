@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PaperCalc.Data;
 
@@ -11,9 +12,11 @@ using PaperCalc.Data;
 namespace PaperCalc.Migrations
 {
     [DbContext(typeof(PaperCalcContext))]
-    partial class PaperCalcContextModelSnapshot : ModelSnapshot
+    [Migration("20230904045401_asdasdasdasd")]
+    partial class asdasdasdasd
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -135,27 +138,6 @@ namespace PaperCalc.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("EpsonStock");
-                });
-
-            modelBuilder.Entity("PaperCalc.Models.FlatFlatSize", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<double?>("LaminationCost")
-                        .HasColumnType("float");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("SizeMultiplier")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("FlatFlatSizes");
                 });
 
             modelBuilder.Entity("PaperCalc.Models.FlatStock", b =>

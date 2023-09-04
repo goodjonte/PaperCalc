@@ -32,7 +32,16 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-page="/Index">Home</a>
+                            <a class="nav-link text-dark" asp-page="/Index">SRA3</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-page="/Flat">Flat</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-page="/Booklets">Booklets</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-page="/WideFormat">Wide Format</a>
                         </li>
                         @{if (Model.GetType().GetProperty("Admin") == null || Model.Admin)
                             {
@@ -41,8 +50,9 @@
                                         Stock
                                     </a>
                                     <div class="dropdown-menu" style="width: 300px;" aria-labelledby="navbarDropdown">
-                                        <a class="nav-link text-dark" asp-page="/Stock/AspeosStock/Index">Aspeos Stock</a>
+                                        <a class="nav-link text-dark" asp-page="/Stock/AspeosStock/Index">SRA3 Stock</a>
                                         <a class="nav-link text-dark" asp-page="/Stock/EpsonStock/Index">Epson Stock</a>
+                                        <a class="nav-link text-dark" asp-page="/Stock/FlatStock/Index">Flat Stock</a>
                                     </div>
                                 </li>
                                 <li class="nav-item">

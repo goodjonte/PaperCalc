@@ -8,7 +8,7 @@ namespace PaperCalc.Models
     public class User
     {
         public Guid Id { get; set; }
-        public required string UserName { get; set; }
+        public string? UserName { get; set; }
         public byte[]? PasswordHash { get; set; }
         public byte[]? PasswordSalt { get; set; }
         public bool Admin { get; set; }

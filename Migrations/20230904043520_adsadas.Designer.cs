@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PaperCalc.Data;
 
@@ -11,9 +12,11 @@ using PaperCalc.Data;
 namespace PaperCalc.Migrations
 {
     [DbContext(typeof(PaperCalcContext))]
-    partial class PaperCalcContextModelSnapshot : ModelSnapshot
+    [Migration("20230904043520_adsadas")]
+    partial class adsadas
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,6 +62,10 @@ namespace PaperCalc.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<double>("PackCost")
                         .HasColumnType("float");
 
@@ -79,6 +86,10 @@ namespace PaperCalc.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("AspeosStock");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("AspeosStock");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("PaperCalc.Models.EpsonFlatSize", b =>
@@ -137,62 +148,6 @@ namespace PaperCalc.Migrations
                     b.ToTable("EpsonStock");
                 });
 
-            modelBuilder.Entity("PaperCalc.Models.FlatFlatSize", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<double?>("LaminationCost")
-                        .HasColumnType("float");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("SizeMultiplier")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("FlatFlatSizes");
-                });
-
-            modelBuilder.Entity("PaperCalc.Models.FlatStock", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("CoatType")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Company")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("PackCost")
-                        .HasColumnType("float");
-
-                    b.Property<string>("ProductName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("SheetsPerPack")
-                        .HasColumnType("float");
-
-                    b.Property<string>("Size")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Weight")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("FlatStock");
-                });
-
             modelBuilder.Entity("PaperCalc.Models.Login", b =>
                 {
                     b.Property<Guid>("Id")
@@ -234,6 +189,13 @@ namespace PaperCalc.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("User");
+                });
+
+            modelBuilder.Entity("PaperCalc.Models.FlatStock", b =>
+                {
+                    b.HasBaseType("PaperCalc.Models.AspeosStock");
+
+                    b.HasDiscriminator().HasValue("FlatStock");
                 });
 #pragma warning restore 612, 618
         }

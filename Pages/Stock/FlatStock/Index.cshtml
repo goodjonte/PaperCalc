@@ -1,8 +1,8 @@
 ﻿@page
-@model PaperCalc.Pages.AspeosStock.IndexModel
+@model PaperCalc.Pages.FlatStock.IndexModel
 
 @{
-    ViewData["Title"] = "SRA3 Stock";
+    ViewData["Title"] = "Flat Stock";
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -14,37 +14,37 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.AspeosStock[0].Company)
+                @Html.DisplayNameFor(model => model.FlatStock[0].Company)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AspeosStock[0].ProductName)
+                @Html.DisplayNameFor(model => model.FlatStock[0].ProductName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AspeosStock[0].Size)
+                @Html.DisplayNameFor(model => model.FlatStock[0].Size)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AspeosStock[0].Weight)
+                @Html.DisplayNameFor(model => model.FlatStock[0].Weight)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AspeosStock[0].CoatType)
+                @Html.DisplayNameFor(model => model.FlatStock[0].CoatType)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AspeosStock[0].PackCost)
+                @Html.DisplayNameFor(model => model.FlatStock[0].PackCost)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AspeosStock[0].PackCostGstIncluded)
+                @Html.DisplayNameFor(model => model.FlatStock[0].PackCostGstIncluded)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AspeosStock[0].SheetsPerPack)
+                @Html.DisplayNameFor(model => model.FlatStock[0].SheetsPerPack)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AspeosStock[0].SheetCost)
+                @Html.DisplayNameFor(model => model.FlatStock[0].SheetCost)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.AspeosStock)
+        @foreach (var item in Model.FlatStock)
         {
             <tr>
                 <td>

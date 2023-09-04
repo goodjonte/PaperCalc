@@ -65,4 +65,23 @@ namespace PaperCalc.Models
         public double? PriceA1 { get { return PriceA0 != null ? (PricePerMeter / 1000) * 594 : Width >= 594 ? (PricePerMeter / 1000) * 841 : null; } }
         public double? PriceA2 { get { return Width >= 420 ? (PricePerMeter / 1000) * 420 : null; } }
     }
+
+    public class FlatStock : Stock
+    {
+        public string Size { get; set; } = default!;
+        [Display(Name = "Pack Cost")]
+        [DisplayFormat(DataFormatString = "{0:c}")]
+        public double PackCost { get; set; }
+
+        [Display(Name = "Pack Cost + GST")]
+        [DisplayFormat(DataFormatString = "{0:c}")]
+        public double PackCostGstIncluded { get { return Math.Round(PackCost * 1.15, 2); } }
+
+        [Display(Name = "Sheets Per Pack")]
+        public double SheetsPerPack { get; set; }
+
+        [Display(Name = "Sheet Cost")]
+        [DisplayFormat(DataFormatString = "{0:c}")]
+        public double SheetCost { get { return Math.Round(PackCost / SheetsPerPack, 2); } }
+    }
 }
