@@ -2,9 +2,8 @@
 @model PaperCalc.Pages.EpsonStock.IndexModel
 
 @{
-    ViewData["Title"] = "Epson Stock";
+    ViewData["Title"] = "Wide Format Stock";
 }
-<h1 class="RedText">Not Functional Yet</h1>
 <h1>@ViewData["Title"]</h1>
 
 <p>
@@ -32,7 +31,22 @@
                 @Html.DisplayNameFor(model => model.EpsonStock[0].RollCost)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.EpsonStock[0].RollCostGstIncluded)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.EpsonStock[0].RollsLength)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EpsonStock[0].PricePerMeter)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EpsonStock[0].PriceA0)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EpsonStock[0].PriceA1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EpsonStock[0].PriceA2)
             </th>
             <th></th>
         </tr>
@@ -60,7 +74,22 @@
                     @Html.DisplayFor(modelItem => item.RollCost)
                 </td>
                 <td>
+                    @Html.DisplayFor(modelItem => item.RollCostGstIncluded)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.RollsLength)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PricePerMeter)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PriceA0)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PriceA1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PriceA2)
                 </td>
                 <td>
                     <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |

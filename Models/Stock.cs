@@ -60,9 +60,11 @@ namespace PaperCalc.Models
         [Display(Name = "Price Per Meter")]
         [DisplayFormat(DataFormatString = "{0:c}")]
         public double PricePerMeter { get { return Math.Round(RollCost / RollsLength, 2); } }
-
+        [DisplayFormat(DataFormatString = "{0:c}")]
         public double? PriceA0 { get { return Width >= 841 ? (PricePerMeter / 1000) * 1189 : null; } }
+        [DisplayFormat(DataFormatString = "{0:c}")]
         public double? PriceA1 { get { return PriceA0 != null ? (PricePerMeter / 1000) * 594 : Width >= 594 ? (PricePerMeter / 1000) * 841 : null; } }
+        [DisplayFormat(DataFormatString = "{0:c}")]
         public double? PriceA2 { get { return Width >= 420 ? (PricePerMeter / 1000) * 420 : null; } }
     }
 
@@ -83,5 +85,30 @@ namespace PaperCalc.Models
         [Display(Name = "Sheet Cost")]
         [DisplayFormat(DataFormatString = "{0:c}")]
         public double SheetCost { get { return Math.Round(PackCost / SheetsPerPack, 2); } }
+    }
+
+    public class LaminationStock : Stock
+    {
+        public int Width { get; set; }
+        [Display(Name = "Roll Cost")]
+        [DisplayFormat(DataFormatString = "{0:c}")]
+        public double RollCost { get; set; }
+
+        [Display(Name = "Roll Cost (GST Incl)")]
+        [DisplayFormat(DataFormatString = "{0:c}")]
+        public double RollCostGstIncluded { get { return Math.Round(RollCost * 1.15, 2); } }
+
+        [Display(Name = "Rolls Length (meters)")]
+        public double RollsLength { get; set; }
+
+        [Display(Name = "Price Per Meter")]
+        [DisplayFormat(DataFormatString = "{0:c}")]
+        public double PricePerMeter { get { return Math.Round(RollCost / RollsLength, 2); } }
+        [DisplayFormat(DataFormatString = "{0:c}")]
+        public double? PriceA0 { get { return Width >= 841 ? (PricePerMeter / 1000) * 1189 : null; } }
+        [DisplayFormat(DataFormatString = "{0:c}")]
+        public double? PriceA1 { get { return PriceA0 != null ? (PricePerMeter / 1000) * 594 : Width >= 594 ? (PricePerMeter / 1000) * 841 : null; } }
+        [DisplayFormat(DataFormatString = "{0:c}")]
+        public double? PriceA2 { get { return Width >= 420 ? (PricePerMeter / 1000) * 420 : null; } }
     }
 }

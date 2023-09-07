@@ -1,4 +1,5 @@
 ﻿using PaperCalc.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace PaperCalc.DTOs
 {
@@ -26,7 +27,7 @@ namespace PaperCalc.DTOs
         public double? ClickSideMultiplier { get { return PrintedSides == "single" ? BaseClickRate * 1 : BaseClickRate * 2; } }
         public double? ClickSizeMultiplier { get { return FlatSize != null ? ClickSideMultiplier * FlatSize.SizeMultiplier : 0 ; } }
         public double? ClickRate { get { return ClickSizeMultiplier; } }
-        public double? SheetPrice { get; } //set in front end
+        public double? SheetPrice { get; set; } //set in front end
         public double? BindingCost { get { return Binding ? CopyQuantity * 7.7 : 0; } } //Hard coded in binding multiplier
         public double? HolePunchesCost { get { return Pages / 20 * NumOfHolePunches; } }
         public double? LaminationCost { get { return Lamination && FlatSize != null ? FlatSize.LaminationCost * SheetsUsed: 0; } } //dont think this is right -broken on sheets? - i made this multiply by sheets used instead of whats on sheets which is LamCost * Pages * CopyQuantity
@@ -115,25 +116,34 @@ namespace PaperCalc.DTOs
             }
         }
         public double? Minimum { get { return Urgent ? 15 : 0; } } //hardcoded in minimum for urgent cost
-        public double? FileHandlingCost { get; } //Set in front end
+        public double? FileHandlingCost { get { return FileHandling ? FileHandlingFee : 0; } } //Set in front end
 
         //third row calcs
+        [DisplayFormat(DataFormatString = "{0:c}")]
         public double? JobCost {
             get
             {
-                double? jobcost = (((PaperCost * Buffer) + Finishings) * Multiplier ) + Minimum + FileHandlingCost + LamCuts;
-                if(jobcost < 15)
+                if((((PaperCost * Buffer) + Finishings) * Multiplier) + Minimum + FileHandlingCost + LamCuts < 15)
                 {
                     return 15;
                 }
                 else
                 {
-                    return jobcost;
+                    return (((PaperCost * Buffer) + Finishings) * Multiplier) + Minimum + FileHandlingCost + LamCuts;
                 }
             }
         }
+        [DisplayFormat(DataFormatString = "{0:c}")]
         public double? JobCostWithGST { get { return JobCost * 1.15; } }
         //there was an unlabeled cell on sheets inb third row
 
+        //Methods
+
+        public void Calculate(PaperCalc.Data.PaperCalcContext _context, String path)
+        {
+            Settings = new();
+            Settings.SetSettings(path);
+            FlatSize = _context.FlatFlatSizes.Find(FlatSizeId);
+        }
     }
 }

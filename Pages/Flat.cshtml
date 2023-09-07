@@ -8,6 +8,179 @@
 
 <div id="aspeosCalculator" class="text-center">
     <h4 class="display-4">Flat</h4>
+
+    <form id="AspeosForm" method="post">
+        <div class="AspeosFormRow">
+            <div class="input-group mb-3 aspeosInput">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" id="basic-addon1" asp-for="FlatCalculation.Pages"></label>
+                </div>
+                <input type="number" class="form-control" asp-for="FlatCalculation.Pages">
+            </div>
+            <div class="input-group mb-3 aspeosInput">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" id="basic-addon1" asp-for="FlatCalculation.CopyQuantity"></label>
+                </div>
+                <input type="number" class="form-control" asp-for="FlatCalculation.CopyQuantity">
+            </div>
+
+            <div class="input-group mb-3 aspeosInput">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" asp-for="FlatCalculation.FlatSizeId">Flat Size</label>
+                </div>
+                <select class="custom-select" asp-for="FlatCalculation.FlatSizeId">
+                    <option value="">Select a Size...</option>
+                    @{
+                        foreach (PaperCalc.Models.FlatSize fs in Model.FlatFlatSizes)
+                        {
+                            <option value="@fs.Id">@fs.Name</option>
+                        }
+                    }
+                </select>
+            </div>
+
+            <div class="input-group mb-3 aspeosInput">
+                <div class="input-group-prepend">
+                    <label class="input-group-text">Stock</label>
+                </div>
+                <select id="stockSelect" class="custom-select" asp-for="FlatCalculation.SheetPrice">
+                    <option value="">Select a Coating...</option>
+                    @{
+                        foreach (PaperCalc.Models.FlatStock item in Model.FlatStock)
+                        {
+                            <option value="@item.SheetCost">@item.Weight<span>gsm</span> @item.Company @item.ProductName</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="AspeosFormRow">
+            <div class="input-group mb-3 aspeosInput">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" asp-for="FlatCalculation.Colour">Colour</label>
+                </div>
+                <select class="custom-select" asp-for="FlatCalculation.Colour">
+                    <option value="">Select a Option...</option>
+                    <option value="colour">Colour</option>
+                    <option value="black">Black</option>
+                </select>
+            </div>
+
+            <div class="input-group mb-3 aspeosInput">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" asp-for="FlatCalculation.PrintedSides">Printed Sides</label>
+                </div>
+                <select class="custom-select" asp-for="FlatCalculation.PrintedSides">
+                    <option value="">Select a Option...</option>
+                    <option value="single">Single Sided</option>
+                    <option value="double">Double Sided</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="AspeosFormRow">
+            <div class="input-group mb-3 aspeosInput">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" asp-for="FlatCalculation.Folds">Folds</label>
+                </div>
+                <select class="custom-select" asp-for="FlatCalculation.Folds">
+                    <option value="0">None</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+            </div>
+
+
+            <div class="input-group mb-3 aspeosInput">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" asp-for="FlatCalculation.Creasing">Creasing</label>
+                </div>
+                <select class="custom-select" asp-for="FlatCalculation.Creasing">
+                    <option value="0">None</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+            </div>
+
+            <div class="input-group mb-3 aspeosInput">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" asp-for="FlatCalculation.NumOfHolePunches">Hole Punches</label>
+                </div>
+                <select class="custom-select" asp-for="FlatCalculation.NumOfHolePunches">
+                    <option value="0">None</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="Checkboxes" class="AspeosFormRow">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <label asp-for="FlatCalculation.Binding"> Binding</label>
+                    </div>
+                </div>
+                <div class="inputGroupCustomCheckbox"><input asp-for="FlatCalculation.Binding" type="checkbox" value="true"></div>
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <label asp-for="FlatCalculation.Lamination">Lamination</label>
+                    </div>
+                </div>
+                <div class="inputGroupCustomCheckbox"><input asp-for="FlatCalculation.Lamination" type="checkbox" value="true"></div>
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <label asp-for="FlatCalculation.Urgent">Urgent</label>
+                    </div>
+                </div>
+                <div class="inputGroupCustomCheckbox"><input asp-for="FlatCalculation.Urgent" type="checkbox" value="true"></div>
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <label asp-for="FlatCalculation.FileHandling">File Handling</label>
+                    </div>
+                </div>
+                <div class="inputGroupCustomCheckbox"><input asp-for="FlatCalculation.FileHandling" type="checkbox" value="true"></div>
+                <input type="number" class="form-control" value="@Model.Settings.FilehandlingCost" asp-for="FlatCalculation.FileHandlingFee">
+            </div>
+        </div>
+
+        <input type="submit" class="btn btn-success calcSubmit" />
+
+    </form>
+
+    @{ if (Model.FlatCalculation.JobCost > 0)
+        {
+            <div id="calculationPost">
+
+                <dl id="calculationTotals">
+
+                    <dt>Job Cost:</dt>
+                    <dd>@Html.DisplayFor(model => Model.FlatCalculation.JobCost)</dd>
+
+                    <dt>Job Cost (GST Inc):</dt>
+                    <dd>@Html.DisplayFor(model => Model.FlatCalculation.JobCostWithGST)</dd>
+
+                </dl>
+
+            </div>
+        }
+    }
+
+
+
 </div>
 
 

@@ -8,7 +8,7 @@
 <h1>Details</h1>
 
 <div>
-    <h4>EpsonStock</h4>
+    <h4>Wide Format Stock</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -48,10 +48,40 @@
             @Html.DisplayFor(model => model.EpsonStock.RollCost)
         </dd>
         <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EpsonStock.RollCostGstIncluded)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EpsonStock.RollCostGstIncluded)
+        </dd>
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.EpsonStock.RollsLength)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.EpsonStock.RollsLength)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EpsonStock.PricePerMeter)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EpsonStock.PricePerMeter)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EpsonStock.PriceA0)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EpsonStock.PriceA0)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EpsonStock.PriceA1)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EpsonStock.PriceA1)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EpsonStock.PriceA2)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EpsonStock.PriceA2)
         </dd>
     </dl>
 </div>

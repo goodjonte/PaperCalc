@@ -1,0 +1,102 @@
+﻿@page
+@model PaperCalc.Pages.Stock.LaminationStock.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.LaminationStock[0].Company)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LaminationStock[0].ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LaminationStock[0].Width)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LaminationStock[0].Weight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LaminationStock[0].CoatType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LaminationStock[0].RollCost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LaminationStock[0].RollCostGstIncluded)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LaminationStock[0].RollsLength)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LaminationStock[0].PricePerMeter)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LaminationStock[0].PriceA0)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LaminationStock[0].PriceA1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LaminationStock[0].PriceA2)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.LaminationStock) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Company)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Width)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Weight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CoatType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RollCost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RollCostGstIncluded)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RollsLength)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PricePerMeter)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PriceA0)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PriceA1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PriceA2)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
