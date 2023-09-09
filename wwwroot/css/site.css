@@ -1,5 +1,19 @@
 html {
   font-size: 14px;
+  
+}
+
+@font-face {
+    font-family: PoppinsFont;
+    src: url(../Font/Poppins-Medium.ttf);
+}
+@font-face {
+    font-family: PoppinsTitle;
+    src: url(../Font/Poppins-Bold.ttf);
+}
+
+:root {
+    --commonGreen: #00AB7C;
 }
 
 @media (min-width: 768px) {
@@ -20,13 +34,22 @@ html {
 }
 
 body {
+    font-family: PoppinsFont !important;
     margin-bottom: 60px;
+    background-color: #FFFFFF !important;
+    min-height: 100vh;
 }
 footer {
-    position: relative !important;
+    position: absolute !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    height: 2.5rem !important; /* Footer height */
+}
+#footerText {
+    margin: 15px;
 }
 .hidden {
-  display: none !important;
+    display: none !important;
 }
 .btn-group {
     width: 350px !important;
@@ -37,8 +60,68 @@ a {
 .btn {
     color: white !important;
 }
+
+/*    nav    */
+
+.navbar-brand {
+    padding-top: 20px !important;
+    margin-left: 40px;
+}
 .nav-link, .navbar-brand {
     color: black !important;
+}
+.customNav{
+    margin-top: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+#navLinks {
+    margin-right: 15px;
+    margin-top: 15px !important;
+    width: 80%;
+    font-family: PoppinsFont !important;
+    font-size: 20px;
+}
+#navLinks ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+#navLinks li {
+    margin: 0 35px;
+}
+.active {
+    color: var(--commonGreen) !important;
+}
+.dropdown-menu {
+    top: -8px !important;
+    left: -3px !important;
+    padding: 0 !important;
+    min-width: 0 !important;
+    display: flex;
+    flex-direction: column;
+    border-color: var(--commonGreen) !important;
+}
+.dropdown-menu a {
+    margin: 0 5px;
+
+}
+.dropLink {
+    width: 120px;
+}
+.dropBorder {
+    border-bottom: 1px var(--commonGreen) solid;
+}
+
+
+/*    nav    */
+
+.parrotTitle {
+    color: var(--commonGreen);
+    font-size: 30px;
+    margin: 10px 0;
+    font-family: PoppinsTitle !important;
 }
 td, th {
     text-align: center !important;

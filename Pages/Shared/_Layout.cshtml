@@ -22,49 +22,50 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">PaperCalc</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+        
+            <nav class="customNav">
+                <a class="navbar-brand" asp-area="" asp-page="/Index">
+                    <img src="/Images/Logo.png" width="215" alt="">
+                </a>
+                <div id="navLinks">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-page="/Index">SRA3</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-page="/Flat">Flat</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-page="/Booklets">Booklets</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-page="/WideFormat">Wide Format</a>
+                        <li class="nav-item dropdown">
+                            <a class='nav-link dropdown-toggle
+                               @Html.ActiveClass("/Index") @Html.ActiveClass("/Flat") @Html.ActiveClass("/WideFormat") @Html.ActiveClass("/Booklets")
+                               ' href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                quote
+                            </a>
+                            <div class="dropdown-menu" style="width: auto;" aria-labelledby="navbarDropdown">
+                                <a class="nav-link dropLink dropBorder @Html.ActiveClass("/Index")" asp-page="/Index">SRA3</a>
+                                <a class="nav-link dropLink dropBorder @Html.ActiveClass("/Flat")" asp-page="/Flat">Flat</a>
+                                <a class="nav-link dropLink dropBorder @Html.ActiveClass("/Booklets")" asp-page="/Booklets">Booklets</a>
+                                <a class="nav-link dropLink @Html.ActiveClass("/WideFormat")" asp-page="/WideFormat">Wide Format</a>
+                            </div>
                         </li>
                         @{if (Model.GetType().GetProperty("Admin") == null || Model.Admin)
                             {
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Stock
+                                    <a class='nav-link dropdown-toggle
+                                       @Html.ActiveClass("/Stock/AspeosStock/Index") @Html.ActiveClass("/Stock/FlatStock/Index")  @Html.ActiveClass("/Stock/LaminationStock/Index") @Html.ActiveClass("/Stock/EpsonStock/Index")
+                                       ' href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        stock
                                     </a>
-                                    <div class="dropdown-menu" style="width: 300px;" aria-labelledby="navbarDropdown">
-                                        <a class="nav-link text-dark" asp-page="/Stock/AspeosStock/Index">SRA3</a>
-                                        <a class="nav-link text-dark" asp-page="/Stock/FlatStock/Index">Flat</a>
-                                        <a class="nav-link text-dark" asp-page="/Stock/EpsonStock/Index">Wide Format</a>
-                                        <a class="nav-link text-dark" asp-page="/Stock/LaminationStock/Index">Lamination</a>
+                                    <div class='dropdown-menu' style="width: auto;" aria-labelledby="navbarDropdown">
+                                        <a class='nav-link dropLink dropBorder @Html.ActiveClass("/Stock/AspeosStock/Index")' asp-page="/Stock/AspeosStock/Index">SRA3</a>
+                                        <a class='nav-link dropLink dropBorder @Html.ActiveClass("/Stock/FlatStock/Index")' asp-page="/Stock/FlatStock/Index">Flat</a>
+                                        <a class='nav-link dropLink dropBorder @Html.ActiveClass("/Stock/EpsonStock/Index")' asp-page="/Stock/EpsonStock/Index">Wide Format</a>
+                                        <a class='nav-link dropLink @Html.ActiveClass("/Stock/LaminationStock/Index")' asp-page="/Stock/LaminationStock/Index">Lamination</a>
                                     </div>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-page="/Settings/Index">Settings </a>
+                                    <a class='nav-link @Html.ActiveClass("/Settings/Index")' asp-page="/Settings/Index">settings </a>
                                 </li>
                             }
                         }
                     </ul>
                 </div>
-            </div>
-        </nav>
+            </nav>
+
     </header>
     <div class="container">
         <main role="main" class="pb-3">
@@ -72,10 +73,8 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - PaperCalc
-        </div>
+    <footer class="text-muted">
+        <span id="footerText">&copy; 2023 - PaperCalc</span>
     </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
