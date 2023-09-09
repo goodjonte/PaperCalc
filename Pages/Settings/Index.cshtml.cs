@@ -20,6 +20,7 @@ namespace PaperCalc.Pages.Settings
             _context = context;
             AspeosFlatSizes = new();
             FlatFlatSizes = new();
+            BookletFlatSizes = new();
             _env = env;
             Settings = new();
             NewUser = new();
@@ -29,6 +30,11 @@ namespace PaperCalc.Pages.Settings
                 Name = ""
             };
             FlatFlatSize = new()
+            {
+                Id = Guid.NewGuid(),
+                Name = ""
+            };
+            BookletFlatSize = new()
             {
                 Id = Guid.NewGuid(),
                 Name = ""
@@ -47,6 +53,10 @@ namespace PaperCalc.Pages.Settings
         public List<PaperCalc.Models.FlatFlatSize> FlatFlatSizes { get; set; }
         [BindProperty]
         public PaperCalc.Models.FlatFlatSize FlatFlatSize { get; set; }
+        [BindProperty]
+        public List<PaperCalc.Models.BookletFlatSize> BookletFlatSizes { get; set; }
+        [BindProperty]
+        public PaperCalc.Models.BookletFlatSize BookletFlatSize { get; set; }
 
         //GET Method
         public IActionResult OnGet()
@@ -61,6 +71,7 @@ namespace PaperCalc.Pages.Settings
 
             AspeosFlatSizes = _context.AspeosFlatSizes.ToList();
             FlatFlatSizes = _context.FlatFlatSizes.ToList();
+            BookletFlatSizes = _context.BookletFlatSizes.ToList();
             return Page();
         }
 
@@ -129,6 +140,38 @@ namespace PaperCalc.Pages.Settings
             }
 
             _context.Attach(FlatFlatSize).State = EntityState.Modified;
+            _context.SaveChanges();
+
+            return RedirectToPage("./Index");
+        }
+
+        //Booklet - Flat size methods
+        public ActionResult OnPostBookletCreate()
+        {
+            if (BookletFlatSize == null)
+            {
+                return Page();
+            }
+
+            _context.BookletFlatSizes.Add(BookletFlatSize);
+            _context.SaveChanges();
+
+            return RedirectToPage("./Index");
+        }
+        public ActionResult OnPostBookletEdit()
+        {
+            if (BookletFlatSize == null)
+            {
+                return Page();
+            }
+            if (string.Equals(BookletFlatSize.Name, "delete", StringComparison.OrdinalIgnoreCase))
+            {
+                _context.BookletFlatSizes.Remove(BookletFlatSize);
+                _context.SaveChanges();
+                return RedirectToPage("./Index");
+            }
+
+            _context.Attach(BookletFlatSize).State = EntityState.Modified;
             _context.SaveChanges();
 
             return RedirectToPage("./Index");
