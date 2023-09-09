@@ -1,4 +1,5 @@
 ﻿using PaperCalc.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace PaperCalc.DTOs
 {
@@ -68,6 +69,7 @@ namespace PaperCalc.DTOs
         public double? FileHandlingCost { get { return FileHandlingFee; } }
 
         //Third row calcs
+        [DisplayFormat(DataFormatString = "{0:c}")]
         public double? JobCost
         {
             get
@@ -80,6 +82,7 @@ namespace PaperCalc.DTOs
                 return jobCost;
             }
         }
+        [DisplayFormat(DataFormatString = "{0:c}")]
         public double? JobCostWithGST { get { return JobCost * 1.15; } }
 
 

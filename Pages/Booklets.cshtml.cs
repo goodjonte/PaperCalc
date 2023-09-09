@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace PaperCalc.Pages
 {
+    [BindProperties]
     public class BookletsModel : PageModel
     {
         private readonly PaperCalc.Data.PaperCalcContext _context;
