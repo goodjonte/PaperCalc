@@ -21,4 +21,7 @@
         public int? SizeMultiplier { get; set; }
         public double? LaminationCost { get; set; }
     }
+    public class BookletFlatSize : FlatSize
+    {
+    }
 }

@@ -15,6 +15,7 @@ namespace PaperCalc.Data
         }
         public DbSet<PaperCalc.Models.AspeosFlatSize> AspeosFlatSizes { get; set; } = default!;
         public DbSet<PaperCalc.Models.FlatFlatSize> FlatFlatSizes { get; set; } = default!;
+        public DbSet<PaperCalc.Models.BookletFlatSize> BookletFlatSizes { get; set; } = default!;
         public DbSet<PaperCalc.Models.EpsonFlatSize> EpsonFlatSizes { get; set; } = default!;
         public DbSet<PaperCalc.Models.AspeosStock> AspeosStock { get; set; } = default!;
         public DbSet<PaperCalc.Models.EpsonStock> EpsonStock { get; set; } = default!;

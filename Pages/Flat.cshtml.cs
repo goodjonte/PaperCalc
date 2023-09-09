@@ -18,7 +18,7 @@ namespace PaperCalc.Pages
     public class FlatModel : PageModel
     {
         private readonly PaperCalc.Data.PaperCalcContext _context;
-        private IWebHostEnvironment _env;
+        private readonly IWebHostEnvironment _env;
         public readonly IConfiguration _configuration;
 
         public FlatModel(IConfiguration config, PaperCalc.Data.PaperCalcContext context, IWebHostEnvironment env)

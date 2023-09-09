@@ -2,7 +2,7 @@
 
 namespace PaperCalc.DTOs
 {
-    public class BookletsCalculation
+    public class BookletCalculation
     {
         public Settings? Settings { get; set; }
         public int? TotalPages { get; set; }
@@ -23,13 +23,14 @@ namespace PaperCalc.DTOs
         //First row calcs
         public double? InnerSheetPrice { get; set; } //Set in front end
         public double? CoverSheetPrice { get; set; } //Set in front end
-        public int? SheetsUsedInners { get { return ((TotalPages - 4 ) / 4 ) * CopyQuantity; } }
+        public int? SheetsUsedInners { get { return ((TotalPages - 4) / 4) * CopyQuantity; } }
         public double? BaseClickRate { get { return Colour == "black" ? 0.01 : 0.08; } } //Hard coded in click rates
         public double? ClickSideMultiplier { get { return PrintedSides == "single" ? BaseClickRate * 1 : BaseClickRate * 2; } }
         public double? ClickSizeMultiplier { get { return Trimming ? ClickSideMultiplier * 2 : ClickSideMultiplier; } }
         public double? ClickRate { get { return ClickSizeMultiplier; } }
         public double? CutsCost { get { return SheetsUsedInners * 4 / 80; } }
-        public double? HolePunchCost {
+        public double? HolePunchCost
+        {
             get
             {
                 return NumOfHolePunches switch
@@ -67,11 +68,12 @@ namespace PaperCalc.DTOs
         public double? FileHandlingCost { get { return FileHandlingFee; } }
 
         //Third row calcs
-        public double? JobCost {
+        public double? JobCost
+        {
             get
             {
                 double? jobCost = (((PaperCost * Buffer) + Finishings) * Multiplier) + FileHandlingCost;
-                if(jobCost < 15)
+                if (jobCost < 15)
                 {
                     jobCost = 15;
                 }
@@ -79,5 +81,12 @@ namespace PaperCalc.DTOs
             }
         }
         public double? JobCostWithGST { get { return JobCost * 1.15; } }
+
+
+        public void Calculate(PaperCalc.Data.PaperCalcContext _context, String path)
+        {
+            Settings = new();
+            Settings.SetSettings(path);
+        }
     }
 }

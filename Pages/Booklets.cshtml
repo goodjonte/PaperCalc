@@ -5,4 +5,200 @@
 
 <div id="aspeosCalculator" class="text-center">
     <h4 class="display-4">Booklets</h4>
+
+    <form id="AspeosForm" method="post">
+        <div class="AspeosFormRow">
+            <div class="input-group mb-3 aspeosInput">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" id="basic-addon1" asp-for="BookletCalculation.TotalPages"></label>
+                </div>
+                <input type="number" class="form-control" asp-for="BookletCalculation.TotalPages">
+            </div>
+            <div class="input-group mb-3 aspeosInput">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" id="basic-addon1" asp-for="BookletCalculation.CopyQuantity"></label>
+                </div>
+                <input type="number" class="form-control" asp-for="BookletCalculation.CopyQuantity">
+            </div>
+
+
+            <div class="input-group mb-3 aspeosInput">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" asp-for="BookletCalculation.FlatSizeId">Flat Size</label>
+                </div>
+                <select class="custom-select" asp-for="BookletCalculation.FlatSizeId">
+                    <option value="">Select a Size...</option>
+                    @{
+                        foreach (PaperCalc.Models.FlatSize fs in Model.BookletFlatSizes)
+                        {
+                            <option value="@fs.Id">@fs.Name</option>
+                        }
+                    }
+                </select>
+            </div>
+
+
+            <div class="input-group mb-3 aspeosInput">
+                <div class="input-group-prepend">
+                    <label class="input-group-text">Stock</label>
+                </div>
+                <select id="stockSelect" class="custom-select" asp-for="BookletCalculation.InnerSheetPrice">
+                    <option value="">Select a Coating...</option>
+                    @{
+                        foreach (PaperCalc.Models.AspeosStock item in Model.AspeosStock)
+                        {
+                            <option value="@item.SheetCost">@item.Weight<span>gsm</span> @item.Company @item.ProductName</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="input-group mb-3 aspeosInput">
+                <div class="input-group-prepend">
+                    <label class="input-group-text">Stock</label>
+                </div>
+                <select id="stockSelect" class="custom-select" asp-for="BookletCalculation.CoverSheetPrice">
+                    <option value="">Select a Coating...</option>
+                    @{
+                        foreach (PaperCalc.Models.AspeosStock item in Model.AspeosStock)
+                        {
+                            <option value="@item.SheetCost">@item.Weight<span>gsm</span> @item.Company @item.ProductName</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="AspeosFormRow">
+            <div class="input-group mb-3 aspeosInput">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" asp-for="BookletCalculation.Colour">Colour</label>
+                </div>
+                <select class="custom-select" asp-for="BookletCalculation.Colour">
+                    <option value="">Select a Option...</option>
+                    <option value="colour">Colour</option>
+                    <option value="black">Black</option>
+                </select>
+            </div>
+
+            <div class="input-group mb-3 aspeosInput">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" asp-for="BookletCalculation.PrintedSides">Printed Sides</label>
+                </div>
+                <select class="custom-select" asp-for="BookletCalculation.PrintedSides">
+                    <option value="">Select a Option...</option>
+                    <option value="single">Single Sided</option>
+                    <option value="double">Double Sided</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="AspeosFormRow">
+            <div class="input-group mb-3 aspeosInput">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" asp-for="BookletCalculation.Folds">Folds</label>
+                </div>
+                <select class="custom-select" asp-for="BookletCalculation.Folds">
+                    <option value="0">None</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+            </div>
+
+
+            <div class="input-group mb-3 aspeosInput">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" asp-for="BookletCalculation.Creasing">Creasing</label>
+                </div>
+                <select class="custom-select" asp-for="BookletCalculation.Creasing">
+                    <option value="0">None</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+            </div>
+
+            <div class="input-group mb-3 aspeosInput">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" asp-for="BookletCalculation.NumOfHolePunches">Hole Punches</label>
+                </div>
+                <select class="custom-select" asp-for="BookletCalculation.NumOfHolePunches">
+                    <option value="0">None</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="Checkboxes" class="AspeosFormRow">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <label asp-for="BookletCalculation.Trimming">Trimming</label>
+                    </div>
+                </div>
+                <div class="inputGroupCustomCheckbox"><input asp-for="BookletCalculation.Trimming" type="checkbox" value="true"></div>
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <label asp-for="BookletCalculation.Lamination">Lamination</label>
+                    </div>
+                </div>
+                <div class="inputGroupCustomCheckbox"><input asp-for="BookletCalculation.Lamination" type="checkbox" value="true"></div>
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <label asp-for="BookletCalculation.SmallJob">Small Job</label>
+                    </div>
+                </div>
+                <div class="inputGroupCustomCheckbox"><input asp-for="BookletCalculation.SmallJob" type="checkbox" value="true"></div>
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <label asp-for="BookletCalculation.Urgent">Urgent</label>
+                    </div>
+                </div>
+                <div class="inputGroupCustomCheckbox"><input asp-for="BookletCalculation.Urgent" type="checkbox" value="true"></div>
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <label asp-for="BookletCalculation.FileHandling">File Handling</label>
+                    </div>
+                </div>
+                <div class="inputGroupCustomCheckbox"><input asp-for="BookletCalculation.FileHandling" type="checkbox" value="true"></div>
+                <input type="number" class="form-control" value="@Model.Settings.FilehandlingCost" asp-for="BookletCalculation.FileHandlingFee">
+            </div>
+        </div>
+
+        <input type="submit" class="btn btn-success calcSubmit" />
+
+    </form>
+
+    @{ if (Model.BookletCalculation.JobCost > 0)
+        {
+            <div id="calculationPost">
+
+                <dl id="calculationTotals">
+
+                    <dt>Job Cost:</dt>
+                    <dd>@Html.DisplayFor(model => Model.BookletCalculation.JobCost)</dd>
+
+                    <dt>Job Cost (GST Inc):</dt>
+                    <dd>@Html.DisplayFor(model => Model.BookletCalculation.JobCostWithGST)</dd>
+
+                </dl>
+
+            </div>
+        }
+    }
+
 </div>
