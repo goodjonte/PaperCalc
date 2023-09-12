@@ -335,8 +335,28 @@ td, th {
 
 /*    Input Row    */
 @media only screen and (max-width: 1046px) {
-    .inputForRow label {
-        height: 50px;
+    .calculationForm {
+        width: 80vw;
+    }
+
+    .inputsForRow {
+        width: 60%;
+        margin: auto;
+        flex-direction: column !important;
+        align-content: center;
+    }
+
+    .inputForRow {
+        width: 100% !important;
+    }
+
+        .inputForRow label {
+            width: 100%;
+            height: 30px;
+        }
+
+    .checkboxesForRow {
+        flex-direction: column !important;
     }
 }
 @media only screen and (max-width: 690px) {
@@ -473,55 +493,55 @@ td, th {
 }
 .checkboxWithinInput {
     position: absolute;
-    top: 10px;
-    left: 45%;
+    top: -2px;
+    left: 54%;
     z-index: 10;
     width: 10px;
 }
 .labelWithinInput {
     position: absolute;
     width: 90px;
-    top: 2px;
-    left: 55%;
+    top: 3px;
+    left: 60%;
 }
 @media only screen and (max-width: 1900px) {
     .labelWithinInput {
-        left: 50%;
+        left: 53%;
     }
     .checkboxWithinInput {
-        left: 40%;
+        left: 47%;
     }
 }
 @media only screen and (max-width: 1670px) {
     .labelWithinInput {
-        left: 45%;
+        left: 50%;
     }
     .checkboxWithinInput {
-        left: 35%;
+        left: 43%;
     }
 }
 @media only screen and (max-width: 1528px) {
     .labelWithinInput {
-        left: 40%;
+        left: 48%;
     }
     .checkboxWithinInput {
-        left: 30%;
+        left: 38%;
     }
 }
 @media only screen and (max-width: 1414px) {
     .labelWithinInput {
-        left: 35%;
+        left: 46%;
     }
     .checkboxWithinInput {
-        left: 25%;
+        left: 36%;
     }
 }
 @media only screen and (max-width: 1300px) {
     .labelWithinInput {
-        left: 30%;
+        left: 38%;
     }
     .checkboxWithinInput {
-        left: 20%;
+        left: 29%;
     }
 }
 /*    Input Row    */

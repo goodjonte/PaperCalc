@@ -71,6 +71,26 @@
         </div>
     </div>
 
+    <!-- Quantity -->
+    <div class="inputRow inputRowWithBorder">
+        <div class="inputRowTitle">
+            <h3>quantity</h3>
+        </div>
+        <div class="inputsForRow">
+            <div class="inputForRow">
+                <label>total pages<span class="requiredStar">*</span></label>
+                <input type="number" placeholder="0" asp-for="BookletCalculation.TotalPages">
+            </div>
+            <div class="inputForRow">
+                <label>copy quantity<span class="requiredStar">*</span></label>
+                <input type="number" placeholder="0" asp-for="BookletCalculation.CopyQuantity">
+            </div>
+            <div class="inputForRow">
+                <label></label>
+            </div>
+        </div>
+    </div>
+
     <!-- Printing -->
     <div class="inputRow inputRowWithBorder">
         <div class="inputRowTitle">
@@ -93,15 +113,8 @@
                     <option value="double">Double Sided</option>
                 </select>
             </div>
-        </div>
-        <div class="inputsForRow">
             <div class="inputForRow">
-                <label>total pages<span class="requiredStar">*</span></label>
-                <input type="number" placeholder="0" asp-for="BookletCalculation.TotalPages">
-            </div>
-            <div class="inputForRow">
-                <label>copy quantity<span class="requiredStar">*</span></label>
-                <input type="number" placeholder="0" asp-for="BookletCalculation.CopyQuantity">
+                <label></label>
             </div>
         </div>
     </div>
