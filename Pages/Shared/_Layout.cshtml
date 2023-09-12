@@ -3,15 +3,19 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - PaperCalc</title>
+    <title>@ViewData["Title"] Pepper Parrot</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/PaperCalc.styles.css" asp-append-version="true" />
 
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+    <!-- Poppins Font - font-family: 'Poppins', sans-serif; weight 400, 600, 700 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
+    <!-- Bootstrap -->
     <link rel="stylesheet" href="~/multiselect-01/multiselect-01/css/style.css">
     <script src="~/multiselect-01/multiselect-01/js/jquery.min.js"></script>
     <script src="~/multiselect-01/multiselect-01/js/popper.js"></script>
@@ -19,13 +23,16 @@
     <script src="~/multiselect-01/multiselect-01/js/bootstrap-multiselect.js"></script>
     <script src="~/multiselect-01/multiselect-01/js/main.js"></script>
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/ParrotIcon.ico">
+
 </head>
 <body>
     <header>
         
             <nav class="customNav">
                 <a class="navbar-brand" asp-area="" asp-page="/Index">
-                    <img src="/Images/Logo.png" width="215" alt="">
+                    <img src="/Images/Logo.png" width="200" alt="">
                 </a>
                 <div id="navLinks">
                     <ul class="navbar-nav flex-grow-1">
@@ -67,14 +74,15 @@
             </nav>
 
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+    
+    <main role="main" class="pb-3">
+        @RenderBody()
+    </main>
 
     <footer class="text-muted">
-        <span id="footerText">&copy; 2023 - PaperCalc</span>
+        <span id="footerText">&copy; 2023 - PaperCalc - 
+            <a style="color: #6C757D !important; text-decoration: underline;" asp-page="/Login/LogOut">Logout</a>
+        </span>
     </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

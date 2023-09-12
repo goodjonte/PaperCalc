@@ -70,6 +70,12 @@ namespace PaperCalc.Pages
                 Settings = new();
                 Settings.FilehandlingCost = (double)AspeosCalculation.FileHandlingFee;
             }
+            var token = Request.Cookies["Parrot"];
+            if (token == null) { return; }
+            if (PaperCalc.Models.User.VerifyToken(_configuration, token))
+            {
+                Admin = PaperCalc.Models.User.IsAdmin(token);
+            }
         }
     }
 }

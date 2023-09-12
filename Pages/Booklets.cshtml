@@ -3,31 +3,39 @@
 @{
 }
 
-<div id="aspeosCalculator" class="text-center">
-    <h4 class="display-4 parrotTitle">Booklets</h4>
-
-    <form id="AspeosForm" method="post">
-        <div class="AspeosFormRow">
-            <div class="input-group mb-3 aspeosInput">
-                <div class="input-group-prepend">
-                    <label class="input-group-text" id="basic-addon1" asp-for="BookletCalculation.TotalPages"></label>
-                </div>
-                <input type="number" class="form-control" asp-for="BookletCalculation.TotalPages">
+<form method="post" class="calculationForm">
+    <h4 class="calculationTitle">Booklets</h4>
+    <!-- Job Details-->
+    <div class="inputRow inputRowWithBorder">
+        <div class="inputRowTitle">
+            <h3>job details</h3>
+        </div>
+        <div class="inputsForRow">
+            <div class="inputForRow">
+                <label>job title<span class="requiredStar">*</span></label>
+                <input placeholder="job title" type="text" />
             </div>
-            <div class="input-group mb-3 aspeosInput">
-                <div class="input-group-prepend">
-                    <label class="input-group-text" id="basic-addon1" asp-for="BookletCalculation.CopyQuantity"></label>
-                </div>
-                <input type="number" class="form-control" asp-for="BookletCalculation.CopyQuantity">
+            <div class="inputForRow">
+                <label>client name<span class="requiredStar">*</span></label>
+                <input placeholder="client name" type="text" />
             </div>
+            <div class="inputForRow">
+                <label>business name</label>
+                <input placeholder="business name" type="text" />
+            </div>
+        </div>
+    </div>
 
-
-            <div class="input-group mb-3 aspeosInput">
-                <div class="input-group-prepend">
-                    <label class="input-group-text" asp-for="BookletCalculation.FlatSizeId">Flat Size</label>
-                </div>
+    <!-- Paper -->
+    <div class="inputRow inputRowWithBorder">
+        <div class="inputRowTitle">
+            <h3>paper</h3>
+        </div>
+        <div class="inputsForRow">
+            <div class="inputForRow">
+                <label>flat size<span class="requiredStar">*</span></label>
                 <select class="custom-select" asp-for="BookletCalculation.FlatSizeId">
-                    <option value="">Select a Size...</option>
+                    <option value="">select a size...</option>
                     @{
                         foreach (PaperCalc.Models.FlatSize fs in Model.BookletFlatSizes)
                         {
@@ -36,14 +44,10 @@
                     }
                 </select>
             </div>
-
-
-            <div class="input-group mb-3 aspeosInput">
-                <div class="input-group-prepend">
-                    <label class="input-group-text">Stock</label>
-                </div>
+            <div class="inputForRow">
+                <label>inner stock<span class="requiredStar">*</span></label>
                 <select id="stockSelect" class="custom-select" asp-for="BookletCalculation.InnerSheetPrice">
-                    <option value="">Select a Coating...</option>
+                    <option value="">select inner...</option>
                     @{
                         foreach (PaperCalc.Models.AspeosStock item in Model.AspeosStock)
                         {
@@ -52,12 +56,10 @@
                     }
                 </select>
             </div>
-            <div class="input-group mb-3 aspeosInput">
-                <div class="input-group-prepend">
-                    <label class="input-group-text">Stock</label>
-                </div>
+            <div class="inputForRow">
+                <label>cover stock<span class="requiredStar">*</span></label>
                 <select id="stockSelect" class="custom-select" asp-for="BookletCalculation.CoverSheetPrice">
-                    <option value="">Select a Coating...</option>
+                    <option value="">select cover...</option>
                     @{
                         foreach (PaperCalc.Models.AspeosStock item in Model.AspeosStock)
                         {
@@ -67,36 +69,51 @@
                 </select>
             </div>
         </div>
+    </div>
 
-        <div class="AspeosFormRow">
-            <div class="input-group mb-3 aspeosInput">
-                <div class="input-group-prepend">
-                    <label class="input-group-text" asp-for="BookletCalculation.Colour">Colour</label>
-                </div>
+    <!-- Printing -->
+    <div class="inputRow inputRowWithBorder">
+        <div class="inputRowTitle">
+            <h3>printing</h3>
+        </div>
+        <div class="inputsForRow">
+            <div class="inputForRow">
+                <label>colour<span class="requiredStar">*</span></label>
                 <select class="custom-select" asp-for="BookletCalculation.Colour">
-                    <option value="">Select a Option...</option>
+                    <option value="">select a option...</option>
                     <option value="colour">Colour</option>
                     <option value="black">Black</option>
                 </select>
             </div>
-
-            <div class="input-group mb-3 aspeosInput">
-                <div class="input-group-prepend">
-                    <label class="input-group-text" asp-for="BookletCalculation.PrintedSides">Printed Sides</label>
-                </div>
+            <div class="inputForRow">
+                <label>printed sides<span class="requiredStar">*</span></label>
                 <select class="custom-select" asp-for="BookletCalculation.PrintedSides">
-                    <option value="">Select a Option...</option>
+                    <option value="">select a option...</option>
                     <option value="single">Single Sided</option>
                     <option value="double">Double Sided</option>
                 </select>
             </div>
         </div>
+        <div class="inputsForRow">
+            <div class="inputForRow">
+                <label>total pages<span class="requiredStar">*</span></label>
+                <input type="number" placeholder="0" asp-for="BookletCalculation.TotalPages">
+            </div>
+            <div class="inputForRow">
+                <label>copy quantity<span class="requiredStar">*</span></label>
+                <input type="number" placeholder="0" asp-for="BookletCalculation.CopyQuantity">
+            </div>
+        </div>
+    </div>
 
-        <div class="AspeosFormRow">
-            <div class="input-group mb-3 aspeosInput">
-                <div class="input-group-prepend">
-                    <label class="input-group-text" asp-for="BookletCalculation.Folds">Folds</label>
-                </div>
+    <!-- Finishing -->
+    <div class="inputRow inputRowWithBorder">
+        <div class="inputRowTitle">
+            <h3>finishing</h3>
+        </div>
+        <div class="inputsForRow">
+            <div class="inputForRow">
+                <label>folds</label>
                 <select class="custom-select" asp-for="BookletCalculation.Folds">
                     <option value="0">None</option>
                     <option value="1">1</option>
@@ -104,101 +121,110 @@
                     <option value="3">3</option>
                 </select>
             </div>
-
-
-            <div class="input-group mb-3 aspeosInput">
-                <div class="input-group-prepend">
-                    <label class="input-group-text" asp-for="BookletCalculation.Creasing">Creasing</label>
-                </div>
+            <div class="inputForRow">
+                <label>cresaing</label>
                 <select class="custom-select" asp-for="BookletCalculation.Creasing">
-                    <option value="0">None</option>
+                    <option value="0">none</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
                 </select>
             </div>
-
-            <div class="input-group mb-3 aspeosInput">
-                <div class="input-group-prepend">
-                    <label class="input-group-text" asp-for="BookletCalculation.NumOfHolePunches">Hole Punches</label>
-                </div>
+            <div class="inputForRow">
+                <label>hole punches</label>
                 <select class="custom-select" asp-for="BookletCalculation.NumOfHolePunches">
-                    <option value="0">None</option>
+                    <option value="0">none</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
                 </select>
             </div>
         </div>
+        <div class="checkboxesForRow">
+            <label class="checkbox">
+                trimming
+                <input asp-for="BookletCalculation.Trimming" type="checkbox" />
+                <span class="checkmark"></span>
+            </label>
+            <label class="checkbox">
+                lammination
+                <input asp-for="BookletCalculation.Lamination" type="checkbox" />
+                <span class="checkmark"></span>
+            </label>
+        </div>
+    </div>
 
-        <div id="Checkboxes" class="AspeosFormRow">
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">
-                        <label asp-for="BookletCalculation.Trimming">Trimming</label>
-                    </div>
-                </div>
-                <div class="inputGroupCustomCheckbox"><input asp-for="BookletCalculation.Trimming" type="checkbox" value="true"></div>
+    <!-- Additional Costs -->
+    <div class="inputRow inputRowWithBorder">
+        <div class="inputRowTitle">
+            <h3>additional costs</h3>
+        </div>
+        <div class="inputsForRow">
+            <div class="inputForRow">
+                <label>design</label>
+                <input placeholder="$00.00" type="text" />
             </div>
-
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">
-                        <label asp-for="BookletCalculation.Lamination">Lamination</label>
-                    </div>
-                </div>
-                <div class="inputGroupCustomCheckbox"><input asp-for="BookletCalculation.Lamination" type="checkbox" value="true"></div>
+            <div class="inputForRow">
+                <label>file handling</label>
+                <input type="number" placeholder="$00.00" asp-for="BookletCalculation.FileHandlingFee">
             </div>
-
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">
-                        <label asp-for="BookletCalculation.SmallJob">Small Job</label>
-                    </div>
-                </div>
-                <div class="inputGroupCustomCheckbox"><input asp-for="BookletCalculation.SmallJob" type="checkbox" value="true"></div>
-            </div>
-
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">
-                        <label asp-for="BookletCalculation.Urgent">Urgent</label>
-                    </div>
-                </div>
-                <div class="inputGroupCustomCheckbox"><input asp-for="BookletCalculation.Urgent" type="checkbox" value="true"></div>
-            </div>
-
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">
-                        <label asp-for="BookletCalculation.FileHandling">File Handling</label>
-                    </div>
-                </div>
-                <div class="inputGroupCustomCheckbox"><input asp-for="BookletCalculation.FileHandling" type="checkbox" value="true"></div>
-                <input type="number" class="form-control" value="@Model.Settings.FilehandlingCost" asp-for="BookletCalculation.FileHandlingFee">
+            <div class="inputForRow">
+                <label>setup</label>
+                <input placeholder="$00.00" type="text" />
             </div>
         </div>
+        <div class="checkboxesForRow">
+            <label class="checkbox">
+                small job
+                <input asp-for="BookletCalculation.SmallJob" type="checkbox" />
+                <span class="checkmark"></span>
+            </label>
+        </div>
+    </div>
 
-        <input type="submit" class="btn btn-success calcSubmit" />
-
-    </form>
-
-    @{ if (Model.BookletCalculation.JobCost > 0)
-        {
-            <div id="calculationPost">
-
-                <dl id="calculationTotals">
-
-                    <dt>Job Cost:</dt>
-                    <dd>@Html.DisplayFor(model => Model.BookletCalculation.JobCost)</dd>
-
-                    <dt>Job Cost (GST Inc):</dt>
-                    <dd>@Html.DisplayFor(model => Model.BookletCalculation.JobCostWithGST)</dd>
-
-                </dl>
-
+    <!-- Delivery & Turnaround -->
+    <div class="inputRow">
+        <div class="inputRowTitle">
+            <h3>delivery & turnaround</h3>
+        </div>
+        <div class="inputsForRow">
+            <div class="inputForRow">
+                <label>address</label>
+                <input placeholder="address" type="text" />
             </div>
-        }
-    }
+            <div class="inputForRow">
+                <label>cost</label>
+                <input placeholder="$00.00" type="text" />
+            </div>
+            <div class="inputForRow">
+                <label>turnaround </label>
+                <div class="inputWithCheckbox">
+                    <input class="turnaroundInput" type="number" />
+                    <input asp-for="BookletCalculation.Urgent" class="checkboxWithinInput" type="checkbox" />
+                    <label class="labelWithinInput">urgent job</label>
+                </div>
+            </div>
+        </div>
+    </div>
 
-</div>
+    <button class="btn btn-success calculationSubmitButton">generate quote</button>
+
+</form>
+
+@{ if (Model.BookletCalculation.JobCost > 0)
+    {
+        <div id="calculationPost">
+
+            <dl id="calculationTotals">
+
+                <dt>Job Cost:</dt>
+                <dd>@Html.DisplayFor(model => Model.BookletCalculation.JobCost)</dd>
+
+                <dt>Job Cost (GST Inc):</dt>
+                <dd>@Html.DisplayFor(model => Model.BookletCalculation.JobCostWithGST)</dd>
+
+            </dl>
+
+        </div>
+    }
+}
