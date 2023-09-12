@@ -116,7 +116,7 @@ namespace PaperCalc.DTOs
             }
         }
         public double? Minimum { get { return Urgent ? 15 : 0; } } //hardcoded in minimum for urgent cost
-        public double? FileHandlingCost { get { return FileHandlingFee; } } //Set in front end
+        public double? FileHandlingCost { get { return FileHandlingFee != null ? FileHandlingFee : 0; } } //Set in front end
 
         //third row calcs
         [DisplayFormat(DataFormatString = "{0:c}")]

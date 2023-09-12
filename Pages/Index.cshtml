@@ -107,7 +107,7 @@
             </div>
             <div class="inputForRow">
                 <label>quantity<span class="requiredStar">*</span></label>
-                <input placeholder="0" type="numeric" asp-for="AspeosCalculation.Quantity">
+                <input placeholder="0" type="number" asp-for="AspeosCalculation.Quantity">
             </div>
         </div>
     </div>
@@ -149,12 +149,12 @@
         <div class="checkboxesForRow">
             <label class="checkbox">
                 trimming
-                <input asp-for="AspeosCalculation.Trimming" type="checkbox" />
+                <input asp-for="AspeosCalculation.Trimming" type="checkbox" value="true"/>
                 <span class="checkmark"></span>
             </label>
             <label class="checkbox">
                 lammination
-                <input asp-for="AspeosCalculation.Lamination" type="checkbox" />
+                <input asp-for="AspeosCalculation.Lamination" type="checkbox" value="true"/>
                 <span class="checkmark"></span>
             </label>
         </div>
@@ -172,7 +172,7 @@
             </div>
             <div class="inputForRow">
                 <label>file handling</label>
-                <input type="number"  placeholder="$00.00" asp-for="AspeosCalculation.FileHandlingFee">
+                <input type="number" placeholder="$00.00" asp-for="AspeosCalculation.FileHandlingFee">
             </div>
             <div class="inputForRow">
                 <label>setup</label>
@@ -182,7 +182,7 @@
         <div class="checkboxesForRow">
             <label class="checkbox">
                 small job
-                <input asp-for="AspeosCalculation.SmallJob" type="checkbox" />
+                <input asp-for="AspeosCalculation.SmallJob" type="checkbox" value="true" />
                 <span class="checkmark"></span>
             </label>
         </div>
@@ -206,7 +206,7 @@
                 <label>turnaround </label>
                 <div class="inputWithCheckbox">
                     <input class="turnaroundInput" type="number" />
-                    <input asp-for="AspeosCalculation.Urgent" class="checkboxWithinInput" type="checkbox" />
+                    <input asp-for="AspeosCalculation.Urgent" class="checkboxWithinInput" type="checkbox" value="true" />
                     <label class="labelWithinInput">urgent job</label>
                 </div>
             </div>

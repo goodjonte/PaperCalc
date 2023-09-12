@@ -66,7 +66,7 @@ namespace PaperCalc.DTOs
                 };
             }
         }
-        public double? FileHandlingCost { get { return FileHandlingFee; } }
+        public double? FileHandlingCost { get { return FileHandlingFee != null ? FileHandlingFee : 0; } }
 
         //Third row calcs
         [DisplayFormat(DataFormatString = "{0:c}")]

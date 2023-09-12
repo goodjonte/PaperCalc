@@ -130,12 +130,12 @@
         <div class="checkboxesForRow">
             <label class="checkbox">
                 binding
-                <input asp-for="FlatCalculation.Binding" type="checkbox" />
+                <input asp-for="FlatCalculation.Binding" type="checkbox" value="true" />
                 <span class="checkmark"></span>
             </label>
             <label class="checkbox">
                 lammination
-                <input asp-for="FlatCalculation.Lamination" type="checkbox" />
+                <input asp-for="FlatCalculation.Lamination" type="checkbox" value="true" />
                 <span class="checkmark"></span>
             </label>
         </div>
@@ -180,7 +180,7 @@
                 <label>turnaround </label>
                 <div class="inputWithCheckbox">
                     <input class="turnaroundInput" type="number" />
-                    <input asp-for="FlatCalculation.Urgent" class="checkboxWithinInput" type="checkbox" />
+                    <input asp-for="FlatCalculation.Urgent" class="checkboxWithinInput" type="checkbox" value="true" />
                     <label class="labelWithinInput">urgent job</label>
                 </div>
             </div>

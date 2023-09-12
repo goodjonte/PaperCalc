@@ -92,8 +92,8 @@ namespace PaperCalc.DTOs
         public double? Minimum { get { return Settings != null ? SmallJob && Urgent ? Settings.SmallOrUrgentMinimum : 0 : 0; } }
         //MiFileHandling value hard coded - change this
         public double? FileHandlingCost { get {
-                
-                return FileHandlingFee;
+
+                return FileHandlingFee != null ? FileHandlingFee : 0;
             
         } }
         [DisplayFormat(DataFormatString = "{0:c}")]

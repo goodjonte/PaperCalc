@@ -156,12 +156,12 @@
         <div class="checkboxesForRow">
             <label class="checkbox">
                 trimming
-                <input asp-for="BookletCalculation.Trimming" type="checkbox" />
+                <input asp-for="BookletCalculation.Trimming" type="checkbox" value="true" />
                 <span class="checkmark"></span>
             </label>
             <label class="checkbox">
                 lammination
-                <input asp-for="BookletCalculation.Lamination" type="checkbox" />
+                <input asp-for="BookletCalculation.Lamination" type="checkbox" value="true"/>
                 <span class="checkmark"></span>
             </label>
         </div>
@@ -189,7 +189,7 @@
         <div class="checkboxesForRow">
             <label class="checkbox">
                 small job
-                <input asp-for="BookletCalculation.SmallJob" type="checkbox" />
+                <input asp-for="BookletCalculation.SmallJob" type="checkbox" value="true" />
                 <span class="checkmark"></span>
             </label>
         </div>
@@ -213,7 +213,7 @@
                 <label>turnaround </label>
                 <div class="inputWithCheckbox">
                     <input class="turnaroundInput" type="number" />
-                    <input asp-for="BookletCalculation.Urgent" class="checkboxWithinInput" type="checkbox" />
+                    <input asp-for="BookletCalculation.Urgent" class="checkboxWithinInput" type="checkbox" value="true" />
                     <label class="labelWithinInput">urgent job</label>
                 </div>
             </div>
