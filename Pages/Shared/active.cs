@@ -12,5 +12,26 @@ namespace PaperCalc.Pages.Shared
 
             return route == pageRoute ? "active" : "";
         }
+
+        public static string NoScroll(this IHtmlHelper htmlHelper)
+        {
+            var routeData = htmlHelper.ViewContext.RouteData;
+
+            var pageRoute = routeData.Values["page"].ToString();
+
+            switch (pageRoute)
+            {
+                case "/Stock/AspeosStock/Index":
+                    return "style=overflow-y:hidden;";
+                case "/Stock/EpsonStock/Index":
+                    return "style=overflow-y:hidden;";
+                case "/Stock/FlatStock/Index":
+                    return "style=overflow-y:hidden;";
+                case "/Stock/LaminationStock/Index":
+                    return "style=overflow-y:hidden;";
+                default:
+                    return "";
+            }
+        }
     }
 }

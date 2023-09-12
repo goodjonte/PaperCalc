@@ -16,9 +16,6 @@
 .RedText {
     color: red;
 }
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
 
 html {
   position: relative;
@@ -30,6 +27,10 @@ body {
     margin-bottom: 60px;
     background-color: #FFFFFF !important;
     min-height: 100vh;
+    overflow-x: hidden;
+}
+.borderBottom {
+    border-bottom: 1px solid var(--commonGreen);
 }
 footer {
     position: absolute !important;
@@ -50,7 +51,24 @@ a {
     color: rgb(0, 0, 255) !important;
 }
 .btn {
+    font-family: 'Poppins', sans-serif !important;
     color: white !important;
+    font-weight: 600 !important;
+}
+.btn-success {
+    background-color: var(--commonGreen) !important;
+}
+.btn-primary {
+    background-color: #409981 !important;
+    border-color: #409981 !important;
+}
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
 }
 
 
@@ -545,3 +563,259 @@ td, th {
     }
 }
 /*    Input Row    */
+
+
+
+/*      scroll bar  */
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px var(--lighterGreen);
+    border-radius: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--commonGreen);
+    border-radius: 5px;
+}
+/*      scroll bar  */
+
+
+
+/* Stock Index Page */
+
+
+
+.stockIndexPage {
+    width: 40vw;
+    margin: 50px auto;
+}
+.stockTitle {
+    color: var(--commonGreen);
+    margin: 10px 0;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 60px;
+}
+.scrollableTable {
+    height: 500px;
+    overflow-y: scroll;
+}
+.customTable {
+    width: 100%;
+}
+.customTable thead tr {
+    height: 50px !important;
+    border-bottom: 1px solid var(--commonGreen);
+}
+.customTable thead tr th {
+    font-family: 'Poppins', sans-serif;
+    color: var(--commonGreen);
+    text-align: left !important;
+}
+.customTable tbody tr {
+    height: 50px !important;
+    border-bottom: 1px solid var(--commonGreen);
+}
+.customTable tbody tr:hover {
+    background-color: var(--lighterGreen);
+}
+.customTable tbody tr td {
+    font-family: 'Poppins', sans-serif;
+    text-align: left !important;
+    color: black;
+}
+.buttonTableRow {
+    width: 35px;
+}
+.tdForButton {
+    position: relative;
+}
+.dotsForButton {
+    position: absolute;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    top: -7px;
+    left: 6px;
+    width: 100%;
+    height: 100%;
+}
+.stockNavButton {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    height: 29px;
+    width: 29px;
+    background-color: var(--commonGreen);
+    border: 1px solid var(--commonGreen);
+    border-radius: 8px;
+}
+.createButtonBottum{
+    display: block;
+    border: 1px solid var(--commonGreen);
+    border-radius: 8px;
+    width: 100px;
+    height: 30px;
+    margin-top: 10px;
+}
+.createButtonTop {
+    position: absolute;
+    border: 1px solid var(--commonGreen);
+    border-radius: 8px;
+    width: 100px;
+    height: 30px;
+}
+.createButtonBottum a, .createButtonTop a {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400 !important;
+    color: var(--commonGreen) !important;
+    padding-left: 7px;
+}
+.stockDropDown a {
+    font-family: 'Poppins', sans-serif !important;
+    font-weight: 400 !important;
+    color: black !important;
+    width: 80%;
+    margin: auto;
+    text-align: left;
+    padding-left: 0;
+}
+.stockDropDownBorder {
+    border-bottom: 1px solid var(--commonGreen) !important;
+}
+.svg {
+    color: var(--commonGreen);
+}
+
+/* Stock Index Page */
+
+
+
+
+/* Stock Details Page */
+
+.stockDetails {
+    width: 40vw;
+    margin: 50px auto;
+}
+.stockDetails h4 {
+    color: var(--commonGreen);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    text-align: center;
+}
+.detailsTable {
+    width: 50%;
+    margin: auto;
+}
+.stockDetailsButtons {
+    width: 300px;
+    margin: auto;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    color: var(--commonGreen);
+}
+.stockDetailsButtons a {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+.detailsTableRow {
+    border-bottom: 1px solid var(--commonGreen);
+    height: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+.detailsTableRow h1 {
+    margin: 0;
+    height: 30px;
+    font-size: 20px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+.detailsTableRow h2 {
+    margin: 0;
+    height: 30px;
+    font-size: 18px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+}
+
+/* Stock Details Page */
+
+
+/* Stock Delete Page */
+
+.stockDeletePage {
+    width: 40vw;
+    margin: 50px auto;
+    text-align: center;
+}
+.areUSure {
+    color: red;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+.stockDeletePage h4 {
+    color: var(--commonGreen);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+}
+.deleteForm {
+    margin-top: 30px;
+    color: var(--commonGreen);
+}
+/* Stock Delete Page */
+
+/* Stock Edit Page */
+.stockEditPage {
+    width: 40vw;
+    margin: 50px auto;
+    text-align: center;
+}
+.editStockForm{
+    width: 100%;
+}
+.editFormRow {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    height: 100px;
+    
+}
+.editFormRow * {
+    width: 33%;
+}
+.control-label {
+    text-align: left;
+    width: 100%;
+    color: var(--commonGreen);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+}
+.editRowTitle h3{
+    text-align: left;
+    font-size: 20px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    margin: 10px 0 0 0;
+}
+.form-control {
+    border-color: var(--commonGreen) !important;
+    border-radius: 7px !important;
+    font-family: 'Poppins', sans-serif !important;
+    font-weight: 400 !important;
+    color: black !important;
+}
+
+
+
+/* Stock Edit Page */

@@ -36,11 +36,12 @@ namespace PaperCalc.Pages.AspeosStock
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid || _context.AspeosStock == null || AspeosStock == null)
+            AspeosStock.Id = Guid.NewGuid();
+            if ( _context.AspeosStock == null || AspeosStock == null)
             {
                 return Page();
             }
-
+            
             _context.AspeosStock.Add(AspeosStock);
             await _context.SaveChangesAsync();
 

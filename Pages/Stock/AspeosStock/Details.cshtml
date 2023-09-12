@@ -5,69 +5,95 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1 class="stockTitle">Details</h1>
 
-<div>
+<div class="stockDetails">
     <h4>SRA3 Stock</h4>
     <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.AspeosStock.Company)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.AspeosStock.Company)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.AspeosStock.ProductName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.AspeosStock.ProductName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.AspeosStock.Size)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.AspeosStock.Size)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.AspeosStock.Weight)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.AspeosStock.Weight)<span>gsm</span>
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.AspeosStock.CoatType)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.AspeosStock.CoatType)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.AspeosStock.PackCost)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.AspeosStock.PackCost)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.AspeosStock.PackCostGstIncluded)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.AspeosStock.PackCostGstIncluded)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.AspeosStock.SheetsPerPack)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.AspeosStock.SheetsPerPack)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.AspeosStock.SheetCost)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.AspeosStock.SheetCost)
-        </dd>
-    </dl>
+    <div class="detailsTable">
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.AspeosStock.Company)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.AspeosStock.Company)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.AspeosStock.ProductName)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.AspeosStock.ProductName)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.AspeosStock.Size)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.AspeosStock.Size)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.AspeosStock.Weight)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.AspeosStock.Weight)<span>gsm</span>
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.AspeosStock.CoatType)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.AspeosStock.CoatType)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.AspeosStock.PackCost)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.AspeosStock.PackCost)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.AspeosStock.PackCostGstIncluded)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.AspeosStock.PackCostGstIncluded)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.AspeosStock.SheetsPerPack)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.AspeosStock.SheetsPerPack)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.AspeosStock.SheetCost)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.AspeosStock.SheetCost)
+            </h2>
+        </div>
+    </div>
 </div>
-<div>
-    <a asp-page="./Edit" asp-route-id="@Model.AspeosStock?.Id">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
+<div class="stockDetailsButtons">
+    <a class="btn btn-success" asp-page="./Edit" asp-route-id="@Model.AspeosStock?.Id">edit</a>
+    <a class="btn btn-primary" asp-page="./Index">back to stock</a>
 </div>

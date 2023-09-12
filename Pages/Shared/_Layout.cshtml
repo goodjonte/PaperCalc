@@ -28,8 +28,9 @@
 
 </head>
 <body>
-    <header>
-        
+    <div @Html.NoScroll()> <!-- Doesnt allow scrolling on stock pages -->
+        <header>
+
             <nav class="customNav">
                 <a class="navbar-brand" asp-area="" asp-page="/Index">
                     <img src="/Images/Logo.png" width="200" alt="">
@@ -73,22 +74,24 @@
                 </div>
             </nav>
 
-    </header>
-    
-    <main role="main" class="pb-3">
-        @RenderBody()
-    </main>
+        </header>
 
-    <footer class="text-muted">
-        <span id="footerText">&copy; 2023 - PaperCalc - 
-            <a style="color: #6C757D !important; text-decoration: underline;" asp-page="/Login/LogOut">Logout</a>
-        </span>
-    </footer>
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+        <footer class="text-muted">
+            <span id="footerText">
+                &copy; 2023 - PaperCalc -
+                <a style="color: #6C757D !important; text-decoration: underline;" asp-page="/Login/LogOut">Logout</a>
+            </span>
+        </footer>
 
-    @await RenderSectionAsync("Scripts", required: false)
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+
+        @await RenderSectionAsync("Scripts", required: false)
+    </div>
 </body>
 </html>
