@@ -4,6 +4,16 @@
     {
         public Guid Id { get; set; }
         public required string Name { get; set; }
+        //public int? Height { get; set; }
+        //public int? Width { get; set; }
+
+        //public int? QuantityMin { get; set; }
+        //public int? QuantityMax { get; set; }
+        //public double? MultiplierMin { get; set; }
+        //public double? MultiplierMax { get; set; }
+        //public int? TestQuantity { get; set; }
+        //public double? TestMultiplier { get; set; }
+
     }
     public class AspeosFlatSize : FlatSize
     {

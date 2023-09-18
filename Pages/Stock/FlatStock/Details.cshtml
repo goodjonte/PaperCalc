@@ -5,69 +5,95 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1 class="stockTitle">Details</h1>
 
-<div>
-    <h4>FlatStock</h4>
+<div class="stockDetails">
+    <h4>Flat Stock</h4>
     <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.FlatStock.Company)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.FlatStock.Company)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.FlatStock.ProductName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.FlatStock.ProductName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.FlatStock.Size)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.FlatStock.Size)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.FlatStock.Weight)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.FlatStock.Weight)<span>gsm</span>
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.FlatStock.CoatType)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.FlatStock.CoatType)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.FlatStock.PackCost)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.FlatStock.PackCost)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.FlatStock.PackCostGstIncluded)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.FlatStock.PackCostGstIncluded)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.FlatStock.SheetsPerPack)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.FlatStock.SheetsPerPack)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.FlatStock.SheetCost)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.FlatStock.SheetCost)
-        </dd>
-    </dl>
+    <div class="detailsTable">
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.FlatStock.Company)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.FlatStock.Company)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.FlatStock.ProductName)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.FlatStock.ProductName)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.FlatStock.Size)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.FlatStock.Size)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.FlatStock.Weight)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.FlatStock.Weight)<span>gsm</span>
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.FlatStock.CoatType)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.FlatStock.CoatType)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.FlatStock.PackCost)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.FlatStock.PackCost)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.FlatStock.PackCostGstIncluded)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.FlatStock.PackCostGstIncluded)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.FlatStock.SheetsPerPack)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.FlatStock.SheetsPerPack)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.FlatStock.SheetCost)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.FlatStock.SheetCost)
+            </h2>
+        </div>
+    </div>
 </div>
-<div>
-    <a asp-page="./Edit" asp-route-id="@Model.FlatStock?.Id">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
+<div class="stockDetailsButtons">
+    <a class="btn btn-success" asp-page="./Edit" asp-route-id="@Model.FlatStock?.Id">edit</a>
+    <a class="btn btn-primary" asp-page="./Index">back to stock</a>
 </div>

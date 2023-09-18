@@ -5,37 +5,48 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<h1 class="stockTitle">Edit</h1>
 
-<h4>Wide Format Stock</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="EpsonStock.Id" />
+<div class="stockEditPage">
+
+    <form class="editStockForm" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="EpsonStock.Id" />
+
+        <div class="editRowTitle">
+            <h3>product</h3>
+        </div>
+        <div class="editFormRow borderBottom">
             <div class="form-group">
-                <label asp-for="EpsonStock.Company" class="control-label"></label>
+                <label class="control-label">company<span class="requiredStar">*</span></label>
                 <input asp-for="EpsonStock.Company" class="form-control" />
                 <span asp-validation-for="EpsonStock.Company" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="EpsonStock.ProductName" class="control-label"></label>
+                <label class="control-label">product name<span class="requiredStar">*</span></label>
                 <input asp-for="EpsonStock.ProductName" class="form-control" />
                 <span asp-validation-for="EpsonStock.ProductName" class="text-danger"></span>
             </div>
+            <div>
+            </div>
+        </div>
+
+        <div class="editRowTitle">
+            <h3>specifications</h3>
+        </div>
+        <div class="editFormRow borderBottom">
             <div class="form-group">
-                <label asp-for="EpsonStock.Width" class="control-label"></label>
+                <label asp-for="EpsonStock.Width" class="control-label">width<span class="requiredStar">*</span></label>
                 <input asp-for="EpsonStock.Width" class="form-control" />
                 <span asp-validation-for="EpsonStock.Width" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="EpsonStock.Weight" class="control-label"></label>
+                <label asp-for="EpsonStock.Weight" class="control-label">weight(gsm)<span class="requiredStar">*</span></label>
                 <input asp-for="EpsonStock.Weight" class="form-control" />
                 <span asp-validation-for="EpsonStock.Weight" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="EpsonStock.CoatType" class="control-label"></label>
+                <label asp-for="EpsonStock.CoatType" class="control-label">coating<span class="requiredStar">*</span></label>
                 <select asp-for="EpsonStock.CoatType" class="form-control custom-select">
                     <option value="">Select a Coating Type...</option>
                     <option value="Adhesive">Adhesive</option>
@@ -48,6 +59,12 @@
                 </select>
                 <span asp-validation-for="EpsonStock.CoatType" class="text-danger"></span>
             </div>
+        </div>
+
+        <div class="editRowTitle">
+            <h3>quantity & cost</h3>
+        </div>
+        <div class="editFormRow">
             <div class="form-group">
                 <label asp-for="EpsonStock.RollCost" class="control-label"></label>
                 <input asp-for="EpsonStock.RollCost" class="form-control" />
@@ -58,16 +75,23 @@
                 <input asp-for="EpsonStock.RollsLength" class="form-control" />
                 <span asp-validation-for="EpsonStock.RollsLength" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+            <div>
             </div>
-        </form>
-    </div>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="save" class="btn btn-success" />
+        </div>
+        <div>
+            <a class="btn btn-primary" asp-page="./Index">back to list</a>
+        </div>
+
+    </form>
+
+
 </div>
 
-<div>
-    <a asp-page="./Index">Back to List</a>
-</div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

@@ -4,91 +4,127 @@
 @{
     ViewData["Title"] = "Delete";
 }
+<div class="stockDeletePage">
+    <h1 class="stockTitle">Delete</h1>
 
-<h1>Delete</h1>
+    <h3 class="areUSure">Are you sure you want to delete this?</h3>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>LaminationStock</h4>
+    <h4>Lamination Stock</h4>
+
     <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.LaminationStock.Company)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.LaminationStock.Company)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.LaminationStock.ProductName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.LaminationStock.ProductName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.LaminationStock.Width)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.LaminationStock.Width)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.LaminationStock.Weight)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.LaminationStock.Weight)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.LaminationStock.CoatType)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.LaminationStock.CoatType)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.LaminationStock.RollCost)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.LaminationStock.RollCost)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.LaminationStock.RollCostGstIncluded)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.LaminationStock.RollCostGstIncluded)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.LaminationStock.RollsLength)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.LaminationStock.RollsLength)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.LaminationStock.PricePerMeter)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.LaminationStock.PricePerMeter)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.LaminationStock.PriceA0)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.LaminationStock.PriceA0)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.LaminationStock.PriceA1)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.LaminationStock.PriceA1)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.LaminationStock.PriceA2)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.LaminationStock.PriceA2)
-        </dd>
-    </dl>
-    
-    <form method="post">
+    <div class="detailsTable">
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.LaminationStock.Company)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.LaminationStock.Company)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.LaminationStock.ProductName)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.LaminationStock.ProductName)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.LaminationStock.Width)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.LaminationStock.Width)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.LaminationStock.Weight)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.LaminationStock.Weight)<span>gsm</span>
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.LaminationStock.CoatType)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.LaminationStock.CoatType)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.LaminationStock.RollCost)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.LaminationStock.RollCost)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.LaminationStock.RollCostGstIncluded)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.LaminationStock.RollCostGstIncluded)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.LaminationStock.RollsLength)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.LaminationStock.RollsLength)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.LaminationStock.PricePerMeter)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.LaminationStock.PricePerMeter)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.LaminationStock.PriceA0)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.LaminationStock.PriceA0)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.LaminationStock.PriceA1)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.LaminationStock.PriceA1)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.LaminationStock.PriceA2)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.LaminationStock.PriceA2)
+            </h2>
+        </div>
+    </div>
+
+    <form class="deleteForm" method="post">
         <input type="hidden" asp-for="LaminationStock.Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-page="./Index">Back to List</a>
+        <input type="submit" value="Delete" class="btn btn-danger" />
+        <a class="btn btn-primary" asp-page="./Index">back to list</a>
     </form>
 </div>

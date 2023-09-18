@@ -38,7 +38,7 @@ namespace PaperCalc.Pages.EpsonStock
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid || _context.EpsonStock == null || EpsonStock == null)
+          if ( _context.EpsonStock == null || EpsonStock == null)
             {
                 return Page();
             }

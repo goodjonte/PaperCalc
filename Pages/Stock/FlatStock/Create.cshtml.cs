@@ -36,7 +36,7 @@ namespace PaperCalc.Pages.FlatStock
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid || _context.FlatStock == null || FlatStock == null)
+          if (_context.FlatStock == null || FlatStock == null)
             {
                 return Page();
             }

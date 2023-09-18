@@ -10,6 +10,9 @@ namespace PaperCalc.DTOs
         public double? Quantity { get; set; }
         public Guid? FlatSizeId { get; set; }
         public CoatType? CoatType { get; set; }
+        public bool CustomSize { get; set; }
+        public int? Height { get; set; }
+        public int? Width { get; set; }
         public AspeosFlatSize? FlatSize { get; set; }
         public string? Colour { get; set;}
         public string? PrintedSides { get; set; }
@@ -23,8 +26,9 @@ namespace PaperCalc.DTOs
         public int Creasing { get; set; }
         public int Folds { get; set; }
 
-        //Some Value are hard coded in but could be moved to settings
+        //First Row Calculations
         public int PerSRA { get { return (FlatSize?.PiecesPerSRA3) ?? 0; } }
+
         [DisplayFormat(DataFormatString = "{0:c}")]
         public double BaseClickRate { get { return Colour == null ? 0 : Colour == "colour" ? 0.08 : 0.01; } }
         [DisplayFormat(DataFormatString = "{0:c}")]
@@ -80,22 +84,26 @@ namespace PaperCalc.DTOs
                 }
         } }
 
+        //Second Row Calculations
+
         [DisplayFormat(DataFormatString = "{0:c}")]
         public double? PaperCost { get { return Quantity != null ? ((SheetPrice + ClickRate) / PerSRA )* Quantity : 0; } }
-        //Buffer values hard coded - change this
+        
         public double Buffer { get { return Settings != null ? SmallJob || Urgent ? Settings.BufferSmallOrUrgent : Settings.Buffer : 0; } }
         [DisplayFormat(DataFormatString = "{0:c}")]
         public double? FinishingsCost { get { return (Cuts*2)+HolePunches+LaminationCost+CreasingRate+FoldingRate; } }
-        //Multiplier values hard coded - change this
+        
         public double? Multiplier { get { return Settings != null ? SmallJob || Urgent ? Settings.MarginMultiplierSmallOrUrgent : Settings.MarginMultiplier : 0; } }
-        //Minimum value hard coded - change this
+        
         public double? Minimum { get { return Settings != null ? SmallJob && Urgent ? Settings.SmallOrUrgentMinimum : 0 : 0; } }
-        //MiFileHandling value hard coded - change this
+        
         public double? FileHandlingCost { get {
 
                 return FileHandlingFee != null ? FileHandlingFee : 0;
             
         } }
+
+        //Third Row Calculations
         [DisplayFormat(DataFormatString = "{0:c}")]
         public double? JobCost { get {
                 if (Quantity == null) { return 0; }
@@ -111,6 +119,9 @@ namespace PaperCalc.DTOs
         [DisplayFormat(DataFormatString = "{0:c}")]
         public double? GST { get { return JobCostGstInc > 0 ? JobCostGstInc - JobCost : 0; } }
 
+
+
+        //Method has to be called to calculate the values of the DTO - sets settings and flat size
         public void Calculate(PaperCalc.Data.PaperCalcContext _context, String path)
         {
             Settings = new();
