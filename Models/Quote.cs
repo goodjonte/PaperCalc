@@ -13,9 +13,9 @@ namespace PaperCalc.Models
         public double? DeliveryCost { get; set; }
         public double? DesignCost { get; set; }
         public double? SetupCost { get; set; }
-
-        //DTO
         public JobType JobTypeForDTO { get; set; }
+
+        //DTO - not saved in db
         public AspeosCalculation? AspeosCalculation { get; set; }
         public BookletCalculation? BookletCalculation { get; set; }
         public WideFormatCalculation? WideFormatCalculation { get; set; }
@@ -108,6 +108,59 @@ namespace PaperCalc.Models
                     break;
             }
         }
+
+        //Values for quote from calculation
+        public void SetQuoteDTOValues(AspeosCalculation asp)
+        {
+            Quantity = asp?.Quantity;
+            FlatSizeId = asp?.FlatSizeId;
+            CoatType = asp?.CoatType;
+            CustomSize = asp?.CustomSize ?? false;
+            Height = asp?.Height ?? 0;
+            Width = asp?.Width ?? 0;
+            Colour = asp?.Colour;
+            PrintedSides = asp?.PrintedSides;
+            NumOfHolePunches = asp?.NumOfHolePunches ?? 0;
+            Trimming = asp?.Trimming ?? false;
+            Lamination = asp?.Lamination ?? false;
+            SmallJob = asp?.SmallJob ?? false;
+            Urgent = asp?.Urgent ?? false;
+            FileHandlingFee = asp?.FileHandlingFee;
+            Creasing = asp?.Creasing ?? 0;
+            Folds = asp?.Folds ?? 0;
+        }
+        public void SetQuoteDTOValues(FlatCalculation flat)
+        {
+            Pages = flat.Pages;
+            CopyQuantity = flat.CopyQuantity;
+            FlatSizeId = flat.FlatSizeId;
+            Colour = flat.Colour;
+            PrintedSides = flat.PrintedSides;
+            Binding = flat.Binding;
+            NumOfHolePunches = flat.NumOfHolePunches;
+            Lamination = flat.Lamination;
+            Creasing = flat.Creasing;
+            Folds = flat.Folds;
+            Urgent = flat.Urgent;
+            FileHandlingFee = flat.FileHandlingFee;
+        }
+        public void SetQuoteDTOValues(BookletCalculation book)
+        {
+            Pages = book.TotalPages;
+            CopyQuantity = book.CopyQuantity;
+            FlatSizeId = book.FlatSizeId;
+            Colour = book.Colour;
+            PrintedSides = book.PrintedSides;
+            Trimming = book.Trimming;
+            NumOfHolePunches = book.NumOfHolePunches;
+            Lamination = book.Lamination;
+            SmallJob = book.SmallJob;
+            Urgent = book.Urgent;
+            FileHandlingFee = book.FileHandlingFee;
+            Creasing = book.Creasing;
+            Folds = book.Folds;
+        }
+
     }
     public enum JobType
     {

@@ -10,6 +10,7 @@ using PaperCalc.DTOs;
 using PaperCalc.Models;
 using System.Drawing;
 using System.IdentityModel.Tokens.Jwt;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace PaperCalc.Pages
@@ -29,6 +30,11 @@ namespace PaperCalc.Pages
             Settings.SetSettings(_env.ContentRootPath);
             Paper = _context.AspeosStock.ToList();
             _configuration = config;
+            Quote = new()
+            {
+                Id = Guid.NewGuid(),
+                JobTypeForDTO = JobType.SRA3,
+            };
         }
         public bool Admin { get; set; }
         public PaperCalc.DTOs.Settings? Settings { get; set; }
@@ -36,6 +42,7 @@ namespace PaperCalc.Pages
 
         public IList<PaperCalc.Models.AspeosFlatSize> FlatSize { get; set; } = default!;
         public AspeosCalculation? AspeosCalculation { get; set; }
+        public Models.Quote? Quote { get; set; }
 
         public async Task<IActionResult> OnGetAsync()
         {
@@ -59,11 +66,13 @@ namespace PaperCalc.Pages
 
         public void OnPost()
         {
-            if(AspeosCalculation != null)
+            if(AspeosCalculation != null && Quote != null)
             {
                 AspeosCalculation.Calculate(_context, _env.ContentRootPath);
                 FlatSize = _context.AspeosFlatSizes.ToList();
                 Paper = _context.AspeosStock.ToList();
+                Quote.SetQuoteDTOValues(AspeosCalculation);
+                Quote.AspeosCalculation = AspeosCalculation;
             }
             if(AspeosCalculation != null && AspeosCalculation.FileHandlingFee != null)
             {
