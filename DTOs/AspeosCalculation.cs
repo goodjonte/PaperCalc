@@ -12,8 +12,8 @@ namespace PaperCalc.DTOs
         public Guid? FlatSizeId { get; set; }
         public CoatType? CoatType { get; set; }
         public bool CustomSize { get; set; }
-        public int Height { get; set; }
-        public int Width { get; set; }
+        public double Height { get; set; }
+        public double Width { get; set; }
         public AspeosFlatSize? FlatSize { get; set; }
         public string? Colour { get; set; }
         public string? PrintedSides { get; set; }
@@ -22,7 +22,6 @@ namespace PaperCalc.DTOs
         public bool Lamination { get; set; }
         public bool SmallJob { get; set; }
         public bool Urgent { get; set; }
-        public bool FileHandling { get; set; }
         public double? FileHandlingFee { get; set; }
         public int Creasing { get; set; }
         public int Folds { get; set; }

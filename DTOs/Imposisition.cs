@@ -15,7 +15,7 @@
         private bool portrait { get {
                 return landscaperows * landscapecolums > portraitrows * portraicolums ? false : true;
         }}
-        public void Calculate(int Height, int Width)
+        public void Calculate(double Height, double Width)
         {
             heightImposistion = (decimal)Height + bleed + artworkGap;
             widthImposistion = (decimal)Width + bleed + artworkGap;

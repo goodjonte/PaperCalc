@@ -18,7 +18,6 @@ namespace PaperCalc.DTOs
         public int Folds { get; set; }
         public bool SmallJob { get; set; }
         public bool Urgent { get; set; }
-        public bool FileHandling { get; set; }
         public double? FileHandlingFee { get; set; }
 
         //First row calcs

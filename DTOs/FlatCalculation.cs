@@ -18,7 +18,6 @@ namespace PaperCalc.DTOs
         public int Creasing { get; set; }
         public int Folds { get; set; }
         public bool Urgent { get; set; }
-        public bool FileHandling { get; set; }
         public double? FileHandlingFee { get; set; }
 
         //first row calcs
