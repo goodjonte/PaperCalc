@@ -48,7 +48,7 @@
         <div class="inputsForRow">
             <div class="inputForRow">
                 <label>flat size<span class="requiredStar">*</span></label>
-                <select class="custom-select" asp-for="AspeosCalculation.FlatSizeId">
+                <select id="FlatSizeSelect" class="custom-select" asp-for="AspeosCalculation.FlatSizeId">
                     <option class="defaultOption" value="">select a size...</option>
                     @{
                         foreach (PaperCalc.Models.FlatSize fs in Model.FlatSize)
@@ -56,6 +56,7 @@
                             <option value="@fs.Id">@fs.Name</option>
                         }
                     }
+                    <option class="defaultOption" value="custom">CUSTOM</option>
                 </select>
             </div>
             <div class="inputForRow">
@@ -79,6 +80,19 @@
                         }
                     }
                 </select>
+            </div>
+        </div>
+        <div id="hiddenSizeInputs" class="inputsForRow hidden">
+            <input asp-for="AspeosCalculation.CustomSize" value="false" type="hidden" />
+            <div class="inputForRow">
+                <label>Width<span class="requiredStar">*</span></label>
+                <input placeholder="0" asp-for="AspeosCalculation.Width" type="text" />
+            </div>
+            <div class="inputForRow">
+                <label>Height<span class="requiredStar">*</span></label>
+                <input placeholder="0" asp-for="AspeosCalculation.Height" type="text" />
+            </div>
+            <div class="inputForRow">
             </div>
         </div>
     </div>
@@ -356,6 +370,15 @@
         return sides + colour;
     }
 
+    document.getElementById("FlatSizeSelect").addEventListener("change", function (e) {
+        if (e.target.value == "custom") {
+            document.getElementById('hiddenSizeInputs').classList.remove("hidden");
+            document.getElementById("AspeosCalculation_CustomSize").value = true;
+        } else if (e.target.value != "custom" && !document.getElementById('hiddenSizeInputs').classList.contains("hidden")) {
+            document.getElementById('hiddenSizeInputs').classList.add("hidden");
+            document.getElementById("AspeosCalculation_CustomSize").value = false;
+        }
+    });
 
     window.generate = function generate() {
         loadFile(

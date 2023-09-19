@@ -7,7 +7,7 @@ namespace PaperCalc.DTOs
     public class AspeosCalculation
     {
         public Settings? Settings { get; set; }
-        public Imposisition? CustomFlatSize { get; set; } //Half done
+        public Imposisition? CustomFlatSize { get; set; } //Half done - am calculating persra3 and cuts for custom sizes but havent sorted lamination
         public double? Quantity { get; set; }
         public Guid? FlatSizeId { get; set; }
         public CoatType? CoatType { get; set; }
