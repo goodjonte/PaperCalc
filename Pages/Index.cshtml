@@ -56,7 +56,7 @@
                             <option value="@fs.Id">@fs.Name</option>
                         }
                     }
-                    <option class="defaultOption" value="custom">CUSTOM</option>
+                    <option class="defaultOption" value="custom">Custom</option>
                 </select>
             </div>
             <div class="inputForRow">
@@ -368,6 +368,11 @@
         var sides = document.getElementById("AspeosCalculation_PrintedSides").value == "single" ? "Single Sided - " : "Double Sided - ";
         var colour = document.getElementById("AspeosCalculation_Colour").value == "colour" ? "Colour" : "Black and White";
         return sides + colour;
+    }
+
+    if (document.getElementById("FlatSizeSelect").value == "custom") {
+        document.getElementById('hiddenSizeInputs').classList.remove("hidden");
+        document.getElementById("AspeosCalculation_CustomSize").value = true;
     }
 
     document.getElementById("FlatSizeSelect").addEventListener("change", function (e) {

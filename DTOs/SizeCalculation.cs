@@ -1,6 +1,7 @@
 ﻿namespace PaperCalc.DTOs
 {
-    public class Imposisition
+    //This class is uesd to calculate things based on the height and width of paper, was originally made for custom sizes but will be used to calculate all sizes, this means flatsize class coulb be made redundant in the future, also will help with testing
+    public class SizeCalculation
     {
         const decimal bleed = 3;
         const decimal artworkGap = 1;

@@ -4,8 +4,8 @@
     {
         public Guid Id { get; set; }
         public required string Name { get; set; }
-        //public int? Height { get; set; }
-        //public int? Width { get; set; }
+        public double? Height { get; set; }
+        public double? Width { get; set; }
 
         //public int? QuantityMin { get; set; }
         //public int? QuantityMax { get; set; }

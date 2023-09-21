@@ -1,13 +1,15 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Drawing;
+using PaperCalc.Data;
 using PaperCalc.Models;
 
 namespace PaperCalc.DTOs
 {
     public class AspeosCalculation
     {
+        public PaperCalcContext? Context { get; set; }
         public Settings? Settings { get; set; }
-        public Imposisition? CustomFlatSize { get; set; } //Half done - am calculating persra3 and cuts for custom sizes but havent sorted lamination
+        public SizeCalculation? CustomFlatSize { get; set; } //Half done - am calculating persra3 and cuts for custom sizes but havent sorted lamination
         public double? Quantity { get; set; }
         public Guid? FlatSizeId { get; set; }
         public CoatType? CoatType { get; set; }
@@ -34,7 +36,7 @@ namespace PaperCalc.DTOs
         [DisplayFormat(DataFormatString = "{0:c}")]
         public double ClickSideMultiplier { get { return PrintedSides == null ? 0 : PrintedSides == "single" ? BaseClickRate : BaseClickRate * 2; } }
         [DisplayFormat(DataFormatString = "{0:c}")]
-        public double ClickSizeMultiplier { get { return Trimming ? ClickSideMultiplier * 2 : ClickSideMultiplier; } }
+        public double ClickSizeMultiplier { get { return Trimming ? ClickSideMultiplier * 2 : ClickSideMultiplier; } } //This need a proper solution based on size
         [DisplayFormat(DataFormatString = "{0:c}")]
         public double ClickRate { get { return ClickSizeMultiplier; } }
         [DisplayFormat(DataFormatString = "{0:c}")]
@@ -42,7 +44,18 @@ namespace PaperCalc.DTOs
         public double Cuts { get { return CustomSize && CustomFlatSize != null ? CustomFlatSize.CutsCustomSize : (FlatSize?.CutsPerSRA3) ?? 0; } }
         public double? HolePunches { get { return NumOfHolePunches > 0 ? (Quantity / 20) * NumOfHolePunches : 0; } }
         [DisplayFormat(DataFormatString = "{0:c}")]
-        public double? LaminationCost { get { return FlatSize != null ? Lamination ? FlatSize.LaminationCost * Quantity : 0 : 0; } }
+        public double? LaminationCost { get {
+                if (Lamination)
+                {
+                    if (CustomSize && Context != null)
+                    {
+                        return LaminationStock.GetLaminationCost(Context, Width, Height) * Quantity;
+                    }
+                    return FlatSize != null ? FlatSize.LaminationCost * Quantity : 0 ; //need to get rid of this and do it by flatsize size like with custom above
+                }
+                return 0;
+            }
+        }
         public double? CreasingRate
         {
             get
@@ -139,6 +152,7 @@ namespace PaperCalc.DTOs
         //Method has to be called to calculate the values of the DTO - sets settings and flat size
         public void Calculate(PaperCalc.Data.PaperCalcContext _context, String path)
         {
+            Context = _context;
             Settings = new();
             Settings.SetSettings(path);
             if (CustomSize)

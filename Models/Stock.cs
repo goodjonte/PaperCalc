@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using PaperCalc.Data;
+using System.ComponentModel.DataAnnotations;
 
 namespace PaperCalc.Models
 {
@@ -110,5 +111,16 @@ namespace PaperCalc.Models
         public double? PriceA1 { get { return PriceA0 != null ? (PricePerMeter / 1000) * 594 : Width >= 594 ? (PricePerMeter / 1000) * 841 : null; } }
         [DisplayFormat(DataFormatString = "{0:c}")]
         public double? PriceA2 { get { return Width >= 420 ? (PricePerMeter / 1000) * 420 : null; } }
+
+        public static double GetLaminationCost(PaperCalcContext context, double width, double length)
+        {
+            double lamUsed = width > length ? (width + 10) * 2 : (length + 10) * 2;
+            LaminationStock? lamStock = context.LaminationStock.FirstOrDefault();
+            if(lamStock != null)
+            {
+                return Math.Round(((lamStock.PricePerMeter * 2)/1000) * lamUsed, 2);
+            }
+            return 0;
+        }
     }
 }
