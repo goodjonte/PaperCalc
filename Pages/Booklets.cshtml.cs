@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using PaperCalc.Models;
 
 namespace PaperCalc.Pages
 {
@@ -15,7 +16,7 @@ namespace PaperCalc.Pages
             _context = context;
             _env = env;
             Settings = new();
-            BookletFlatSizes = _context.BookletFlatSizes.ToList();
+            FlatSizes = _context.FlatSizes.Where(x => x.ForCalculation == CalculationType.Booklet).ToList();
             AspeosStock = _context.AspeosStock.ToList();
             Settings.SetSettings(_env.ContentRootPath);
             _configuration = config;
@@ -23,7 +24,7 @@ namespace PaperCalc.Pages
         }
         public PaperCalc.DTOs.Settings? Settings { get; set; }
         public PaperCalc.DTOs.BookletCalculation BookletCalculation { get; set; }
-        public List<PaperCalc.Models.BookletFlatSize> BookletFlatSizes { get; set; }
+        public List<PaperCalc.Models.FlatSize> FlatSizes { get; set; }
         public List<PaperCalc.Models.AspeosStock> AspeosStock { get; set; }
 
         public void OnGetAsync()
@@ -34,7 +35,7 @@ namespace PaperCalc.Pages
         public void OnPost()
         {
             BookletCalculation.Calculate(_context, _env.ContentRootPath);
-            BookletFlatSizes = _context.BookletFlatSizes.ToList();
+            FlatSizes = _context.FlatSizes.Where(x => x.ForCalculation == CalculationType.Booklet).ToList();
             AspeosStock = _context.AspeosStock.ToList();
         }
     }

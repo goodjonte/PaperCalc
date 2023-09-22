@@ -37,7 +37,7 @@
                 <select class="custom-select" asp-for="BookletCalculation.FlatSizeId">
                     <option value="">select a size...</option>
                     @{
-                        foreach (PaperCalc.Models.FlatSize fs in Model.BookletFlatSizes)
+                        foreach (PaperCalc.Models.FlatSize fs in Model.FlatSizes)
                         {
                             <option value="@fs.Id">@fs.Name</option>
                         }

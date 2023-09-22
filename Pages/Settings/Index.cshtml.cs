@@ -18,27 +18,11 @@ namespace PaperCalc.Pages.Settings
         public IndexModel(IConfiguration config,PaperCalc.Data.PaperCalcContext context, IWebHostEnvironment env)
         {
             _context = context;
-            AspeosFlatSizes = new();
-            FlatFlatSizes = new();
-            BookletFlatSizes = new();
+            FlatSizes = new();
             _env = env;
             Settings = new();
             NewUser = new();
-            AspeosFlatSize = new()
-            {
-                Id = Guid.NewGuid(),
-                Name = ""
-            };
-            FlatFlatSize = new()
-            {
-                Id = Guid.NewGuid(),
-                Name = ""
-            };
-            BookletFlatSize = new()
-            {
-                Id = Guid.NewGuid(),
-                Name = ""
-            };
+           
             _configuration = config;
         }
         [BindProperty]
@@ -46,17 +30,8 @@ namespace PaperCalc.Pages.Settings
         [BindProperty]
         public PaperCalc.DTOs.Settings Settings { get; set; }
         [BindProperty]
-        public List<PaperCalc.Models.AspeosFlatSize> AspeosFlatSizes { get; set; }
-        [BindProperty]
-        public PaperCalc.Models.AspeosFlatSize AspeosFlatSize { get; set; }
-        [BindProperty]
-        public List<PaperCalc.Models.FlatFlatSize> FlatFlatSizes { get; set; }
-        [BindProperty]
-        public PaperCalc.Models.FlatFlatSize FlatFlatSize { get; set; }
-        [BindProperty]
-        public List<PaperCalc.Models.BookletFlatSize> BookletFlatSizes { get; set; }
-        [BindProperty]
-        public PaperCalc.Models.BookletFlatSize BookletFlatSize { get; set; }
+        public List<PaperCalc.Models.FlatSize> FlatSizes { get; set; }
+        
 
         //GET Method
         public IActionResult OnGet()
@@ -69,9 +44,7 @@ namespace PaperCalc.Pages.Settings
                 return Redirect("/Login");
             }
 
-            AspeosFlatSizes = _context.AspeosFlatSizes.ToList();
-            FlatFlatSizes = _context.FlatFlatSizes.ToList();
-            BookletFlatSizes = _context.BookletFlatSizes.ToList();
+            FlatSizes = _context.FlatSizes.ToList();
             return Page();
         }
 
@@ -79,101 +52,6 @@ namespace PaperCalc.Pages.Settings
         public ActionResult OnPostSaveSettings()
         {
             Settings.SaveSettings(_env.ContentRootPath);
-            return RedirectToPage("./Index");
-        }
-        //Aspeos Flat size methods
-        public ActionResult OnPostAspeosCreate()
-        {
-            if(AspeosFlatSize == null)
-            {
-                return Page();
-            }
-
-            _context.AspeosFlatSizes.Add(AspeosFlatSize);
-            _context.SaveChanges();
-
-            return RedirectToPage("./Index");
-        }
-        public ActionResult OnPostAspeosEdit()
-        {
-            if(AspeosFlatSize == null)
-            {
-                return Page();
-            }
-            if(string.Equals(AspeosFlatSize.Name, "delete", StringComparison.OrdinalIgnoreCase))
-            {
-                _context.AspeosFlatSizes.Remove(AspeosFlatSize);
-                _context.SaveChanges();
-                return RedirectToPage("./Index");
-            }
-            
-            _context.Attach(AspeosFlatSize).State = EntityState.Modified;
-            _context.SaveChanges();
-
-            return RedirectToPage("./Index");
-        }
-
-        //Flat - Flat size methods
-        public ActionResult OnPostFlatCreate()
-        {
-            if (FlatFlatSize == null)
-            {
-                return Page();
-            }
-
-            _context.FlatFlatSizes.Add(FlatFlatSize);
-            _context.SaveChanges();
-
-            return RedirectToPage("./Index");
-        }
-        public ActionResult OnPostFlatEdit()
-        {
-            if (FlatFlatSize == null)
-            {
-                return Page();
-            }
-            if (string.Equals(FlatFlatSize.Name, "delete", StringComparison.OrdinalIgnoreCase))
-            {
-                _context.FlatFlatSizes.Remove(FlatFlatSize);
-                _context.SaveChanges();
-                return RedirectToPage("./Index");
-            }
-
-            _context.Attach(FlatFlatSize).State = EntityState.Modified;
-            _context.SaveChanges();
-
-            return RedirectToPage("./Index");
-        }
-
-        //Booklet - Flat size methods
-        public ActionResult OnPostBookletCreate()
-        {
-            if (BookletFlatSize == null)
-            {
-                return Page();
-            }
-
-            _context.BookletFlatSizes.Add(BookletFlatSize);
-            _context.SaveChanges();
-
-            return RedirectToPage("./Index");
-        }
-        public ActionResult OnPostBookletEdit()
-        {
-            if (BookletFlatSize == null)
-            {
-                return Page();
-            }
-            if (string.Equals(BookletFlatSize.Name, "delete", StringComparison.OrdinalIgnoreCase))
-            {
-                _context.BookletFlatSizes.Remove(BookletFlatSize);
-                _context.SaveChanges();
-                return RedirectToPage("./Index");
-            }
-
-            _context.Attach(BookletFlatSize).State = EntityState.Modified;
-            _context.SaveChanges();
-
             return RedirectToPage("./Index");
         }
 
@@ -200,12 +78,9 @@ namespace PaperCalc.Pages.Settings
                 PasswordSalt = passwordSalt,
                 Admin = NewUser.Admin
             };
-
             _context.User.Add(user);
             await _context.SaveChangesAsync();
-
             return RedirectToPage("./Index");
-
         }
 
         private static void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)

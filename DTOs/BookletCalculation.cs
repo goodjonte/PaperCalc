@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PaperCalc.DTOs
 {
+    //Not complete on google sheets yet ???? missing some things like laminayion cost... and some other things
     public class BookletCalculation
     {
         public Settings? Settings { get; set; }

@@ -1,54 +1,42 @@
 ﻿namespace PaperCalc.DTOs
 {
     //This class is uesd to calculate things based on the height and width of paper, was originally made for custom sizes but will be used to calculate all sizes, this means flatsize class coulb be made redundant in the future, also will help with testing
-    public class SizeCalculation
+    public static class SizeCalculation
     {
         const decimal bleed = 3;
         const decimal artworkGap = 1;
         const decimal sra3HeightPrintableLandscape = 310;
         const decimal sra3WidthPrintableLandscape = 440;
-        private decimal heightImposistion { get; set; }
-        private decimal widthImposistion { get; set; }
-        private decimal landscaperows { get; set; }
-        private decimal landscapecolums { get; set; }
-        private decimal portraitrows { get; set; }
-        private decimal portraicolums { get; set; }
-        private bool portrait { get {
-                return landscaperows * landscapecolums > portraitrows * portraicolums ? false : true;
-        }}
-        public void Calculate(double Height, double Width)
+        public static int CalculatePerSra3(double? Height, double? Width)
         {
-            heightImposistion = (decimal)Height + bleed + artworkGap;
-            widthImposistion = (decimal)Width + bleed + artworkGap;
-            landscaperows = Math.Floor(sra3HeightPrintableLandscape / heightImposistion);
-            landscapecolums = Math.Floor(sra3WidthPrintableLandscape / widthImposistion);
-            portraitrows = Math.Floor(sra3HeightPrintableLandscape / widthImposistion);
-            portraicolums = Math.Floor(sra3WidthPrintableLandscape / heightImposistion);
+            decimal heightImposistion = (decimal)Height + bleed + artworkGap;
+            decimal widthImposistion = (decimal)Width + bleed + artworkGap;
+            decimal landscaperows = Math.Floor(sra3HeightPrintableLandscape / heightImposistion);
+            decimal landscapecolums = Math.Floor(sra3WidthPrintableLandscape / widthImposistion);
+            decimal portraitrows = Math.Floor(sra3HeightPrintableLandscape / widthImposistion);
+            decimal portraicolums = Math.Floor(sra3WidthPrintableLandscape / heightImposistion);
+            if (landscaperows * landscapecolums > portraitrows * portraicolums)
+            {
+                return (int)landscaperows * (int)landscapecolums;
+            }
+
+            return (int)portraitrows * (int)portraicolums;
         }
 
-        public int PerSra3CustomSize
+        public static int CalculateCuts(double? Height, double? Width)
         {
-            get
+            decimal heightImposistion = (decimal)Height + bleed + artworkGap;
+            decimal widthImposistion = (decimal)Width + bleed + artworkGap;
+            decimal landscaperows = Math.Floor(sra3HeightPrintableLandscape / heightImposistion);
+            decimal landscapecolums = Math.Floor(sra3WidthPrintableLandscape / widthImposistion);
+            decimal portraitrows = Math.Floor(sra3HeightPrintableLandscape / widthImposistion);
+            decimal portraicolums = Math.Floor(sra3WidthPrintableLandscape / heightImposistion);
+            bool portrait = landscaperows * landscapecolums > portraitrows * portraicolums ? false : true;
+            if (portrait)
             {
-                if (landscaperows * landscapecolums > portraitrows * portraicolums)
-                {
-                    return (int)landscaperows * (int)landscapecolums;
-                }
-
-                return (int)portraitrows * (int)portraicolums;
+                return ((int)portraitrows + (int)portraicolums + 2);
             }
-        }
-
-        public int CutsCustomSize
-        {
-            get
-            {
-                if (portrait)
-                {
-                    return ((int)portraitrows + (int)portraicolums + 2) * 2;
-                }
-                return ((int)landscaperows + (int)landscapecolums + 2) * 2;
-            }
+            return ((int)landscaperows + (int)landscapecolums + 2);
         }
     }
 }

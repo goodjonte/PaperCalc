@@ -1,15 +1,20 @@
-﻿using PaperCalc.Models;
+﻿using PaperCalc.Data;
+using PaperCalc.Models;
 using System.ComponentModel.DataAnnotations;
 
 namespace PaperCalc.DTOs
 {
     public class FlatCalculation
     {
+        public PaperCalcContext? Context { get; set; }
         public Settings? Settings { get; set; }
+
         public int? Pages { get; set; }
         public int? CopyQuantity { get; set; }
-        public Guid? FlatSizeId { get; set; }
-        public FlatFlatSize? FlatSize { get; set; }
+        public string? FlatSizeHW { get; set; }
+        public bool CustomSize { get; set; }
+        public double Height { get; set; }
+        public double Width { get; set; }
         public string? Colour { get; set; }
         public string? PrintedSides { get; set; }
         public bool Binding { get; set; }
@@ -24,12 +29,31 @@ namespace PaperCalc.DTOs
         public int? SheetsUsed { get { return Pages * CopyQuantity; } }
         public double? BaseClickRate { get { return Colour == "black" ? 0.01 : 0.08; } } //Hard coded in click rates
         public double? ClickSideMultiplier { get { return PrintedSides == "single" ? BaseClickRate * 1 : BaseClickRate * 2; } }
-        public double? ClickSizeMultiplier { get { return FlatSize != null ? ClickSideMultiplier * FlatSize.SizeMultiplier : 0 ; } }
+        public double? ClickSizeMultiplier { //hardcoded
+            get
+            { 
+                if(Height == 297 && Width == 210 || Width == 297 && Height == 210)//if a4
+                {
+                    return ClickSideMultiplier * 1;
+                }
+                return ClickSideMultiplier * 2;
+            } 
+        }
         public double? ClickRate { get { return ClickSizeMultiplier; } }
         public double? SheetPrice { get; set; } //set in front end
         public double? BindingCost { get { return Binding ? CopyQuantity * 7.7 : 0; } } //Hard coded in binding multiplier
-        public double? HolePunchesCost { get { return Pages / 20 * NumOfHolePunches; } }
-        public double? LaminationCost { get { return Lamination && FlatSize != null ? FlatSize.LaminationCost * SheetsUsed: 0; } } //dont think this is right -broken on sheets? - i made this multiply by sheets used instead of whats on sheets which is LamCost * Pages * CopyQuantity
+        public double? HolePunchesCost { get { return SheetsUsed / 20 * NumOfHolePunches; } } //in sheets was pages instead of sheets used - believe that is an error
+        public double? LaminationCost
+        {
+            get
+            {
+                if (Lamination && Context != null)
+                {
+                    return LaminationStock.GetLaminationCost(Context, Width, Height) * SheetsUsed;
+                }
+                return 0;
+            }
+        }
         public double? CreasingCost {// Hard coded in creasing multiplier
             get
             {
@@ -54,7 +78,7 @@ namespace PaperCalc.DTOs
                 };
             }
         }
-        public int? LamCuts { get { return Lamination ? 8 * Pages : 0; } }
+        public double? LamCuts { get { return Lamination ? 8 * SheetsUsed : 0; } } // I THink $1 per cut might be too much
 
         //second row calcs
         public double? PaperCost {
@@ -62,7 +86,7 @@ namespace PaperCalc.DTOs
             {
                 if(PrintedSides == "double")
                 {
-                    return (SheetPrice + ClickRate) * (Pages / 2 * CopyQuantity);
+                    return (SheetPrice + ClickRate) * (Pages / 2 * CopyQuantity); //divided by 2 because double sided - ur using less sheets
                 }
                 else if(PrintedSides == "single")
                 {
@@ -79,9 +103,7 @@ namespace PaperCalc.DTOs
         public double? Multiplier{ //hard coded in multipliers
             get
             {
-                if(FlatSize != null)
-                {
-                    if (FlatSize.Name == "A4")
+                    if (Height == 297 && Width == 210 || Width == 297 && Height == 210)//A4
                     {
                         return SheetsUsed switch
                         {
@@ -107,11 +129,6 @@ namespace PaperCalc.DTOs
                             _ => (double?)2,
                         };
                     }
-                }
-                else
-                {
-                    return 0;
-                }
             }
         }
         public double? Minimum { get { return Urgent ? 15 : 0; } } //hardcoded in minimum for urgent cost
@@ -122,7 +139,7 @@ namespace PaperCalc.DTOs
         public double? JobCost {
             get
             {
-                if((((PaperCost * Buffer) + Finishings) * Multiplier) + Minimum + FileHandlingCost + LamCuts < 15)
+                if((((PaperCost * Buffer) + Finishings) * Multiplier) + Minimum + FileHandlingCost + LamCuts < 15)//hardcoded in minimum job cost
                 {
                     return 15;
                 }
@@ -136,13 +153,19 @@ namespace PaperCalc.DTOs
         public double? JobCostWithGST { get { return JobCost * 1.15; } }
         //there was an unlabeled cell on sheets inb third row
 
-        //Methods
 
+        //Method must be called before being able to get correct values
         public void Calculate(PaperCalc.Data.PaperCalcContext _context, String path)
         {
+            Context = _context;
             Settings = new();
             Settings.SetSettings(path);
-            FlatSize = _context.FlatFlatSizes.Find(FlatSizeId);
+
+            if (CustomSize || FlatSizeHW == null) return;
+
+            string[] HeightWidth = FlatSizeHW.Split(',');
+            Height = Convert.ToDouble(HeightWidth[0]);
+            Width = Convert.ToDouble(HeightWidth[1]);
         }
     }
 }

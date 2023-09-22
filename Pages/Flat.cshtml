@@ -35,12 +35,12 @@
         <div class="inputsForRow">
             <div class="inputForRow">
                 <label>flat size<span class="requiredStar">*</span></label>
-                <select class="custom-select" asp-for="FlatCalculation.FlatSizeId">
+                <select class="custom-select" asp-for="FlatCalculation.FlatSizeHW">
                     <option value="">select a size...</option>
                     @{
-                        foreach (PaperCalc.Models.FlatSize fs in Model.FlatFlatSizes)
+                        foreach (PaperCalc.Models.FlatSize fs in Model.FlatSizes)
                         {
-                            <option value="@fs.Id">@fs.Name</option>
+                            <option value="@fs.Height,@fs.Width">@fs.Name</option>
                         }
                     }
                 </select>

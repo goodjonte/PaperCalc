@@ -132,7 +132,7 @@
                         <h3>Aspeos Flat Sizes</h3>
                         <p>To delete a flatsize, set name to delete</p>
                         <div class="customDivTableHead">
-                            <div>
+                            @*<div>
                                 <h5>@Html.DisplayNameFor(model => model.AspeosFlatSizes[0].Name)</h5>
                             </div>
                             <div>
@@ -143,13 +143,13 @@
                             </div>
                             <div>
                                 <h5>@Html.DisplayNameFor(model => model.AspeosFlatSizes[0].LaminationCost)</h5>
-                            </div>
+                            </div>*@
                             <div>
                             </div>
                         </div>
 
                         <div class="customDivTableBody">
-                            @for (int i = 0; i < Model.AspeosFlatSizes.Count; i++)
+                            @*@for (int i = 0; i < Model.AspeosFlatSizes.Count; i++)
                             {
 
                                 <form method="post" asp-page-handler="AspeosEdit">
@@ -170,37 +170,14 @@
                                         <input type="submit" value="Save" class="btn btn-primary tbButton" />
                                     </div>
                                 </form>
-                            }
+                            }*@
                         </div>
                     </div>
                     <!-- Aspeos Create -->
-                    <form method="post" id="CreateAspeosFlatsize" asp-page-handler="AspeosCreate">
-                        <h3>Add Aspeos Flat Size</h3>
-                        <input type="hidden" asp-for="AspeosFlatSize.Id" />
-
-                        <div class="form-group">
-                            <label asp-for="AspeosFlatSize.Name" class="control-label"></label>
-                            <input asp-for="AspeosFlatSize.Name" class="form-control" />
-                            <span asp-validation-for="AspeosFlatSize.Name" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="AspeosFlatSize.PiecesPerSRA3" class="control-label"></label>
-                            <input asp-for="AspeosFlatSize.PiecesPerSRA3" class="form-control" />
-                            <span asp-validation-for="AspeosFlatSize.PiecesPerSRA3" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="AspeosFlatSize.CutsPerSRA3" class="control-label"></label>
-                            <input asp-for="AspeosFlatSize.CutsPerSRA3" class="form-control" />
-                            <span asp-validation-for="AspeosFlatSize.CutsPerSRA3" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="AspeosFlatSize.LaminationCost" class="control-label"></label>
-                            <input asp-for="AspeosFlatSize.LaminationCost" class="form-control" />
-                            <span asp-validation-for="AspeosFlatSize.LaminationCost" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" value="Create" class="btn btn-primary" />
-                        </div>
+                    <form method="post" id="EpsonFlatsize" asp-page-handler="EpsonEdit">
+                        <h1 class="RedText">Not Functional Yet</h1>
+                        <label>Epson Edit</label>
+                        <input type="number" />
                     </form>
                 </div>
 
@@ -211,7 +188,7 @@
                         <h3>Flat - Flat Sizes</h3>
                         <p>To delete a flatsize, set name to delete</p>
                         <div class="customDivTableHead">
-                            <div>
+                            @*<div>
                                 <h5>@Html.DisplayNameFor(model => model.FlatFlatSizes[0].Name)</h5>
                             </div>
                             <div>
@@ -219,12 +196,12 @@
                             </div>
                             <div>
                                 <h5>@Html.DisplayNameFor(model => model.FlatFlatSizes[0].LaminationCost)</h5>
-                            </div>
+                            </div>*@
                             <div>
                             </div>
                         </div>
                         <div class="customDivTableBody">
-                            @for (int i = 0; i < Model.FlatFlatSizes.Count; i++)
+                            @*@for (int i = 0; i < Model.FlatFlatSizes.Count; i++)
                             {
 
                                 <form method="post" asp-page-handler="FlatEdit">
@@ -241,33 +218,15 @@
                                     <div>
                                         <input type="submit" value="Save" class="btn btn-primary tbButton" />
                                     </div>
-                                </form>
+                                </form>*@
                             }
                         </div>
                     </div>
                     <!-- Flat Create -->
-                    <form method="post" id="CreateFlatFlatsize" asp-page-handler="FlatCreate">
-                        <h3>Add a Flat size for Flat Calculation</h3>
-                        <input type="hidden" asp-for="FlatFlatSize.Id" />
-
-                        <div class="form-group">
-                            <label asp-for="FlatFlatSize.Name" class="control-label"></label>
-                            <input asp-for="FlatFlatSize.Name" class="form-control" />
-                            <span asp-validation-for="FlatFlatSize.Name" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="FlatFlatSize.SizeMultiplier" class="control-label"></label>
-                            <input asp-for="FlatFlatSize.SizeMultiplier" class="form-control" />
-                            <span asp-validation-for="FlatFlatSize.SizeMultiplier" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="FlatFlatSize.LaminationCost" class="control-label"></label>
-                            <input asp-for="FlatFlatSize.LaminationCost" class="form-control" />
-                            <span asp-validation-for="FlatFlatSize.LaminationCost" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" value="Create" class="btn btn-primary" />
-                        </div>
+                    <form method="post" id="EpsonFlatsize" asp-page-handler="EpsonEdit">
+                        <h1 class="RedText">Not Functional Yet</h1>
+                        <label>Epson Edit</label>
+                        <input type="number" />
                     </form>
                 </div>
 
@@ -278,39 +237,28 @@
                         <p>To delete a flatsize, set name to delete</p>
                         <div class="customDivTableHead">
                             <div>
-                                <h5>@Html.DisplayNameFor(model => model.BookletFlatSizes[0].Name)</h5>
+                                @*<h5>@Html.DisplayNameFor(model => model.BookletFlatSizes[0].Name)</h5>*@
                             </div>
                             <div>
                             </div>
                         </div>
                         <div class="customDivTableBody">
-                            @for (int i = 0; i < Model.BookletFlatSizes.Count; i++)
+                            @*@for (int i = 0; i < Model.BookletFlatSizes.Count; i++)
                             {
 
-                                <form method="post" asp-page-handler="BookletEdit">
-                                    <input asp-for="BookletFlatSize.Id" value="@Model.BookletFlatSizes[i].Id" type="hidden" />
-                                    <div>
-                                        <input asp-for="BookletFlatSize.Name" value="@Model.BookletFlatSizes[i].Name" />
-                                    </div>
-                                    <div>
-                                        <input type="submit" value="Save" class="btn btn-primary tbButton" />
-                                    </div>
+                                <form method="post" id="EpsonFlatsize" asp-page-handler="EpsonEdit">
+                                    <h1 class="RedText">Not Functional Yet</h1>
+                                    <label>Epson Edit</label>
+                                    <input type="number" />
                                 </form>
-                            }
+                            }*@
                         </div>
                     </div>
                     <!-- Booklet Create -->
-                    <form method="post" id="CreateBookletFlatsize" asp-page-handler="BookletCreate">
-                        <h3>Add a Flat size for Booklet Calculation</h3>
-                        <input type="hidden" asp-for="BookletFlatSize.Id" />
-                        <div class="form-group">
-                            <label asp-for="BookletFlatSize.Name" class="control-label"></label>
-                            <input asp-for="BookletFlatSize.Name" class="form-control" />
-                            <span asp-validation-for="BookletFlatSize.Name" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" value="Create" class="btn btn-primary" />
-                        </div>
+                    <form method="post" id="EpsonFlatsize" asp-page-handler="EpsonEdit">
+                        <h1 class="RedText">Not Functional Yet</h1>
+                        <label>Epson Edit</label>
+                        <input type="number" />
                     </form>
                 </div>
 

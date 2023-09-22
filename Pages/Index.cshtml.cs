@@ -40,7 +40,7 @@ namespace PaperCalc.Pages
         public PaperCalc.DTOs.Settings? Settings { get; set; }
         public IList<PaperCalc.Models.AspeosStock> Paper { get; set; } = default!;
 
-        public IList<PaperCalc.Models.AspeosFlatSize> FlatSize { get; set; } = default!;
+        public IList<PaperCalc.Models.FlatSize> FlatSizes { get; set; } = default!;
         public AspeosCalculation? AspeosCalculation { get; set; }
         public Models.Quote? Quote { get; set; }
 
@@ -54,7 +54,7 @@ namespace PaperCalc.Pages
                 if (_context.AspeosStock != null)
                 {
                     AspeosCalculation = new AspeosCalculation();
-                    FlatSize = await _context.AspeosFlatSizes.ToListAsync();
+                    FlatSizes = await _context.FlatSizes.Where(x => x.ForCalculation == CalculationType.Aspeos).ToListAsync();
                 }
                 Admin = PaperCalc.Models.User.IsAdmin(token);
                 return Page();
@@ -69,7 +69,7 @@ namespace PaperCalc.Pages
             if(AspeosCalculation != null && Quote != null)
             {
                 AspeosCalculation.Calculate(_context, _env.ContentRootPath);
-                FlatSize = _context.AspeosFlatSizes.ToList();
+                FlatSizes = _context.FlatSizes.Where(x => x.ForCalculation == CalculationType.Aspeos).ToList();
                 Paper = _context.AspeosStock.ToList();
                 Quote.SetQuoteDTOValues(AspeosCalculation);
                 Quote.AspeosCalculation = AspeosCalculation;

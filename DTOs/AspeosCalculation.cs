@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Drawing;
+using Microsoft.DotNet.Scaffolding.Shared;
 using PaperCalc.Data;
 using PaperCalc.Models;
 
@@ -9,14 +10,13 @@ namespace PaperCalc.DTOs
     {
         public PaperCalcContext? Context { get; set; }
         public Settings? Settings { get; set; }
-        public SizeCalculation? CustomFlatSize { get; set; } //Half done - am calculating persra3 and cuts for custom sizes but havent sorted lamination
+
         public double? Quantity { get; set; }
-        public Guid? FlatSizeId { get; set; }
+        public string? FlatSizeHW { get; set; }
         public CoatType? CoatType { get; set; }
         public bool CustomSize { get; set; }
         public double Height { get; set; }
         public double Width { get; set; }
-        public AspeosFlatSize? FlatSize { get; set; }
         public string? Colour { get; set; }
         public string? PrintedSides { get; set; }
         public int NumOfHolePunches { get; set; }
@@ -29,7 +29,7 @@ namespace PaperCalc.DTOs
         public int Folds { get; set; }
 
         //First Row Calculations
-        public int PerSRA { get { return CustomSize && CustomFlatSize != null ? CustomFlatSize.PerSra3CustomSize : (FlatSize?.PiecesPerSRA3) ?? 0; } }
+        public int PerSRA { get { return Height > 0 && Width > 0 ? SizeCalculation.CalculatePerSra3(Height, Width) : 0; } }
 
         [DisplayFormat(DataFormatString = "{0:c}")]
         public double BaseClickRate { get { return Colour == null ? 0 : Colour == "colour" ? 0.08 : 0.01; } }
@@ -41,17 +41,13 @@ namespace PaperCalc.DTOs
         public double ClickRate { get { return ClickSizeMultiplier; } }
         [DisplayFormat(DataFormatString = "{0:c}")]
         public double SheetPrice { get; set; }
-        public double Cuts { get { return CustomSize && CustomFlatSize != null ? CustomFlatSize.CutsCustomSize : (FlatSize?.CutsPerSRA3) ?? 0; } }
+        public double Cuts { get { return Height > 0 && Width > 0 ? SizeCalculation.CalculateCuts(Height, Width) : 0; } }
         public double? HolePunches { get { return NumOfHolePunches > 0 ? (Quantity / 20) * NumOfHolePunches : 0; } }
         [DisplayFormat(DataFormatString = "{0:c}")]
         public double? LaminationCost { get {
-                if (Lamination)
+                if (Lamination && Context != null)
                 {
-                    if (CustomSize && Context != null)
-                    {
-                        return LaminationStock.GetLaminationCost(Context, Width, Height) * Quantity;
-                    }
-                    return FlatSize != null ? FlatSize.LaminationCost * Quantity : 0 ; //need to get rid of this and do it by flatsize size like with custom above
+                    return LaminationStock.GetLaminationCost(Context, Width, Height) * Quantity;
                 }
                 return 0;
             }
@@ -135,9 +131,12 @@ namespace PaperCalc.DTOs
             {
                 if (Quantity == null) { return 0; }
                 double? jobCost = (((PaperCost * Buffer) + FinishingsCost) * Multiplier) + Minimum + FileHandlingCost;
-                if (jobCost < 15 && Settings != null)
+                if (Settings != null)
                 {
-                    return Settings.MinimumJobCost;
+                    if (jobCost < Settings.MinimumJobCost)
+                    {
+                        return Settings.MinimumJobCost;
+                    }
                 }
                 return jobCost;
             }
@@ -147,21 +146,24 @@ namespace PaperCalc.DTOs
         [DisplayFormat(DataFormatString = "{0:c}")]
         public double? GST { get { return JobCostGstInc > 0 ? JobCostGstInc - JobCost : 0; } }
 
-
-
         //Method has to be called to calculate the values of the DTO - sets settings and flat size
         public void Calculate(PaperCalc.Data.PaperCalcContext _context, String path)
         {
+            //Set Context and Settings
             Context = _context;
             Settings = new();
             Settings.SetSettings(path);
-            if (CustomSize)
+
+            //Return if custom size as height and width are already set
+            if (CustomSize || FlatSizeHW == null)
             {
-                CustomFlatSize = new();
-                CustomFlatSize.Calculate(Height, Width);
                 return;
             }
-            FlatSize = _context.AspeosFlatSizes.Find(FlatSizeId);
+
+            //Set Height and Width - based off FlatSizeHW
+            string[] HeightWidth = FlatSizeHW.Split(',');
+            Height = Convert.ToDouble(HeightWidth[0]);
+            Width = Convert.ToDouble(HeightWidth[1]);
         }
 
     }

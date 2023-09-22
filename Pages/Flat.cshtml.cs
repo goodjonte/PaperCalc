@@ -26,7 +26,7 @@ namespace PaperCalc.Pages
             _context = context;
             _env = env;
             Settings = new();
-            FlatFlatSizes = _context.FlatFlatSizes.ToList();
+            FlatSizes = _context.FlatSizes.Where(x => x.ForCalculation == CalculationType.Flat).ToList();
             FlatStock = _context.FlatStock.ToList();
             Settings.SetSettings(_env.ContentRootPath);
             _configuration = config;
@@ -34,7 +34,7 @@ namespace PaperCalc.Pages
         }
         public PaperCalc.DTOs.Settings? Settings { get; set; }
         public PaperCalc.DTOs.FlatCalculation FlatCalculation { get; set; }
-        public List<PaperCalc.Models.FlatFlatSize> FlatFlatSizes { get; set; }
+        public List<PaperCalc.Models.FlatSize> FlatSizes { get; set; }
         public List<PaperCalc.Models.FlatStock> FlatStock { get; set; }
 
         public void OnGetAsync()
@@ -45,7 +45,7 @@ namespace PaperCalc.Pages
         public void OnPost()
         {
             FlatCalculation.Calculate(_context, _env.ContentRootPath);
-            FlatFlatSizes = _context.FlatFlatSizes.ToList();
+            FlatSizes = _context.FlatSizes.Where(x => x.ForCalculation == CalculationType.Flat).ToList();
             FlatStock = _context.FlatStock.ToList();
         }
     }

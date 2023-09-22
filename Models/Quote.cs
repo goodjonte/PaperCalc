@@ -24,6 +24,7 @@ namespace PaperCalc.Models
         //Values for DTOS
         public double? Quantity { get; set; }
         public Guid? FlatSizeId { get; set; }
+        public string? FlatSizeHW { get; set;}
         public CoatType? CoatType { get; set; }
         public bool CustomSize { get; set; }
         public double Height { get; set; }
@@ -50,7 +51,7 @@ namespace PaperCalc.Models
                     AspeosCalculation = new AspeosCalculation
                     {
                         Quantity = Quantity,
-                        FlatSizeId = FlatSizeId,
+                        FlatSizeHW = FlatSizeHW,
                         CoatType = CoatType,
                         CustomSize = CustomSize,
                         Height = Height,
@@ -72,7 +73,7 @@ namespace PaperCalc.Models
                     {
                         Pages = Pages,
                         CopyQuantity = CopyQuantity,
-                        FlatSizeId = FlatSizeId,
+                        FlatSizeHW = FlatSizeHW,
                         Colour = Colour,
                         PrintedSides = PrintedSides,
                         Binding = Binding,
@@ -113,7 +114,7 @@ namespace PaperCalc.Models
         public void SetQuoteDTOValues(AspeosCalculation asp)
         {
             Quantity = asp?.Quantity;
-            FlatSizeId = asp?.FlatSizeId;
+            FlatSizeHW = asp?.FlatSizeHW;
             CoatType = asp?.CoatType;
             CustomSize = asp?.CustomSize ?? false;
             Height = asp?.Height ?? 0;
@@ -133,7 +134,7 @@ namespace PaperCalc.Models
         {
             Pages = flat.Pages;
             CopyQuantity = flat.CopyQuantity;
-            FlatSizeId = flat.FlatSizeId;
+            FlatSizeHW = flat.FlatSizeHW;
             Colour = flat.Colour;
             PrintedSides = flat.PrintedSides;
             Binding = flat.Binding;
