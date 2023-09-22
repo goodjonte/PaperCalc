@@ -29,6 +29,7 @@ namespace PaperCalc.Pages
             Settings = new();
             Settings.SetSettings(_env.ContentRootPath);
             Paper = _context.AspeosStock.ToList();
+            FlatSizes = _context.FlatSizes.Where(x => x.ForCalculation == CalculationType.Aspeos).ToList();
             _configuration = config;
             Quote = new()
             {
@@ -44,7 +45,7 @@ namespace PaperCalc.Pages
         public AspeosCalculation? AspeosCalculation { get; set; }
         public Models.Quote? Quote { get; set; }
 
-        public async Task<IActionResult> OnGetAsync()
+        public IActionResult OnGetAsync()
         {
             var token = Request.Cookies["Parrot"];
             if (token == null) { return Redirect("/Login");}
@@ -54,7 +55,6 @@ namespace PaperCalc.Pages
                 if (_context.AspeosStock != null)
                 {
                     AspeosCalculation = new AspeosCalculation();
-                    FlatSizes = await _context.FlatSizes.Where(x => x.ForCalculation == CalculationType.Aspeos).ToListAsync();
                 }
                 Admin = PaperCalc.Models.User.IsAdmin(token);
                 return Page();

@@ -12,7 +12,8 @@ namespace PaperCalc.DTOs
         public Settings? Settings { get; set; }
 
         public double? Quantity { get; set; }
-        public string? FlatSizeHW { get; set; }
+        public Guid? FlatSizeId { get; set; }
+        public FlatSize? FlatSize { get; set; }
         public CoatType? CoatType { get; set; }
         public bool CustomSize { get; set; }
         public double Height { get; set; }
@@ -109,7 +110,7 @@ namespace PaperCalc.DTOs
         [DisplayFormat(DataFormatString = "{0:c}")]
         public double? FinishingsCost { get { return (Cuts * 2) + HolePunches + LaminationCost + CreasingRate + FoldingRate; } }
 
-        public double? Multiplier { get { return Settings != null ? SmallJob || Urgent ? Settings.MarginMultiplierSmallOrUrgent : Settings.MarginMultiplier : 0; } }
+        public double? Multiplier { get { return CalculateMultiplier(); } }
 
         public double? Minimum { get { return Settings != null ? SmallJob && Urgent ? Settings.SmallOrUrgentMinimum : 0 : 0; } }
 
@@ -155,16 +156,40 @@ namespace PaperCalc.DTOs
             Settings.SetSettings(path);
 
             //Return if custom size as height and width are already set
-            if (CustomSize || FlatSizeHW == null)
+            if (CustomSize || FlatSizeId == null)
             {
                 return;
             }
 
-            //Set Height and Width - based off FlatSizeHW
-            string[] HeightWidth = FlatSizeHW.Split(',');
-            Height = Convert.ToDouble(HeightWidth[0]);
-            Width = Convert.ToDouble(HeightWidth[1]);
+            //Set FlatSize, Height and Width
+            FlatSize = _context.FlatSizes.Find(FlatSizeId);
+            if(FlatSize == null) return;
+            Width = FlatSize.Width;
+            Height = FlatSize.Height;
         }
 
+        //Calculates the multiplier base on Regression Slope
+        public double CalculateMultiplier()
+        {
+            if (CustomSize)
+            {
+                return 2; //Need to figure out a way of calculating this - maybe we can have in settings a multiplier and qauntity min, max, etc for custom size
+            }
+
+            if (FlatSize != null && Quantity > 0)
+            {
+                double xDif = (double)FlatSize.QuantityMin - (double)FlatSize.QuantityMax;
+                double yDif = (double)FlatSize.MultiplierMax - (double)FlatSize.MultiplierMin;
+                double slope = yDif / xDif;
+
+                double xMean = ((double)FlatSize.QuantityMin + (double)FlatSize.QuantityMax) / 2;
+                double yMean = ((double)FlatSize.MultiplierMin + (double)FlatSize.MultiplierMax) / 2;
+                double yIntercept = yMean - (slope * xMean);
+
+                return slope * (double)Quantity + yIntercept;
+            }
+
+            return 0;
+        }
     }
 }

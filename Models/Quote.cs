@@ -51,7 +51,7 @@ namespace PaperCalc.Models
                     AspeosCalculation = new AspeosCalculation
                     {
                         Quantity = Quantity,
-                        FlatSizeHW = FlatSizeHW,
+                        FlatSizeId = FlatSizeId,
                         CoatType = CoatType,
                         CustomSize = CustomSize,
                         Height = Height,
@@ -114,7 +114,7 @@ namespace PaperCalc.Models
         public void SetQuoteDTOValues(AspeosCalculation asp)
         {
             Quantity = asp?.Quantity;
-            FlatSizeHW = asp?.FlatSizeHW;
+            FlatSizeId = asp?.FlatSizeId;
             CoatType = asp?.CoatType;
             CustomSize = asp?.CustomSize ?? false;
             Height = asp?.Height ?? 0;
