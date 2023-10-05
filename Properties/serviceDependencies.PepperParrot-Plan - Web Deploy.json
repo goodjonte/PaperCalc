@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "mssql2": {
+      "serviceConnectorResourceId": "/subscriptions/[parameters('subscriptionId')]/resourcegroups/[parameters('resourceGroupName')]/providers/Microsoft.Web/sites/PepperParrot-Plan/providers/Microsoft.ServiceLinker/linkers/ConnectionStringsPepperParrotDB_1BD33D0735",
+      "secretStore": "AzureAppSettings",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourcegroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/pepperparrotdbserver/databases/PepperParrot_db",
+      "type": "mssql.azure",
+      "connectionId": "ConnectionStrings:PepperParrotDB"
+    }
+  }
+}

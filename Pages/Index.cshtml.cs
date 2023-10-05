@@ -73,6 +73,12 @@ namespace PaperCalc.Pages
                 Paper = _context.AspeosStock.ToList();
                 Quote.SetQuoteDTOValues(AspeosCalculation);
                 Quote.AspeosCalculation = AspeosCalculation;
+                if (Quote.save)
+                {
+                    _context.Quote.Add(Quote);
+                    _context.SaveChanges();
+                }
+                
             }
             if(AspeosCalculation != null && AspeosCalculation.FileHandlingFee != null)
             {
@@ -85,6 +91,10 @@ namespace PaperCalc.Pages
             {
                 Admin = PaperCalc.Models.User.IsAdmin(token);
             }
+        }
+        public void OnPostSaveQuote()
+        {
+            Console.Write("yo");
         }
     }
 }

@@ -19,5 +19,6 @@ namespace PaperCalc.Data
         public DbSet<PaperCalc.Models.FlatStock> FlatStock { get; set; } = default!;
         public DbSet<PaperCalc.Models.LaminationStock> LaminationStock { get; set; } = default!;
         public DbSet<PaperCalc.Models.User> User { get; set; } = default!;
+        public DbSet<PaperCalc.Models.Quote> Quote { get; set; } = default!;
     }
 }

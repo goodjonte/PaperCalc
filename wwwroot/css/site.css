@@ -70,7 +70,9 @@ a {
     user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
 }
-
+.marginAuto {
+    margin: 0 auto !important;
+}
 
 /*    nav    */
 .navbar-brand {
@@ -819,3 +821,15 @@ td, th {
 
 
 /* Stock Edit Page */
+
+
+/* Jobs Index Page */
+.JobsHome {
+    width: 40vw;
+    margin: 50px auto;
+    text-align: center;
+}
+
+
+
+/* Jobs Index Page */

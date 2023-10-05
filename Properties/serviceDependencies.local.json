@@ -3,6 +3,11 @@
     "mssql1": {
       "type": "mssql.local",
       "connectionId": "ConnectionStrings:PaperCalcContext"
+    },
+    "mssql2": {
+      "ignored": "true",
+      "type": "mssql",
+      "connectionId": "ConnectionStrings:DefaultConnection"
     }
   }
 }

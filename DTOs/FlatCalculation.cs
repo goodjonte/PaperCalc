@@ -11,7 +11,7 @@ namespace PaperCalc.DTOs
 
         public int? Pages { get; set; }
         public int? CopyQuantity { get; set; }
-        public string? FlatSizeHW { get; set; }
+        public string? FlatSizeHW { get; set; } // Change to using actual flatzise
         public bool CustomSize { get; set; }
         public double Height { get; set; }
         public double Width { get; set; }
@@ -31,13 +31,13 @@ namespace PaperCalc.DTOs
         public double? ClickSideMultiplier { get { return PrintedSides == "single" ? BaseClickRate * 1 : BaseClickRate * 2; } }
         public double? ClickSizeMultiplier { //hardcoded
             get
-            { 
+            {
                 if(Height == 297 && Width == 210 || Width == 297 && Height == 210)//if a4
                 {
                     return ClickSideMultiplier * 1;
                 }
                 return ClickSideMultiplier * 2;
-            } 
+            }
         }
         public double? ClickRate { get { return ClickSizeMultiplier; } }
         public double? SheetPrice { get; set; } //set in front end

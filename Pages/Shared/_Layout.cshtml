@@ -50,6 +50,13 @@
                                 <a class="nav-link dropLink @Html.ActiveClass("/WideFormat")" asp-page="/WideFormat">Wide Format</a>
                             </div>
                         </li>
+                        <li class="nav-item dropdown">
+                            <a class='nav-link
+                               @Html.ActiveClass("/jobs")
+                               ' asp-page="/Jobs/Index" id="navbarDropdown" role="button">
+                                jobs
+                            </a>
+                        </li>
                         @{if (Model.GetType().GetProperty("Admin") == null || Model.Admin)
                             {
                                 <li class="nav-item dropdown">

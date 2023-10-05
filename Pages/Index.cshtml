@@ -105,7 +105,7 @@
         <div class="inputsForRow">
             <div class="inputForRow">
                 <label>colour<span class="requiredStar">*</span></label>
-                <select  class="custom-select" asp-for="AspeosCalculation.Colour">
+                <select class="custom-select" asp-for="AspeosCalculation.Colour">
                     <option class="defaultOption" value="">select a option...</option>
                     <option value="colour">Colour</option>
                     <option value="black">Black</option>
@@ -163,12 +163,12 @@
         <div class="checkboxesForRow">
             <label class="checkbox">
                 trimming
-                <input asp-for="AspeosCalculation.Trimming" type="checkbox" value="true"/>
+                <input asp-for="AspeosCalculation.Trimming" type="checkbox" value="true" />
                 <span class="checkmark"></span>
             </label>
             <label class="checkbox">
                 lammination
-                <input asp-for="AspeosCalculation.Lamination" type="checkbox" value="true"/>
+                <input asp-for="AspeosCalculation.Lamination" type="checkbox" value="true" />
                 <span class="checkmark"></span>
             </label>
         </div>
@@ -190,7 +190,7 @@
             </div>
             <div class="inputForRow">
                 <label>setup</label>
-                <input  placeholder="$00.00" asp-for="Quote.SetupCost" type="number" />
+                <input placeholder="$00.00" asp-for="Quote.SetupCost" type="number" />
             </div>
         </div>
         <div class="checkboxesForRow">
@@ -214,7 +214,7 @@
             </div>
             <div class="inputForRow">
                 <label>cost</label>
-                <input  placeholder="$00.00" asp-for="Quote.DeliveryCost" type="number" />
+                <input placeholder="$00.00" asp-for="Quote.DeliveryCost" type="number" />
             </div>
             <div class="inputForRow">
                 <label>turnaround </label>
@@ -227,34 +227,47 @@
         </div>
     </div>
 
-    <button class="btn btn-success calculationSubmitButton">generate quote</button>
+    <button class="btn btn-success calculationSubmitButton marginAuto">generate quote</button>
+    @{ if (Model.AspeosCalculation.JobCost > 0)
+        {
+            <div>
+                <input asp-for="Quote.save" type="hidden" />
+                <div id="saveButton" class="btn btn-success calculationSubmitButton marginAuto">Save Quote</div>
+                <script>
+                    document.getElementById("saveButton").addEventListener("click", function () {
+                        document.getElementById("Quote_save").value = true;
+                        document.getElementsByClassName("calculationForm")[0].submit();
+                    });
+                </script>
+            </div>
+        
+            <div id="calculationPost">
+
+                <dl id="calculationTotals">
+
+                    <dt>Job Cost:</dt>
+                    <dd>@Html.DisplayFor(model => Model.AspeosCalculation.JobCost)</dd>
+
+                    <dt>GST:</dt>
+                    <dd>@Html.DisplayFor(model => Model.AspeosCalculation.GST)</dd>
+
+                    <dt>Job Cost (GST Inc):</dt>
+                    <dd>@Html.DisplayFor(model => Model.AspeosCalculation.JobCostGstInc)</dd>
+                </dl>
+
+                <div>
+                    <a class="btn btn-primary" id="showCalculationsButton" data-toggle="collapse" href="#CalculationValues" role="button" aria-expanded="false" aria-controls="CalculationValues">Show Calculation Values</a>
+
+                </div>
+
+            </div>
+        }
+    }
+
 
 </form>
 
-@{ if (Model.AspeosCalculation.JobCost > 0)
-    {
-        <div id="calculationPost">
 
-            <dl id="calculationTotals">
-
-                <dt>Job Cost:</dt>
-                <dd>@Html.DisplayFor(model => Model.AspeosCalculation.JobCost)</dd>
-
-                <dt>GST:</dt>
-                <dd>@Html.DisplayFor(model => Model.AspeosCalculation.GST)</dd>
-
-                <dt>Job Cost (GST Inc):</dt>
-                <dd>@Html.DisplayFor(model => Model.AspeosCalculation.JobCostGstInc)</dd>
-            </dl>
-
-            <div>
-                <a class="btn btn-primary" id="showCalculationsButton" data-toggle="collapse" href="#CalculationValues" role="button" aria-expanded="false" aria-controls="CalculationValues">Show Calculation Values</a>
-                <button class="btn btn-primary" onclick="generate()">Generate document</button>
-            </div>
-
-        </div>
-    }
-}
 
 <div id="CalculationValues" class="collapse">
     <table>

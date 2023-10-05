@@ -1,4 +1,5 @@
 ﻿using PaperCalc.DTOs;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PaperCalc.Models
 {
@@ -16,9 +17,15 @@ namespace PaperCalc.Models
         public JobType JobTypeForDTO { get; set; }
 
         //DTO - not saved in db
+        [NotMapped]
+        public bool save { get; set; }
+        [NotMapped]
         public AspeosCalculation? AspeosCalculation { get; set; }
+        [NotMapped]
         public BookletCalculation? BookletCalculation { get; set; }
+        [NotMapped]
         public WideFormatCalculation? WideFormatCalculation { get; set; }
+        [NotMapped]
         public FlatCalculation? FlatCalculation { get; set; }
 
         //Values for DTOS
