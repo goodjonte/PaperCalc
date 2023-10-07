@@ -6,7 +6,7 @@ namespace PaperCalc.Models
 {
 
     //----- Paper Stock Classes -----//
-    public class Stock
+    public abstract class Stock
     {
         [Key]
         public Guid Id { get; set; }
@@ -19,7 +19,7 @@ namespace PaperCalc.Models
         [Display(Name = "Coating Type")]
         public CoatType CoatType { get; set; }
     }
-    public class Sra3Stock : Stock
+    public class Sra3AndBookletsStock : Stock
     {
         public string Size { get; set; } = default!; //Possabily unneccesary
         [Display(Name = "Sheets Per Pack")]
