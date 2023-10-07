@@ -14,10 +14,10 @@ namespace PaperCalc.Data
         {
         }
         public DbSet<PaperCalc.Models.FlatSize> FlatSizes { get; set; } = default!;
-        public DbSet<PaperCalc.Models.AspeosStock> AspeosStock { get; set; } = default!;
-        public DbSet<PaperCalc.Models.EpsonStock> EpsonStock { get; set; } = default!;
-        public DbSet<PaperCalc.Models.FlatStock> FlatStock { get; set; } = default!;
-        public DbSet<PaperCalc.Models.LaminationStock> LaminationStock { get; set; } = default!;
+        public DbSet<PaperCalc.Models.Sra3AndBookletsStock> Sra3AndBookletsStock { get; set; } = default!;
+        public DbSet<PaperCalc.Models.DocumentsStock> DocumentsStock { get; set; } = default!;
+        public DbSet<PaperCalc.Models.BindingCoverStock> BindingCoverStock { get; set; } = default!;
+        public DbSet<PaperCalc.Models.BindingCoilsStock> BindingCoilsStock { get; set; } = default!;
         public DbSet<PaperCalc.Models.User> User { get; set; } = default!;
         public DbSet<PaperCalc.Models.Quote> Quote { get; set; } = default!;
     }

@@ -34,7 +34,8 @@ namespace PaperCalc.Models
         [DisplayFormat(DataFormatString = "{0:c}")]
         public double SheetCost { get { return Math.Round(PricePerPack / SheetsPerPack, 2); } }
         [Display(Name = "Height Of 100 Sheets")]
-        public double HeighOf100Sheets { get; set; }
+        public double HeightOf100Sheets { get; set; }
+        public double HeightOfASheet { get { return HeightOf100Sheets / 100; } }
     }
     public class DocumentsStock : Stock
     {
@@ -60,7 +61,7 @@ namespace PaperCalc.Models
     //----- Other Items Stock Classes -----//
 
 
-    public class DocumentsBindingCoverStock
+    public class BindingCoverStock
     {
         [Key]
         public Guid Id { get; set; }

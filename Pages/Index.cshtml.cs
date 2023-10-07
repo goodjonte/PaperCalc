@@ -42,7 +42,7 @@ namespace PaperCalc.Pages
         public IList<PaperCalc.Models.AspeosStock> Paper { get; set; } = default!;
 
         public IList<PaperCalc.Models.FlatSize> FlatSizes { get; set; } = default!;
-        public AspeosCalculation? AspeosCalculation { get; set; }
+        public Sra3Calculation? AspeosCalculation { get; set; }
         public Models.Quote? Quote { get; set; }
 
         public IActionResult OnGetAsync()
@@ -54,7 +54,7 @@ namespace PaperCalc.Pages
             {
                 if (_context.AspeosStock != null)
                 {
-                    AspeosCalculation = new AspeosCalculation();
+                    AspeosCalculation = new Sra3Calculation();
                 }
                 Admin = PaperCalc.Models.User.IsAdmin(token);
                 return Page();

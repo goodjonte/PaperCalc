@@ -20,7 +20,7 @@ namespace PaperCalc.Models
         [NotMapped]
         public bool save { get; set; }
         [NotMapped]
-        public AspeosCalculation? AspeosCalculation { get; set; }
+        public Sra3Calculation? AspeosCalculation { get; set; }
         [NotMapped]
         public BookletCalculation? BookletCalculation { get; set; }
         [NotMapped]
@@ -55,7 +55,7 @@ namespace PaperCalc.Models
             switch (JobTypeForDTO)
             {
                 case JobType.SRA3:
-                    AspeosCalculation = new AspeosCalculation
+                    AspeosCalculation = new Sra3Calculation
                     {
                         Quantity = Quantity,
                         FlatSizeId = FlatSizeId,
@@ -118,7 +118,7 @@ namespace PaperCalc.Models
         }
 
         //Values for quote from calculation
-        public void SetQuoteDTOValues(AspeosCalculation asp)
+        public void SetQuoteDTOValues(Sra3Calculation asp)
         {
             Quantity = asp?.Quantity;
             FlatSizeId = asp?.FlatSizeId;
