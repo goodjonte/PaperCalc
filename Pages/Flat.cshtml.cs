@@ -33,7 +33,7 @@ namespace PaperCalc.Pages
             FlatCalculation = new();
         }
         public PaperCalc.DTOs.Settings? Settings { get; set; }
-        public PaperCalc.DTOs.FlatCalculation FlatCalculation { get; set; }
+        public PaperCalc.DTOs.DocumentCalculation FlatCalculation { get; set; }
         public List<PaperCalc.Models.FlatSize> FlatSizes { get; set; }
         public List<PaperCalc.Models.FlatStock> FlatStock { get; set; }
 

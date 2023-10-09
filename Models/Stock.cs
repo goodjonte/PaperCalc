@@ -52,7 +52,8 @@ namespace PaperCalc.Models
         [DisplayFormat(DataFormatString = "{0:c}")]
         public double SheetCost { get { return Math.Round(PricePerPack / SheetsPerPack, 2); } }
         [Display(Name = "Height Of 100 Sheets")]
-        public double HeighOf100Sheets { get; set; }
+        public double HeightOf100Sheets { get; set; }
+        public double HeightOfASheet { get { return HeightOf100Sheets / 100; } }
     }
     public class EpsonStock : Stock
     {
@@ -117,6 +118,7 @@ namespace PaperCalc.Models
     }
     public enum BindingCoilType
     {
+        None,
         Plastic,
         Wire,
     }

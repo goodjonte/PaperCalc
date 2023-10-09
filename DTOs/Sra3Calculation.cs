@@ -17,7 +17,7 @@ namespace PaperCalc.DTOs
         public bool DoubleSided { get; set; }
         public bool Colour { get; set; }
         public bool Lamination { get; set; }
-        public Guid StockId { get; set; } //maybe change to sheet price
+        public Guid StockId { get; set; }
         public int Creases { get; set; }
         public int Folds { get; set; }
         public int Staples { get; set; }
@@ -29,7 +29,7 @@ namespace PaperCalc.DTOs
     public class Sra3Calculation
     {
         //Constructor
-        Sra3Calculation(PaperCalc.Data.PaperCalcContext _context, String path, Sra3FormInput inputs)
+        public Sra3Calculation(PaperCalc.Data.PaperCalcContext _context, String path, Sra3FormInput inputs)
         {
             Sra3AndBookletsStock? stock = _context.Sra3AndBookletsStock.Find(inputs.StockId);
             FlatSize? flatsize = _context.FlatSizes.Find(inputs.FlatSizeId);
@@ -46,35 +46,19 @@ namespace PaperCalc.DTOs
             CuttingCalculation = new(Inputs.Quantity, Sra3Stock.HeightOfASheet, Inputs.Height, Inputs.Width);
         }
         //Classes Required For Calculation
-        public PaperCalcContext? Context { get; set; }
-        public Settings? Settings { get; set; }
-        public FlatSize? FlatSize { get; set; }
+        public PaperCalcContext Context { get; set; }
+        public Settings Settings { get; set; }
+        public FlatSize FlatSize { get; set; }
         public Sra3AndBookletsStock Sra3Stock { get; set; }
         public Sra3FormInput Inputs { get; set; }
         public CuttingCalculation CuttingCalculation { get; set; }
 
-        public string? Description
-        {
-            get
-            {
-                string size = FlatSize != null ? FlatSize.Name : "Custom";
-                string stock = $"{Sra3Stock.CoatType} {Sra3Stock.StockType} - {Sra3Stock.Weight}gsm";
-                string sides = Inputs.DoubleSided ? "D/S" : "S/S";
-                string colour = Inputs.Colour ? "Colour" : "B&W";
-                string crease = Inputs.Creases > 0 ? $"{Inputs.Creases} x Crease, " : "";
-                string fold = Inputs.Folds > 0 ? $"{Inputs.Folds} x Folds, " : "";
-                string holePunches = Inputs.HolePunches > 0 ? $"{Inputs.HolePunches} x Drill, " : "";
-                string staple = Inputs.Staples > 0 ? $"{Inputs.Staples} x Staple, " : "";
-                string lamination = Inputs.Lamination ? ", Laminated" : "";
-
-                return $"@{Inputs.Quantity}qty - {size} size, {crease}{fold}{holePunches}{staple}{stock}, {sides}, {colour}{lamination}";
-            }
-        }
+        //Calculations
         public double ClickRate
         {
             get
             {
-                double clickrate = 0.02; //HardCoded for now - need to add clickrate model etc
+                double clickrate = 0.02; //HardCoded for now - need to add clickrate model etc - would be in settings
                 clickrate = Inputs.Colour ? clickrate * 2 : clickrate;
                 clickrate = Inputs.DoubleSided ? clickrate * 2 : clickrate;
                 return clickrate;
@@ -125,6 +109,7 @@ namespace PaperCalc.DTOs
             }
         }
 
+        //Totals
         public double PaperCost { get { return CuttingCalculation.SheetsUsed * Sra3Stock.SheetCost; } }
         public double ClickCost { get { return CuttingCalculation.SheetsUsed * ClickRate; } }
         public double MaterialCost { get { return PaperCost + ClickCost; } }
@@ -152,23 +137,43 @@ namespace PaperCalc.DTOs
             }
         }
 
-        //Final Calculations
+        //Final BackEnd Calculations
         public double TotalCost { get { return MaterialCost + FinishingCost; } }
         public double FinalCharge { get { return Math.Ceiling(MaterialCharge + LabourCharge); } }
 
-        //Profit Calculations
+        //Profit BackEnd Calculations
         public double MaterialProfit { get { return MaterialCharge - MaterialCost; } }
         public double LabourProfit { get { return LabourCharge - FinishingCost; } }
         public double TotalProfit { get { return LabourProfit + MaterialProfit; } }
 
+        //Final Calculations For FrontEnd
+        [DisplayFormat(DataFormatString = "{0:c}")]
+        public double JobCost {
+            get
+            {
+                double jobCost = FinalCharge + Inputs.FileHandlingCost + Inputs.DesignCost + Inputs.SetupCost;
+                return jobCost < 15 ? 15 : jobCost;//Hardcoded Minimum Charge
+            }
+        }
+        [DisplayFormat(DataFormatString = "{0:c}")]
+        public double JobCostWithGst { get { return JobCost * 1.15; } }
 
+        public string? Description
+        {
+            get
+            {
+                string size = FlatSize != null ? FlatSize.Name : "Custom";
+                string stock = $"{Sra3Stock.CoatType} {Sra3Stock.StockType} - {Sra3Stock.Weight}gsm";
+                string sides = Inputs.DoubleSided ? "D/S" : "S/S";
+                string colour = Inputs.Colour ? "Colour" : "B&W";
+                string crease = Inputs.Creases > 0 ? $"{Inputs.Creases} x Crease, " : "";
+                string fold = Inputs.Folds > 0 ? $"{Inputs.Folds} x Folds, " : "";
+                string holePunches = Inputs.HolePunches > 0 ? $"{Inputs.HolePunches} x Drill, " : "";
+                string staple = Inputs.Staples > 0 ? $"{Inputs.Staples} x Staple, " : "";
+                string lamination = Inputs.Lamination ? ", Laminated" : "";
 
-
-
-
-
-
-
-
+                return $"@{Inputs.Quantity}qty - {size} size, {crease}{fold}{holePunches}{staple}{stock}, {sides}, {colour}{lamination}";
+            }
+        }
     }
 }

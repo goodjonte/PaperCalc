@@ -26,7 +26,7 @@ namespace PaperCalc.Models
         [NotMapped]
         public WideFormatCalculation? WideFormatCalculation { get; set; }
         [NotMapped]
-        public FlatCalculation? FlatCalculation { get; set; }
+        public DocumentCalculation? FlatCalculation { get; set; }
 
         //Values for DTOS
         public double? Quantity { get; set; }
@@ -76,7 +76,7 @@ namespace PaperCalc.Models
                     };
                     break;
                 case JobType.Flat:
-                    FlatCalculation = new FlatCalculation
+                    FlatCalculation = new DocumentCalculation
                     {
                         Pages = Pages,
                         CopyQuantity = CopyQuantity,
@@ -137,7 +137,7 @@ namespace PaperCalc.Models
             Creasing = asp?.Creasing ?? 0;
             Folds = asp?.Folds ?? 0;
         }
-        public void SetQuoteDTOValues(FlatCalculation flat)
+        public void SetQuoteDTOValues(DocumentCalculation flat)
         {
             Pages = flat.Pages;
             CopyQuantity = flat.CopyQuantity;
