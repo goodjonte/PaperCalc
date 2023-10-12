@@ -7,6 +7,7 @@ namespace PaperCalc.DTOs
 {
     public class Settings
     {
+        public string? PathForSettings { get; set; }
         [Display(Name = "Minimum Job Cost ($)")]
         public double MinimumJobCost { get; set; }
         [Display(Name = "Filehandling Cost ($)")]
@@ -36,6 +37,7 @@ namespace PaperCalc.DTOs
 
         public void SetSettings(String path)
         {
+            PathForSettings = path;
             XmlDocument doc = new XmlDocument();
             doc.Load(string.Concat(path, "/wwwroot/Settings.xml"));
 

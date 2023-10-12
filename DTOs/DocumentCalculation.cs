@@ -45,7 +45,6 @@ namespace PaperCalc.DTOs
 
             Inputs.Height = FlatSize.Height;
             Inputs.Width = FlatSize.Width;
-
         }
 
         //Classes Required For Calculation

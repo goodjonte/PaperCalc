@@ -122,13 +122,14 @@ namespace PaperCalc.DTOs
                 }
                 else
                 {
-                    return (CuttingCalculation.CutsRequired / (60 / 60)) + ((CreasingCost + FoldingCost) / (250 / 60)) + (HolePunchesCost * (50 / 60)); //Missing stapling cost? - asked on sheets
+                    return (CuttingCalculation.CutsRequired / (60 / 60)) + ((CreasingCost + FoldingCost) / (250 / 60)) + (HolePunchesCost * (50 / 60) + StaplesCost); //Missing stapling cost? - asked on sheets
                 }
             }
         }
+        //Factors
         public double Buffer { get { return CuttingCalculation.SheetsUsed < 10 ? 1.5 : 1.1; } }
         public double Multiplier { get { return 1.1; } } //TODO - can use my method or his
-
+        //Charges
         public double MaterialCharge { get { return MaterialCost * Buffer * Multiplier; } }
         public double LabourCharge {
             get
@@ -137,11 +138,11 @@ namespace PaperCalc.DTOs
             }
         }
 
-        //Final BackEnd Calculations
+        //Totals
         public double TotalCost { get { return MaterialCost + FinishingCost; } }
         public double FinalCharge { get { return Math.Ceiling(MaterialCharge + LabourCharge); } }
 
-        //Profit BackEnd Calculations
+        //Profit
         public double MaterialProfit { get { return MaterialCharge - MaterialCost; } }
         public double LabourProfit { get { return LabourCharge - FinishingCost; } }
         public double TotalProfit { get { return LabourProfit + MaterialProfit; } }
@@ -151,12 +152,27 @@ namespace PaperCalc.DTOs
         public double JobCost {
             get
             {
+                if(Inputs.Quantity > FlatSize.QuantityMax) //This is a shortcut fix for now ideally we want to make temp calc this calc possibly
+                {
+                    var tempJob = Inputs;
+                    tempJob.Quantity = FlatSize.QuantityMax;
+                    var tempCalc = new Sra3Calculation(Context, Settings.PathForSettings, tempJob);
+                    return Inputs.Quantity * tempCalc.CostPerunit;
+                }
                 double jobCost = FinalCharge + Inputs.FileHandlingCost + Inputs.DesignCost + Inputs.SetupCost;
                 return jobCost < 15 ? 15 : jobCost;//Hardcoded Minimum Charge
             }
         }
         [DisplayFormat(DataFormatString = "{0:c}")]
         public double JobCostWithGst { get { return JobCost * 1.15; } }
+        public double CostPerunit
+        {
+            get
+            {
+                return JobCost / Inputs.Quantity;
+            }
+        }
+
 
         public string? Description
         {
