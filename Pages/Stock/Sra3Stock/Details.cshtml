@@ -1,5 +1,5 @@
 ﻿@page
-@model PaperCalc.Pages.AspeosStock.DetailsModel
+@model PaperCalc.Pages.Sra3Stock.DetailsModel
 
 @{
     ViewData["Title"] = "Details";
@@ -13,87 +13,105 @@
     <div class="detailsTable">
         <div class="detailsTableRow">
             <h1>
-                @Html.DisplayNameFor(model => model.AspeosStock.Company)
+                @Html.DisplayNameFor(model => model.Sra3Stock.Supplier)
             </h1>
             <h2>
-                @Html.DisplayFor(model => model.AspeosStock.Company)
+                @Html.DisplayFor(model => model.Sra3Stock.Supplier)
             </h2>
         </div>
 
         <div class="detailsTableRow">
             <h1>
-                @Html.DisplayNameFor(model => model.AspeosStock.ProductName)
+                @Html.DisplayNameFor(model => model.Sra3Stock.StockBrand)
             </h1>
             <h2>
-                @Html.DisplayFor(model => model.AspeosStock.ProductName)
+                @Html.DisplayFor(model => model.Sra3Stock.StockBrand)
             </h2>
         </div>
 
         <div class="detailsTableRow">
             <h1>
-                @Html.DisplayNameFor(model => model.AspeosStock.Size)
+                @Html.DisplayNameFor(model => model.Sra3Stock.Size)
             </h1>
             <h2>
-                @Html.DisplayFor(model => model.AspeosStock.Size)
+                @Html.DisplayFor(model => model.Sra3Stock.Size)
             </h2>
         </div>
 
         <div class="detailsTableRow">
             <h1>
-                @Html.DisplayNameFor(model => model.AspeosStock.Weight)
+                @Html.DisplayNameFor(model => model.Sra3Stock.Weight)
             </h1>
             <h2>
-                @Html.DisplayFor(model => model.AspeosStock.Weight)<span>gsm</span>
+                @Html.DisplayFor(model => model.Sra3Stock.Weight)<span>gsm</span>
             </h2>
         </div>
 
         <div class="detailsTableRow">
             <h1>
-                @Html.DisplayNameFor(model => model.AspeosStock.CoatType)
+                @Html.DisplayNameFor(model => model.Sra3Stock.CoatType)
             </h1>
             <h2>
-                @Html.DisplayFor(model => model.AspeosStock.CoatType)
+                @Html.DisplayFor(model => model.Sra3Stock.CoatType)
             </h2>
         </div>
 
         <div class="detailsTableRow">
             <h1>
-                @Html.DisplayNameFor(model => model.AspeosStock.PackCost)
+                @Html.DisplayNameFor(model => model.Sra3Stock.StockType)
             </h1>
             <h2>
-                @Html.DisplayFor(model => model.AspeosStock.PackCost)
+                @Html.DisplayFor(model => model.Sra3Stock.StockType)
             </h2>
         </div>
 
         <div class="detailsTableRow">
             <h1>
-                @Html.DisplayNameFor(model => model.AspeosStock.PackCostGstIncluded)
+                @Html.DisplayNameFor(model => model.Sra3Stock.HeightOf100Sheets)
             </h1>
             <h2>
-                @Html.DisplayFor(model => model.AspeosStock.PackCostGstIncluded)
+                @Html.DisplayFor(model => model.Sra3Stock.HeightOf100Sheets)
             </h2>
         </div>
 
         <div class="detailsTableRow">
             <h1>
-                @Html.DisplayNameFor(model => model.AspeosStock.SheetsPerPack)
+                @Html.DisplayNameFor(model => model.Sra3Stock.PricePer1000)
             </h1>
             <h2>
-                @Html.DisplayFor(model => model.AspeosStock.SheetsPerPack)
+                @Html.DisplayFor(model => model.Sra3Stock.PricePer1000)
             </h2>
         </div>
 
         <div class="detailsTableRow">
             <h1>
-                @Html.DisplayNameFor(model => model.AspeosStock.SheetCost)
+                @Html.DisplayNameFor(model => model.Sra3Stock.PricePerPack)
             </h1>
             <h2>
-                @Html.DisplayFor(model => model.AspeosStock.SheetCost)
+                @Html.DisplayFor(model => model.Sra3Stock.PricePerPack)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.Sra3Stock.SheetsPerPack)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.Sra3Stock.SheetsPerPack)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.Sra3Stock.SheetCost)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.Sra3Stock.SheetCost)
             </h2>
         </div>
     </div>
 </div>
 <div class="stockDetailsButtons">
-    <a class="btn btn-success" asp-page="./Edit" asp-route-id="@Model.AspeosStock?.Id">edit</a>
+    <a class="btn btn-success" asp-page="./Edit" asp-route-id="@Model.Sra3Stock?.Id">edit</a>
     <a class="btn btn-primary" asp-page="./Index">back to stock</a>
 </div>

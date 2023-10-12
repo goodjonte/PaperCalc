@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using PaperCalc.Data;
 using PaperCalc.Models;
 
-namespace PaperCalc.Pages.FlatStock
+namespace PaperCalc.Pages.DocumentsStock
 {
     public class DetailsModel : PageModel
     {
@@ -21,7 +21,7 @@ namespace PaperCalc.Pages.FlatStock
             _configuration = configuration;
         }
 
-        public PaperCalc.Models.FlatStock FlatStock { get; set; } = default!; 
+        public PaperCalc.Models.DocumentsStock DocumentsStock { get; set; } = default!; 
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
@@ -30,19 +30,19 @@ namespace PaperCalc.Pages.FlatStock
             {
                 return Redirect("/Login");
             }
-            if (id == null || _context.FlatStock == null)
+            if (id == null || _context.DocumentsStock == null)
             {
                 return NotFound();
             }
 
-            var flatStock = await _context.FlatStock.FirstOrDefaultAsync(m => m.Id == id);
-            if (flatStock == null)
+            var documentsStock = await _context.DocumentsStock.FirstOrDefaultAsync(m => m.Id == id);
+            if (documentsStock == null)
             {
                 return NotFound();
             }
             else
             {
-                FlatStock = flatStock;
+                DocumentsStock = documentsStock;
             }
             return Page();
         }

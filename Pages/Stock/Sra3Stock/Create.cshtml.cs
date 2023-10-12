@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using PaperCalc.Data;
 using PaperCalc.Models;
 
-namespace PaperCalc.Pages.AspeosStock
+namespace PaperCalc.Pages.Sra3Stock
 {
     public class CreateModel : PageModel
     {
@@ -32,17 +32,17 @@ namespace PaperCalc.Pages.AspeosStock
         }
 
         [BindProperty]
-        public PaperCalc.Models.AspeosStock AspeosStock { get; set; } = default!;
+        public PaperCalc.Models.Sra3AndBookletsStock Sra3Stock { get; set; } = default!;
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-            AspeosStock.Id = Guid.NewGuid();
-            if ( _context.AspeosStock == null || AspeosStock == null)
+            Sra3Stock.Id = Guid.NewGuid();
+            if ( _context.Sra3AndBookletsStock == null || Sra3Stock == null)
             {
                 return Page();
             }
             
-            _context.AspeosStock.Add(AspeosStock);
+            _context.Sra3AndBookletsStock.Add(Sra3Stock);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

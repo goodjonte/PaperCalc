@@ -16,7 +16,7 @@ namespace PaperCalc.Pages.AspeosStock
             _configuration = configuration;
         }
 
-        public IList<PaperCalc.Models.AspeosStock> AspeosStock { get;set; } = default!;
+        public IList<PaperCalc.Models.Sra3AndBookletsStock> Sra3Stock { get;set; } = default!;
 
         public async Task<IActionResult> OnGetAsync()
         {
@@ -25,9 +25,9 @@ namespace PaperCalc.Pages.AspeosStock
             {
                 return Redirect("/Login");
             }
-            if (_context.AspeosStock != null)
+            if (_context.Sra3AndBookletsStock != null)
             {
-                AspeosStock = await _context.AspeosStock.ToListAsync();
+                Sra3Stock = await _context.Sra3AndBookletsStock.ToListAsync();
             }
             return Page();
         }

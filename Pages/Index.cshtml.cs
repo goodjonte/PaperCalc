@@ -6,16 +6,15 @@ using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json.Linq;
 using NuGet.Common;
 using PaperCalc.DTOs;
-//using PaperCalc.Data;
 using PaperCalc.Models;
 using System.Drawing;
 using System.IdentityModel.Tokens.Jwt;
+using System.IO;
 using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace PaperCalc.Pages
 {
-    [BindProperties]
     public class IndexModel : PageModel
     {
         private readonly PaperCalc.Data.PaperCalcContext _context;
@@ -28,22 +27,21 @@ namespace PaperCalc.Pages
             _env = env;
             Settings = new();
             Settings.SetSettings(_env.ContentRootPath);
-            Paper = _context.AspeosStock.ToList();
+            Paper = _context.Sra3AndBookletsStock.ToList();
             FlatSizes = _context.FlatSizes.Where(x => x.ForCalculation == CalculationType.Aspeos).ToList();
             _configuration = config;
-            Quote = new()
-            {
-                Id = Guid.NewGuid(),
-                JobTypeForDTO = JobType.SRA3,
-            };
+            Inputs = new();
+            Calculation = new(_context, _env.ContentRootPath, Inputs);
         }
         public bool Admin { get; set; }
         public PaperCalc.DTOs.Settings? Settings { get; set; }
-        public IList<PaperCalc.Models.AspeosStock> Paper { get; set; } = default!;
+        public IList<PaperCalc.Models.Sra3AndBookletsStock> Paper { get; set; } = default!;
 
         public IList<PaperCalc.Models.FlatSize> FlatSizes { get; set; } = default!;
-        public Sra3Calculation? AspeosCalculation { get; set; }
-        public Models.Quote? Quote { get; set; }
+        [BindProperty]
+        public Sra3FormInput Inputs { get; set; }
+        public Sra3Calculation Calculation { get; set; }
+        public Quote Quote { get; set; } = default!;
 
         public IActionResult OnGetAsync()
         {
@@ -52,9 +50,9 @@ namespace PaperCalc.Pages
 
             if(PaperCalc.Models.User.VerifyToken(_configuration, token))
             {
-                if (_context.AspeosStock != null)
+                if (_context.Sra3AndBookletsStock != null)
                 {
-                    AspeosCalculation = new Sra3Calculation();
+                    Inputs = new Sra3FormInput();
                 }
                 Admin = PaperCalc.Models.User.IsAdmin(token);
                 return Page();
@@ -66,35 +64,16 @@ namespace PaperCalc.Pages
 
         public void OnPost()
         {
-            if(AspeosCalculation != null && Quote != null)
-            {
-                AspeosCalculation.Calculate(_context, _env.ContentRootPath);
-                FlatSizes = _context.FlatSizes.Where(x => x.ForCalculation == CalculationType.Aspeos).ToList();
-                Paper = _context.AspeosStock.ToList();
-                Quote.SetQuoteDTOValues(AspeosCalculation);
-                Quote.AspeosCalculation = AspeosCalculation;
-                if (Quote.save)
-                {
-                    _context.Quote.Add(Quote);
-                    _context.SaveChanges();
-                }
-                
-            }
-            if(AspeosCalculation != null && AspeosCalculation.FileHandlingFee != null)
-            {
-                Settings = new();
-                Settings.FilehandlingCost = (double)AspeosCalculation.FileHandlingFee;
-            }
+            
+            Calculation = new Sra3Calculation(_context, _env.ContentRootPath, Inputs);
+
+            //Auth user
             var token = Request.Cookies["Parrot"];
             if (token == null) { return; }
             if (PaperCalc.Models.User.VerifyToken(_configuration, token))
             {
                 Admin = PaperCalc.Models.User.IsAdmin(token);
             }
-        }
-        public void OnPostSaveQuote()
-        {
-            Console.Write("yo");
         }
     }
 }

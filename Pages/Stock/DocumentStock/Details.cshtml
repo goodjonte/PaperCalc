@@ -1,5 +1,5 @@
 ﻿@page
-@model PaperCalc.Pages.FlatStock.DetailsModel
+@model PaperCalc.Pages.DocumentsStock.DetailsModel
 
 @{
     ViewData["Title"] = "Details";
@@ -13,87 +13,96 @@
     <div class="detailsTable">
         <div class="detailsTableRow">
             <h1>
-                @Html.DisplayNameFor(model => model.FlatStock.Company)
+                @Html.DisplayNameFor(model => model.DocumentsStock.Supplier)
             </h1>
             <h2>
-                @Html.DisplayFor(model => model.FlatStock.Company)
+                @Html.DisplayFor(model => model.DocumentsStock.Supplier)
             </h2>
         </div>
 
         <div class="detailsTableRow">
             <h1>
-                @Html.DisplayNameFor(model => model.FlatStock.ProductName)
+                @Html.DisplayNameFor(model => model.DocumentsStock.StockBrand)
             </h1>
             <h2>
-                @Html.DisplayFor(model => model.FlatStock.ProductName)
+                @Html.DisplayFor(model => model.DocumentsStock.StockBrand)
             </h2>
         </div>
 
         <div class="detailsTableRow">
             <h1>
-                @Html.DisplayNameFor(model => model.FlatStock.Size)
+                @Html.DisplayNameFor(model => model.DocumentsStock.Size)
             </h1>
             <h2>
-                @Html.DisplayFor(model => model.FlatStock.Size)
+                @Html.DisplayFor(model => model.DocumentsStock.Size)
             </h2>
         </div>
 
         <div class="detailsTableRow">
             <h1>
-                @Html.DisplayNameFor(model => model.FlatStock.Weight)
+                @Html.DisplayNameFor(model => model.DocumentsStock.Weight)
             </h1>
             <h2>
-                @Html.DisplayFor(model => model.FlatStock.Weight)<span>gsm</span>
+                @Html.DisplayFor(model => model.DocumentsStock.Weight)<span>gsm</span>
             </h2>
         </div>
 
         <div class="detailsTableRow">
             <h1>
-                @Html.DisplayNameFor(model => model.FlatStock.CoatType)
+                @Html.DisplayNameFor(model => model.DocumentsStock.CoatType)
             </h1>
             <h2>
-                @Html.DisplayFor(model => model.FlatStock.CoatType)
+                @Html.DisplayFor(model => model.DocumentsStock.CoatType)
             </h2>
         </div>
 
         <div class="detailsTableRow">
             <h1>
-                @Html.DisplayNameFor(model => model.FlatStock.PackCost)
+                @Html.DisplayNameFor(model => model.DocumentsStock.HeightOf100Sheets)
             </h1>
             <h2>
-                @Html.DisplayFor(model => model.FlatStock.PackCost)
+                @Html.DisplayFor(model => model.DocumentsStock.HeightOf100Sheets)
             </h2>
         </div>
 
         <div class="detailsTableRow">
             <h1>
-                @Html.DisplayNameFor(model => model.FlatStock.PackCostGstIncluded)
+                @Html.DisplayNameFor(model => model.DocumentsStock.PricePer1000)
             </h1>
             <h2>
-                @Html.DisplayFor(model => model.FlatStock.PackCostGstIncluded)
+                @Html.DisplayFor(model => model.DocumentsStock.PricePer1000)
             </h2>
         </div>
 
         <div class="detailsTableRow">
             <h1>
-                @Html.DisplayNameFor(model => model.FlatStock.SheetsPerPack)
+                @Html.DisplayNameFor(model => model.DocumentsStock.PricePerPack)
             </h1>
             <h2>
-                @Html.DisplayFor(model => model.FlatStock.SheetsPerPack)
+                @Html.DisplayFor(model => model.DocumentsStock.PricePerPack)
             </h2>
         </div>
 
         <div class="detailsTableRow">
             <h1>
-                @Html.DisplayNameFor(model => model.FlatStock.SheetCost)
+                @Html.DisplayNameFor(model => model.DocumentsStock.SheetsPerPack)
             </h1>
             <h2>
-                @Html.DisplayFor(model => model.FlatStock.SheetCost)
+                @Html.DisplayFor(model => model.DocumentsStock.SheetsPerPack)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.DocumentsStock.SheetCost)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.DocumentsStock.SheetCost)
             </h2>
         </div>
     </div>
 </div>
 <div class="stockDetailsButtons">
-    <a class="btn btn-success" asp-page="./Edit" asp-route-id="@Model.FlatStock?.Id">edit</a>
+    <a class="btn btn-success" asp-page="./Edit" asp-route-id="@Model.DocumentsStock?.Id">edit</a>
     <a class="btn btn-primary" asp-page="./Index">back to stock</a>
 </div>

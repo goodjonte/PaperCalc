@@ -1,11 +1,11 @@
 ﻿@page
-@model FlatModel
+@model DocumentsModel
 @{
 
 }
 
 <form method="post" class="calculationForm">
-    <h4 class="calculationTitle">Flat</h4>
+    <h4 class="calculationTitle">Document</h4>
     <!-- Job Details-->
     <div class="inputRow inputRowWithBorder">
         <div class="inputRowTitle">
@@ -35,31 +35,31 @@
         <div class="inputsForRow">
             <div class="inputForRow">
                 <label>flat size<span class="requiredStar">*</span></label>
-                <select class="custom-select" asp-for="FlatCalculation.FlatSizeHW">
+                <select class="custom-select" asp-for="Inputs.FlatSizeId">
                     <option value="">select a size...</option>
                     @{
                         foreach (PaperCalc.Models.FlatSize fs in Model.FlatSizes)
                         {
-                            <option value="@fs.Height,@fs.Width">@fs.Name</option>
+                            <option value="@fs.Id">@fs.Name</option>
                         }
                     }
                 </select>
             </div>
             <div class="inputForRow">
                 <label>stock<span class="requiredStar">*</span></label>
-                <select id="stockSelect" class="custom-select" asp-for="FlatCalculation.SheetPrice">
+                <select id="stockSelect" class="custom-select" asp-for="Inputs.StockId">
                     <option value="">select stock...</option>
                     @{
-                        foreach (PaperCalc.Models.FlatStock item in Model.FlatStock)
+                        foreach (PaperCalc.Models.DocumentsStock item in Model.DocumentsStock)
                         {
-                            <option value="@item.SheetCost">@item.Weight<span>gsm</span> @item.Company @item.ProductName</option>
+                            <option value="@item.Id">@item.Weight<span>gsm</span> @item.Supplier @item.StockBrand</option>
                         }
                     }
                 </select>
             </div>
             <div class="inputForRow">
                 <label>pages<span class="requiredStar">*</span></label>
-                <input type="number" placeholder="0" asp-for="FlatCalculation.Pages">
+                <input type="number" placeholder="0" asp-for="Inputs.Pages">
             </div>
         </div>
     </div>
@@ -72,23 +72,23 @@
         <div class="inputsForRow">
             <div class="inputForRow">
                 <label>colour<span class="requiredStar">*</span></label>
-                <select class="custom-select" asp-for="FlatCalculation.Colour">
+                <select class="custom-select" asp-for="Inputs.Colour">
                     <option value="">select a option...</option>
-                    <option value="colour">Colour</option>
-                    <option value="black">Black</option>
+                    <option value="true">Colour</option>
+                    <option value="false">Black</option>
                 </select>
             </div>
             <div class="inputForRow">
                 <label>printed sides<span class="requiredStar">*</span></label>
-                <select class="custom-select" asp-for="FlatCalculation.PrintedSides">
+                <select class="custom-select" asp-for="Inputs.DoubleSided">
                     <option value="">Select a Option...</option>
-                    <option value="single">Single Sided</option>
-                    <option value="double">Double Sided</option>
+                    <option value="false">Single Sided</option>
+                    <option value="true">Double Sided</option>
                 </select>
             </div>
             <div class="inputForRow">
                 <label>copy quantity<span class="requiredStar">*</span></label>
-                <input type="number" placeholder="0" asp-for="FlatCalculation.CopyQuantity">
+                <input type="number" placeholder="0" asp-for="Inputs.Quantity">
             </div>
         </div>
     </div>
@@ -101,7 +101,7 @@
         <div class="inputsForRow">
             <div class="inputForRow">
                 <label>folds</label>
-                <select class="custom-select" asp-for="FlatCalculation.Folds">
+                <select class="custom-select" asp-for="Inputs.Folds">
                     <option value="0">None</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -110,7 +110,7 @@
             </div>
             <div class="inputForRow">
                 <label>cresaing</label>
-                <select class="custom-select" asp-for="FlatCalculation.Creasing">
+                <select class="custom-select" asp-for="Inputs.Staples">
                     <option value="0">none</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -119,23 +119,26 @@
             </div>
             <div class="inputForRow">
                 <label>hole punches</label>
-                <select class="custom-select" asp-for="FlatCalculation.NumOfHolePunches">
+                <select class="custom-select" asp-for="Inputs.HolePunches">
                     <option value="0">none</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
                 </select>
             </div>
+            <div class="inputForRow">
+                <label>hole punches</label>
+                <select class="custom-select" asp-for="Inputs.Binding">
+                    <option value="None">none</option>
+                    <option value="Plastic">Plastic</option>
+                    <option value="Wire">Wire</option>
+                </select>
+            </div>
         </div>
-        <div class="checkboxesForRow">
-            <label class="checkbox">
-                binding
-                <input asp-for="FlatCalculation.Binding" type="checkbox" value="true" />
-                <span class="checkmark"></span>
-            </label>
+        <div class="checkboxesForRow"
             <label class="checkbox">
                 lammination
-                <input asp-for="FlatCalculation.Lamination" type="checkbox" value="true" />
+                <input asp-for="Inputs.Lamination" type="checkbox" value="true" />
                 <span class="checkmark"></span>
             </label>
         </div>
@@ -149,15 +152,15 @@
         <div class="inputsForRow">
             <div class="inputForRow">
                 <label>design</label>
-                <input placeholder="$00.00" type="text" />
+                <input placeholder="$00.00" type="text" asp-for="Inputs.DesignCost"/>
             </div>
             <div class="inputForRow">
                 <label>file handling</label>
-                <input type="number" placeholder="$00.00" asp-for="FlatCalculation.FileHandlingFee">
+                <input type="number" placeholder="$00.00" asp-for="Inputs.FileHandlingCost">
             </div>
             <div class="inputForRow">
                 <label>setup</label>
-                <input placeholder="$00.00" type="text" />
+                <input placeholder="$00.00" type="text"  asp-for="Inputs.SetupCost"/>
             </div>
         </div>
     </div>
@@ -180,8 +183,6 @@
                 <label>turnaround </label>
                 <div class="inputWithCheckbox">
                     <input class="turnaroundInput" type="number" />
-                    <input asp-for="FlatCalculation.Urgent" class="checkboxWithinInput" type="checkbox" value="true" />
-                    <label class="labelWithinInput">urgent job</label>
                 </div>
             </div>
         </div>
@@ -191,17 +192,17 @@
 
 </form>
 
-@{ if (Model.FlatCalculation.JobCost > 0)
+@{ if (Model.Calculation != null)
     {
         <div id="calculationPost">
 
             <dl id="calculationTotals">
 
                 <dt>Job Cost:</dt>
-                <dd>@Html.DisplayFor(model => Model.FlatCalculation.JobCost)</dd>
+                <dd>@Html.DisplayFor(model => Model.Calculation.JobCost)</dd>
 
                 <dt>Job Cost (GST Inc):</dt>
-                <dd>@Html.DisplayFor(model => Model.FlatCalculation.JobCostWithGST)</dd>
+                <dd>@Html.DisplayFor(model => Model.Calculation.JobCostWithGST)</dd>
 
             </dl>
 

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using PaperCalc.Data;
 using PaperCalc.Models;
 
-namespace PaperCalc.Pages.AspeosStock
+namespace PaperCalc.Pages.Sra3Stock
 {
     public class DeleteModel : PageModel
     {
@@ -22,7 +22,7 @@ namespace PaperCalc.Pages.AspeosStock
         }
 
         [BindProperty]
-      public PaperCalc.Models.AspeosStock AspeosStock { get; set; } = default!;
+      public PaperCalc.Models.Sra3AndBookletsStock Sra3Stock { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
@@ -31,36 +31,35 @@ namespace PaperCalc.Pages.AspeosStock
             {
                 return Redirect("/Login");
             }
-            if (id == null || _context.AspeosStock == null)
+            if (id == null || _context.Sra3AndBookletsStock == null)
             {
                 return NotFound();
             }
 
-            var aspeosstock = await _context.AspeosStock.FirstOrDefaultAsync(m => m.Id == id);
+            var sra3Stock = await _context.Sra3AndBookletsStock.FirstOrDefaultAsync(m => m.Id == id);
 
-            if (aspeosstock == null)
+            if (sra3Stock == null)
             {
                 return NotFound();
             }
             else 
             {
-                AspeosStock = aspeosstock;
+                Sra3Stock = sra3Stock;
             }
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync(Guid? id)
         {
-            if (id == null || _context.AspeosStock == null)
+            if (id == null || _context.Sra3AndBookletsStock == null)
             {
                 return NotFound();
             }
-            var aspeosstock = await _context.AspeosStock.FindAsync(id);
+            var sra3Stock = await _context.Sra3AndBookletsStock.FindAsync(id);
 
-            if (aspeosstock != null)
+            if (sra3Stock != null)
             {
-                AspeosStock = aspeosstock;
-                _context.AspeosStock.Remove(AspeosStock);
+                _context.Sra3AndBookletsStock.Remove(sra3Stock);
                 await _context.SaveChangesAsync();
             }
 

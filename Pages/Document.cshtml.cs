@@ -15,27 +15,28 @@ using System.Text;
 namespace PaperCalc.Pages
 {
     [BindProperties]
-    public class FlatModel : PageModel
+    public class DocumentsModel : PageModel
     {
         private readonly PaperCalc.Data.PaperCalcContext _context;
         private readonly IWebHostEnvironment _env;
         public readonly IConfiguration _configuration;
 
-        public FlatModel(IConfiguration config, PaperCalc.Data.PaperCalcContext context, IWebHostEnvironment env)
+        public DocumentsModel(IConfiguration config, PaperCalc.Data.PaperCalcContext context, IWebHostEnvironment env)
         {
             _context = context;
             _env = env;
             Settings = new();
             FlatSizes = _context.FlatSizes.Where(x => x.ForCalculation == CalculationType.Flat).ToList();
-            FlatStock = _context.FlatStock.ToList();
+            DocumentsStock = _context.DocumentsStock.ToList();
             Settings.SetSettings(_env.ContentRootPath);
             _configuration = config;
-            FlatCalculation = new();
+            Inputs = new();
         }
         public PaperCalc.DTOs.Settings? Settings { get; set; }
-        public PaperCalc.DTOs.DocumentCalculation FlatCalculation { get; set; }
+        public PaperCalc.DTOs.DocumentFormInputs Inputs { get; set; }
+        public PaperCalc.DTOs.DocumentCalculation? Calculation { get; set; } = null;
         public List<PaperCalc.Models.FlatSize> FlatSizes { get; set; }
-        public List<PaperCalc.Models.FlatStock> FlatStock { get; set; }
+        public List<PaperCalc.Models.DocumentsStock> DocumentsStock { get; set; }
 
         public void OnGetAsync()
         {
@@ -44,9 +45,9 @@ namespace PaperCalc.Pages
 
         public void OnPost()
         {
-            FlatCalculation.Calculate(_context, _env.ContentRootPath);
+            Calculation = new(_context, _env.ContentRootPath, Inputs);
             FlatSizes = _context.FlatSizes.Where(x => x.ForCalculation == CalculationType.Flat).ToList();
-            FlatStock = _context.FlatStock.ToList();
+            DocumentsStock = _context.DocumentsStock.ToList();
         }
     }
 }

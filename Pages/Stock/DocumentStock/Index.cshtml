@@ -1,11 +1,11 @@
 ﻿@page
-@model PaperCalc.Pages.FlatStock.IndexModel
+@model PaperCalc.Pages.DocumentsStock.IndexModel
 
 @{
-    ViewData["Title"] = "Flat Stock";
+    ViewData["Title"] = "Documents Stock";
 }
 <div class="stockIndexPage">
-    <h1 class="stockTitle">Flat</h1>
+    <h1 class="stockTitle">Document</h1>
 
     <div class="scrollableTable">
         <table class="customTable">
@@ -24,11 +24,11 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model.FlatStock)
+                @foreach (var item in Model.DocumentsStock)
                 {
                     <tr class="rowWithData">
                         <td>
-                            @item.Company @item.ProductName @item.Weight<span>gsm</span> @Html.DisplayFor(modelItem => item.CoatType) @item.Size
+                            @item.Supplier @item.StockBrand @item.Weight<span>gsm</span> @Html.DisplayFor(modelItem => item.CoatType) @item.Size
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.SheetsPerPack)

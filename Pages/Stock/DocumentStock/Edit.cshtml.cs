@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using PaperCalc.Data;
 using PaperCalc.Models;
 
-namespace PaperCalc.Pages.FlatStock
+namespace PaperCalc.Pages.DocumentsStock
 {
     public class EditModel : PageModel
     {
@@ -23,7 +23,7 @@ namespace PaperCalc.Pages.FlatStock
         }
 
         [BindProperty]
-        public PaperCalc.Models.FlatStock FlatStock { get; set; } = default!;
+        public PaperCalc.Models.DocumentsStock DocumentsStock { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
@@ -32,17 +32,17 @@ namespace PaperCalc.Pages.FlatStock
             {
                 return Redirect("/Login");
             }
-            if (id == null || _context.FlatStock == null)
+            if (id == null || _context.DocumentsStock == null)
             {
                 return NotFound();
             }
 
-            var flatStock =  await _context.FlatStock.FirstOrDefaultAsync(m => m.Id == id);
-            if (flatStock == null)
+            var documentsStock =  await _context.DocumentsStock.FirstOrDefaultAsync(m => m.Id == id);
+            if (documentsStock == null)
             {
                 return NotFound();
             }
-            FlatStock = flatStock;
+            DocumentsStock = documentsStock;
             return Page();
         }
 
@@ -55,13 +55,13 @@ namespace PaperCalc.Pages.FlatStock
                 return Page();
             }
 
-            _context.Attach(FlatStock).State = EntityState.Modified;
+            _context.Attach(DocumentsStock).State = EntityState.Modified;
 
             try
             {
                 await _context.SaveChangesAsync();
             }
-            catch (DbUpdateConcurrencyException) when (!FlatStockExists(FlatStock.Id))
+            catch (DbUpdateConcurrencyException) when (!DocumentsStockExists(DocumentsStock.Id))
             {
                 return NotFound();
             }
@@ -69,9 +69,9 @@ namespace PaperCalc.Pages.FlatStock
             return RedirectToPage("./Index");
         }
 
-        private bool FlatStockExists(Guid id)
+        private bool DocumentsStockExists(Guid id)
         {
-          return (_context.FlatStock?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.DocumentsStock?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

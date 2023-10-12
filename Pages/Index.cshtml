@@ -17,8 +17,11 @@
         }
     }
 </script>
+
 <form method="post" class="calculationForm">
+
     <h4 class="calculationTitle">SRA3</h4>
+
     <!-- Job Details-->
     <div class="inputRow inputRowWithBorder">
         <div class="inputRowTitle">
@@ -48,7 +51,7 @@
         <div class="inputsForRow">
             <div class="inputForRow">
                 <label>flat size<span class="requiredStar">*</span></label>
-                <select id="FlatSizeSelect" class="custom-select" asp-for="AspeosCalculation.FlatSizeId">
+                <select id="FlatSizeSelect" class="custom-select" asp-for="Inputs.FlatSizeId">
                     <option class="defaultOption" value="">select a size...</option>
                     @{
                         foreach (PaperCalc.Models.FlatSize fs in Model.FlatSizes)
@@ -61,36 +64,37 @@
             </div>
             <div class="inputForRow">
                 <label>coating<span class="requiredStar">*</span></label>
-                <select onchange="filterStock()" id="coatSelect" class="custom-select" asp-for="AspeosCalculation.CoatType">
+                <select onchange="filterStock()" id="coatSelect" class="custom-select">
                     <option class="defaultOption" value="">select a coating...</option>
                     <option value="Uncoated">Uncoated</option>
                     <option value="Coated">Coated</option>
-                    <option value="Adhesive">Adhesive</option>
-                    <option value="Synthetic">Synthetic</option>
+                    <option value="Matt">Matt</option>
+                    <option value="Satin">Satin</option>
+                    <option value="Gloss">Gloss</option>
                 </select>
             </div>
             <div class="inputForRow">
                 <label>stock<span class="requiredStar">*</span></label>
-                <select id="stockSelect" class="custom-select" asp-for="AspeosCalculation.SheetPrice">
+                <select id="stockSelect" class="custom-select" asp-for="Inputs.StockId">
                     <option class="defaultOption" value="">select stock...</option>
                     @{
-                        foreach (PaperCalc.Models.AspeosStock item in Model.Paper)
+                        foreach (PaperCalc.Models.Sra3AndBookletsStock item in Model.Paper)
                         {
-                            <option class="@item.CoatType" value="@item.SheetCost">@item.Weight<span>gsm</span> @item.Company @item.ProductName</option>
+                            <option class="@item.CoatType" value="@item.Id">@item.Weight<span>gsm</span> @item.Supplier @item.StockBrand</option>
                         }
                     }
                 </select>
             </div>
         </div>
         <div id="hiddenSizeInputs" class="inputsForRow hidden">
-            <input asp-for="AspeosCalculation.CustomSize" value="false" type="hidden" />
+            <input asp-for="Inputs.CustomFlatSize" value="false" type="hidden" />
             <div class="inputForRow">
                 <label>Width<span class="requiredStar">*</span></label>
-                <input placeholder="0" asp-for="AspeosCalculation.Width" type="text" />
+                <input placeholder="0" asp-for="Inputs.Width" type="text" />
             </div>
             <div class="inputForRow">
                 <label>Height<span class="requiredStar">*</span></label>
-                <input placeholder="0" asp-for="AspeosCalculation.Height" type="text" />
+                <input placeholder="0" asp-for="Inputs.Height" type="text" />
             </div>
             <div class="inputForRow">
             </div>
@@ -105,23 +109,23 @@
         <div class="inputsForRow">
             <div class="inputForRow">
                 <label>colour<span class="requiredStar">*</span></label>
-                <select class="custom-select" asp-for="AspeosCalculation.Colour">
-                    <option class="defaultOption" value="">select a option...</option>
-                    <option value="colour">Colour</option>
-                    <option value="black">Black</option>
+                <select class="custom-select" asp-for="Inputs.Colour">
+                    <option class="defaultOption" value="false">select a option...</option>
+                    <option value="true">Colour</option>
+                    <option value="false">Black</option>
                 </select>
             </div>
             <div class="inputForRow">
                 <label>printed sides<span class="requiredStar">*</span></label>
-                <select class="custom-select" asp-for="AspeosCalculation.PrintedSides">
-                    <option class="defaultOption" value="">select a option...</option>
-                    <option value="single">Single Sided</option>
-                    <option value="double">Double Sided</option>
+                <select class="custom-select" asp-for="Inputs.DoubleSided">
+                    <option class="defaultOption" value="false">select a option...</option>
+                    <option value="false">Single Sided</option>
+                    <option value="true">Double Sided</option>
                 </select>
             </div>
             <div class="inputForRow">
                 <label>quantity<span class="requiredStar">*</span></label>
-                <input placeholder="0" type="number" asp-for="AspeosCalculation.Quantity">
+                <input placeholder="0" type="number" asp-for="Inputs.Quantity">
             </div>
         </div>
     </div>
@@ -134,7 +138,7 @@
         <div class="inputsForRow">
             <div class="inputForRow">
                 <label>folds</label>
-                <select class="custom-select" asp-for="AspeosCalculation.Folds">
+                <select class="custom-select" asp-for="Inputs.Folds">
                     <option value="0">none</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -143,7 +147,7 @@
             </div>
             <div class="inputForRow">
                 <label>cresaing</label>
-                <select class="custom-select" asp-for="AspeosCalculation.Creasing">
+                <select class="custom-select" asp-for="Inputs.Creases">
                     <option value="0">none</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -152,7 +156,7 @@
             </div>
             <div class="inputForRow">
                 <label>hole punches</label>
-                <select class="custom-select" asp-for="AspeosCalculation.NumOfHolePunches">
+                <select class="custom-select" asp-for="Inputs.HolePunches">
                     <option value="0">none</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -162,13 +166,8 @@
         </div>
         <div class="checkboxesForRow">
             <label class="checkbox">
-                trimming
-                <input asp-for="AspeosCalculation.Trimming" type="checkbox" value="true" />
-                <span class="checkmark"></span>
-            </label>
-            <label class="checkbox">
                 lammination
-                <input asp-for="AspeosCalculation.Lamination" type="checkbox" value="true" />
+                <input asp-for="Inputs.Lamination" type="checkbox" value="true" />
                 <span class="checkmark"></span>
             </label>
         </div>
@@ -182,23 +181,16 @@
         <div class="inputsForRow">
             <div class="inputForRow">
                 <label>design</label>
-                <input placeholder="$00.00" asp-for="Quote.DesignCost" type="number" />
+                <input placeholder="$00.00" asp-for="Inputs.DesignCost" type="number" />
             </div>
             <div class="inputForRow">
                 <label>file handling</label>
-                <input type="number" placeholder="$00.00" asp-for="AspeosCalculation.FileHandlingFee">
+                <input type="number" placeholder="$00.00" asp-for="Inputs.FileHandlingCost">
             </div>
             <div class="inputForRow">
                 <label>setup</label>
-                <input placeholder="$00.00" asp-for="Quote.SetupCost" type="number" />
+                <input placeholder="$00.00" asp-for="Inputs.SetupCost" type="number" />
             </div>
-        </div>
-        <div class="checkboxesForRow">
-            <label class="checkbox">
-                small job
-                <input asp-for="AspeosCalculation.SmallJob" type="checkbox" value="true" />
-                <span class="checkmark"></span>
-            </label>
         </div>
     </div>
 
@@ -220,17 +212,17 @@
                 <label>turnaround </label>
                 <div class="inputWithCheckbox">
                     <input class="turnaroundInput" asp-for="Quote.Turnaround" type="number" />
-                    <input asp-for="AspeosCalculation.Urgent" class="checkboxWithinInput" type="checkbox" value="true" />
                     <label class="labelWithinInput">urgent job</label>
                 </div>
             </div>
         </div>
     </div>
 
-    <button class="btn btn-success calculationSubmitButton marginAuto">generate quote</button>
-    @{ if (Model.AspeosCalculation.JobCost > 0)
+    <button type="submit" class="btn btn-success calculationSubmitButton marginAuto">generate quote</button>
+
+    @{ if (Model.Calculation != null)
         {
-            <div>
+            @*<div>
                 <input asp-for="Quote.save" type="hidden" />
                 <div id="saveButton" class="btn btn-success calculationSubmitButton marginAuto">Save Quote</div>
                 <script>
@@ -239,24 +231,22 @@
                         document.getElementsByClassName("calculationForm")[0].submit();
                     });
                 </script>
-            </div>
+            </div>*@
         
             <div id="calculationPost">
 
                 <dl id="calculationTotals">
 
                     <dt>Job Cost:</dt>
-                    <dd>@Html.DisplayFor(model => Model.AspeosCalculation.JobCost)</dd>
+                    <dd>@Html.DisplayFor(model => Model.Calculation.JobCost)</dd>
 
-                    <dt>GST:</dt>
-                    <dd>@Html.DisplayFor(model => Model.AspeosCalculation.GST)</dd>
 
                     <dt>Job Cost (GST Inc):</dt>
-                    <dd>@Html.DisplayFor(model => Model.AspeosCalculation.JobCostGstInc)</dd>
+                    <dd>@Html.DisplayFor(model => Model.Calculation.JobCostWithGst)</dd>
                 </dl>
 
                 <div>
-                    <a class="btn btn-primary" id="showCalculationsButton" data-toggle="collapse" href="#CalculationValues" role="button" aria-expanded="false" aria-controls="CalculationValues">Show Calculation Values</a>
+                    @*<a class="btn btn-primary" id="showCalculationsButton" data-toggle="collapse" href="#CalculationValues" role="button" aria-expanded="false" aria-controls="CalculationValues">Show Calculation Values</a>*@
 
                 </div>
 
@@ -269,65 +259,12 @@
 
 
 
-<div id="CalculationValues" class="collapse">
-    <table>
-        <tr>
-            <th>PER SRA</th>
-            <th>Base Click Rate</th>
-            <th>Click Side Multiplier</th>
-            <th>Click Size Multiplier</th>
-            <th>Click Rate</th>
-            <th>Sheet Price</th>
-            <th>Cuts</th>
-            <th>Hole Punch</th>
-            <th>Lamination</th>
-            <th>Creasing</th>
-            <th>Folding</th>
-        </tr>
-        <tr>
-            <td>@Model.AspeosCalculation.PerSRA</td>
-            <td>@Html.DisplayFor(model => Model.AspeosCalculation.BaseClickRate)</td>
-            <td>@Html.DisplayFor(model => Model.AspeosCalculation.ClickSideMultiplier)</td>
-            <td>@Html.DisplayFor(model => Model.AspeosCalculation.ClickSizeMultiplier)</td>
-            <td>@Html.DisplayFor(model => Model.AspeosCalculation.ClickRate)</td>
-            <td id="SheetPrice">@Html.DisplayFor(model => Model.AspeosCalculation.SheetPrice)</td>
-            <td>@Model.AspeosCalculation.Cuts</td>
-            <td>@Model.AspeosCalculation.HolePunches</td>
-            <td>@Html.DisplayFor(model => Model.AspeosCalculation.LaminationCost)</td>
-            <td>@Model.AspeosCalculation.CreasingRate</td>
-            <td>@Model.AspeosCalculation.FoldingRate</td>
-        </tr>
-        <tr>
-            <th>Paper Cost</th>
-            <th>Buffer</th>
-            <th>Finishings</th>
-            <th>Multiplier</th>
-            <th>Minimum</th>
-            <th>File Handling</th>
-        </tr>
-        <tr>
-            <td>@Html.DisplayFor(model => Model.AspeosCalculation.PaperCost)</td>
-            <td>@Model.AspeosCalculation.Buffer</td>
-            <td>@Html.DisplayFor(model => Model.AspeosCalculation.FinishingsCost)</td>
-            <td>@Model.AspeosCalculation.Multiplier</td>
-            <td>@Model.AspeosCalculation.Minimum</td>
-            <td>@Model.AspeosCalculation.FileHandlingCost</td>
-        </tr>
-        <tr>
-            <th>Job Cost</th>
-            <th>GST</th>
-            <th>Cost + GST</th>
-        </tr>
-        <tr>
-            <td id="JobCost">@Html.DisplayFor(model => Model.AspeosCalculation.JobCost)</td>
-            <td id="GST">@Html.DisplayFor(model => Model.AspeosCalculation.GST)</td>
-            <td id="JobCostGstInc">@Html.DisplayFor(model => Model.AspeosCalculation.JobCostGstInc)</td>
-        </tr>
-    </table>
-</div>
+@*<div id="CalculationValues" class="collapse">
+    
+</div>*@
 
 
-<script>
+@*<script>
     function calculationValuesDisplay() {
         let button = document.getElementById("showCalculationsButton");
         let table = document.getElementById("CalculationValues");
@@ -340,7 +277,7 @@
             button.innerText = "Show Calculation Values";
         }
     }
-</script>
+</script>*@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/docxtemplater/3.37.13/docxtemplater.js"></script>
 <script src="https://unpkg.com/pizzip@3.1.4/dist/pizzip.js"></script>

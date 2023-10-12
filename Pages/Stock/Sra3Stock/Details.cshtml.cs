@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using PaperCalc.Data;
 using PaperCalc.Models;
 
-namespace PaperCalc.Pages.AspeosStock
+namespace PaperCalc.Pages.Sra3Stock
 {
     public class DetailsModel : PageModel
     {
@@ -21,7 +21,7 @@ namespace PaperCalc.Pages.AspeosStock
             _configuration = configuration;
         }
 
-        public PaperCalc.Models.AspeosStock AspeosStock { get; set; } = default!; 
+        public PaperCalc.Models.Sra3AndBookletsStock Sra3Stock { get; set; } = default!; 
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
@@ -30,19 +30,19 @@ namespace PaperCalc.Pages.AspeosStock
             {
                 return Redirect("/Login");
             }
-            if (id == null || _context.AspeosStock == null)
+            if (id == null || _context.Sra3AndBookletsStock == null)
             {
                 return NotFound();
             }
 
-            var aspeosstock = await _context.AspeosStock.FirstOrDefaultAsync(m => m.Id == id);
-            if (aspeosstock == null)
+            var sra3stock = await _context.Sra3AndBookletsStock.FirstOrDefaultAsync(m => m.Id == id);
+            if (sra3stock == null)
             {
                 return NotFound();
             }
             else 
             {
-                AspeosStock = aspeosstock;
+                Sra3Stock = sra3stock;
             }
             return Page();
         }

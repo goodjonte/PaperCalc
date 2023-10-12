@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using PaperCalc.Data;
 using PaperCalc.Models;
 
-namespace PaperCalc.Pages.FlatStock
+namespace PaperCalc.Pages.DocumentsStock
 {
     public class CreateModel : PageModel
     {
@@ -32,16 +32,16 @@ namespace PaperCalc.Pages.FlatStock
         }
 
         [BindProperty]
-        public PaperCalc.Models.FlatStock FlatStock { get; set; } = default!;
+        public PaperCalc.Models.DocumentsStock DocumentsStock { get; set; } = default!;
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (_context.FlatStock == null || FlatStock == null)
+          if (_context.DocumentsStock == null || DocumentsStock == null)
             {
                 return Page();
             }
 
-            _context.FlatStock.Add(FlatStock);
+            _context.DocumentsStock.Add(DocumentsStock);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

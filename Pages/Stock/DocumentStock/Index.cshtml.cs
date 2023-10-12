@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
-namespace PaperCalc.Pages.FlatStock
+namespace PaperCalc.Pages.DocumentsStock
 {
     public class IndexModel : PageModel
     {
@@ -15,8 +15,8 @@ namespace PaperCalc.Pages.FlatStock
             _context = context;
             _configuration = configuration;
         }
-
-        public IList<PaperCalc.Models.FlatStock> FlatStock { get;set; } = default!;
+        [BindProperty]
+        public IList<PaperCalc.Models.DocumentsStock> DocumentsStock { get;set; } = default!;
 
         public async Task<IActionResult> OnGetAsync()
         {
@@ -25,9 +25,9 @@ namespace PaperCalc.Pages.FlatStock
             {
                 return Redirect("/Login");
             }
-            if (_context.FlatStock != null)
+            if (_context.DocumentsStock != null)
             {
-                FlatStock = await _context.FlatStock.ToListAsync();
+                DocumentsStock = await _context.DocumentsStock.ToListAsync();
             }
             return Page();
         }

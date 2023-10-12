@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using PaperCalc.Data;
 using PaperCalc.Models;
 
-namespace PaperCalc.Pages.AspeosStock
+namespace PaperCalc.Pages.Sra3Stock
 {
     public class EditModel : PageModel
     {
@@ -23,7 +23,7 @@ namespace PaperCalc.Pages.AspeosStock
         }
 
         [BindProperty]
-        public PaperCalc.Models.AspeosStock AspeosStock { get; set; } = default!;
+        public PaperCalc.Models.Sra3AndBookletsStock Sra3Stock { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
@@ -32,17 +32,17 @@ namespace PaperCalc.Pages.AspeosStock
             {
                 return Redirect("/Login");
             }
-            if (id == null || _context.AspeosStock == null)
+            if (id == null || _context.Sra3AndBookletsStock == null)
             {
                 return NotFound();
             }
 
-            var aspeosstock =  await _context.AspeosStock.FirstOrDefaultAsync(m => m.Id == id);
-            if (aspeosstock == null)
+            var sra3stock =  await _context.Sra3AndBookletsStock.FirstOrDefaultAsync(m => m.Id == id);
+            if (sra3stock == null)
             {
                 return NotFound();
             }
-            AspeosStock = aspeosstock;
+            Sra3Stock = sra3stock;
             return Page();
         }
 
@@ -55,13 +55,13 @@ namespace PaperCalc.Pages.AspeosStock
                 return Page();
             }
 
-            _context.Attach(AspeosStock).State = EntityState.Modified;
+            _context.Attach(Sra3Stock).State = EntityState.Modified;
 
             try
             {
                 await _context.SaveChangesAsync();
             }
-            catch (DbUpdateConcurrencyException) when (!AspeosStockExists(AspeosStock.Id))
+            catch (DbUpdateConcurrencyException) when (!Sra3StockExists(Sra3Stock.Id))
             {
                 return NotFound();
             }
@@ -69,9 +69,9 @@ namespace PaperCalc.Pages.AspeosStock
             return RedirectToPage("./Index");
         }
 
-        private bool AspeosStockExists(Guid id)
+        private bool Sra3StockExists(Guid id)
         {
-          return (_context.AspeosStock?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.Sra3AndBookletsStock?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

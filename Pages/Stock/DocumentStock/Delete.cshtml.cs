@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using PaperCalc.Data;
 using PaperCalc.Models;
 
-namespace PaperCalc.Pages.FlatStock
+namespace PaperCalc.Pages.DocumentsStock
 {
     public class DeleteModel : PageModel
     {
@@ -22,7 +22,7 @@ namespace PaperCalc.Pages.FlatStock
         }
 
         [BindProperty]
-      public PaperCalc.Models.FlatStock FlatStock { get; set; } = default!;
+      public PaperCalc.Models.DocumentsStock DocumentsStock { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
@@ -31,36 +31,35 @@ namespace PaperCalc.Pages.FlatStock
             {
                 return Redirect("/Login");
             }
-            if (id == null || _context.FlatStock == null)
+            if (id == null || _context.DocumentsStock == null)
             {
                 return NotFound();
             }
 
-            var flatStock = await _context.FlatStock.FirstOrDefaultAsync(m => m.Id == id);
+            var documentsStock = await _context.DocumentsStock.FirstOrDefaultAsync(m => m.Id == id);
 
-            if (flatStock == null)
+            if (documentsStock == null)
             {
                 return NotFound();
             }
-            else 
+            else
             {
-                FlatStock = flatStock;
+                DocumentsStock = documentsStock;
             }
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync(Guid? id)
         {
-            if (id == null || _context.FlatStock == null)
+            if (id == null || _context.DocumentsStock == null)
             {
                 return NotFound();
             }
-            var flatStock = await _context.FlatStock.FindAsync(id);
+            var documentsStock = await _context.DocumentsStock.FindAsync(id);
 
-            if (flatStock != null)
+            if (documentsStock != null)
             {
-                FlatStock = flatStock;
-                _context.FlatStock.Remove(FlatStock);
+                _context.DocumentsStock.Remove(documentsStock);
                 await _context.SaveChangesAsync();
             }
 

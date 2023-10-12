@@ -28,7 +28,7 @@ namespace PaperCalc.DTOs
     }
     public class Sra3Calculation
     {
-        //Constructor
+        //Constructors
         public Sra3Calculation(PaperCalc.Data.PaperCalcContext _context, String path, Sra3FormInput inputs)
         {
             Sra3AndBookletsStock? stock = _context.Sra3AndBookletsStock.Find(inputs.StockId);
@@ -46,9 +46,9 @@ namespace PaperCalc.DTOs
             CuttingCalculation = new(Inputs.Quantity, Sra3Stock.HeightOfASheet, Inputs.Height, Inputs.Width);
         }
         //Classes Required For Calculation
-        public PaperCalcContext Context { get; set; }
+        public PaperCalcContext? Context { get; set; }
         public Settings Settings { get; set; }
-        public FlatSize FlatSize { get; set; }
+        public FlatSize? FlatSize { get; set; }
         public Sra3AndBookletsStock Sra3Stock { get; set; }
         public Sra3FormInput Inputs { get; set; }
         public CuttingCalculation CuttingCalculation { get; set; }
@@ -128,7 +128,7 @@ namespace PaperCalc.DTOs
         }
         //Factors
         public double Buffer { get { return CuttingCalculation.SheetsUsed < 10 ? 1.5 : 1.1; } }
-        public double Multiplier { get { return 1.1; } } //TODO - can use my method or his
+        public double Multiplier { get { return FlatSize.CalculateMultiplier(Inputs.Quantity); } } //TODO - can use my method or his
         //Charges
         public double MaterialCharge { get { return MaterialCost * Buffer * Multiplier; } }
         public double LabourCharge {
@@ -152,7 +152,9 @@ namespace PaperCalc.DTOs
         public double JobCost {
             get
             {
-                if(Inputs.Quantity > FlatSize.QuantityMax) //This is a shortcut fix for now ideally we want to make temp calc this calc possibly
+                if (Inputs.Quantity < 1) return 0;
+                if (FlatSize == null) return 0;
+                if (Inputs.Quantity > FlatSize.QuantityMax) //This is a shortcut fix for now ideally we want to make temp calc this calc possibly
                 {
                     var tempJob = Inputs;
                     tempJob.Quantity = FlatSize.QuantityMax;

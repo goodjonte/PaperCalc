@@ -24,11 +24,11 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model.AspeosStock)
+                @foreach (var item in Model.Sra3Stock)
                 {
                     <tr class="rowWithData">
                         <td>
-                            @item.Company @item.ProductName @item.Weight<span>gsm</span> @Html.DisplayFor(modelItem => item.CoatType)
+                            @item.Supplier @item.StockBrand @item.Weight<span>gsm</span> @Html.DisplayFor(modelItem => item.CoatType)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.SheetsPerPack)

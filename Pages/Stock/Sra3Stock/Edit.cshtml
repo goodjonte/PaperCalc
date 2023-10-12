@@ -1,5 +1,5 @@
 ﻿@page
-@model PaperCalc.Pages.AspeosStock.EditModel
+@model PaperCalc.Pages.Sra3Stock.EditModel
 
 @{
     ViewData["Title"] = "Edit";
@@ -11,23 +11,36 @@
 
     <form class="editStockForm" method="post">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <input type="hidden" asp-for="AspeosStock.Id" />
+        <input type="hidden" asp-for="Sra3Stock.Id" />
 
         <div class="editRowTitle">
             <h3>product</h3>
         </div>
         <div class="editFormRow borderBottom">
             <div class="form-group">
-                <label class="control-label">company<span class="requiredStar">*</span></label>
-                <input asp-for="AspeosStock.Company" class="form-control" />
-                <span asp-validation-for="AspeosStock.Company" class="text-danger"></span>
+                <label class="control-label">supplier<span class="requiredStar">*</span></label>
+                <input asp-for="Sra3Stock.Supplier" class="form-control" />
+                <span asp-validation-for="Sra3Stock.Supplier" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label class="control-label">product name<span class="requiredStar">*</span></label>
-                <input asp-for="AspeosStock.ProductName" class="form-control" />
-                <span asp-validation-for="AspeosStock.ProductName" class="text-danger"></span>
+                <label class="control-label">stock brand<span class="requiredStar">*</span></label>
+                <input asp-for="Sra3Stock.StockBrand" class="form-control" />
+                <span asp-validation-for="Sra3Stock.StockBrand" class="text-danger"></span>
             </div>
-            <div>
+            <div class="form-group">
+                <label asp-for="Sra3Stock.StockType" class="control-label">coating<span class="requiredStar">*</span></label>
+                <select asp-for="Sra3Stock.StockType" class="form-control custom-select">
+                    <option value="">Select a Coating Type...</option>
+                    <option value="Adhesive">Adhesive</option>
+                    <option value="Synthetic">Synthetic</option>
+                    <option value="Paper">Paper</option>
+                    <option value="Card">Card</option>
+                    <option value="CardTextured">Card Textured</option>
+                    <option value="CardRecycled">Card Recycled</option>
+                    <option value="Leater">Leather</option>
+                    <option value="Acetate">Acetate</option>
+                </select>
+                <span asp-validation-for="Sra3Stock.StockType" class="text-danger"></span>
             </div>
         </div>
 
@@ -36,8 +49,8 @@
         </div>
         <div class="editFormRow borderBottom">
             <div class="form-group">
-                <label asp-for="AspeosStock.Size" class="control-label">size<span class="requiredStar">*</span></label>
-                <select asp-for="AspeosStock.Size" class="form-control custom-select">
+                <label asp-for="Sra3Stock.Size" class="control-label">size<span class="requiredStar">*</span></label>
+                <select asp-for="Sra3Stock.Size" class="form-control custom-select">
                     <option value="">Select a Size...</option>
                     <option>SRA3</option>
                     <option value="A4">A4</option>
@@ -50,26 +63,25 @@
                     <option value="SRA2">SRA2</option>
                     <option value="SRA1">SRA1</option>
                 </select>
-                <span asp-validation-for="AspeosStock.Size" class="text-danger"></span>
+                <span asp-validation-for="Sra3Stock.Size" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="AspeosStock.Weight" class="control-label">weight(gsm)<span class="requiredStar">*</span></label>
-                <input asp-for="AspeosStock.Weight" class="form-control" />
-                <span asp-validation-for="AspeosStock.Weight" class="text-danger"></span>
+                <label asp-for="Sra3Stock.Weight" class="control-label">weight(gsm)<span class="requiredStar">*</span></label>
+                <input asp-for="Sra3Stock.Weight" class="form-control" />
+                <span asp-validation-for="Sra3Stock.Weight" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="AspeosStock.CoatType" class="control-label">coating<span class="requiredStar">*</span></label>
-                <select asp-for="AspeosStock.CoatType" class="form-control custom-select">
+                <label asp-for="Sra3Stock.CoatType" class="control-label">coating<span class="requiredStar">*</span></label>
+                <select asp-for="Sra3Stock.CoatType" class="form-control custom-select">
                     <option value="">Select a Coating Type...</option>
-                    <option value="Adhesive">Adhesive</option>
                     <option value="Coated">Coated</option>
                     <option value="Uncoated">Uncoated</option>
-                    <option value="Synthetic">Synthetic</option>
+                    <option value="Uncoated">Uncoated</option>
                     <option value="Matt">Matt</option>
                     <option value="Satin">Satin</option>
                     <option value="Gloss">Gloss</option>
                 </select>
-                <span asp-validation-for="AspeosStock.CoatType" class="text-danger"></span>
+                <span asp-validation-for="Sra3Stock.CoatType" class="text-danger"></span>
             </div>
         </div>
 
@@ -78,16 +90,19 @@
         </div>
         <div class="editFormRow">
             <div class="form-group">
-                <label asp-for="AspeosStock.PackCost" class="control-label">pack cost<span class="requiredStar">*</span></label>
-                <input asp-for="AspeosStock.PackCost" class="form-control" />
-                <span asp-validation-for="AspeosStock.PackCost" class="text-danger"></span>
+                <label asp-for="Sra3Stock.PricePer1000" class="control-label">price per 1000 sheets<span class="requiredStar">*</span></label>
+                <input asp-for="Sra3Stock.PricePer1000" class="form-control" />
+                <span asp-validation-for="Sra3Stock.PricePer1000" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="AspeosStock.SheetsPerPack" class="control-label">sheets per pack<span class="requiredStar">*</span></label>
-                <input asp-for="AspeosStock.SheetsPerPack" class="form-control" />
-                <span asp-validation-for="AspeosStock.SheetsPerPack" class="text-danger"></span>
+                <label asp-for="Sra3Stock.SheetsPerPack" class="control-label">sheets per pack<span class="requiredStar">*</span></label>
+                <input asp-for="Sra3Stock.SheetsPerPack" class="form-control" />
+                <span asp-validation-for="Sra3Stock.SheetsPerPack" class="text-danger"></span>
             </div>
-            <div>
+            <div class="form-group">
+                <label asp-for="Sra3Stock.HeightOf100Sheets" class="control-label">height of 100 sheets (mm)<span class="requiredStar">*</span></label>
+                <input asp-for="Sra3Stock.HeightOf100Sheets" class="form-control" />
+                <span asp-validation-for="Sra3Stock.HeightOf100Sheets" class="text-danger"></span>
             </div>
         </div>
 

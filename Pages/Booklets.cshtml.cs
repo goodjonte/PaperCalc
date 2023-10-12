@@ -17,15 +17,16 @@ namespace PaperCalc.Pages
             _env = env;
             Settings = new();
             FlatSizes = _context.FlatSizes.Where(x => x.ForCalculation == CalculationType.Booklet).ToList();
-            AspeosStock = _context.AspeosStock.ToList();
+            BookletsStock = _context.Sra3AndBookletsStock.ToList();
             Settings.SetSettings(_env.ContentRootPath);
             _configuration = config;
-            BookletCalculation = new();
+            Inputs = new();
         }
         public PaperCalc.DTOs.Settings? Settings { get; set; }
-        public PaperCalc.DTOs.BookletCalculation BookletCalculation { get; set; }
+        public PaperCalc.DTOs.BookletFormInputs Inputs { get; set; }
+        public PaperCalc.DTOs.BookletCalculation? Calculation { get; set; } = null;
         public List<PaperCalc.Models.FlatSize> FlatSizes { get; set; }
-        public List<PaperCalc.Models.AspeosStock> AspeosStock { get; set; }
+        public List<PaperCalc.Models.Sra3AndBookletsStock> BookletsStock { get; set; }
 
         public void OnGetAsync()
         {
@@ -34,9 +35,9 @@ namespace PaperCalc.Pages
 
         public void OnPost()
         {
-            BookletCalculation.Calculate(_context, _env.ContentRootPath);
+            Calculation = new(_context, _env.ContentRootPath, Inputs);
             FlatSizes = _context.FlatSizes.Where(x => x.ForCalculation == CalculationType.Booklet).ToList();
-            AspeosStock = _context.AspeosStock.ToList();
+            BookletsStock = _context.Sra3AndBookletsStock.ToList();
         }
     }
 }
