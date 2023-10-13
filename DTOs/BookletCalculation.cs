@@ -74,7 +74,7 @@ namespace PaperCalc.DTOs
         public double TotalInners { get { return BookletInnersused * Inputs.Quantity; } }
         public double BookletThickness { get { return ((InnerStock.HeightOfASheet * BookletInnersused) + CoverStock.HeightOfASheet ) * 2; } }
         public double TotalThickness { get { return BookletThickness * Inputs.Quantity; } }
-        public double BookletsPerBundle { get { return Math.Floor(20 / BookletThickness); } }
+        public double BookletsPerBundle { get { return Math.Floor(5 / BookletThickness); } }
         public double Bundles { get { return Math.Ceiling(Inputs.Quantity / BookletsPerBundle); } }
 
         public double CutsRequired { get { return Bundles * 3; } }
@@ -94,11 +94,43 @@ namespace PaperCalc.DTOs
         public double PaperCost { get { return (InnerStock.SheetCost * TotalInners) + (CoverStock.SheetCost * Inputs.Quantity); } }
         public double ClickCost { get { return ClickRate * (TotalInners + Inputs.Quantity); } }
         public double MaterialCost { get { return PaperCost + ClickCost + StaplesCost; } }
-        public double LabourCost { get { return CutsRequired / (90 / 60); } }
+        public double LabourCost { get { return CutsRequired / 1.5; } }
 
         //Factors
         public double Buffer { get { return (TotalInners + Inputs.Quantity) < 32 ? 2 : 1.5; } }
-        public double Multiplier { get { return (TotalInners + Inputs.Quantity) < 32 ? 2 : 1.5; } } // Sort this tododod
+        public double Multiplier
+        {
+            get
+            {
+                if (Inputs.CustomFlatSize && Context != null) //Havent Test yet
+                {
+                    double area = Inputs.Height * Inputs.Width;
+                    var allFlats = Context.FlatSizes.ToList();
+                    FlatSize? roundedUptoFlat = null;
+                    for (int i = 0; i < allFlats.Count; i++)
+                    {
+                        if (allFlats[i].ForCalculation == CalculationType.Aspeos)
+                        {
+                            if (roundedUptoFlat == null && allFlats[i].Area > area)
+                            {
+                                roundedUptoFlat = allFlats[i];
+                                continue;
+                            }
+                            if (allFlats[i].Area > area && roundedUptoFlat != null && allFlats[i].Area < roundedUptoFlat.Area)
+                            {
+                                roundedUptoFlat = allFlats[i];
+                            }
+                        }
+                    }
+                    if (roundedUptoFlat != null)
+                    {
+                        return roundedUptoFlat.CalculateMultiplier(Inputs.Quantity);
+                    }
+                }
+
+                return FlatSize.CalculateMultiplier(Inputs.Quantity);
+            }
+        }
 
         //Charge Totals
         public double MaterialCharge { get { return MaterialCost * Buffer * Multiplier; } }

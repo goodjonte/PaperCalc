@@ -14,7 +14,6 @@ using System.Text;
 
 namespace PaperCalc.Pages
 {
-    [BindProperties]
     public class DocumentsModel : PageModel
     {
         private readonly PaperCalc.Data.PaperCalcContext _context;
@@ -33,6 +32,7 @@ namespace PaperCalc.Pages
             Inputs = new();
         }
         public PaperCalc.DTOs.Settings? Settings { get; set; }
+        [BindProperty]
         public PaperCalc.DTOs.DocumentFormInputs Inputs { get; set; }
         public PaperCalc.DTOs.DocumentCalculation? Calculation { get; set; } = null;
         public List<PaperCalc.Models.FlatSize> FlatSizes { get; set; }

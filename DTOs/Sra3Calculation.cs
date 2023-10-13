@@ -40,8 +40,11 @@ namespace PaperCalc.DTOs
             Settings = new();
             Settings.SetSettings(path);
 
-            Inputs.Height = FlatSize.Height;
-            Inputs.Width = FlatSize.Width;
+            if (!Inputs.CustomFlatSize)
+            {
+                Inputs.Height = FlatSize.Height;
+                Inputs.Width = FlatSize.Width;
+            }
 
             CuttingCalculation = new(Inputs.Quantity, Sra3Stock.HeightOfASheet, Inputs.Height, Inputs.Width);
         }
@@ -118,17 +121,48 @@ namespace PaperCalc.DTOs
             {
                 if (Inputs.Quantity >= CuttingCalculation.PerSra3)
                 {
-                    return (CuttingCalculation.CutsRequired / (100 / 60)) + ((CreasingCost + FoldingCost) / (500 / 60)) + (HolePunchesCost * (50 / 60) + StaplesCost);
+                    return (CuttingCalculation.CutsRequired / (100 / 60)) + ((CreasingCost + FoldingCost) / (200 / 60)) + (HolePunchesCost * (50 / 60) + StaplesCost);
                 }
                 else
                 {
-                    return (CuttingCalculation.CutsRequired / (60 / 60)) + ((CreasingCost + FoldingCost) / (250 / 60)) + (HolePunchesCost * (50 / 60) + StaplesCost); //Missing stapling cost? - asked on sheets
+                    return (CuttingCalculation.CutsRequired / (60 / 60)) + ((CreasingCost + FoldingCost) / (200 / 60)) + (HolePunchesCost * (50 / 60) + StaplesCost);
                 }
             }
         }
         //Factors
         public double Buffer { get { return CuttingCalculation.SheetsUsed < 10 ? 1.5 : 1.1; } }
-        public double Multiplier { get { return FlatSize.CalculateMultiplier(Inputs.Quantity); } } //TODO - can use my method or his
+        public double Multiplier {
+            get
+            {
+                if (Inputs.CustomFlatSize && Context != null) //Havent Test yet
+                {
+                    double area = Inputs.Height * Inputs.Width;
+                    var allFlats = Context.FlatSizes.ToList();
+                    FlatSize? roundedUptoFlat = null;
+                    for(int i = 0; i < allFlats.Count; i++)
+                    {
+                        if (allFlats[i].ForCalculation == CalculationType.Aspeos)
+                        {
+                            if(roundedUptoFlat == null && allFlats[i].Area > area)
+                            {
+                                roundedUptoFlat = allFlats[i];
+                                continue;
+                            }
+                            if (allFlats[i].Area > area && roundedUptoFlat != null && allFlats[i].Area < roundedUptoFlat.Area)
+                            {
+                                roundedUptoFlat = allFlats[i];
+                            }
+                        }
+                    }
+                    if(roundedUptoFlat != null)
+                    {
+                        return roundedUptoFlat.CalculateMultiplier(Inputs.Quantity);
+                    }
+                }
+
+                return FlatSize.CalculateMultiplier(Inputs.Quantity);
+            }
+        } //TODO - can use my method or his
         //Charges
         public double MaterialCharge { get { return MaterialCost * Buffer * Multiplier; } }
         public double LabourCharge {

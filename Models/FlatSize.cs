@@ -9,6 +9,7 @@ namespace PaperCalc.Models
         public required string Name { get; set; }
         public double Height { get; set; }
         public double Width { get; set; }
+        public double Area { get { return Height * Width; } }
 
         public int QuantityMin { get; set; }
         public int QuantityMax { get; set; }

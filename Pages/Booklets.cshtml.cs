@@ -4,7 +4,6 @@ using PaperCalc.Models;
 
 namespace PaperCalc.Pages
 {
-    [BindProperties]
     public class BookletsModel : PageModel
     {
         private readonly PaperCalc.Data.PaperCalcContext _context;
@@ -23,6 +22,7 @@ namespace PaperCalc.Pages
             Inputs = new();
         }
         public PaperCalc.DTOs.Settings? Settings { get; set; }
+        [BindProperty]
         public PaperCalc.DTOs.BookletFormInputs Inputs { get; set; }
         public PaperCalc.DTOs.BookletCalculation? Calculation { get; set; } = null;
         public List<PaperCalc.Models.FlatSize> FlatSizes { get; set; }

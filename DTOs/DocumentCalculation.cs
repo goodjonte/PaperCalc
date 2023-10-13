@@ -70,7 +70,7 @@ namespace PaperCalc.DTOs
             get
             {
                 //calculation is Inputs.DoubleSided ? Inputs.Pages / 2 : Inputs.Pages - But we need to round up to a even number
-                return Math.Round((Inputs.DoubleSided ? Inputs.Pages / 2 : Inputs.Pages) / 2, MidpointRounding.AwayFromZero);
+                return Math.Round((Inputs.DoubleSided ? Inputs.Pages / 2 : Inputs.Pages), MidpointRounding.AwayFromZero);
             }
         }
         public double SheetsUsed
@@ -208,11 +208,22 @@ namespace PaperCalc.DTOs
         public double PaperCost { get { return SheetsUsed * Stock.SheetCost; } }
         public double ClickCost { get { return SheetsUsed * ClickRate; } }
         public double MaterialCost { get { return StaplesCost + BindingCoilsCost + BindingPunches + BindingCoversCost; } }
-        public double FinishingCost { get { return (FoldingCost / (250/60)) + (HolePunchesCost / (50 / 60)) + BindingCost + StaplesCost; } }
+        public double FinishingCost {
+            get
+            {
+                if(Double.IsNaN((FoldingCost / (250 / 60)) +(HolePunchesCost / (50 / 60)) + BindingCost + StaplesCost)) { return 0; }
+                return (FoldingCost / (250/60)) + (HolePunchesCost / (50 / 60)) + BindingCost + StaplesCost;
+            }
+        }
 
         //Factors
         public double Buffer { get { return SheetsUsed < 50 ? 2 : 1.1; } }
-        public double Multiplier { get { return 1.1; } } //TODO - can use my method or his
+        public double Multiplier {
+            get
+            {
+                return FlatSize.CalculateMultiplier(Inputs.Quantity);
+            }
+        }
 
         //Charge Totals
         public double MaterialCharge { get { return (PaperCost + ClickCost + MaterialCost) * (Buffer * Multiplier); } }
