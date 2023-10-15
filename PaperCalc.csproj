@@ -22,8 +22,6 @@
   <ItemGroup>
     <Folder Include="Pages\Stock\EpsonStock\" />
     <Folder Include="Pages\Stock\LaminationStock\" />
-    <Folder Include="Pages\Stock\BindingCovers\" />
-    <Folder Include="Pages\Stock\BindingCoils\" />
   </ItemGroup>
 
 </Project>

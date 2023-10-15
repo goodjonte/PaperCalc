@@ -1,0 +1,81 @@
+﻿@page
+@model Binding.Cover.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1 class="stockTitle">Details</h1>
+
+<div class="stockDetails">
+    <h4>Flat Stock</h4>
+    <hr />
+    <div class="detailsTable">
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.BindingCoverStock.Supplier)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.BindingCoverStock.Supplier)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.BindingCoverStock.StockBrand)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.BindingCoverStock.StockBrand)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.BindingCoverStock.StockType)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.BindingCoverStock.StockType)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.BindingCoverStock.Size)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.BindingCoverStock.Size)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.BindingCoverStock.PricePerPack)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.BindingCoverStock.PricePerPack)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.BindingCoverStock.SheetsPerPack)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.BindingCoverStock.SheetsPerPack)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.BindingCoverStock.SheetCost)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.BindingCoverStock.SheetCost)
+            </h2>
+        </div>
+    </div>
+</div>
+<div class="stockDetailsButtons">
+    <a class="btn btn-success" asp-page="./Edit" asp-route-id="@Model.BindingCoverStock?.Id">edit</a>
+    <a class="btn btn-primary" asp-page="../Index">back to stock</a>
+</div>

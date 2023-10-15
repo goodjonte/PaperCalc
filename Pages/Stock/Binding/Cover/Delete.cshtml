@@ -1,0 +1,85 @@
+﻿@page
+@model Binding.Cover.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+<div class="stockDeletePage">
+    <h1 class="stockTitle">Delete</h1>
+
+    <h3 class="areUSure">Are you sure you want to delete this?</h3>
+
+    <h4>Binding Cover Stock</h4>
+
+    <hr />
+    <div class="detailsTable">
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.BindingCoverStock.Supplier)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.BindingCoverStock.Supplier)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.BindingCoverStock.StockBrand)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.BindingCoverStock.StockBrand)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.BindingCoverStock.StockType)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.BindingCoverStock.StockType)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.BindingCoverStock.Size)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.BindingCoverStock.Size)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.BindingCoverStock.PricePerPack)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.BindingCoverStock.PricePerPack)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.BindingCoverStock.SheetsPerPack)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.BindingCoverStock.SheetsPerPack)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.BindingCoverStock.SheetCost)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.BindingCoverStock.SheetCost)
+            </h2>
+        </div>
+    </div>
+
+    <form method="post">
+        <input type="hidden" asp-for="BindingCoverStock.Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a class="btn btn-primary" asp-page="../Index">back to stock</a>
+    </form>
+</div>

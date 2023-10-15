@@ -1,0 +1,124 @@
+﻿@page
+@model PaperCalc.Pages.Stock.BindingCovers.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="stockIndexPage">
+    <h1 class="stockTitle">Covers</h1>
+
+    <div class="scrollableTable">
+        <table class="customTable">
+            <thead>
+                <tr>
+                    <th class="position-relative">
+                        name &nbsp; <span class="createButtonTop"><a asp-page="/Cover/Create">+ add new</a></span>
+                    </th>
+                    <th>
+                        sheets(pack)
+                    </th>
+                    <th>
+                        sheet price
+                    </th>
+                    <th class="buttonTableRow"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.BindingCoverStock)
+                {
+                    <tr class="rowWithData">
+                        <td>
+                            @item.Supplier @item.StockBrand @item.Size
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SheetsPerPack)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SheetCost)
+                        </td>
+                        <td class="tdForButton">
+                            <span class="stockNavButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="dotsForButton noselect">...</span></span>
+                            <div class="dropdown-menu stockDropDown" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item stockDropDownBorder" asp-page="./Cover/Edit" asp-route-id="@item.Id">
+                                    <object class="svg" data="/Images/edit.svg" width="15" height="15"> </object>
+                                    edit
+                                </a>
+
+                                <a class="dropdown-item stockDropDownBorder" asp-page="./Cover/Details" asp-route-id="@item.Id">
+                                    <object class="svg" data="/Images/details.svg" width="15" height="15"> </object>
+                                    details
+                                </a>
+                                <a class="dropdown-item" asp-page="./Cover/Delete" asp-route-id="@item.Id">
+                                    <object class="svg" data="/Images/delete.svg" width="15" height="15"> </object>
+                                    delete
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    @*<span class="createButtonBottum"><a asp-page="./Cover/Create">+ add new</a></span>*@
+</div>
+
+<div class="stockIndexPage">
+    <h1 class="stockTitle">Coils</h1>
+
+    <div class="scrollableTable">
+        <table class="customTable">
+            <thead>
+                <tr>
+                    <th class="position-relative">
+                        name &nbsp; <span class="createButtonTop"><a asp-page="./Coil/Create">+ add new</a></span>
+                    </th>
+                    <th>
+                        coils per pack
+                    </th>
+                    <th>
+                        coil price
+                    </th>
+                    <th class="buttonTableRow"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.BindingCoilsStock)
+                {
+                    <tr class="rowWithData">
+                        <td>
+                            @item.BindingCoilType @item.RingsRatio
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CoilsPerPack)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PricePerCoil)
+                        </td>
+                        <td class="tdForButton">
+                            <span class="stockNavButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="dotsForButton noselect">...</span></span>
+                            <div class="dropdown-menu stockDropDown" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item stockDropDownBorder" asp-page="./Coil/Edit" asp-route-id="@item.Id">
+                                    <object class="svg" data="/Images/edit.svg" width="15" height="15"> </object>
+                                    edit
+                                </a>
+
+                                <a class="dropdown-item stockDropDownBorder" asp-page="./Coil/Details" asp-route-id="@item.Id">
+                                    <object class="svg" data="/Images/details.svg" width="15" height="15"> </object>
+                                    details
+                                </a>
+                                <a class="dropdown-item" asp-page="./Coil/Delete" asp-route-id="@item.Id">
+                                    <object class="svg" data="/Images/delete.svg" width="15" height="15"> </object>
+                                    delete
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    @*<span class="createButtonBottum"><a asp-page="./Coil/Create">+ add new</a></span>*@
+</div>
+
+
