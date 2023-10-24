@@ -7,9 +7,10 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PaperCalc.Data;
+using PaperCalc.DTOs;
 using PaperCalc.Models;
 
-namespace PaperCalc.Pages.Job
+namespace PaperCalc.Pages.Jobs.Sra3
 {
     public class EditModel : PageModel
     {
@@ -18,24 +19,28 @@ namespace PaperCalc.Pages.Job
         public EditModel(PaperCalc.Data.PaperCalcContext context)
         {
             _context = context;
+            Paper = _context.Sra3AndBookletsStock.ToList();
+            FlatSizes = _context.FlatSizes.Where(x => x.ForCalculation == CalculationType.Sra3).ToList();
         }
 
         [BindProperty]
-        public Quote Quote { get; set; } = default!;
+        public Sra3FormInput Sra3FormInput { get; set; } = default!;
+        public List<Sra3AndBookletsStock> Paper { get; set; }
+        public List<FlatSize> FlatSizes { get; set; }
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
-            if (id == null || _context.Quote == null)
+            if (id == null || _context.Sra3FormInput == null)
             {
                 return NotFound();
             }
 
-            var quote =  await _context.Quote.FirstOrDefaultAsync(m => m.Id == id);
-            if (quote == null)
+            var sra3forminput =  await _context.Sra3FormInput.FirstOrDefaultAsync(m => m.Id == id);
+            if (sra3forminput == null)
             {
                 return NotFound();
             }
-            Quote = quote;
+            Sra3FormInput = sra3forminput;
             return Page();
         }
 
@@ -48,7 +53,7 @@ namespace PaperCalc.Pages.Job
                 return Page();
             }
 
-            _context.Attach(Quote).State = EntityState.Modified;
+            _context.Attach(Sra3FormInput).State = EntityState.Modified;
 
             try
             {
@@ -56,7 +61,7 @@ namespace PaperCalc.Pages.Job
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!QuoteExists(Quote.Id))
+                if (!Sra3FormInputExists(Sra3FormInput.Id))
                 {
                     return NotFound();
                 }
@@ -66,12 +71,14 @@ namespace PaperCalc.Pages.Job
                 }
             }
 
-            return RedirectToPage("./Index");
+            InputsForJobs connection = _context.InputsForJobs.Where(x => x.InputId == Sra3FormInput.Id).First();
+
+            return RedirectToPage("../Details", new { id = connection.JobId.ToString() });
         }
 
-        private bool QuoteExists(Guid id)
+        private bool Sra3FormInputExists(Guid id)
         {
-          return (_context.Quote?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.Sra3FormInput?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

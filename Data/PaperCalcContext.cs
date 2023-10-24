@@ -19,6 +19,11 @@ namespace PaperCalc.Data
         public DbSet<PaperCalc.Models.BindingCoverStock> BindingCoverStock { get; set; } = default!;
         public DbSet<PaperCalc.Models.BindingCoilsStock> BindingCoilsStock { get; set; } = default!;
         public DbSet<PaperCalc.Models.User> User { get; set; } = default!;
-        public DbSet<PaperCalc.Models.Quote> Quote { get; set; } = default!;
+        public DbSet<PaperCalc.Models.Job> Job { get; set; } = default!;
+        public DbSet<PaperCalc.Models.InputsForJobs> InputsForJobs { get; set; } = default!;
+        public DbSet<PaperCalc.Models.Sra3FormInput> Sra3FormInput { get; set; } = default!;
+        public DbSet<PaperCalc.Models.BookletFormInputs> BookletFormInputs { get; set; } = default!;
+        public DbSet<PaperCalc.Models.DocumentFormInputs> DocumentFormInputs { get; set; } = default!;
+
     }
 }

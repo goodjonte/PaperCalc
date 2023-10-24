@@ -1,0 +1,187 @@
+﻿@page
+@model PaperCalc.Pages.Jobs.Sra3.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<form method="post" class="calculationForm">
+    <input type="hidden" asp-for="Sra3FormInput.Id" />
+
+    <h4 class="calculationTitle">Edit SRA3</h4>
+
+
+    <!-- Paper -->
+    <div class="inputRow inputRowWithBorder">
+        <div class="inputRowTitle">
+            <h3>paper</h3>
+        </div>
+        <div class="inputsForRow">
+            <div class="inputForRow">
+                <label>flat size<span class="requiredStar">*</span></label>
+                <select id="FlatSizeSelect" class="custom-select" asp-for="Sra3FormInput.FlatSizeId">
+                    <option class="defaultOption" value="">select a size...</option>
+                    @{
+                        foreach (PaperCalc.Models.FlatSize fs in Model.FlatSizes)
+                        {
+                            <option value="@fs.Id">@fs.Name</option>
+                        }
+                    }
+                    <option class="defaultOption" value="custom">Custom</option>
+                </select>
+            </div>
+            <div class="inputForRow">
+                <label>coating<span class="requiredStar">*</span></label>
+                <select onchange="filterStock()" id="coatSelect" class="custom-select">
+                    <option class="defaultOption" value="">select a coating...</option>
+                    <option value="Uncoated">Uncoated</option>
+                    <option value="Coated">Coated</option>
+                    <option value="Matt">Matt</option>
+                    <option value="Satin">Satin</option>
+                    <option value="Gloss">Gloss</option>
+                </select>
+            </div>
+            <div class="inputForRow">
+                <label>stock<span class="requiredStar">*</span></label>
+                <select id="stockSelect" class="custom-select" asp-for="Sra3FormInput.StockId">
+                    <option class="defaultOption" value="">select stock...</option>
+                    @{
+                        foreach (PaperCalc.Models.Sra3AndBookletsStock item in Model.Paper)
+                        {
+                            <option class="@item.CoatType" value="@item.Id">@item.Weight<span>gsm</span> @item.Supplier @item.StockBrand</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+        <div id="hiddenSizeSra3FormInput" class="inputsForRow hidden">
+            <input asp-for="Sra3FormInput.CustomFlatSize" value="false" type="hidden" />
+            <div class="inputForRow">
+                <label>Width<span class="requiredStar">*</span></label>
+                <input placeholder="0" asp-for="Sra3FormInput.Width" type="text" />
+            </div>
+            <div class="inputForRow">
+                <label>Height<span class="requiredStar">*</span></label>
+                <input placeholder="0" asp-for="Sra3FormInput.Height" type="text" />
+            </div>
+            <div class="inputForRow">
+            </div>
+        </div>
+    </div>
+
+    <!-- Printing -->
+    <div class="inputRow inputRowWithBorder">
+        <div class="inputRowTitle">
+            <h3>printing</h3>
+        </div>
+        <div class="inputsForRow">
+            <div class="inputForRow">
+                <label>colour<span class="requiredStar">*</span></label>
+                <select class="custom-select" asp-for="Sra3FormInput.Colour">
+                    <option class="defaultOption" value="false">select a option...</option>
+                    <option value="true">Colour</option>
+                    <option value="false">Black</option>
+                </select>
+            </div>
+            <div class="inputForRow">
+                <label>printed sides<span class="requiredStar">*</span></label>
+                <select class="custom-select" asp-for="Sra3FormInput.DoubleSided">
+                    <option class="defaultOption" value="false">select a option...</option>
+                    <option value="false">Single Sided</option>
+                    <option value="true">Double Sided</option>
+                </select>
+            </div>
+            <div class="inputForRow">
+            </div>
+        </div>
+    </div>
+
+    <!-- Finishing -->
+    <div class="inputRow inputRowWithBorder">
+        <div class="inputRowTitle">
+            <h3>finishing</h3>
+        </div>
+        <div class="inputsForRow">
+            <div class="inputForRow">
+                <label>folds</label>
+                <select class="custom-select" asp-for="Sra3FormInput.Folds">
+                    <option value="0">none</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+            </div>
+            <div class="inputForRow">
+                <label>cresaing</label>
+                <select class="custom-select" asp-for="Sra3FormInput.Creases">
+                    <option value="0">none</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+            </div>
+            <div class="inputForRow">
+                <label>hole punches</label>
+                <select class="custom-select" asp-for="Sra3FormInput.HolePunches">
+                    <option value="0">none</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+            </div>
+        </div>
+        <div class="checkboxesForRow">
+            <label class="checkbox">
+                lammination
+                <input asp-for="Sra3FormInput.Lamination" type="checkbox" value="true" />
+                <span class="checkmark"></span>
+            </label>
+        </div>
+    </div>
+
+    <!-- Additional Costs -->
+    <div class="inputRow inputRowWithBorder">
+        <div class="inputRowTitle">
+            <h3>additional costs</h3>
+        </div>
+        <div class="inputsForRow">
+            <div class="inputForRow">
+                <label>design</label>
+                <input placeholder="$00.00" asp-for="Sra3FormInput.DesignCost" type="number" />
+            </div>
+            <div class="inputForRow">
+                <label>file handling</label>
+                <input type="number" placeholder="$00.00" asp-for="Sra3FormInput.FileHandlingCost">
+            </div>
+            <div class="inputForRow">
+                <label>setup</label>
+                <input placeholder="$00.00" asp-for="Sra3FormInput.SetupCost" type="number" />
+            </div>
+        </div>
+    </div>
+
+    <div class="inputRow">
+        <div class="inputRowTitle">
+            <h3>quantitys</h3>
+        </div>
+        <div class="inputsForRow">
+            <div class="inputForRow">
+                <label>quantity<span class="requiredStar">*</span></label>
+                <input placeholder="0" type="number" asp-for="Sra3FormInput.Quantity">
+            </div>
+            <div class="inputForRow">
+                <label>quantity<span class="requiredStar">*</span></label>
+                <input placeholder="1" type="number" asp-for="Sra3FormInput.Kinds">
+            </div>
+            <div class="inputForRow">
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-success calculationSubmitButton marginAuto">update quote</button>
+
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -23,7 +23,7 @@ namespace PaperCalc.Pages
         }
         public PaperCalc.DTOs.Settings? Settings { get; set; }
         [BindProperty]
-        public PaperCalc.DTOs.BookletFormInputs Inputs { get; set; }
+        public PaperCalc.Models.BookletFormInputs Inputs { get; set; }
         public PaperCalc.DTOs.BookletCalculation? Calculation { get; set; } = null;
         public List<PaperCalc.Models.FlatSize> FlatSizes { get; set; }
         public List<PaperCalc.Models.Sra3AndBookletsStock> BookletsStock { get; set; }

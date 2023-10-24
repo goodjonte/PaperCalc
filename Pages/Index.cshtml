@@ -22,25 +22,89 @@
 
     <h4 class="calculationTitle">SRA3</h4>
 
-    <!-- Job Details-->
+    <!-- Job Details - user first selects new or existing job -->
     <div class="inputRow inputRowWithBorder">
-        <div class="inputRowTitle">
-            <h3>job details</h3>
+
+        <!-- JS for showing corresponding elements -->
+        @if (Model.JobId != null)
+         {
+            <script>
+                setTimeout(() => {
+                    document.getElementById("existingJobSelect").classList.remove("hidden");
+                    document.getElementById("newOrExistingJob").classList.add("hidden");
+                }, 500);
+            </script>
+         }
+        <script>
+            function newJob() {
+                document.getElementById("newJobDetails").classList.remove("hidden");
+                document.getElementById("newOrExistingJob").classList.add("hidden");
+            };
+            function existingJob() {
+                document.getElementById("existingJobSelect").classList.remove("hidden");
+                document.getElementById("newOrExistingJob").classList.add("hidden");
+            };
+        </script>
+
+        <!--new or existing job -->
+        <div id="newOrExistingJob">
+            <div class="inputRowTitle">
+                <h3>job details</h3>
+            </div>
+            <div class="jobButtons">
+                <div id="newJobButton" onclick="newJob()" class="btn btn-success inputForRow">new job</div>
+                <div id="existingJobButton" onclick="existingJob()" class="btn btn-success inputForRow">existing job</div>
+            </div>
         </div>
-        <div class="inputsForRow">
-            <div class="inputForRow">
-                <label>job title<span class="requiredStar">*</span></label>
-                <input placeholder="job title" asp-for="Quote.JobTitle" type="text" />
+
+        <!-- existing job select -->
+        <div id="existingJobSelect" class="hidden">
+            <div class="inputRowTitle">
+                <h3>job details</h3>
             </div>
-            <div class="inputForRow">
-                <label>client name<span class="requiredStar">*</span></label>
-                <input placeholder="client name" asp-for="Quote.ClientName" type="text" />
-            </div>
-            <div class="inputForRow">
-                <label>business name</label>
-                <input placeholder="business name" asp-for="Quote.BuissnessName" type="text" />
+            <div class="inputsForRow">
+                <div class="inputForRow">
+
+                </div>
+                <div class="inputForRow">
+                    <label>select job<span class="requiredStar">*</span></label>
+                    <select class="custom-select" asp-for="JobId">
+                        <option class="defaultOption" value="">select a job...</option>
+                        @{
+                            foreach (PaperCalc.Models.Job j in Model.Jobs)
+                            {
+                                <option value="@j.Id">@j.JobTitle</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="inputForRow">
+
+                </div>
             </div>
         </div>
+
+        <!-- new job details -->
+        <div id="newJobDetails" class="hidden">
+            <div class="inputRowTitle">
+                <h3>job details</h3>
+            </div>
+            <div class="inputsForRow">
+                <div class="inputForRow">
+                    <label>job title<span class="requiredStar">*</span></label>
+                    <input placeholder="job title" asp-for="Job.JobTitle" type="text" />
+                </div>
+                <div class="inputForRow">
+                    <label>client name<span class="requiredStar">*</span></label>
+                    <input placeholder="client name" asp-for="Job.ClientName" type="text" />
+                </div>
+                <div class="inputForRow">
+                    <label>business name</label>
+                    <input placeholder="business name" asp-for="Job.Buissnessname" type="text" />
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <!-- Paper -->
@@ -124,8 +188,6 @@
                 </select>
             </div>
             <div class="inputForRow">
-                <label>quantity<span class="requiredStar">*</span></label>
-                <input placeholder="0" type="number" asp-for="Inputs.Quantity">
             </div>
         </div>
     </div>
@@ -195,25 +257,43 @@
     </div>
 
     <!-- Delivery & Turnaround -->
-    <div class="inputRow">
+    <div class="inputRow inputRowWithBorder">
         <div class="inputRowTitle">
             <h3>delivery & turnaround</h3>
         </div>
         <div class="inputsForRow">
             <div class="inputForRow">
                 <label>address</label>
-                <input placeholder="address" asp-for="Quote.Address" type="text" />
+                <input placeholder="address" type="text" />
             </div>
             <div class="inputForRow">
                 <label>cost</label>
-                <input placeholder="$00.00" asp-for="Quote.DeliveryCost" type="number" />
+                <input placeholder="$00.00" type="number" />
             </div>
             <div class="inputForRow">
                 <label>turnaround </label>
                 <div class="inputWithCheckbox">
-                    <input class="turnaroundInput" asp-for="Quote.Turnaround" type="number" />
+                    <input class="turnaroundInput" type="number" />
                     <label class="labelWithinInput">urgent job</label>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="inputRow">
+        <div class="inputRowTitle">
+            <h3>quantitys</h3>
+        </div>
+        <div class="inputsForRow">
+            <div class="inputForRow">
+                <label>quantity<span class="requiredStar">*</span></label>
+                <input placeholder="0" type="number" asp-for="Inputs.Quantity">
+            </div>
+            <div class="inputForRow">
+                <label>quantity<span class="requiredStar">*</span></label>
+                <input placeholder="1" type="number" asp-for="Inputs.Kinds">
+            </div>
+            <div class="inputForRow">
             </div>
         </div>
     </div>
@@ -223,26 +303,27 @@
     @{ if (Model.Calculation != null)
         {
             @*<div>
-                <input asp-for="Quote.save" type="hidden" />
-                <div id="saveButton" class="btn btn-success calculationSubmitButton marginAuto">Save Quote</div>
-                <script>
-                    document.getElementById("saveButton").addEventListener("click", function () {
-                        document.getElementById("Quote_save").value = true;
-                        document.getElementsByClassName("calculationForm")[0].submit();
-                    });
-                </script>
-            </div>*@
-        
+                    <input asp-for="Quote.save" type="hidden" />
+                    <div id="saveButton" class="btn btn-success calculationSubmitButton marginAuto">Save Quote</div>
+                    <script>
+                        document.getElementById("saveButton").addEventListener("click", function () {
+                            document.getElementById("Quote_save").value = true;
+                            document.getElementsByClassName("calculationForm")[0].submit();
+                        });
+                    </script>
+                </div>*@
+
             <div id="calculationPost">
 
                 <dl id="calculationTotals">
 
                     <dt>Job Cost:</dt>
-                    <dd>@Html.DisplayFor(model => Model.Calculation.JobCost)</dd>
+                    <dd>@Html.DisplayFor(model => Model.Calculation.FinalJobCost)</dd>
 
 
                     <dt>Job Cost (GST Inc):</dt>
-                    <dd>@Html.DisplayFor(model => Model.Calculation.JobCostWithGst)</dd>
+                    <dd>@Html.DisplayFor(model => Model.Calculation.FinalJobCostWithGst)</dd>
+
                 </dl>
 
                 <div>
@@ -251,6 +332,7 @@
                 </div>
 
             </div>
+
         }
     }
 
@@ -260,24 +342,30 @@
 
 
 @*<div id="CalculationValues" class="collapse">
-    
-</div>*@
+
+    </div>*@
 
 
 @*<script>
-    function calculationValuesDisplay() {
-        let button = document.getElementById("showCalculationsButton");
-        let table = document.getElementById("CalculationValues");
+        function calculationValuesDisplay() {
+            let button = document.getElementById("showCalculationsButton");
+            let table = document.getElementById("CalculationValues");
 
-        if (button.innerText == "Show Calculation Values") {
-            table.classList.remove("hidden");
-            button.innerText = "Hide Calculation Values";
-        } else if (button.innerText == "Hide Calculation Values") {
-            table.classList.add("hidden");
-            button.innerText = "Show Calculation Values";
+            if (button.innerText == "Show Calculation Values") {
+                table.classList.remove("hidden");
+                button.innerText = "Hide Calculation Values";
+            } else if (button.innerText == "Hide Calculation Values") {
+                table.classList.add("hidden");
+                button.innerText = "Show Calculation Values";
+            }
         }
-    }
-</script>*@
+    </script>*@
+
+
+
+
+
+<!-- Below is the js for creating a word doc quote, need to change this to pdf, it will also be within quote page aswell -->
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/docxtemplater/3.37.13/docxtemplater.js"></script>
 <script src="https://unpkg.com/pizzip@3.1.4/dist/pizzip.js"></script>

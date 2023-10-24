@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using PaperCalc.Data;
 using PaperCalc.Models;
 
-namespace PaperCalc.Pages.Jobs
+namespace PaperCalc.Pages.Jobs.Sra3
 {
     public class DeleteModel : PageModel
     {
@@ -20,44 +20,45 @@ namespace PaperCalc.Pages.Jobs
         }
 
         [BindProperty]
-      public Job Job { get; set; } = default!;
+      public Sra3FormInput Sra3FormInput { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
-            if (id == null || _context.Job == null)
+            if (id == null || _context.Sra3FormInput == null)
             {
                 return NotFound();
             }
 
-            var job = await _context.Job.FirstOrDefaultAsync(m => m.Id == id);
+            var sra3forminput = await _context.Sra3FormInput.FirstOrDefaultAsync(m => m.Id == id);
 
-            if (job == null)
+            if (sra3forminput == null)
             {
                 return NotFound();
             }
             else 
             {
-                Job = job;
+                Sra3FormInput = sra3forminput;
             }
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync(Guid? id)
         {
-            if (id == null || _context.Job == null)
+            if (id == null || _context.Sra3FormInput == null)
             {
                 return NotFound();
             }
-            var job = await _context.Job.FindAsync(id);
+            var sra3forminput = await _context.Sra3FormInput.FindAsync(id);
 
-            if (job != null)
+            if (sra3forminput != null)
             {
-                Job = job;
-                _context.Job.Remove(Job);
+                Sra3FormInput = sra3forminput;
+                _context.Sra3FormInput.Remove(Sra3FormInput);
                 await _context.SaveChangesAsync();
             }
+            InputsForJobs connection = _context.InputsForJobs.Where(x => x.InputId == Sra3FormInput.Id).First();
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("../Details", new { id = connection.JobId.ToString() });
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿@page
-@model PaperCalc.Pages.Job.DeleteModel
+@model PaperCalc.Pages.Jobs.DeleteModel
 
 @{
     ViewData["Title"] = "Delete";
@@ -9,187 +9,31 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Quote</h4>
+    <h4>Job</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quote.JobTitle)
+            @Html.DisplayNameFor(model => model.Job.JobTitle)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quote.JobTitle)
+            @Html.DisplayFor(model => model.Job.JobTitle)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quote.ClientName)
+            @Html.DisplayNameFor(model => model.Job.ClientName)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quote.ClientName)
+            @Html.DisplayFor(model => model.Job.ClientName)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quote.BuissnessName)
+            @Html.DisplayNameFor(model => model.Job.Buissnessname)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quote.BuissnessName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quote.Address)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quote.Address)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quote.Turnaround)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quote.Turnaround)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quote.DeliveryCost)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quote.DeliveryCost)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quote.DesignCost)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quote.DesignCost)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quote.SetupCost)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quote.SetupCost)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quote.JobTypeForDTO)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quote.JobTypeForDTO)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quote.Quantity)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quote.Quantity)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quote.FlatSizeId)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quote.FlatSizeId)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quote.FlatSizeHW)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quote.FlatSizeHW)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quote.CoatType)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quote.CoatType)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quote.CustomSize)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quote.CustomSize)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quote.Height)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quote.Height)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quote.Width)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quote.Width)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quote.Colour)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quote.Colour)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quote.PrintedSides)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quote.PrintedSides)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quote.NumOfHolePunches)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quote.NumOfHolePunches)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quote.Trimming)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quote.Trimming)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quote.Lamination)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quote.Lamination)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quote.SmallJob)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quote.SmallJob)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quote.Urgent)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quote.Urgent)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quote.FileHandlingFee)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quote.FileHandlingFee)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quote.Creasing)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quote.Creasing)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quote.Folds)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quote.Folds)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quote.Pages)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quote.Pages)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quote.CopyQuantity)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quote.CopyQuantity)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quote.Binding)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quote.Binding)
+            @Html.DisplayFor(model => model.Job.Buissnessname)
         </dd>
     </dl>
     
     <form method="post">
-        <input type="hidden" asp-for="Quote.Id" />
+        <input type="hidden" asp-for="Job.Id" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-page="./Index">Back to List</a>
     </form>

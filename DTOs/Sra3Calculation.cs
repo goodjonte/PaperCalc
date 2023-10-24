@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Drawing;
 using System.IO;
 using Microsoft.DotNet.Scaffolding.Shared;
@@ -7,29 +8,11 @@ using PaperCalc.Models;
 
 namespace PaperCalc.DTOs
 {
-    public class Sra3FormInput
-    {
-        public double Quantity { get; set; }
-        public Guid? FlatSizeId { get; set; }
-        public bool CustomFlatSize { get; set; }
-        public double Height { get; set; }
-        public double Width { get; set; }
-        public bool DoubleSided { get; set; }
-        public bool Colour { get; set; }
-        public bool Lamination { get; set; }
-        public Guid StockId { get; set; }
-        public int Creases { get; set; }
-        public int Folds { get; set; }
-        public int Staples { get; set; }
-        public int HolePunches { get; set; }
-        public double FileHandlingCost { get; set; }
-        public double DesignCost { get; set; }
-        public double SetupCost { get; set; }
-    }
+    [NotMapped]
     public class Sra3Calculation
     {
         //Constructors
-        public Sra3Calculation(PaperCalc.Data.PaperCalcContext _context, String path, Sra3FormInput inputs)
+        public Sra3Calculation(PaperCalc.Data.PaperCalcContext _context, string path, Sra3FormInput inputs)
         {
             Sra3AndBookletsStock? stock = _context.Sra3AndBookletsStock.Find(inputs.StockId);
             FlatSize? flatsize = _context.FlatSizes.Find(inputs.FlatSizeId);
@@ -141,7 +124,7 @@ namespace PaperCalc.DTOs
                     FlatSize? roundedUptoFlat = null;
                     for(int i = 0; i < allFlats.Count; i++)
                     {
-                        if (allFlats[i].ForCalculation == CalculationType.Aspeos)
+                        if (allFlats[i].ForCalculation == CalculationType.Sra3)
                         {
                             if(roundedUptoFlat == null && allFlats[i].Area > area)
                             {
@@ -195,12 +178,15 @@ namespace PaperCalc.DTOs
                     var tempCalc = new Sra3Calculation(Context, Settings.PathForSettings, tempJob);
                     return Inputs.Quantity * tempCalc.CostPerunit;
                 }
-                double jobCost = FinalCharge + Inputs.FileHandlingCost + Inputs.DesignCost + Inputs.SetupCost;
+                double jobCost = FinalCharge + Inputs.FileHandlingCost + Inputs.DesignCost + Inputs.SetupCost + 4;//4 if for packaging cost, we can make this a setting
                 return jobCost < 15 ? 15 : jobCost;//Hardcoded Minimum Charge
             }
         }
         [DisplayFormat(DataFormatString = "{0:c}")]
-        public double JobCostWithGst { get { return JobCost * 1.15; } }
+        public double FinalJobCost { get { return Inputs.Kinds < 2 ? JobCost : JobCost * Inputs.Kinds * 0.80; } }
+        [DisplayFormat(DataFormatString = "{0:c}")]
+        public double FinalJobCostWithGst { get { return FinalJobCost * 1.15; } }
+        [DisplayFormat(DataFormatString = "{0:c}")]
         public double CostPerunit
         {
             get
@@ -208,7 +194,8 @@ namespace PaperCalc.DTOs
                 return JobCost / Inputs.Quantity;
             }
         }
-
+        [DisplayFormat(DataFormatString = "{0:c}")]
+        public double GST { get { return FinalJobCostWithGst - FinalJobCost; } }
 
         public string? Description
         {
@@ -223,8 +210,9 @@ namespace PaperCalc.DTOs
                 string holePunches = Inputs.HolePunches > 0 ? $"{Inputs.HolePunches} x Drill, " : "";
                 string staple = Inputs.Staples > 0 ? $"{Inputs.Staples} x Staple, " : "";
                 string lamination = Inputs.Lamination ? ", Laminated" : "";
+                string kinds = Inputs.Kinds > 1 ? $" {Inputs.Kinds} kinds" : "";
 
-                return $"@{Inputs.Quantity}qty - {size} size, {crease}{fold}{holePunches}{staple}{stock}, {sides}, {colour}{lamination}";
+                return $"@{Inputs.Quantity}qty{kinds} - {size} size, {crease}{fold}{holePunches}{staple}{stock}, {sides}, {colour}{lamination}";
             }
         }
     }

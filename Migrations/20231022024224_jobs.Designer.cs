@@ -12,8 +12,8 @@ using PaperCalc.Data;
 namespace PaperCalc.Migrations
 {
     [DbContext(typeof(PaperCalcContext))]
-    [Migration("20231012033829_bruuhhh")]
-    partial class bruuhhh
+    [Migration("20231022024224_jobs")]
+    partial class jobs
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -85,6 +85,121 @@ namespace PaperCalc.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("BindingCoverStock");
+                });
+
+            modelBuilder.Entity("PaperCalc.Models.BookletFormInputs", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Colour")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("CoverStockId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("CustomFlatSize")
+                        .HasColumnType("bit");
+
+                    b.Property<double>("DesignCost")
+                        .HasColumnType("float");
+
+                    b.Property<double>("FileHandlingCost")
+                        .HasColumnType("float");
+
+                    b.Property<Guid?>("FlatSizeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<double>("Height")
+                        .HasColumnType("float");
+
+                    b.Property<int>("HolePunches")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("InnerStockId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<double>("Kinds")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Pages")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Quantity")
+                        .HasColumnType("float");
+
+                    b.Property<double>("SetupCost")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Width")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("BookletFormInputs");
+                });
+
+            modelBuilder.Entity("PaperCalc.Models.DocumentFormInputs", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Binding")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Colour")
+                        .HasColumnType("bit");
+
+                    b.Property<double>("DesignCost")
+                        .HasColumnType("float");
+
+                    b.Property<bool>("DoubleSided")
+                        .HasColumnType("bit");
+
+                    b.Property<double>("FileHandlingCost")
+                        .HasColumnType("float");
+
+                    b.Property<Guid>("FlatSizeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Folds")
+                        .HasColumnType("int");
+
+                    b.Property<double?>("Height")
+                        .HasColumnType("float");
+
+                    b.Property<int>("HolePunches")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Kinds")
+                        .HasColumnType("float");
+
+                    b.Property<bool>("Lamination")
+                        .HasColumnType("bit");
+
+                    b.Property<double>("Pages")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Quantity")
+                        .HasColumnType("float");
+
+                    b.Property<double>("SetupCost")
+                        .HasColumnType("float");
+
+                    b.Property<int>("Staples")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("StockId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<double?>("Width")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DocumentFormInputs");
                 });
 
             modelBuilder.Entity("PaperCalc.Models.DocumentsStock", b =>
@@ -164,102 +279,47 @@ namespace PaperCalc.Migrations
                     b.ToTable("FlatSizes");
                 });
 
-            modelBuilder.Entity("PaperCalc.Models.Quote", b =>
+            modelBuilder.Entity("PaperCalc.Models.InputsForJobs", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Binding")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("BuissnessName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ClientName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("CoatType")
+                    b.Property<int>("CalculationType")
                         .HasColumnType("int");
 
-                    b.Property<string>("Colour")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("CopyQuantity")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Creasing")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("CustomSize")
-                        .HasColumnType("bit");
-
-                    b.Property<double?>("DeliveryCost")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("DesignCost")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("FileHandlingFee")
-                        .HasColumnType("float");
-
-                    b.Property<string>("FlatSizeHW")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("FlatSizeId")
+                    b.Property<Guid>("InputId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("Folds")
-                        .HasColumnType("int");
-
-                    b.Property<double>("Height")
-                        .HasColumnType("float");
-
-                    b.Property<string>("JobTitle")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("JobTypeForDTO")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("Lamination")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("NumOfHolePunches")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Pages")
-                        .HasColumnType("int");
-
-                    b.Property<string>("PrintedSides")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double?>("Quantity")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("SetupCost")
-                        .HasColumnType("float");
-
-                    b.Property<bool>("SmallJob")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("Trimming")
-                        .HasColumnType("bit");
-
-                    b.Property<double?>("Turnaround")
-                        .HasColumnType("float");
-
-                    b.Property<bool>("Urgent")
-                        .HasColumnType("bit");
-
-                    b.Property<double>("Width")
-                        .HasColumnType("float");
+                    b.Property<Guid>("JobId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Quote");
+                    b.ToTable("InputsForJobs");
+                });
+
+            modelBuilder.Entity("PaperCalc.Models.Job", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Buissnessname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClientName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("JobTitle")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Job");
                 });
 
             modelBuilder.Entity("PaperCalc.Models.Sra3AndBookletsStock", b =>
@@ -301,6 +361,68 @@ namespace PaperCalc.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Sra3AndBookletsStock");
+                });
+
+            modelBuilder.Entity("PaperCalc.Models.Sra3FormInput", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Colour")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Creases")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("CustomFlatSize")
+                        .HasColumnType("bit");
+
+                    b.Property<double>("DesignCost")
+                        .HasColumnType("float");
+
+                    b.Property<bool>("DoubleSided")
+                        .HasColumnType("bit");
+
+                    b.Property<double>("FileHandlingCost")
+                        .HasColumnType("float");
+
+                    b.Property<Guid?>("FlatSizeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Folds")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Height")
+                        .HasColumnType("float");
+
+                    b.Property<int>("HolePunches")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Kinds")
+                        .HasColumnType("float");
+
+                    b.Property<bool>("Lamination")
+                        .HasColumnType("bit");
+
+                    b.Property<double>("Quantity")
+                        .HasColumnType("float");
+
+                    b.Property<double>("SetupCost")
+                        .HasColumnType("float");
+
+                    b.Property<int>("Staples")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("StockId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<double>("Width")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Sra3FormInput");
                 });
 
             modelBuilder.Entity("PaperCalc.Models.User", b =>

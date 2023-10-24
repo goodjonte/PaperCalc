@@ -2,35 +2,17 @@
 using PaperCalc.Data;
 using PaperCalc.Models;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 //Need to find out if we can just make it that the user just selects which bing coil to use - will need js to verify it fits coil size
 
 namespace PaperCalc.DTOs
 {
-    public class DocumentFormInputs
-    {
-        public double Quantity { get; set; }
-        public double Pages { get; set; }
-        public Guid FlatSizeId { get; set; }
-        public double? Height { get; set; }
-        public double? Width { get; set; }
-        public Guid StockId { get; set; }
-        //public Guid? BindingCoildStockId { get; set; }
-        public bool DoubleSided { get; set; }
-        public bool Colour { get; set; }
-        public bool Lamination { get; set; } // Lamination not implemented yet
-        public BindingCoilType Binding { get; set; }
-        public int Folds { get; set; }
-        public int Staples { get; set; }
-        public int HolePunches { get; set; }
-        public double FileHandlingCost { get; set; }
-        public double DesignCost { get; set; }
-        public double SetupCost { get; set; }
-    }
+    [NotMapped]
     public class DocumentCalculation
     {
         //Constructor
-        public DocumentCalculation(PaperCalc.Data.PaperCalcContext _context, String path, DocumentFormInputs inputs)
+        public DocumentCalculation(PaperCalc.Data.PaperCalcContext _context, string path, DocumentFormInputs inputs)
         {
             Context = _context;
             Inputs = inputs;
@@ -244,12 +226,14 @@ namespace PaperCalc.DTOs
         public double JobCost {
             get
             {
-                double jobCost = FinalCharge + Inputs.FileHandlingCost + Inputs.DesignCost + Inputs.SetupCost;
+                double jobCost = FinalCharge + Inputs.FileHandlingCost + Inputs.DesignCost + Inputs.SetupCost + 4;//4 if for packaging cost, we can make this a setting
                 return jobCost < 15 ? 15 : jobCost;//Hardcoded Minimum Charge
             }
         }
         [DisplayFormat(DataFormatString = "{0:c}")]
-        public double JobCostWithGST { get { return JobCost * 1.15; } }
+        public double FinalJobCost { get { return Inputs.Kinds < 2 ? JobCost : JobCost * Inputs.Kinds * 0.80; } }
+        [DisplayFormat(DataFormatString = "{0:c}")]
+        public double FinalJobCostWithGST { get { return FinalJobCost * 1.15; } }
         public string? Description
         {
             get

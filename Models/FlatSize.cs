@@ -41,8 +41,8 @@ namespace PaperCalc.Models
     }
     public enum CalculationType
     {
-        Aspeos,
-        Flat,
+        Sra3,
+        Document,
         Booklet,
         WideFormat,
     }

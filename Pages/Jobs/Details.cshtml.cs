@@ -8,36 +8,48 @@ using Microsoft.EntityFrameworkCore;
 using PaperCalc.Data;
 using PaperCalc.Models;
 
-namespace PaperCalc.Pages.Job
+namespace PaperCalc.Pages.Jobs
 {
     public class DetailsModel : PageModel
     {
         private readonly PaperCalc.Data.PaperCalcContext _context;
+        private readonly IWebHostEnvironment _env;
 
-        public DetailsModel(PaperCalc.Data.PaperCalcContext context)
+        public DetailsModel(PaperCalc.Data.PaperCalcContext context, IWebHostEnvironment env)
         {
             _context = context;
+            _env = env;
         }
-
-      public Quote Quote { get; set; } = default!; 
+        [BindProperty]
+        public Job Job { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
-            if (id == null || _context.Quote == null)
+            if (id == null || _context.Job == null)
             {
                 return NotFound();
             }
 
-            var quote = await _context.Quote.FirstOrDefaultAsync(m => m.Id == id);
-            if (quote == null)
+            var job = await _context.Job.FirstOrDefaultAsync(m => m.Id == id);
+            if (job == null)
             {
                 return NotFound();
             }
-            else 
+            else
             {
-                Quote = quote;
+                Job = job;
+                Job.GetItems(_context, _env.ContentRootPath);
             }
             return Page();
+        }
+
+        public async Task<ActionResult> OnPostSaveJobDetails()
+        {
+            _context.Attach(Job).State = EntityState.Modified;
+
+            _context.SaveChanges();
+
+            return RedirectToPage("./Details", new { id = Job.Id.ToString() });
         }
     }
 }

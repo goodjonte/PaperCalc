@@ -1,193 +1,284 @@
 ﻿@page
-@model PaperCalc.Pages.Job.DetailsModel
+@model PaperCalc.Pages.Jobs.DetailsModel
 
 @{
     ViewData["Title"] = "Details";
 }
+<h1 class="stockTitle">Job</h1>
 
-<h1>Details</h1>
-
-<div>
-    <h4>Quote</h4>
+<div class="stockDetails">
+    <h4>@Html.DisplayFor(model => model.Job.JobTitle) - details</h4>
     <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quote.JobTitle)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quote.JobTitle)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quote.ClientName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quote.ClientName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quote.BuissnessName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quote.BuissnessName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quote.Address)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quote.Address)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quote.Turnaround)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quote.Turnaround)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quote.DeliveryCost)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quote.DeliveryCost)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quote.DesignCost)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quote.DesignCost)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quote.SetupCost)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quote.SetupCost)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quote.JobTypeForDTO)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quote.JobTypeForDTO)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quote.Quantity)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quote.Quantity)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quote.FlatSizeId)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quote.FlatSizeId)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quote.FlatSizeHW)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quote.FlatSizeHW)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quote.CoatType)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quote.CoatType)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quote.CustomSize)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quote.CustomSize)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quote.Height)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quote.Height)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quote.Width)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quote.Width)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quote.Colour)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quote.Colour)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quote.PrintedSides)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quote.PrintedSides)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quote.NumOfHolePunches)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quote.NumOfHolePunches)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quote.Trimming)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quote.Trimming)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quote.Lamination)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quote.Lamination)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quote.SmallJob)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quote.SmallJob)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quote.Urgent)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quote.Urgent)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quote.FileHandlingFee)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quote.FileHandlingFee)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quote.Creasing)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quote.Creasing)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quote.Folds)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quote.Folds)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quote.Pages)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quote.Pages)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quote.CopyQuantity)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quote.CopyQuantity)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quote.Binding)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quote.Binding)
-        </dd>
-    </dl>
+
+    <!-- Details Table Logic/Function-->
+    <script>
+
+        function editJobDetails() {
+            document.getElementById("noneditableDetailsTable").classList.add("hidden");
+            document.getElementById("editDetailsTable").classList.remove("hidden");
+        }
+
+    </script>
+
+    <!-- Details Table Non Editable-->
+    <div id="noneditableDetailsTable" class="detailsTable">
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.Job.JobTitle)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.Job.JobTitle)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.Job.ClientName)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.Job.ClientName)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.Job.Buissnessname)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.Job.Buissnessname)
+            </h2>
+        </div>
+        <div class="fullWidth">
+            <button class="btn btn-success center" onclick="editJobDetails()">edit</button>
+        </div>
+    </div>
+
+    <!-- Details Table Editable-->
+    <form asp-page-handler="SaveJobDetails" id="editDetailsTable" class="detailsTable hidden">
+        <input type="hidden" asp-for="Job.Id" />
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.Job.JobTitle)
+            </h1>
+            <h2>
+                <input type="text" class="form-control jobInput" asp-for="Job.JobTitle" />
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.Job.ClientName)
+            </h1>
+            <h2>
+                <input type="text" class="form-control jobInput" asp-for="Job.ClientName" />
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.Job.Buissnessname)
+            </h1>
+            <h2>
+                <input type="text" class="form-control jobInput" asp-for="Job.Buissnessname" />
+            </h2>
+        </div>
+        <div class="fullWidth">
+            <button class="btn btn-primary center">save</button>
+        </div>
+    </form>
+
+    <!-- SRA3 ITEMS -->
+
+    <h4 id="sra3ItemsTitle">sra3 items</h4>
+    <hr />
+    @if (Model.Job.Sra3Items.Count > 0)
+    {
+        <table class="customTable">
+            <thead>
+                <tr>
+                    <th class="position-relative">
+                        description &nbsp; <span class="createButtonTop"><a asp-page="../Index" asp-route-id="@Model.Job.Id">+ add new</a></span>
+                    </th>
+                    <th>
+                        job cost
+                    </th>
+                    <th>
+                        job cost (inc. gst)
+                    </th>
+                    <th>
+                        unit price
+                    </th>
+                    <th class="buttonTableRow"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (PaperCalc.DTOs.Sra3InputAndCalc sraItem in Model.Job.Sra3Items)
+                {
+                    <tr class="rowWithData">
+                        <td>
+                            @sraItem.Calc.Description
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => sraItem.Calc.FinalJobCost)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => sraItem.Calc.FinalJobCostWithGst)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => sraItem.Calc.CostPerunit)
+                        </td>
+                        <td class="tdForButton">
+                            <span class="stockNavButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="dotsForButton noselect">...</span></span>
+                            <div class="dropdown-menu stockDropDown" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item stockDropDownBorder" asp-page="./Sra3/Edit" asp-route-id="@sraItem.Inputs.Id">
+                                    <object class="svg" data="/Images/edit.svg" width="15" height="15"> </object>
+                                    edit
+                                </a>
+                                <a class="dropdown-item" asp-page="./Sra3/Delete" asp-route-id="@sraItem.Inputs.Id">
+                                    <object class="svg" data="/Images/delete.svg" width="15" height="15"> </object>
+                                    delete
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <h6>no sra3 items <a asp-page="../Index" asp-route-id="@Model.Job.Id">+ add new</a></h6>
+    }
+
+    <!-- DOCUMENT ITEMS -->
+
+    <h4 id="sra3ItemsTitle">document items</h4>
+    <hr />
+    @if (Model.Job.DocumentItems.Count > 0)
+    {
+        <table class="customTable">
+            <thead>
+                <tr>
+                    <th class="position-relative">
+                        description &nbsp; <span class="createButtonTop"><a asp-route-id="@Model.Job.Id" asp-page="../Document">+ add new</a></span>
+                    </th>
+                    <th>
+                        job cost
+                    </th>
+                    <th>
+                        job cost (inc. gst)
+                    </th>
+                    <th>
+                        unit price
+                    </th>
+                    <th class="buttonTableRow"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (PaperCalc.DTOs.Sra3InputAndCalc sraItem in Model.Job.Sra3Items)
+                {
+                    <tr class="rowWithData">
+                        <td>
+                            @sraItem.Calc.Description
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => sraItem.Calc.FinalJobCost)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => sraItem.Calc.FinalJobCostWithGst)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => sraItem.Calc.CostPerunit)
+                        </td>
+                        <td class="tdForButton">
+                            <span class="stockNavButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="dotsForButton noselect">...</span></span>
+                            <div class="dropdown-menu stockDropDown" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item stockDropDownBorder" asp-page="./Sra3/Edit" asp-route-id="@sraItem.Inputs.Id">
+                                    <object class="svg" data="/Images/edit.svg" width="15" height="15"> </object>
+                                    edit
+                                </a>
+                                <a class="dropdown-item" asp-page="./Sra3/Delete" asp-route-id="@sraItem.Inputs.Id">
+                                    <object class="svg" data="/Images/delete.svg" width="15" height="15"> </object>
+                                    delete
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <h6>no document items <a asp-route-id="@Model.Job.Id" asp-page="../Document">+ add new</a></h6>
+    }
+
+    <!-- BOOKLET ITEMS -->
+
+    <h4 id="sra3ItemsTitle">booklet items</h4>
+    <hr />
+    @if (Model.Job.BookletItems.Count > 0)
+    {
+        <table class="customTable">
+            <thead>
+                <tr>
+                    <th class="position-relative">
+                        description &nbsp; <span class="createButtonTop"><a asp-route-id="@Model.Job.Id" asp-page="../Booklets">+ add new</a></span>
+                    </th>
+                    <th>
+                        job cost
+                    </th>
+                    <th>
+                        job cost (inc. gst)
+                    </th>
+                    <th>
+                        unit price
+                    </th>
+                    <th class="buttonTableRow"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (PaperCalc.DTOs.Sra3InputAndCalc sraItem in Model.Job.Sra3Items)
+                {
+                    <tr class="rowWithData">
+                        <td>
+                            @sraItem.Calc.Description
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => sraItem.Calc.FinalJobCost)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => sraItem.Calc.FinalJobCostWithGst)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => sraItem.Calc.CostPerunit)
+                        </td>
+                        <td class="tdForButton">
+                            <span class="stockNavButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="dotsForButton noselect">...</span></span>
+                            <div class="dropdown-menu stockDropDown" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item stockDropDownBorder" asp-page="./Sra3/Edit" asp-route-id="@sraItem.Inputs.Id">
+                                    <object class="svg" data="/Images/edit.svg" width="15" height="15"> </object>
+                                    edit
+                                </a>
+                                <a class="dropdown-item" asp-page="./Sra3/Delete" asp-route-id="@sraItem.Inputs.Id">
+                                    <object class="svg" data="/Images/delete.svg" width="15" height="15"> </object>
+                                    delete
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <h6>no booklet items <a asp-route-id="@Model.Job.Id" asp-page="../Booklets">+ add new</a></h6>
+    }
+
 </div>
-<div>
-    <a asp-page="./Edit" asp-route-id="@Model.Quote?.Id">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
+
+<div class="stockDetailsButtons">
+    <a class="btn btn-primary" asp-page="./Index">back to stock</a>
 </div>

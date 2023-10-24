@@ -25,7 +25,7 @@ namespace PaperCalc.Pages
             _context = context;
             _env = env;
             Settings = new();
-            FlatSizes = _context.FlatSizes.Where(x => x.ForCalculation == CalculationType.Flat).ToList();
+            FlatSizes = _context.FlatSizes.Where(x => x.ForCalculation == CalculationType.Document).ToList();
             DocumentsStock = _context.DocumentsStock.ToList();
             Settings.SetSettings(_env.ContentRootPath);
             _configuration = config;
@@ -33,7 +33,7 @@ namespace PaperCalc.Pages
         }
         public PaperCalc.DTOs.Settings? Settings { get; set; }
         [BindProperty]
-        public PaperCalc.DTOs.DocumentFormInputs Inputs { get; set; }
+        public PaperCalc.Models.DocumentFormInputs Inputs { get; set; }
         public PaperCalc.DTOs.DocumentCalculation? Calculation { get; set; } = null;
         public List<PaperCalc.Models.FlatSize> FlatSizes { get; set; }
         public List<PaperCalc.Models.DocumentsStock> DocumentsStock { get; set; }
@@ -46,7 +46,7 @@ namespace PaperCalc.Pages
         public void OnPost()
         {
             Calculation = new(_context, _env.ContentRootPath, Inputs);
-            FlatSizes = _context.FlatSizes.Where(x => x.ForCalculation == CalculationType.Flat).ToList();
+            FlatSizes = _context.FlatSizes.Where(x => x.ForCalculation == CalculationType.Document).ToList();
             DocumentsStock = _context.DocumentsStock.ToList();
         }
     }

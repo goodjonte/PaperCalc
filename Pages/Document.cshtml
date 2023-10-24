@@ -58,8 +58,6 @@
                 </select>
             </div>
             <div class="inputForRow">
-                <label>pages<span class="requiredStar">*</span></label>
-                <input type="number" placeholder="0" asp-for="Inputs.Pages">
             </div>
         </div>
     </div>
@@ -87,8 +85,6 @@
                 </select>
             </div>
             <div class="inputForRow">
-                <label>copy quantity<span class="requiredStar">*</span></label>
-                <input type="number" placeholder="0" asp-for="Inputs.Quantity">
             </div>
         </div>
     </div>
@@ -152,7 +148,7 @@
         <div class="inputsForRow">
             <div class="inputForRow">
                 <label>design</label>
-                <input placeholder="$00.00" type="text" asp-for="Inputs.DesignCost"/>
+                <input placeholder="$00.00" type="text" asp-for="Inputs.DesignCost" />
             </div>
             <div class="inputForRow">
                 <label>file handling</label>
@@ -160,7 +156,7 @@
             </div>
             <div class="inputForRow">
                 <label>setup</label>
-                <input placeholder="$00.00" type="text"  asp-for="Inputs.SetupCost"/>
+                <input placeholder="$00.00" type="text" asp-for="Inputs.SetupCost" />
             </div>
         </div>
     </div>
@@ -188,6 +184,26 @@
         </div>
     </div>
 
+    <div class="inputRow">
+        <div class="inputRowTitle">
+            <h3>quantitys</h3>
+        </div>
+        <div class="inputsForRow">
+            <div class="inputForRow">
+                <label>copy quantity<span class="requiredStar">*</span></label>
+                <input type="number" placeholder="0" asp-for="Inputs.Quantity">
+            </div>
+            <div class="inputForRow">
+                <label>pages<span class="requiredStar">*</span></label>
+                <input type="number" placeholder="0" asp-for="Inputs.Pages">
+            </div>
+            <div class="inputForRow">
+                <label>quantity<span class="requiredStar">*</span></label>
+                <input placeholder="1" type="number" asp-for="Inputs.Kinds">
+            </div>
+        </div>
+    </div>
+
     <button class="btn btn-success calculationSubmitButton">generate quote</button>
 
 </form>
@@ -199,10 +215,10 @@
             <dl id="calculationTotals">
 
                 <dt>Job Cost:</dt>
-                <dd>@Html.DisplayFor(model => Model.Calculation.JobCost)</dd>
+                <dd>@Html.DisplayFor(model => Model.Calculation.FinalJobCost)</dd>
 
                 <dt>Job Cost (GST Inc):</dt>
-                <dd>@Html.DisplayFor(model => Model.Calculation.JobCostWithGST)</dd>
+                <dd>@Html.DisplayFor(model => Model.Calculation.FinalJobCostWithGST)</dd>
 
             </dl>
 

@@ -1,33 +1,32 @@
 ﻿@page
-@model PaperCalc.Pages.Job.IndexModel
+@model PaperCalc.Pages.Jobs.IndexModel
 
 @{
     ViewData["Title"] = "Index";
 }
-<div class="JobsHome">
-
+<div class="stockIndexPage">
     <h1 class="stockTitle">Jobs</h1>
 
     <div class="scrollableTable">
         <table class="customTable">
             <thead>
-                <tr class="rowWithData">
-                    <th>
-                        job name 
-                    </th>
-                    <th>
-                        buissness
+                <tr>
+                    <th class="position-relative">
+                        job title
                     </th>
                     <th>
                         client name
+                    </th>
+                    <th>
+                        buisness name
                     </th>
                     <th class="buttonTableRow"></th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model.Quote)
+                @foreach (var item in Model.Job)
                 {
-                    <tr>
+                    <tr class="rowWithData">
                         <td>
                             @Html.DisplayFor(modelItem => item.JobTitle)
                         </td>
@@ -35,17 +34,11 @@
                             @Html.DisplayFor(modelItem => item.ClientName)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.BuissnessName)
+                            @Html.DisplayFor(modelItem => item.Buissnessname)
                         </td>
-
                         <td class="tdForButton">
                             <span class="stockNavButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="dotsForButton noselect">...</span></span>
                             <div class="dropdown-menu stockDropDown" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item stockDropDownBorder" asp-page="./Edit" asp-route-id="@item.Id">
-                                    <object class="svg" data="/Images/edit.svg" width="15" height="15"> </object>
-                                    edit
-                                </a>
-
                                 <a class="dropdown-item stockDropDownBorder" asp-page="./Details" asp-route-id="@item.Id">
                                     <object class="svg" data="/Images/details.svg" width="15" height="15"> </object>
                                     details

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using PaperCalc.Data;
 using PaperCalc.Models;
 
-namespace PaperCalc.Pages.Job
+namespace PaperCalc.Pages.Jobs
 {
     public class IndexModel : PageModel
     {
@@ -19,13 +19,13 @@ namespace PaperCalc.Pages.Job
             _context = context;
         }
 
-        public IList<Quote> Quote { get;set; } = default!;
+        public IList<Job> Job { get;set; } = default!;
 
         public async Task OnGetAsync()
         {
-            if (_context.Quote != null)
+            if (_context.Job != null)
             {
-                Quote = await _context.Quote.ToListAsync();
+                Job = await _context.Job.ToListAsync();
             }
         }
     }
