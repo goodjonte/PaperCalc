@@ -176,29 +176,29 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (PaperCalc.DTOs.Sra3InputAndCalc sraItem in Model.Job.Sra3Items)
+                @foreach (PaperCalc.DTOs.DocumentInputAndCalc docItem in Model.Job.DocumentItems)
                 {
                     <tr class="rowWithData">
                         <td>
-                            @sraItem.Calc.Description
+                            @docItem.Calc.Description
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => sraItem.Calc.FinalJobCost)
+                            @Html.DisplayFor(modelItem => docItem.Calc.FinalJobCost)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => sraItem.Calc.FinalJobCostWithGst)
+                            @Html.DisplayFor(modelItem => docItem.Calc.FinalJobCostWithGST)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => sraItem.Calc.CostPerunit)
+                            @Html.DisplayFor(modelItem => docItem.Calc.CostPerUnit)
                         </td>
                         <td class="tdForButton">
                             <span class="stockNavButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="dotsForButton noselect">...</span></span>
                             <div class="dropdown-menu stockDropDown" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item stockDropDownBorder" asp-page="./Sra3/Edit" asp-route-id="@sraItem.Inputs.Id">
+                                <a class="dropdown-item stockDropDownBorder" asp-page="./Sra3/Edit" asp-route-id="@docItem.Inputs.Id">
                                     <object class="svg" data="/Images/edit.svg" width="15" height="15"> </object>
                                     edit
                                 </a>
-                                <a class="dropdown-item" asp-page="./Sra3/Delete" asp-route-id="@sraItem.Inputs.Id">
+                                <a class="dropdown-item" asp-page="./Sra3/Delete" asp-route-id="@docItem.Inputs.Id">
                                     <object class="svg" data="/Images/delete.svg" width="15" height="15"> </object>
                                     delete
                                 </a>
@@ -239,29 +239,29 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (PaperCalc.DTOs.Sra3InputAndCalc sraItem in Model.Job.Sra3Items)
+                @foreach (PaperCalc.DTOs.BookletInputAndCalc bookItem in Model.Job.BookletItems)
                 {
                     <tr class="rowWithData">
                         <td>
-                            @sraItem.Calc.Description
+                            @bookItem.Calc.Description
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => sraItem.Calc.FinalJobCost)
+                            @Html.DisplayFor(modelItem => bookItem.Calc.FinalJobCost)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => sraItem.Calc.FinalJobCostWithGst)
+                            @Html.DisplayFor(modelItem => bookItem.Calc.FinalJobCostWithGST)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => sraItem.Calc.CostPerunit)
+                            @Html.DisplayFor(modelItem => bookItem.Calc.CostPerUnit)
                         </td>
                         <td class="tdForButton">
                             <span class="stockNavButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="dotsForButton noselect">...</span></span>
                             <div class="dropdown-menu stockDropDown" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item stockDropDownBorder" asp-page="./Sra3/Edit" asp-route-id="@sraItem.Inputs.Id">
+                                <a class="dropdown-item stockDropDownBorder" asp-page="./Sra3/Edit" asp-route-id="@bookItem.Inputs.Id">
                                     <object class="svg" data="/Images/edit.svg" width="15" height="15"> </object>
                                     edit
                                 </a>
-                                <a class="dropdown-item" asp-page="./Sra3/Delete" asp-route-id="@sraItem.Inputs.Id">
+                                <a class="dropdown-item" asp-page="./Sra3/Delete" asp-route-id="@bookItem.Inputs.Id">
                                     <object class="svg" data="/Images/delete.svg" width="15" height="15"> </object>
                                     delete
                                 </a>

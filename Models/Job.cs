@@ -16,8 +16,8 @@ namespace PaperCalc.Models
 
         //List of items for the job - not stored in db
         public List<Sra3InputAndCalc> Sra3Items { get; set; } = new();
-        public List<BookletCalculation> BookletItems { get; set; } = new();
-        public List<DocumentCalculation> DocumentItems { get; set; } = new();
+        public List<BookletInputAndCalc> BookletItems { get; set; } = new();
+        public List<DocumentInputAndCalc> DocumentItems { get; set; } = new();
 
         //Gets the items for the job from the database and adds them to the lists
         public void GetItems(PaperCalcContext context, String path)
@@ -41,14 +41,14 @@ namespace PaperCalc.Models
                         var bookletItem = context.BookletFormInputs.Find(jobsItems[i].InputId);
                         if (bookletItem != null)
                         {
-                            BookletItems.Add(new (context, path, bookletItem));
+                            BookletItems.Add(new (new (context, path, bookletItem), bookletItem ));
                         }
                         break;
                     case CalculationType.Document:
                         var docItem = context.DocumentFormInputs.Find(jobsItems[i].InputId);
                         if (docItem != null)
                         {
-                            DocumentItems.Add(new (context, path, docItem));
+                            DocumentItems.Add(new (new (context, path, docItem), docItem));
                         }
                         break;
 

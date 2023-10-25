@@ -13,4 +13,26 @@ namespace PaperCalc.DTOs
         public Sra3Calculation Calc { get; set; }
         public Sra3FormInput Inputs { get; set; }
     }
+    [NotMapped]
+    public class DocumentInputAndCalc
+    {
+        public DocumentInputAndCalc(DocumentCalculation calc, DocumentFormInputs inputs)
+        {
+            Calc = calc;
+            Inputs = inputs;
+        }
+        public DocumentCalculation Calc { get; set; }
+        public DocumentFormInputs Inputs { get; set; }
+    }
+    [NotMapped]
+    public class BookletInputAndCalc
+    {
+        public BookletInputAndCalc(BookletCalculation calc, BookletFormInputs inputs)
+        {
+            Calc = calc;
+            Inputs = inputs;
+        }
+        public BookletCalculation Calc { get; set; }
+        public BookletFormInputs Inputs { get; set; }
+    }
 }

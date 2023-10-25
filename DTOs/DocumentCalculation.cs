@@ -234,6 +234,8 @@ namespace PaperCalc.DTOs
         public double FinalJobCost { get { return Inputs.Kinds < 2 ? JobCost : JobCost * Inputs.Kinds * 0.80; } }
         [DisplayFormat(DataFormatString = "{0:c}")]
         public double FinalJobCostWithGST { get { return FinalJobCost * 1.15; } }
+        [DisplayFormat(DataFormatString = "{0:c}")]
+        public double CostPerUnit { get { return FinalJobCostWithGST / Inputs.Quantity; } }
         public string? Description
         {
             get

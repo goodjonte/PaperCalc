@@ -11,26 +11,62 @@
     <div class="inputRow inputRowWithBorder">
 
         <!-- JS for showing corresponding elements -->
+        @if (Model.JobId != null)
+        {
+            <script>
+                setTimeout(() => {
+                    document.getElementById("existingJobSelect").classList.remove("hidden");
+                    document.getElementById("newOrExistingJob").classList.add("hidden");
+                }, 500);
+            </script>
+        }
         <script>
-            document.getElementById("newjobButton").addEventListener("click", function () {
+            function newJob() {
                 document.getElementById("newJobDetails").classList.remove("hidden");
                 document.getElementById("newOrExistingJob").classList.add("hidden");
-            });
-            document.getElementById("existingJobButton").addEventListener("click", function () {
-                document.getElementById("existingJobButton").classList.remove("hidden");
+            };
+            function existingJob() {
+                document.getElementById("existingJobSelect").classList.remove("hidden");
                 document.getElementById("newOrExistingJob").classList.add("hidden");
-            });
+            };
         </script>
 
         <!--new or existing job -->
         <div id="newOrExistingJob">
-            <div id="newJobButton" class="btn btn-success">new job</div>
-            <div id="existingJobButton" class="btn btn-success">existing job</div>
+            <div class="inputRowTitle">
+                <h3>job details</h3>
+            </div>
+            <div class="jobButtons">
+                <div id="newJobButton" onclick="newJob()" class="btn btn-success inputForRow">new job</div>
+                <div id="existingJobButton" onclick="existingJob()" class="btn btn-success inputForRow">existing job</div>
+            </div>
         </div>
 
         <!-- existing job select -->
         <div id="existingJobSelect" class="hidden">
+            <div class="inputRowTitle">
+                <h3>job details</h3>
+            </div>
+            <div class="inputsForRow">
+                <div class="inputForRow">
 
+                </div>
+                <div class="inputForRow">
+                    <label>select job<span class="requiredStar">*</span></label>
+                    <select class="custom-select" asp-for="JobId">
+                        <option class="defaultOption" value="">select a job...</option>
+                        @{
+                            foreach (PaperCalc.Models.Job j in Model.Jobs)
+                            {
+                                <option value="@j.Id">@j.JobTitle</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="inputForRow">
+
+                </div>
+            </div>
         </div>
 
         <!-- new job details -->
@@ -41,15 +77,15 @@
             <div class="inputsForRow">
                 <div class="inputForRow">
                     <label>job title<span class="requiredStar">*</span></label>
-                    <input placeholder="job title" type="text" />
+                    <input placeholder="job title" asp-for="Job.JobTitle" type="text" />
                 </div>
                 <div class="inputForRow">
                     <label>client name<span class="requiredStar">*</span></label>
-                    <input placeholder="client name" type="text" />
+                    <input placeholder="client name" asp-for="Job.ClientName" type="text" />
                 </div>
                 <div class="inputForRow">
                     <label>business name</label>
-                    <input placeholder="business name" type="text" />
+                    <input placeholder="business name" asp-for="Job.Buissnessname" type="text" />
                 </div>
             </div>
         </div>
@@ -99,7 +135,7 @@
                 </select>
             </div>
         </div>
-    </div>x
+    </div>
 
     <!-- Printing -->
     <div class="inputRow inputRowWithBorder">
@@ -197,7 +233,7 @@
                 <input type="number" placeholder="0" asp-for="Inputs.Pages">
             </div>
             <div class="inputForRow">
-                <label>quantity<span class="requiredStar">*</span></label>
+                <label>kinds<span class="requiredStar">*</span></label>
                 <input placeholder="1" type="number" asp-for="Inputs.Kinds">
             </div>
         </div>
