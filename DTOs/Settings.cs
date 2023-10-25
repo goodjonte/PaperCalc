@@ -8,32 +8,29 @@ namespace PaperCalc.DTOs
     public class Settings
     {
         public string? PathForSettings { get; set; }
-        [Display(Name = "Minimum Job Cost ($)")]
+
+        //Settings Properties
+        [Display(Name = "Minimum Job Cost ($ before gst)")]
         public double MinimumJobCost { get; set; }
-        [Display(Name = "Filehandling Cost ($)")]
-        public double FilehandlingCost { get; set; }
-        [Display(Name = "Small & Urgent Fee ($)")]
-        public double SmallOrUrgentMinimum { get; set; }
-        [Display(Name = "Margin Multiplier")]
-        public double MarginMultiplier { get; set; }
-        [Display(Name = "For Small Or Urgent Jobs")]
-        public double MarginMultiplierSmallOrUrgent { get; set; }
-        [Display(Name = "Buffer Multiplier")]
+        [Display(Name = "Kinds Multiplier")]
+        public double KindsMultiplier { get; set; }
+        [Display(Name = "Gst (% as decimal)")]
+        public double Gst { get; set; }
+        [Display(Name = "Buffer Standard")]
         public double Buffer { get; set; }
-        [Display(Name = "For Small Or Urgent Jobs")]
-        public double BufferSmallOrUrgent { get; set; }
-        [Display(Name = "Creasing Multiplier - For 1")]
-        public double Creasing1 { get; set; }
-        [Display(Name = "For 2")]
-        public double Creasing2 { get; set; }
-        [Display(Name = "For 3")]
-        public double Creasing3 { get; set; }
-        [Display(Name = "Folding Multiplier - For 1")]
-        public double Folding1 { get; set; }
-        [Display(Name = "For 2")]
-        public double Folding2 { get; set; }
-        [Display(Name = "For 3")]
-        public double Folding3 { get; set; }
+        [Display(Name = "Buffer High")]
+        public double BufferHigh { get; set; }
+        [Display(Name = "Creasing Base Price")]
+        public double CreasingBase { get; set; }
+        [Display(Name = "Folding Base Price")]
+        public double FoldingBase { get; set; }
+        [Display(Name = "Stapling Base Price")]
+        public double StaplingBase { get; set; }
+        [Display(Name = "Hole Punching Division Rate")]
+        public double HolePunchingBase { get; set; }
+        [Display(Name = "Base Click Rate")]
+        public double ClickRateBase { get; set; }
+
 
         public void SetSettings(String path)
         {
@@ -42,32 +39,31 @@ namespace PaperCalc.DTOs
             doc.Load(string.Concat(path, "/wwwroot/Settings.xml"));
 
             XmlNode? minimumJobCost = doc.SelectSingleNode("/Settings/MinimumJobCost");
-            XmlNode? fileHandlingCost = doc.SelectSingleNode("/Settings/FilehandlingCost");
-            XmlNode? marginMultiplier = doc.SelectSingleNode("/Settings/MarginMultiplier/Standard");
-            XmlNode? marginMultiplierSmallOrUrgent = doc.SelectSingleNode("/Settings/MarginMultiplier/SmallOrUrgent");
-            XmlNode? bufferMultiplier = doc.SelectSingleNode("/Settings/Buffer/Standard");
-            XmlNode? bufferMultiplierSmallOrUrgent = doc.SelectSingleNode("/Settings/Buffer/SmallOrUrgent");
-            XmlNode? smallOrUrgentMinimum = doc.SelectSingleNode("/Settings/SmallOrUrgentMinimum");
-            XmlNode? creasing1 = doc.SelectSingleNode("/Settings/Creasing/CreasingOneMultiplier");
-            XmlNode? creasing2 = doc.SelectSingleNode("/Settings/Creasing/CreasingTwoMultiplier");
-            XmlNode? creasing3 = doc.SelectSingleNode("/Settings/Creasing/CreasingThreeMultiplier");
-            XmlNode? folding1 = doc.SelectSingleNode("/Settings/Folding/FoldingOneMultiplier");
-            XmlNode? folding2 = doc.SelectSingleNode("/Settings/Folding/FoldingTwoMultiplier");
-            XmlNode? folding3 = doc.SelectSingleNode("/Settings/Folding/FoldingThreeMultiplier");
+
+            XmlNode? kindsMultiplier = doc.SelectSingleNode("/Settings/KindsMultiplier");
+
+            XmlNode? buffer = doc.SelectSingleNode("/Settings/Buffer/Standard");
+            XmlNode? bufferHigh = doc.SelectSingleNode("/Settings/Buffer/High");
+
+            XmlNode? gst = doc.SelectSingleNode("/Settings/Gst");
+
+            XmlNode? holePunchingBase = doc.SelectSingleNode("/Settings/HolePunching/Base");
+            XmlNode? creasingBase = doc.SelectSingleNode("/Settings/Creasing/Base");
+            XmlNode? foldingBase = doc.SelectSingleNode("/Settings/Folding/Base");
+            XmlNode? staplingBase = doc.SelectSingleNode("/Settings/Stapling/Base");
+
+            XmlNode? clickRateBase = doc.SelectSingleNode("/Settings/ClickRate/Base");
 
             MinimumJobCost = minimumJobCost != null ? Convert.ToDouble(minimumJobCost.InnerText) : 0;
-            FilehandlingCost = fileHandlingCost != null ? Convert.ToDouble(fileHandlingCost.InnerText) : 0;
-            MarginMultiplier = marginMultiplier != null ? Convert.ToDouble(marginMultiplier.InnerText) : 0;
-            MarginMultiplierSmallOrUrgent = marginMultiplierSmallOrUrgent != null ? Convert.ToDouble(marginMultiplierSmallOrUrgent.InnerText) : 0;
-            Buffer = bufferMultiplier != null ? Convert.ToDouble(bufferMultiplier.InnerText) : 0;
-            BufferSmallOrUrgent = bufferMultiplierSmallOrUrgent != null ? Convert.ToDouble(bufferMultiplierSmallOrUrgent.InnerText) : 0;
-            SmallOrUrgentMinimum = smallOrUrgentMinimum != null ? Convert.ToDouble(smallOrUrgentMinimum.InnerText) : 0;
-            Creasing1 = creasing1 != null ? Convert.ToDouble(creasing1.InnerText) : 0;
-            Creasing2 = creasing2 != null ? Convert.ToDouble(creasing2.InnerText) : 0;
-            Creasing3 = creasing3 != null ? Convert.ToDouble(creasing3.InnerText) : 0;
-            Folding1 = folding1 != null ? Convert.ToDouble(folding1.InnerText) : 0;
-            Folding2 = folding2 != null ? Convert.ToDouble(folding2.InnerText) : 0;
-            Folding3 = folding3 != null ? Convert.ToDouble(folding3.InnerText) : 0;
+            KindsMultiplier = kindsMultiplier != null ? Convert.ToDouble((string)kindsMultiplier.InnerText) : 0;
+            Buffer = buffer != null ? Convert.ToDouble(((string)buffer.InnerText).Trim()) : 0;
+            BufferHigh = bufferHigh != null ? Convert.ToDouble(((string)bufferHigh.InnerText).Trim()) : 0;
+            Gst = gst != null ? Convert.ToDouble(((string)gst.InnerText).Trim()) : 0;
+            HolePunchingBase = holePunchingBase != null ? Convert.ToDouble(((string)holePunchingBase.InnerText).Trim()) : 0;
+            CreasingBase = creasingBase != null ? Convert.ToDouble(((string)creasingBase.InnerText).Trim()) : 0;
+            FoldingBase = foldingBase != null ? Convert.ToDouble(((string)foldingBase.InnerText).Trim()) : 0;
+            StaplingBase = staplingBase != null ? Convert.ToDouble(((string)staplingBase.InnerText).Trim()) : 0;
+            ClickRateBase = clickRateBase != null ? Convert.ToDouble(((string)clickRateBase.InnerText).Trim()) : 0;
 
         }
         public void SaveSettings(String path)
@@ -76,34 +72,33 @@ namespace PaperCalc.DTOs
             doc.Load(string.Concat(path, "/wwwroot/Settings.xml"));
 
             XmlNode? minimumJobCost = doc.SelectSingleNode("/Settings/MinimumJobCost");
-            XmlNode? fileHandlingCost = doc.SelectSingleNode("/Settings/FilehandlingCost");
-            XmlNode? marginMultiplier = doc.SelectSingleNode("/Settings/MarginMultiplier/Standard");
-            XmlNode? marginMultiplierSmallOrUrgent = doc.SelectSingleNode("/Settings/MarginMultiplier/SmallOrUrgent");
-            XmlNode? bufferMultiplier = doc.SelectSingleNode("/Settings/Buffer/Standard");
-            XmlNode? bufferMultiplierSmallOrUrgent = doc.SelectSingleNode("/Settings/Buffer/SmallOrUrgent");
-            XmlNode? smallOrUrgentMinimum = doc.SelectSingleNode("/Settings/SmallOrUrgentMinimum");
-            XmlNode? creasing1 = doc.SelectSingleNode("/Settings/Creasing/CreasingOneMultiplier");
-            XmlNode? creasing2 = doc.SelectSingleNode("/Settings/Creasing/CreasingTwoMultiplier");
-            XmlNode? creasing3 = doc.SelectSingleNode("/Settings/Creasing/CreasingThreeMultiplier");
-            XmlNode? folding1 = doc.SelectSingleNode("/Settings/Folding/FoldingOneMultiplier");
-            XmlNode? folding2 = doc.SelectSingleNode("/Settings/Folding/FoldingTwoMultiplier");
-            XmlNode? folding3 = doc.SelectSingleNode("/Settings/Folding/FoldingThreeMultiplier");
 
-            if (minimumJobCost != null && fileHandlingCost != null && marginMultiplier != null && marginMultiplierSmallOrUrgent != null && bufferMultiplier != null && bufferMultiplierSmallOrUrgent != null && smallOrUrgentMinimum != null && creasing1 != null && creasing2 != null && creasing3 != null && folding1 != null && folding2 != null && folding3 != null)
+            XmlNode? kindsMultiplier = doc.SelectSingleNode("/Settings/KindsMultiplier");
+
+            XmlNode? buffer = doc.SelectSingleNode("/Settings/Buffer/Standard");
+            XmlNode? bufferHigh = doc.SelectSingleNode("/Settings/Buffer/High");
+
+            XmlNode? gst = doc.SelectSingleNode("/Settings/Gst");
+
+            XmlNode? holePunchingBase = doc.SelectSingleNode("/Settings/HolePunching/Base");
+            XmlNode? creasingBase = doc.SelectSingleNode("/Settings/Creasing/Base");
+            XmlNode? foldingBase = doc.SelectSingleNode("/Settings/Folding/Base");
+            XmlNode? staplingBase = doc.SelectSingleNode("/Settings/Stapling/Base");
+
+            XmlNode? clickRateBase = doc.SelectSingleNode("/Settings/ClickRate/Base");
+
+            if (minimumJobCost != null && kindsMultiplier != null && buffer != null && bufferHigh != null && gst != null && holePunchingBase != null && creasingBase != null && foldingBase != null && staplingBase != null && clickRateBase != null)
             {
                 minimumJobCost.InnerText = MinimumJobCost.ToString();
-                fileHandlingCost.InnerText = FilehandlingCost.ToString();
-                marginMultiplier.InnerText = MarginMultiplier.ToString();
-                marginMultiplierSmallOrUrgent.InnerText = MarginMultiplierSmallOrUrgent.ToString();
-                bufferMultiplier.InnerText = Buffer.ToString();
-                bufferMultiplierSmallOrUrgent.InnerText = BufferSmallOrUrgent.ToString();
-                smallOrUrgentMinimum.InnerText = SmallOrUrgentMinimum.ToString();
-                creasing1.InnerText = Creasing1.ToString();
-                creasing2.InnerText = Creasing2.ToString();
-                creasing3.InnerText = Creasing3.ToString();
-                folding1.InnerText = Folding1.ToString();
-                folding2.InnerText = Folding2.ToString();
-                folding3.InnerText = Folding3.ToString();
+                kindsMultiplier.InnerText = KindsMultiplier.ToString();
+                buffer.InnerText = Buffer.ToString();
+                bufferHigh.InnerText = BufferHigh.ToString();
+                gst.InnerText = Gst.ToString();
+                holePunchingBase.InnerText = HolePunchingBase.ToString();
+                creasingBase.InnerText = CreasingBase.ToString();
+                foldingBase.InnerText = FoldingBase.ToString();
+                staplingBase.InnerText = StaplingBase.ToString();
+                clickRateBase.InnerText = ClickRateBase.ToString();
             }
 
             doc.Save(string.Concat(path, "/wwwroot/Settings.xml"));

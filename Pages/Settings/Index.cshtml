@@ -2,306 +2,300 @@
 @model PaperCalc.Pages.Settings.IndexModel
 @{
 }
-<h1>Settings</h1>
+<div class="calculationForm">
 
-<!-- Bootstrap tabs -->
-<ul class="nav nav-tabs" id="myTab" role="tablist">
-    <li class="nav-item" role="presentation">
-        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Values</button>
-    </li>
-    <li class="nav-item" role="presentation">
-        <button class="nav-link" id="flatsize-tab" data-bs-toggle="tab" data-bs-target="#flatsize" type="button" role="tab" aria-controls="flatsize" aria-selected="false">Flat Sizes</button>
-    </li>
-    <li class="nav-item" role="presentation">
-        <button class="nav-link" id="userTab-tab" data-bs-toggle="tab" data-bs-target="#userTab" type="button" role="tab" aria-controls="userTab" aria-selected="false">Users</button>
-    </li>
-</ul>
-<!-- Tabs -->
-<div class="tab-content" id="myTabContent">
-    <!-- Values Tab -->
-    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-        <form method="post" asp-page-handler="SaveSettings">
+    <h1 class="calculationTitle">Settings</h1>
 
-            <div class="input-group mb-3 settingsBasicInput">
-                <div class="input-group-prepend">
-                    <label class="input-group-text" id="basic-addon1" asp-for="Settings.MinimumJobCost"></label>
-                </div>
-                <input type="number" class="form-control inputCurve" step="any" asp-for="Settings.MinimumJobCost">
-            </div>
+    <!-- Bootstrap tabs -->
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Values</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="flatsize-tab" data-bs-toggle="tab" data-bs-target="#flatsize" type="button" role="tab" aria-controls="flatsize" aria-selected="false">Flat Sizes</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="userTab-tab" data-bs-toggle="tab" data-bs-target="#userTab" type="button" role="tab" aria-controls="userTab" aria-selected="false">Users</button>
+        </li>
+    </ul>
+    <!-- Tabs -->
+    <div class="tab-content" id="myTabContent">
+        <!-- Values Tab -->
+        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <form method="post" asp-page-handler="SaveSettings">
 
-            <div class="input-group mb-3 settingsBasicInput">
-                <div class="input-group-prepend">
-                    <label class="input-group-text" id="basic-addon1" asp-for="Settings.FilehandlingCost"></label>
-                </div>
-                <input type="number" class="form-control inputCurve" step="any" asp-for="Settings.FilehandlingCost">
-            </div>
-
-            <div class="input-group mb-3 settingsBasicInput">
-                <div class="input-group-prepend">
-                    <label class="input-group-text" id="basic-addon1" asp-for="Settings.SmallOrUrgentMinimum"></label>
-                </div>
-                <input type="number" class="form-control inputCurve" step="any" asp-for="Settings.SmallOrUrgentMinimum">
-            </div>
-
-            <div class="input-group mb-3 settingsSmallUrgentInput">
-                <div class="input-group-prepend">
-                    <label class="input-group-text" id="basic-addon1" asp-for="Settings.MarginMultiplier"></label>
-                </div>
-                <input type="number" class="form-control noInputCurve" step="any" asp-for="Settings.MarginMultiplier">
-
-                <div class="input-group-prepend">
-                    <label class="input-group-text" id="basic-addon1" asp-for="Settings.MarginMultiplierSmallOrUrgent"></label>
-                </div>
-                <input type="number" class="form-control inputCurve" step="any" asp-for="Settings.MarginMultiplierSmallOrUrgent">
-            </div>
-
-            <div class="input-group mb-3 settingsSmallUrgentInput">
-                <div class="input-group-prepend">
-                    <label class="input-group-text" id="basic-addon1" asp-for="Settings.Buffer"></label>
-                </div>
-                <input type="number" class="form-control noInputCurve" step="any" asp-for="Settings.Buffer">
-
-                <div class="input-group-prepend">
-                    <label class="input-group-text" id="basic-addon1" asp-for="Settings.BufferSmallOrUrgent"></label>
-                </div>
-                <input type="number" class="form-control inputCurve" step="any" asp-for="Settings.BufferSmallOrUrgent">
-            </div>
-
-            <div class="input-group mb-3 settings3ValuesInput">
-                <div class="input-group-prepend">
-                    <label class="input-group-text" id="basic-addon1" asp-for="Settings.Creasing1"></label>
-                </div>
-                <input type="number" class="form-control noInputCurve" step="any" asp-for="Settings.Creasing1">
-
-                <div class="input-group-prepend">
-                    <label class="input-group-text" id="basic-addon1" asp-for="Settings.Creasing2"></label>
-                </div>
-                <input type="number" class="form-control noInputCurve" step="any" asp-for="Settings.Creasing2">
-
-                <div class="input-group-prepend">
-                    <label class="input-group-text" id="basic-addon1" asp-for="Settings.Creasing3"></label>
-                </div>
-                <input type="number" class="form-control inputCurve" step="any" asp-for="Settings.Creasing3">
-            </div>
-
-            <div class="input-group mb-3 settings3ValuesInput">
-                <div class="input-group-prepend">
-                    <label class="input-group-text" id="basic-addon1" asp-for="Settings.Folding1"></label>
-                </div>
-                <input type="number" class="form-control noInputCurve" step="any" asp-for="Settings.Folding1">
-
-                <div class="input-group-prepend">
-                    <label class="input-group-text" id="basic-addon1" asp-for="Settings.Folding2"></label>
-                </div>
-                <input type="number" class="form-control noInputCurve" step="any" asp-for="Settings.Folding2">
-
-                <div class="input-group-prepend">
-                    <label class="input-group-text" id="basic-addon1" asp-for="Settings.Folding3"></label>
-                </div>
-                <input type="number" class="form-control inputCurve" step="any" asp-for="Settings.Folding3">
-            </div>
-
-            <div class="form-group settingsSubmit">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-    <!-- FlatSizes Tab -->
-    <div class="tab-pane fade" id="flatsize" role="tabpanel" aria-labelledby="flatsize-tab">
-        <ul class="nav nav-tabs" id="flatsizeTabs" role="tablist">
-            <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="aspeos-tab" data-bs-toggle="tab" data-bs-target="#aspeos" type="button" role="tab" aria-controls="aspeos" aria-selected="true">SRA3</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="flat-tab" data-bs-toggle="tab" data-bs-target="#flat" type="button" role="tab" aria-controls="flat" aria-selected="false">Flat</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="wide-tab" data-bs-toggle="tab" data-bs-target="#wide" type="button" role="tab" aria-controls="wide" aria-selected="false">Wide Format</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="booklet-tab" data-bs-toggle="tab" data-bs-target="#booklet" type="button" role="tab" aria-controls="booklet" aria-selected="false">Booklet</button>
-            </li>
-        </ul>
-        
-            <h2>Flat Sizes</h2>
-
-            <div class="tab-content" id="flatsizeTabsContent">
-                <div class="tab-pane fade show active" id="aspeos" role="tabpanel" aria-labelledby="aspeos-tab">
-                    <!-- Aspeos Edit -->
-                    <div id="AspeosFlatsize" class="customDivTable">
-                        <h3>Aspeos Flat Sizes</h3>
-                        <p>To delete a flatsize, set name to delete</p>
-                        <div class="customDivTableHead">
-                            @*<div>
-                                <h5>@Html.DisplayNameFor(model => model.AspeosFlatSizes[0].Name)</h5>
-                            </div>
-                            <div>
-                                <h5>@Html.DisplayNameFor(model => model.AspeosFlatSizes[0].PiecesPerSRA3)</h5>
-                            </div>
-                            <div>
-                                <h5>@Html.DisplayNameFor(model => model.AspeosFlatSizes[0].CutsPerSRA3)</h5>
-                            </div>
-                            <div>
-                                <h5>@Html.DisplayNameFor(model => model.AspeosFlatSizes[0].LaminationCost)</h5>
-                            </div>*@
-                            <div>
-                            </div>
-                        </div>
-
-                        <div class="customDivTableBody">
-                            @*@for (int i = 0; i < Model.AspeosFlatSizes.Count; i++)
-                            {
-
-                                <form method="post" asp-page-handler="AspeosEdit">
-                                    <input asp-for="AspeosFlatSize.Id" value="@Model.AspeosFlatSizes[i].Id" type="hidden" />
-                                    <div>
-                                        <input asp-for="AspeosFlatSize.Name" value="@Model.AspeosFlatSizes[i].Name" />
-                                    </div>
-                                    <div>
-                                        <input asp-for="AspeosFlatSize.PiecesPerSRA3" value="@Model.AspeosFlatSizes[i].PiecesPerSRA3" />
-                                    </div>
-                                    <div>
-                                        <input asp-for="AspeosFlatSize.CutsPerSRA3" value="@Model.AspeosFlatSizes[i].CutsPerSRA3" />
-                                    </div>
-                                    <div>
-                                        <input asp-for="AspeosFlatSize.LaminationCost" value="@Model.AspeosFlatSizes[i].LaminationCost" />
-                                    </div>
-                                    <div>
-                                        <input type="submit" value="Save" class="btn btn-primary tbButton" />
-                                    </div>
-                                </form>
-                            }*@
-                        </div>
+                <div class="input-group mb-3 settingsBasicInput">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" id="basic-addon1" asp-for="Settings.MinimumJobCost"></label>
                     </div>
-                    <!-- Aspeos Create -->
-                    <form method="post" id="EpsonFlatsize" asp-page-handler="EpsonEdit">
-                        <h1 class="RedText">Not Functional Yet</h1>
-                        <label>Epson Edit</label>
-                        <input type="number" />
-                    </form>
+                    <input type="number" class="form-control inputCurve" step="any" asp-for="Settings.MinimumJobCost">
                 </div>
 
-
-                <div class="tab-pane fade" id="flat" role="tabpanel" aria-labelledby="flat-tab">
-                    <!-- Flat Edit -->
-                    <div id="FlatFlatsize" class="customDivTable">
-                        <h3>Flat - Flat Sizes</h3>
-                        <p>To delete a flatsize, set name to delete</p>
-                        <div class="customDivTableHead">
-                            @*<div>
-                                <h5>@Html.DisplayNameFor(model => model.FlatFlatSizes[0].Name)</h5>
-                            </div>
-                            <div>
-                                <h5>@Html.DisplayNameFor(model => model.FlatFlatSizes[0].SizeMultiplier)</h5>
-                            </div>
-                            <div>
-                                <h5>@Html.DisplayNameFor(model => model.FlatFlatSizes[0].LaminationCost)</h5>
-                            </div>*@
-                            <div>
-                            </div>
-                        </div>
-                        <div class="customDivTableBody">
-                            @*@for (int i = 0; i < Model.FlatFlatSizes.Count; i++)
-                            {
-
-                                <form method="post" asp-page-handler="FlatEdit">
-                                    <input asp-for="FlatFlatSize.Id" value="@Model.FlatFlatSizes[i].Id" type="hidden" />
-                                    <div>
-                                        <input asp-for="FlatFlatSize.Name" value="@Model.FlatFlatSizes[i].Name" />
-                                    </div>
-                                    <div>
-                                        <input asp-for="FlatFlatSize.SizeMultiplier" value="@Model.FlatFlatSizes[i].SizeMultiplier" />
-                                    </div>
-                                    <div>
-                                        <input asp-for="FlatFlatSize.LaminationCost" value="@Model.FlatFlatSizes[i].LaminationCost" />
-                                    </div>
-                                    <div>
-                                        <input type="submit" value="Save" class="btn btn-primary tbButton" />
-                                    </div>
-                                </form>*@
-                            }
-                        </div>
+                <div class="input-group mb-3 settingsBasicInput">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" id="basic-addon1" asp-for="Settings.KindsMultiplier"></label>
                     </div>
-                    <!-- Flat Create -->
-                    <form method="post" id="EpsonFlatsize" asp-page-handler="EpsonEdit">
-                        <h1 class="RedText">Not Functional Yet</h1>
-                        <label>Epson Edit</label>
-                        <input type="number" />
-                    </form>
+                    <input type="number" class="form-control inputCurve" step="any" asp-for="Settings.KindsMultiplier">
                 </div>
 
-                <div class="tab-pane fade" id="booklet" role="tabpanel" aria-labelledby="booklet-tab">
-                    <!-- Booklet Edit -->
-                    <div id="BookletFlatsize" class="customDivTable">
-                        <h3>Booklet - Flat Sizes</h3>
-                        <p>To delete a flatsize, set name to delete</p>
-                        <div class="customDivTableHead">
-                            <div>
-                                @*<h5>@Html.DisplayNameFor(model => model.BookletFlatSizes[0].Name)</h5>*@
-                            </div>
-                            <div>
-                            </div>
-                        </div>
-                        <div class="customDivTableBody">
-                            @*@for (int i = 0; i < Model.BookletFlatSizes.Count; i++)
-                            {
-
-                                <form method="post" id="EpsonFlatsize" asp-page-handler="EpsonEdit">
-                                    <h1 class="RedText">Not Functional Yet</h1>
-                                    <label>Epson Edit</label>
-                                    <input type="number" />
-                                </form>
-                            }*@
-                        </div>
+                <div class="input-group mb-3 settingsBasicInput">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" id="basic-addon1" asp-for="Settings.Gst"></label>
                     </div>
-                    <!-- Booklet Create -->
-                    <form method="post" id="EpsonFlatsize" asp-page-handler="EpsonEdit">
-                        <h1 class="RedText">Not Functional Yet</h1>
-                        <label>Epson Edit</label>
-                        <input type="number" />
-                    </form>
+                    <input type="number" class="form-control inputCurve" step="any" asp-for="Settings.Gst">
                 </div>
 
-                <div class="tab-pane fade" id="wide" role="tabpanel" aria-labelledby="wide-tab">
-                    <!-- Epson Edit -->
-                    <form method="post" id="EpsonFlatsize" asp-page-handler="EpsonEdit">
-                        <h1 class="RedText">Not Functional Yet</h1>
-                        <label>Epson Edit</label>
-                        <input type="number" />
-                    </form>
+                <div class="input-group mb-3 settingsBasicInput">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" id="basic-addon1" asp-for="Settings.Buffer"></label>
+                    </div>
+                    <input type="number" class="form-control inputCurve" step="any" asp-for="Settings.Buffer">
+                </div>
 
-                    <!-- Epson Create -->
-                    <form method="post" id="CreateEpsonFlatsize" class="" asp-page-handler="EpsonCreate">
-                        <h1 class="RedText">Not Functional Yet</h1>
-                        <label>Epson Create</label>
-                        <input type="number" />
-                    </form>
+                <div class="input-group mb-3 settingsBasicInput">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" id="basic-addon1" asp-for="Settings.BufferHigh"></label>
+                    </div>
+                    <input type="number" class="form-control inputCurve" step="any" asp-for="Settings.BufferHigh">
                 </div>
-            </div>
-    </div>
-    <!-- Users Tab -->
-    <div class="tab-pane fade" id="userTab" role="tabpanel" aria-labelledby="userTab-tab">
-        <div id="CreateUser">
-            <h2>Create A User</h2>
-            <form method="post" asp-page-handler="CreateUser">
-                <div>
-                    <label asp-for="NewUser.UserName"></label>
-                    <input asp-for="NewUser.UserName" />
-                </div>
-                <div>
-                    <label asp-for="NewUser.Password"></label>
-                    <input asp-for="NewUser.Password" />
 
+                <div class="input-group mb-3 settingsBasicInput">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" id="basic-addon1" asp-for="Settings.CreasingBase"></label>
+                    </div>
+                    <input type="number" class="form-control inputCurve" step="any" asp-for="Settings.CreasingBase">
                 </div>
-                <div>
-                    <label asp-for="NewUser.Admin"></label>
-                    <input type="checkbox" value="true" asp-for="NewUser.Admin" />
+
+                <div class="input-group mb-3 settingsBasicInput">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" id="basic-addon1" asp-for="Settings.FoldingBase"></label>
+                    </div>
+                    <input type="number" class="form-control inputCurve" step="any" asp-for="Settings.FoldingBase">
                 </div>
-                <span asp-validation-for="NewUser.ValidationMessage" class="text-danger">@Model.NewUser.ValidationMessage</span>
-                <div>
-                    <input type="submit" value="Save" class="btn btn-primary tbButton" />
+
+                <div class="input-group mb-3 settingsBasicInput">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" id="basic-addon1" asp-for="Settings.StaplingBase"></label>
+                    </div>
+                    <input type="number" class="form-control inputCurve" step="any" asp-for="Settings.StaplingBase">
+                </div>
+
+                <div class="input-group mb-3 settingsBasicInput">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" id="basic-addon1" asp-for="Settings.HolePunchingBase"></label>
+                    </div>
+                    <input type="number" class="form-control inputCurve" step="any" asp-for="Settings.HolePunchingBase">
+                </div>
+
+                <div class="input-group mb-3 settingsBasicInput">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" id="basic-addon1" asp-for="Settings.ClickRateBase"></label>
+                    </div>
+                    <input type="number" class="form-control inputCurve" step="any" asp-for="Settings.ClickRateBase">
+                </div>
+
+                <div class="form-group settingsSubmit">
+                    <input type="submit" value="Save" class="btn btn-primary" />
                 </div>
             </form>
+        </div>
+        <!-- FlatSizes Tab -->
+        <div class="tab-pane fade" id="flatsize" role="tabpanel" aria-labelledby="flatsize-tab">
+            <ul class="nav nav-tabs" id="flatsizeTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="aspeos-tab" data-bs-toggle="tab" data-bs-target="#aspeos" type="button" role="tab" aria-controls="aspeos" aria-selected="true">SRA3</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="flat-tab" data-bs-toggle="tab" data-bs-target="#flat" type="button" role="tab" aria-controls="flat" aria-selected="false">Flat</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="wide-tab" data-bs-toggle="tab" data-bs-target="#wide" type="button" role="tab" aria-controls="wide" aria-selected="false">Wide Format</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="booklet-tab" data-bs-toggle="tab" data-bs-target="#booklet" type="button" role="tab" aria-controls="booklet" aria-selected="false">Booklet</button>
+                </li>
+            </ul>
+        
+                <h2>Flat Sizes</h2>
+
+                <div class="tab-content" id="flatsizeTabsContent">
+                    <div class="tab-pane fade show active" id="aspeos" role="tabpanel" aria-labelledby="aspeos-tab">
+                        <!-- Aspeos Edit -->
+                        <div id="AspeosFlatsize" class="customDivTable">
+                            <h3>Aspeos Flat Sizes</h3>
+                            <p>To delete a flatsize, set name to delete</p>
+                            <div class="customDivTableHead">
+                                @*<div>
+                                    <h5>@Html.DisplayNameFor(model => model.AspeosFlatSizes[0].Name)</h5>
+                                </div>
+                                <div>
+                                    <h5>@Html.DisplayNameFor(model => model.AspeosFlatSizes[0].PiecesPerSRA3)</h5>
+                                </div>
+                                <div>
+                                    <h5>@Html.DisplayNameFor(model => model.AspeosFlatSizes[0].CutsPerSRA3)</h5>
+                                </div>
+                                <div>
+                                    <h5>@Html.DisplayNameFor(model => model.AspeosFlatSizes[0].LaminationCost)</h5>
+                                </div>*@
+                                <div>
+                                </div>
+                            </div>
+
+                            <div class="customDivTableBody">
+                                @*@for (int i = 0; i < Model.AspeosFlatSizes.Count; i++)
+                                {
+
+                                    <form method="post" asp-page-handler="AspeosEdit">
+                                        <input asp-for="AspeosFlatSize.Id" value="@Model.AspeosFlatSizes[i].Id" type="hidden" />
+                                        <div>
+                                            <input asp-for="AspeosFlatSize.Name" value="@Model.AspeosFlatSizes[i].Name" />
+                                        </div>
+                                        <div>
+                                            <input asp-for="AspeosFlatSize.PiecesPerSRA3" value="@Model.AspeosFlatSizes[i].PiecesPerSRA3" />
+                                        </div>
+                                        <div>
+                                            <input asp-for="AspeosFlatSize.CutsPerSRA3" value="@Model.AspeosFlatSizes[i].CutsPerSRA3" />
+                                        </div>
+                                        <div>
+                                            <input asp-for="AspeosFlatSize.LaminationCost" value="@Model.AspeosFlatSizes[i].LaminationCost" />
+                                        </div>
+                                        <div>
+                                            <input type="submit" value="Save" class="btn btn-primary tbButton" />
+                                        </div>
+                                    </form>
+                                }*@
+                            </div>
+                        </div>
+                        <!-- Aspeos Create -->
+                        <form method="post" id="EpsonFlatsize" asp-page-handler="EpsonEdit">
+                            <h1 class="RedText">Not Functional Yet</h1>
+                            <label>Epson Edit</label>
+                            <input type="number" />
+                        </form>
+                    </div>
+
+
+                    <div class="tab-pane fade" id="flat" role="tabpanel" aria-labelledby="flat-tab">
+                        <!-- Flat Edit -->
+                        <div id="FlatFlatsize" class="customDivTable">
+                            <h3>Flat - Flat Sizes</h3>
+                            <p>To delete a flatsize, set name to delete</p>
+                            <div class="customDivTableHead">
+                                @*<div>
+                                    <h5>@Html.DisplayNameFor(model => model.FlatFlatSizes[0].Name)</h5>
+                                </div>
+                                <div>
+                                    <h5>@Html.DisplayNameFor(model => model.FlatFlatSizes[0].SizeMultiplier)</h5>
+                                </div>
+                                <div>
+                                    <h5>@Html.DisplayNameFor(model => model.FlatFlatSizes[0].LaminationCost)</h5>
+                                </div>*@
+                                <div>
+                                </div>
+                            </div>
+                            <div class="customDivTableBody">
+                                @*@for (int i = 0; i < Model.FlatFlatSizes.Count; i++)
+                                {
+
+                                    <form method="post" asp-page-handler="FlatEdit">
+                                        <input asp-for="FlatFlatSize.Id" value="@Model.FlatFlatSizes[i].Id" type="hidden" />
+                                        <div>
+                                            <input asp-for="FlatFlatSize.Name" value="@Model.FlatFlatSizes[i].Name" />
+                                        </div>
+                                        <div>
+                                            <input asp-for="FlatFlatSize.SizeMultiplier" value="@Model.FlatFlatSizes[i].SizeMultiplier" />
+                                        </div>
+                                        <div>
+                                            <input asp-for="FlatFlatSize.LaminationCost" value="@Model.FlatFlatSizes[i].LaminationCost" />
+                                        </div>
+                                        <div>
+                                            <input type="submit" value="Save" class="btn btn-primary tbButton" />
+                                        </div>
+                                    </form>*@
+                                }
+                            </div>
+                        </div>
+                        <!-- Flat Create -->
+                        <form method="post" id="EpsonFlatsize" asp-page-handler="EpsonEdit">
+                            <h1 class="RedText">Not Functional Yet</h1>
+                            <label>Epson Edit</label>
+                            <input type="number" />
+                        </form>
+                    </div>
+
+                    <div class="tab-pane fade" id="booklet" role="tabpanel" aria-labelledby="booklet-tab">
+                        <!-- Booklet Edit -->
+                        <div id="BookletFlatsize" class="customDivTable">
+                            <h3>Booklet - Flat Sizes</h3>
+                            <p>To delete a flatsize, set name to delete</p>
+                            <div class="customDivTableHead">
+                                <div>
+                                    @*<h5>@Html.DisplayNameFor(model => model.BookletFlatSizes[0].Name)</h5>*@
+                                </div>
+                                <div>
+                                </div>
+                            </div>
+                            <div class="customDivTableBody">
+                                @*@for (int i = 0; i < Model.BookletFlatSizes.Count; i++)
+                                {
+
+                                    <form method="post" id="EpsonFlatsize" asp-page-handler="EpsonEdit">
+                                        <h1 class="RedText">Not Functional Yet</h1>
+                                        <label>Epson Edit</label>
+                                        <input type="number" />
+                                    </form>
+                                }*@
+                            </div>
+                        </div>
+                        <!-- Booklet Create -->
+                        <form method="post" id="EpsonFlatsize" asp-page-handler="EpsonEdit">
+                            <h1 class="RedText">Not Functional Yet</h1>
+                            <label>Epson Edit</label>
+                            <input type="number" />
+                        </form>
+                    </div>
+
+                    <div class="tab-pane fade" id="wide" role="tabpanel" aria-labelledby="wide-tab">
+                        <!-- Epson Edit -->
+                        <form method="post" id="EpsonFlatsize" asp-page-handler="EpsonEdit">
+                            <h1 class="RedText">Not Functional Yet</h1>
+                            <label>Epson Edit</label>
+                            <input type="number" />
+                        </form>
+
+                        <!-- Epson Create -->
+                        <form method="post" id="CreateEpsonFlatsize" class="" asp-page-handler="EpsonCreate">
+                            <h1 class="RedText">Not Functional Yet</h1>
+                            <label>Epson Create</label>
+                            <input type="number" />
+                        </form>
+                    </div>
+                </div>
+        </div>
+        <!-- Users Tab -->
+        <div class="tab-pane fade" id="userTab" role="tabpanel" aria-labelledby="userTab-tab">
+            <div id="CreateUser">
+                <h2>Create A User</h2>
+                <form method="post" asp-page-handler="CreateUser">
+                    <div>
+                        <label asp-for="NewUser.UserName"></label>
+                        <input asp-for="NewUser.UserName" />
+                    </div>
+                    <div>
+                        <label asp-for="NewUser.Password"></label>
+                        <input asp-for="NewUser.Password" />
+
+                    </div>
+                    <div>
+                        <label asp-for="NewUser.Admin"></label>
+                        <input type="checkbox" value="true" asp-for="NewUser.Admin" />
+                    </div>
+                    <span asp-validation-for="NewUser.ValidationMessage" class="text-danger">@Model.NewUser.ValidationMessage</span>
+                    <div>
+                        <input type="submit" value="Save" class="btn btn-primary tbButton" />
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>

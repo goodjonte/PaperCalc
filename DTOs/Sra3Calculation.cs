@@ -44,7 +44,7 @@ namespace PaperCalc.DTOs
         {
             get
             {
-                double clickrate = 0.02; //HardCoded for now - need to add clickrate model etc - would be in settings
+                double clickrate = Settings.ClickRateBase;
                 clickrate = Inputs.Colour ? clickrate * 2 : clickrate;
                 clickrate = Inputs.DoubleSided ? clickrate * 2 : clickrate;
                 return clickrate;
@@ -56,7 +56,7 @@ namespace PaperCalc.DTOs
             {
                 if(Inputs.Creases > 0)
                 {
-                    return Inputs.Creases * 0.1 * Inputs.Quantity; //hardcoded - we talked about making this cheaper each time
+                    return Inputs.Creases * Settings.CreasingBase * Inputs.Quantity;
                 }
                 return 0;
             }
@@ -67,7 +67,7 @@ namespace PaperCalc.DTOs
             {
                 if (Inputs.Folds > 0)
                 {
-                    return Inputs.Folds * 0.05 * Inputs.Quantity; //hardcoded - we talked about making this cheaper each time
+                    return Inputs.Folds * Settings.FoldingBase * Inputs.Quantity;
                 }
                 return 0;
             }
@@ -78,7 +78,7 @@ namespace PaperCalc.DTOs
             {
                 if (Inputs.HolePunches > 0)
                 {
-                    return Inputs.HolePunches * Inputs.Quantity / 25; //hardcoded - we talked about making this cheaper each time
+                    return Inputs.HolePunches * Inputs.Quantity / Settings.HolePunchingBase;
                 }
                 return 0;
             }
@@ -89,7 +89,7 @@ namespace PaperCalc.DTOs
             {
                 if (Inputs.Staples > 0)
                 {
-                    return Inputs.Quantity * Inputs.Staples * 0.05; //hardcoded - we talked about making this cheaper each time
+                    return Inputs.Quantity * Inputs.Staples * Settings.StaplingBase;
                 }
                 return 0;
             }
@@ -113,7 +113,7 @@ namespace PaperCalc.DTOs
             }
         }
         //Factors
-        public double Buffer { get { return CuttingCalculation.SheetsUsed < 10 ? 1.5 : 1.1; } }
+        public double Buffer { get { return CuttingCalculation.SheetsUsed < 10 ? Settings.BufferHigh : Settings.Buffer; } }
         public double Multiplier {
             get
             {
@@ -183,9 +183,9 @@ namespace PaperCalc.DTOs
             }
         }
         [DisplayFormat(DataFormatString = "{0:c}")]
-        public double FinalJobCost { get { return Inputs.Kinds < 2 ? JobCost : JobCost * Inputs.Kinds * 0.80; } }
+        public double FinalJobCost { get { return Inputs.Kinds < 2 ? JobCost : JobCost * Inputs.Kinds * Settings.KindsMultiplier; } }
         [DisplayFormat(DataFormatString = "{0:c}")]
-        public double FinalJobCostWithGst { get { return FinalJobCost * 1.15; } }
+        public double FinalJobCostWithGst { get { return FinalJobCost * Settings.Gst; } }
         [DisplayFormat(DataFormatString = "{0:c}")]
         public double CostPerunit
         {

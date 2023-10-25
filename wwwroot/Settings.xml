@@ -1,24 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Settings>
   <MinimumJobCost>15</MinimumJobCost>
-  <FilehandlingCost>25</FilehandlingCost>
-  <MarginMultiplier>
-    <SmallOrUrgent>2</SmallOrUrgent>
-    <Standard>1.4</Standard>
-  </MarginMultiplier>
+  <KindsMultiplier>0.8</KindsMultiplier>
+  <Gst>0.15</Gst>
   <Buffer>
-    <SmallOrUrgent>1.5</SmallOrUrgent>
+    <High>1.5</High>
     <Standard>1.1</Standard>
   </Buffer>
-  <SmallOrUrgentMinimum>15</SmallOrUrgentMinimum>
   <Creasing>
-    <CreasingOneMultiplier>0.1</CreasingOneMultiplier>
-    <CreasingTwoMultiplier>0.15</CreasingTwoMultiplier>
-    <CreasingThreeMultiplier>0.2</CreasingThreeMultiplier>
+    <Base>0.1</Base>
   </Creasing>
   <Folding>
-    <FoldingOneMultiplier>0.1</FoldingOneMultiplier>
-    <FoldingTwoMultiplier>0.15</FoldingTwoMultiplier>
-    <FoldingThreeMultiplier>0.2</FoldingThreeMultiplier>
+    <Base>0.05</Base>
   </Folding>
+  <HolePunching>
+    <Base>25</Base>
+  </HolePunching>
+  <Stapling>
+    <Base>0.05</Base>
+  </Stapling>
+  <ClickRate>
+    <Base>0.02</Base>
+  </ClickRate>
 </Settings>
