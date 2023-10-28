@@ -31,7 +31,9 @@ namespace PaperCalc.Pages.Settings
         public PaperCalc.DTOs.Settings Settings { get; set; }
         [BindProperty]
         public List<PaperCalc.Models.FlatSize> FlatSizes { get; set; }
-        
+        [BindProperty]
+        public FlatSize FlatSize { get; set; }
+
 
         //GET Method
         public IActionResult OnGet()
@@ -52,6 +54,45 @@ namespace PaperCalc.Pages.Settings
         public ActionResult OnPostSaveSettings()
         {
             Settings.SaveSettings(_env.ContentRootPath);
+            return RedirectToPage("./Index");
+        }
+
+        //FlatSize Methods
+        public IActionResult OnPostFlatsizeEdit()
+        {
+            if(FlatSize == null)
+            {
+                return NotFound();
+            }
+            if (string.Equals(FlatSize.Name, "delete", StringComparison.OrdinalIgnoreCase))
+            {
+                var flatsize = _context.FlatSizes.Find(FlatSize.Id);
+
+                if (flatsize != null)
+                {
+                    _context.FlatSizes.Remove(flatsize);
+
+                }
+                _context.SaveChanges();
+
+                return RedirectToPage("./Index");
+            }
+
+            _context.Attach(FlatSize).State = EntityState.Modified;
+            _context.SaveChanges();
+
+            return RedirectToPage("./Index");
+        }
+        public IActionResult OnPostFlatsizeCreate()
+        {
+            if (FlatSize == null)
+            {
+                return NotFound();
+            }
+            FlatSize.Id = Guid.NewGuid();
+            _context.FlatSizes.Add(FlatSize);
+            _context.SaveChanges();
+
             return RedirectToPage("./Index");
         }
 

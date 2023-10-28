@@ -341,7 +341,13 @@ td, th {
 
 
 
-
+.settingsPage {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    width: 60vw;
+    margin: 100px auto;
+}
 
 .calculationForm {
     display: flex;
