@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using PaperCalc.Data;
 using PaperCalc.Models;
 
-namespace PaperCalc.Pages.Jobs.Sra3
+namespace PaperCalc.Pages.Jobs.Booklet
 {
     public class DeleteModel : PageModel
     {
@@ -20,42 +20,42 @@ namespace PaperCalc.Pages.Jobs.Sra3
         }
 
         [BindProperty]
-        public Sra3FormInput Sra3FormInput { get; set; } = default!;
+      public BookletFormInputs BookletFormInputs { get; set; } = default!;
         [BindProperty]
-        public InputsForJobs Connection { get { return _context.InputsForJobs.Where(x => x.InputId == Sra3FormInput.Id).First(); } }
+        public InputsForJobs Connection { get { return _context.InputsForJobs.Where(x => x.InputId == BookletFormInputs.Id).First(); } }
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
-            if (id == null || _context.Sra3FormInput == null)
+            if (id == null || _context.BookletFormInputs == null)
             {
                 return NotFound();
             }
 
-            var sra3forminput = await _context.Sra3FormInput.FirstOrDefaultAsync(m => m.Id == id);
+            var bookletFormInputs = await _context.BookletFormInputs.FirstOrDefaultAsync(m => m.Id == id);
 
-            if (sra3forminput == null)
+            if (bookletFormInputs == null)
             {
                 return NotFound();
             }
-            else 
+            else
             {
-                Sra3FormInput = sra3forminput;
+                BookletFormInputs = bookletFormInputs;
             }
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync(Guid? id)
         {
-            if (id == null || _context.Sra3FormInput == null)
+            if (id == null || _context.BookletFormInputs == null)
             {
                 return NotFound();
             }
-            var sra3forminput = await _context.Sra3FormInput.FindAsync(id);
+            var bookletFormInputs = await _context.BookletFormInputs.FindAsync(id);
 
-            if (sra3forminput != null)
+            if (bookletFormInputs != null)
             {
-                Sra3FormInput = sra3forminput;
-                _context.Sra3FormInput.Remove(Sra3FormInput);
+                BookletFormInputs = bookletFormInputs;
+                _context.BookletFormInputs.Remove(BookletFormInputs);
                 await _context.SaveChangesAsync();
             }
 

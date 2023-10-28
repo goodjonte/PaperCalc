@@ -10,7 +10,7 @@ using PaperCalc.Data;
 using PaperCalc.DTOs;
 using PaperCalc.Models;
 
-namespace PaperCalc.Pages.Jobs.Sra3
+namespace PaperCalc.Pages.Jobs.Document
 {
     public class EditModel : PageModel
     {
@@ -19,30 +19,30 @@ namespace PaperCalc.Pages.Jobs.Sra3
         public EditModel(PaperCalc.Data.PaperCalcContext context)
         {
             _context = context;
-            Paper = _context.Sra3AndBookletsStock.ToList();
-            FlatSizes = _context.FlatSizes.Where(x => x.ForCalculation == CalculationType.Sra3).ToList();
+            Paper = _context.DocumentsStock.ToList();
+            FlatSizes = _context.FlatSizes.Where(x => x.ForCalculation == CalculationType.Document).ToList();
         }
 
         [BindProperty]
-        public Sra3FormInput Sra3FormInput { get; set; } = default!;
-        public List<Sra3AndBookletsStock> Paper { get; set; }
+        public DocumentFormInputs DocumentFormInputs { get; set; } = default!;
+        public List<Models.DocumentsStock> Paper { get; set; }
         public List<FlatSize> FlatSizes { get; set; }
         [BindProperty]
-        public InputsForJobs Connection { get { return _context.InputsForJobs.Where(x => x.InputId == Sra3FormInput.Id).First(); } }
+        public InputsForJobs Connection { get { return _context.InputsForJobs.Where(x => x.InputId == DocumentFormInputs.Id).First(); } }
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
-            if (id == null || _context.Sra3FormInput == null)
+            if (id == null || _context.DocumentFormInputs == null)
             {
                 return NotFound();
             }
 
-            var sra3forminput =  await _context.Sra3FormInput.FirstOrDefaultAsync(m => m.Id == id);
-            if (sra3forminput == null)
+            var documentFormInputs =  await _context.DocumentFormInputs.FirstOrDefaultAsync(m => m.Id == id);
+            if (documentFormInputs == null)
             {
                 return NotFound();
             }
-            Sra3FormInput = sra3forminput;
+            DocumentFormInputs = documentFormInputs;
             return Page();
         }
 
@@ -55,7 +55,7 @@ namespace PaperCalc.Pages.Jobs.Sra3
                 return Page();
             }
 
-            _context.Attach(Sra3FormInput).State = EntityState.Modified;
+            _context.Attach(DocumentFormInputs).State = EntityState.Modified;
 
             try
             {
@@ -63,7 +63,7 @@ namespace PaperCalc.Pages.Jobs.Sra3
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!Sra3FormInputExists(Sra3FormInput.Id))
+                if (!DocumentFormInputsExists(DocumentFormInputs.Id))
                 {
                     return NotFound();
                 }
@@ -76,9 +76,9 @@ namespace PaperCalc.Pages.Jobs.Sra3
             return RedirectToPage("../Details", new { id = Connection.JobId.ToString() });
         }
 
-        private bool Sra3FormInputExists(Guid id)
+        private bool DocumentFormInputsExists(Guid id)
         {
-          return (_context.Sra3FormInput?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.DocumentFormInputs?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

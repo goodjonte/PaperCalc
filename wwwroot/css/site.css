@@ -87,7 +87,7 @@ a {
                                   supported by Chrome, Edge, Opera and Firefox */
 }
 .marginAuto {
-    margin: 0 auto !important;
+    margin: 5px auto !important;
 }
 
 /*    nav    */

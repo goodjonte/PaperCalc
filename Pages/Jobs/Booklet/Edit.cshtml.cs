@@ -10,7 +10,7 @@ using PaperCalc.Data;
 using PaperCalc.DTOs;
 using PaperCalc.Models;
 
-namespace PaperCalc.Pages.Jobs.Sra3
+namespace PaperCalc.Pages.Jobs.Booklet
 {
     public class EditModel : PageModel
     {
@@ -20,29 +20,29 @@ namespace PaperCalc.Pages.Jobs.Sra3
         {
             _context = context;
             Paper = _context.Sra3AndBookletsStock.ToList();
-            FlatSizes = _context.FlatSizes.Where(x => x.ForCalculation == CalculationType.Sra3).ToList();
+            FlatSizes = _context.FlatSizes.Where(x => x.ForCalculation == CalculationType.Booklet).ToList();
         }
 
         [BindProperty]
-        public Sra3FormInput Sra3FormInput { get; set; } = default!;
-        public List<Sra3AndBookletsStock> Paper { get; set; }
+        public BookletFormInputs BookletFormInputs { get; set; } = default!;
+        public List<Models.Sra3AndBookletsStock> Paper { get; set; }
         public List<FlatSize> FlatSizes { get; set; }
         [BindProperty]
-        public InputsForJobs Connection { get { return _context.InputsForJobs.Where(x => x.InputId == Sra3FormInput.Id).First(); } }
+        public InputsForJobs Connection { get { return _context.InputsForJobs.Where(x => x.InputId == BookletFormInputs.Id).First(); } }
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
-            if (id == null || _context.Sra3FormInput == null)
+            if (id == null || _context.BookletFormInputs == null)
             {
                 return NotFound();
             }
 
-            var sra3forminput =  await _context.Sra3FormInput.FirstOrDefaultAsync(m => m.Id == id);
-            if (sra3forminput == null)
+            var bookletFormInputs =  await _context.BookletFormInputs.FirstOrDefaultAsync(m => m.Id == id);
+            if (bookletFormInputs == null)
             {
                 return NotFound();
             }
-            Sra3FormInput = sra3forminput;
+            BookletFormInputs = bookletFormInputs;
             return Page();
         }
 
@@ -55,7 +55,7 @@ namespace PaperCalc.Pages.Jobs.Sra3
                 return Page();
             }
 
-            _context.Attach(Sra3FormInput).State = EntityState.Modified;
+            _context.Attach(BookletFormInputs).State = EntityState.Modified;
 
             try
             {
@@ -63,7 +63,7 @@ namespace PaperCalc.Pages.Jobs.Sra3
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!Sra3FormInputExists(Sra3FormInput.Id))
+                if (!BookletFormInputsExists(BookletFormInputs.Id))
                 {
                     return NotFound();
                 }
@@ -76,9 +76,9 @@ namespace PaperCalc.Pages.Jobs.Sra3
             return RedirectToPage("../Details", new { id = Connection.JobId.ToString() });
         }
 
-        private bool Sra3FormInputExists(Guid id)
+        private bool BookletFormInputsExists(Guid id)
         {
-          return (_context.Sra3FormInput?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.BookletFormInputs?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
