@@ -15,3 +15,4 @@ Once everything is filled out the employee clicks generate quote and it brings t
 From here if the job is just a single quote the employee can click genereate pdf to get the quote in a pdf file format.
 If the job is not done the empoloyee can select to add a quote from the calculation needed, after that they can then generate the pdf for all quotes assigned to that job.
 
+![pic](https://drive.google.com/uc?export=view&id=1oJaK5kd9iEKraEahP-R7EgbPmEBe8vJ0)
