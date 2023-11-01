@@ -15,4 +15,13 @@ Once everything is filled out the employee clicks generate quote and it brings t
 From here if the job is just a single quote the employee can click genereate pdf to get the quote in a pdf file format.
 If the job is not done the empoloyee can select to add a quote from the calculation needed, after that they can then generate the pdf for all quotes assigned to that job.
 
+# Screenshots
+
+### Job page with 3 quotes
 ![pic](https://drive.google.com/uc?export=view&id=1oJaK5kd9iEKraEahP-R7EgbPmEBe8vJ0)
+### Quote page for sra3 printing
+![pic](https://drive.google.com/uc?export=view&id=1uUQUUcfUMfshVAbayAiuTqqeuiy6ORqC)
+### Stock page for sra3 printing
+![pic](https://drive.google.com/uc?export=view&id=1HqVYTUJ7b0X2m9lqoa4Lmt668X_VgXy6)
+### Settings - Sra3 flatsizes
+![pic](https://drive.google.com/uc?export=view&id=12Vj_F7wz3HalZwC5iVhxQGZ4bmlR0ULI)
