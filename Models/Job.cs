@@ -18,6 +18,7 @@ namespace PaperCalc.Models
         public List<Sra3InputAndCalc> Sra3Items { get; set; } = new();
         public List<BookletInputAndCalc> BookletItems { get; set; } = new();
         public List<DocumentInputAndCalc> DocumentItems { get; set; } = new();
+        public List<WideFormatInputAndCalc> WideFormatItems { get; set; } = new();
 
         //Gets the items for the job from the database and adds them to the lists
         public void GetItems(PaperCalcContext context, String path)
@@ -51,7 +52,13 @@ namespace PaperCalc.Models
                             DocumentItems.Add(new (new (context, path, docItem), docItem));
                         }
                         break;
-
+                    case CalculationType.WideFormat:
+                        var wideItem = context.WideFormatFormInputs.Find(jobsItems[i].InputId);
+                        if (wideItem != null)
+                        {
+                            WideFormatItems.Add(new(new(context, path, wideItem), wideItem));
+                        }
+                        break;
                 }
             }
         }

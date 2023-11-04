@@ -1,0 +1,65 @@
+﻿@page
+@model PaperCalc.Pages.Stock.WideFormatStock.IndexModel
+
+@{
+    ViewData["Title"] = "Wide Format Stock";
+}
+<div class="stockIndexPage">
+    <h1 class="stockTitle">Wide Format</h1>
+
+    <div class="scrollableTable">
+        <table class="customTable">
+            <thead>
+                <tr>
+                    <th class="position-relative">
+                        name &nbsp; <span class="createButtonTop"><a asp-page="Create">+ add new</a></span>
+                    </th>
+                    <th>
+                        roll length
+                    </th>
+                    <th>
+                        price/m
+                    </th>
+                    <th class="buttonTableRow"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.WideFormatStock)
+                {
+                    <tr class="rowWithData">
+                        <td>
+                            @item.Supplier @item.StockBrand @item.Weight<span>gsm</span> @Html.DisplayFor(modelItem => item.CoatType)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RollLength)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PricePerMeter)
+                        </td>
+                        <td class="tdForButton">
+                            <span class="stockNavButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="dotsForButton noselect">...</span></span>
+                            <div class="dropdown-menu stockDropDown" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item stockDropDownBorder" asp-page="./Edit" asp-route-id="@item.Id">
+                                    <object class="svg" data="/Images/edit.svg" width="15" height="15"> </object>
+                                    edit
+                                </a>
+
+                                <a class="dropdown-item stockDropDownBorder" asp-page="./Details" asp-route-id="@item.Id">
+                                    <object class="svg" data="/Images/details.svg" width="15" height="15"> </object>
+                                    details
+                                </a>
+                                <a class="dropdown-item" asp-page="./Delete" asp-route-id="@item.Id">
+                                    <object class="svg" data="/Images/delete.svg" width="15" height="15"> </object>
+                                    delete
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <span class="createButtonBottum"><a asp-page="Create">+ add new</a></span>
+
+
+</div>

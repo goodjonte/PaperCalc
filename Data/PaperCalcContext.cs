@@ -25,6 +25,7 @@ namespace PaperCalc.Data
         public DbSet<PaperCalc.Models.Sra3FormInput> Sra3FormInput { get; set; } = default!;
         public DbSet<PaperCalc.Models.BookletFormInputs> BookletFormInputs { get; set; } = default!;
         public DbSet<PaperCalc.Models.DocumentFormInputs> DocumentFormInputs { get; set; } = default!;
+        public DbSet<PaperCalc.Models.WideFormatFormInputs> WideFormatFormInputs { get; set; } = default!;
 
     }
 }

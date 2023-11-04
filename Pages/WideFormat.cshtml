@@ -3,6 +3,221 @@
 @{
 }
 
-<div id="aspeosCalculator" class="text-center">
-    <h4 class="display-4 parrotTitle">WideFormat</h4>
-</div>
+
+<form method="post" class="calculationForm">
+    <h4 class="calculationTitle">Wide Format</h4>
+    <!-- Job Details - user first selects new or existing job -->
+    <div class="inputRow inputRowWithBorder">
+
+        <!-- JS for showing corresponding elements -->
+        @if (Model.JobId != null)
+        {
+            <script>
+                setTimeout(() => {
+                    document.getElementById("existingJobSelect").classList.remove("hidden");
+                    document.getElementById("newOrExistingJob").classList.add("hidden");
+                }, 500);
+            </script>
+        }
+        <script>
+            function newJob() {
+                document.getElementById("newJobDetails").classList.remove("hidden");
+                document.getElementById("newOrExistingJob").classList.add("hidden");
+            };
+            function existingJob() {
+                document.getElementById("existingJobSelect").classList.remove("hidden");
+                document.getElementById("newOrExistingJob").classList.add("hidden");
+            };
+        </script>
+
+        <!--new or existing job -->
+        <div id="newOrExistingJob">
+            <div class="inputRowTitle">
+                <h3>job details</h3>
+            </div>
+            <div class="jobButtons">
+                <div id="newJobButton" onclick="newJob()" class="btn btn-success inputForRow">new job</div>
+                <div id="existingJobButton" onclick="existingJob()" class="btn btn-success inputForRow">existing job</div>
+            </div>
+        </div>
+
+        <!-- existing job select -->
+        <div id="existingJobSelect" class="hidden">
+            <div class="inputRowTitle">
+                <h3>job details</h3>
+            </div>
+            <div class="inputsForRow">
+                <div class="inputForRow">
+
+                </div>
+                <div class="inputForRow">
+                    <label>select job<span class="requiredStar">*</span></label>
+                    <select class="custom-select" asp-for="JobId">
+                        <option class="defaultOption" value="">select a job...</option>
+                        @{
+                            foreach (PaperCalc.Models.Job j in Model.Jobs)
+                            {
+                                <option value="@j.Id">@j.JobTitle</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="inputForRow">
+
+                </div>
+            </div>
+        </div>
+
+        <!-- new job details -->
+        <div id="newJobDetails" class="hidden">
+            <div class="inputRowTitle">
+                <h3>job details</h3>
+            </div>
+            <div class="inputsForRow">
+                <div class="inputForRow">
+                    <label>job title<span class="requiredStar">*</span></label>
+                    <input placeholder="job title" asp-for="Job.JobTitle" type="text" />
+                </div>
+                <div class="inputForRow">
+                    <label>client name<span class="requiredStar">*</span></label>
+                    <input placeholder="client name" asp-for="Job.ClientName" type="text" />
+                </div>
+                <div class="inputForRow">
+                    <label>business name</label>
+                    <input placeholder="business name" asp-for="Job.Buissnessname" type="text" />
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Paper -->
+    <div class="inputRow inputRowWithBorder">
+        <div class="inputRowTitle">
+            <h3>paper</h3>
+        </div>
+        <div class="inputsForRow">
+            <div class="inputForRow">
+                <label>flat size<span class="requiredStar">*</span></label>
+                <select class="custom-select" asp-for="Inputs.FlatSizeId">
+                    <option value="">select a size...</option>
+                    @{
+                        foreach (PaperCalc.Models.FlatSize fs in Model.FlatSizes)
+                        {
+                            <option value="@fs.Id">@fs.Name</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="inputForRow">
+                <label>stock<span class="requiredStar">*</span></label>
+                <select id="stockSelect" class="custom-select" asp-for="Inputs.StockId">
+                    <option value="">select stock...</option>
+                    @{
+                        foreach (PaperCalc.Models.WideFormatStock item in Model.Stock)
+                        {
+                            <option value="@item.Id">@item.Weight<span>gsm</span> @item.Supplier @item.StockBrand</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="inputForRow">
+            </div>
+        </div>
+    </div>
+
+    <!-- Printing -->
+    <div class="inputRow inputRowWithBorder">
+        <div class="inputRowTitle">
+            <h3>printing</h3>
+        </div>
+        <div class="inputsForRow">
+            <div class="inputForRow">
+                <label>colour<span class="requiredStar">*</span></label>
+                <select class="custom-select" asp-for="Inputs.Colour">
+                    <option value="">select a option...</option>
+                    <option value="true">Colour</option>
+                    <option value="false">Black</option>
+                </select>
+            </div>
+            <div class="inputForRow">
+            </div>
+            <div class="inputForRow">
+            </div>
+        </div>
+    </div>
+
+    <!-- Finishing -->
+    <div class="inputRow inputRowWithBorder">
+        <div class="inputRowTitle">
+            <h3>finishing</h3>
+        </div>
+        <div class="inputsForRow">
+            <div class="inputForRow">
+                <label>folds</label>
+                <select class="custom-select" asp-for="Inputs.Folds">
+                    <option value="0">None</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+            </div>
+            <div class="inputForRow">
+                <label>cresaing</label>
+                <select class="custom-select" asp-for="Inputs.Creases">
+                    <option value="0">none</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+            </div>
+            <div class="inputForRow">
+            </div>
+        </div>
+    </div>
+
+    <!-- Additional Costs -->
+    <div class="inputRow inputRowWithBorder">
+        <div class="inputRowTitle">
+            <h3>additional costs</h3>
+        </div>
+        <div class="inputsForRow">
+            <div class="inputForRow">
+                <label>design</label>
+                <input placeholder="$00.00" type="text" asp-for="Inputs.DesignCost" />
+            </div>
+            <div class="inputForRow">
+                <label>file handling</label>
+                <input type="number" placeholder="$00.00" asp-for="Inputs.FileHandlingCost">
+            </div>
+            <div class="inputForRow">
+                <label>setup</label>
+                <input placeholder="$00.00" type="text" asp-for="Inputs.SetupCost" />
+            </div>
+        </div>
+    </div>
+
+    <div class="inputRow">
+        <div class="inputRowTitle">
+            <h3>quantitys</h3>
+        </div>
+        <div class="inputsForRow">
+            <div class="inputForRow">
+                <label>copy quantity<span class="requiredStar">*</span></label>
+                <input type="number" placeholder="0" asp-for="Inputs.Quantity">
+            </div>
+            <div class="inputForRow">
+                <label>pages<span class="requiredStar">*</span></label>
+                <input type="number" placeholder="0" asp-for="Inputs.Pages">
+            </div>
+            <div class="inputForRow">
+                <label>kinds<span class="requiredStar">*</span></label>
+                <input placeholder="1" type="number" asp-for="Inputs.Kinds">
+            </div>
+        </div>
+    </div>
+
+    <button class="btn btn-success calculationSubmitButton">generate quote</button>
+
+</form>
+

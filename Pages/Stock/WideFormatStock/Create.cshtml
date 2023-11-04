@@ -1,0 +1,107 @@
+﻿@page
+@model PaperCalc.Pages.Stock.WideFormatStock.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+<h1 class="stockTitle">Create</h1>
+
+<div class="stockEditPage">
+
+    <form class="editStockForm" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="editRowTitle">
+            <h3>product</h3>
+        </div>
+        <div class="editFormRow borderBottom">
+            <div class="form-group">
+                <label class="control-label">supplier<span class="requiredStar">*</span></label>
+                <input asp-for="WideFormatStock.Supplier" class="form-control" />
+                <span asp-validation-for="WideFormatStock.Supplier" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">stock brand<span class="requiredStar">*</span></label>
+                <input asp-for="WideFormatStock.StockBrand" class="form-control" />
+                <span asp-validation-for="WideFormatStock.StockBrand" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WideFormatStock.StockType" class="control-label">stock type<span class="requiredStar">*</span></label>
+                <select asp-for="WideFormatStock.StockType" class="form-control custom-select">
+                    <option value="">Select a Coating Type...</option>
+                    <option value="Adhesive">Adhesive</option>
+                    <option value="Synthetic">Synthetic</option>
+                    <option value="Paper">Paper</option>
+                    <option value="Card">Card</option>
+                    <option value="CardTextured">Card Textured</option>
+                    <option value="CardRecycled">Card Recycled</option>
+                    <option value="Leather">Leather</option>
+                    <option value="Acetate">Acetate</option>
+                </select>
+                <span asp-validation-for="WideFormatStock.StockType" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="editRowTitle">
+            <h3>specifications</h3>
+        </div>
+        <div class="editFormRow borderBottom">
+            <div class="form-group">
+                <label asp-for="WideFormatStock.RollWidth" class="control-label">roll width(mm)<span class="requiredStar">*</span></label>
+                <input asp-for="WideFormatStock.RollWidth" class="form-control" />
+                <span asp-validation-for="WideFormatStock.RollWidth" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WideFormatStock.Weight" class="control-label">weight(gsm)<span class="requiredStar">*</span></label>
+                <input asp-for="WideFormatStock.Weight" class="form-control" />
+                <span asp-validation-for="WideFormatStock.Weight" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WideFormatStock.CoatType" class="control-label">coating<span class="requiredStar">*</span></label>
+                <select asp-for="WideFormatStock.CoatType" class="form-control custom-select">
+                    <option value="">Select a Coating Type...</option>
+                    <option value="Coated">Coated</option>
+                    <option value="Uncoated">Uncoated</option>
+                    <option value="Uncoated">Uncoated</option>
+                    <option value="Matt">Matt</option>
+                    <option value="Satin">Satin</option>
+                    <option value="Gloss">Gloss</option>
+                </select>
+                <span asp-validation-for="WideFormatStock.CoatType" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="editRowTitle">
+            <h3>quantity & cost</h3>
+        </div>
+        <div class="editFormRow">
+            <div class="form-group">
+                <label asp-for="WideFormatStock.RollLength" class="control-label">roll length<span class="requiredStar">*</span></label>
+                <input asp-for="WideFormatStock.RollLength" class="form-control" />
+                <span asp-validation-for="WideFormatStock.RollLength" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WideFormatStock.RollPrice" class="control-label">roll price<span class="requiredStar">*</span></label>
+                <input asp-for="WideFormatStock.RollPrice" class="form-control" />
+                <span asp-validation-for="WideFormatStock.RollPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="save" class="btn btn-success" />
+        </div>
+        <div>
+            <a class="btn btn-primary" asp-page="./Index">back to list</a>
+        </div>
+
+    </form>
+
+
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

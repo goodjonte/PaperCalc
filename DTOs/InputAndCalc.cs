@@ -35,4 +35,15 @@ namespace PaperCalc.DTOs
         public BookletCalculation Calc { get; set; }
         public BookletFormInputs Inputs { get; set; }
     }
+    [NotMapped]
+    public class WideFormatInputAndCalc
+    {
+        public WideFormatInputAndCalc(WideFormatCalculation calc, WideFormatFormInputs inputs)
+        {
+            Calc = calc;
+            Inputs = inputs;
+        }
+        public WideFormatCalculation Calc { get; set; }
+        public WideFormatFormInputs Inputs { get; set; }
+    }
 }

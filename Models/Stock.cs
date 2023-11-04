@@ -58,16 +58,19 @@ namespace PaperCalc.Models
     public class WideFormatStock : Stock
     {
         public double RollWidth { get; set; } //milimeters
+        [DisplayFormat(DataFormatString = "{0:c}")]
         public double RollPrice { get; set; }
         public double RollLength { get; set; } //meters
+        [DisplayFormat(DataFormatString = "{0:c}")]
         public double PricePerMeter { get { return RollPrice / RollLength; } }
         private bool FitsA0 { get { return RollWidth > 840; } }
         private double PricePerMillimeter { get { return PricePerMeter / 1000; } }
+        [DisplayFormat(DataFormatString = "{0:c}")]
         public double A0Price { get { return FitsA0 ? PricePerMillimeter * 1189 : 0;  } }
+        [DisplayFormat(DataFormatString = "{0:c}")]
         public double A1Price { get { return FitsA0 ? PricePerMillimeter * 594 : PricePerMillimeter * 841; } }
+        [DisplayFormat(DataFormatString = "{0:c}")]
         public double A2Price { get { return PricePerMillimeter * 420; } }
-
-
     }
 
     //----- Other Items Stock Classes -----//

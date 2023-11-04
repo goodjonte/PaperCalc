@@ -1,0 +1,126 @@
+﻿@page
+@model PaperCalc.Pages.Stock.WideFormatStock.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1 class="stockTitle">Details</h1>
+
+<div class="stockDetails">
+    <h4>Wide Format Stock</h4>
+    <hr />
+    <div class="detailsTable">
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.WideFormatStock.Supplier)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.WideFormatStock.Supplier)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.WideFormatStock.StockBrand)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.WideFormatStock.StockBrand)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.WideFormatStock.RollWidth)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.WideFormatStock.RollWidth)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.WideFormatStock.Weight)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.WideFormatStock.Weight)<span>gsm</span>
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.WideFormatStock.CoatType)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.WideFormatStock.CoatType)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.WideFormatStock.StockType)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.WideFormatStock.StockType)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.WideFormatStock.RollLength)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.WideFormatStock.RollLength)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.WideFormatStock.RollPrice)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.WideFormatStock.RollPrice)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.WideFormatStock.PricePerMeter)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.WideFormatStock.PricePerMeter)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.WideFormatStock.A0Price)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.WideFormatStock.A0Price)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.WideFormatStock.A1Price)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.WideFormatStock.A1Price)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.WideFormatStock.A2Price)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.WideFormatStock.A2Price)
+            </h2>
+        </div>
+    </div>
+</div>
+<div class="stockDetailsButtons">
+    <a class="btn btn-success" asp-page="./Edit" asp-route-id="@Model.WideFormatStock?.Id">edit</a>
+    <a class="btn btn-primary" asp-page="./Index">back to stock</a>
+</div>

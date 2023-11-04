@@ -277,6 +277,69 @@
         <h6>no booklet items <a asp-route-id="@Model.Job.Id" asp-page="../Booklets">+ add new</a></h6>
     }
 
+    <!-- Wide Format ITEMS -->
+
+    <h4 id="sra3ItemsTitle">wide format items</h4>
+    <hr />
+    @if (Model.Job.WideFormatItems.Count > 0)
+    {
+        <table class="customTable">
+            <thead>
+                <tr>
+                    <th class="position-relative">
+                        description &nbsp; <span class="createButtonTop"><a asp-route-id="@Model.Job.Id" asp-page="../WideFormat">+ add new</a></span>
+                    </th>
+                    <th>
+                        job cost
+                    </th>
+                    <th>
+                        job cost (inc. gst)
+                    </th>
+                    <th>
+                        unit price
+                    </th>
+                    <th class="buttonTableRow"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (PaperCalc.DTOs.WideFormatInputAndCalc wideFormatItem in Model.Job.WideFormatItems)
+                {
+                    <tr class="rowWithData">
+                        <td>
+                            @wideFormatItem.Calc.Description
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => wideFormatItem.Calc.FinalJobCost)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => wideFormatItem.Calc.FinalJobCostWithGST)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => wideFormatItem.Calc.CostPerUnit)
+                        </td>
+                        <td class="tdForButton">
+                            <span class="stockNavButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="dotsForButton noselect">...</span></span>
+                            <div class="dropdown-menu stockDropDown" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item stockDropDownBorder" asp-page="./WideFormat/Edit" asp-route-id="@wideFormatItem.Inputs.Id">
+                                    <object class="svg" data="/Images/edit.svg" width="15" height="15"> </object>
+                                    edit
+                                </a>
+                                <a class="dropdown-item" asp-page="./WideFormat/Delete" asp-route-id="@wideFormatItem.Inputs.Id">
+                                    <object class="svg" data="/Images/delete.svg" width="15" height="15"> </object>
+                                    delete
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <h6>no booklet items <a asp-route-id="@Model.Job.Id" asp-page="../WideFormat">+ add new</a></h6>
+    }
+
 </div>
 
 <div class="stockDetailsButtons">

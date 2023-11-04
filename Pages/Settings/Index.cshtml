@@ -122,7 +122,7 @@
                     <!-- Sra3 Edit -->
                     <div id="AspeosFlatsize" class="customDivTable">
                         <h3>Sra3 Flat Sizes</h3>
-                        <p>To delete a flatsize, set name to delete</p>
+                        <p>To delete a flatsize, set name to delete and save</p>
                         <div class="customDivTableHead">
                             <div>
                                 <h5>@Html.DisplayNameFor(model => model.FlatSizes[0].Name)</h5>
@@ -252,7 +252,7 @@
                     <!-- Document Edit -->
                     <div class="customDivTable">
                         <h3>Document Flat Sizes</h3>
-                        <p>To delete a flatsize, set name to delete</p>
+                        <p>To delete a flatsize, set name to delete and save</p>
                         <div class="customDivTableHead">
                             <div>
                                 <h5>Name</h5>
@@ -382,7 +382,7 @@
                     <!-- Booklet Edit -->
                     <div class="customDivTable">
                         <h3>Booklet Flat Sizes</h3>
-                        <p>To delete a flatsize, set name to delete</p>
+                        <p>To delete a flatsize, set name to delete and save</p>
                         <div class="customDivTableHead">
                             <div>
                                 <h5>Name</h5>
@@ -509,7 +509,133 @@
                 </div>
 
                 <div class="tab-pane fade" id="wide" role="tabpanel" aria-labelledby="wide-tab">
-                                    
+                    <!-- Wide Format Edit -->
+                    <div class="customDivTable">
+                        <h3>Wide Format Flat Sizes</h3>
+                        <p>To delete a flatsize, set name to delete and save</p>
+                        <div class="customDivTableHead">
+                            <div>
+                                <h5>Name</h5>
+                            </div>
+                            <div>
+                                <h5>Height</h5>
+                            </div>
+                            <div>
+                                <h5>Width</h5>
+                            </div>
+                            <div>
+                                <h5>Multiplier Min</h5>
+                            </div>
+                            <div>
+                                <h5>Multiplier Max</h5>
+                            </div>
+                            <div>
+                                <h5>Quantity Min</h5>
+                            </div>
+                            <div>
+                                <h5>Quantity Max</h5>
+                            </div>
+                            <div>
+                            </div>
+                        </div>
+                        <div class="customDivTableBody">
+                            @for (int i = 0; i < Model.FlatSizes.Count; i++)
+                            {
+                                if (Model.FlatSizes[i].ForCalculation == Models.CalculationType.WideFormat)
+                                {
+                                    <form method="post" asp-page-handler="FlatsizeEdit">
+                                        <input asp-for="FlatSize.Id" value="@Model.FlatSizes[i].Id" type="hidden" />
+                                        <input asp-for="FlatSize.ForCalculation" value="@Model.FlatSizes[i].ForCalculation" type="hidden" />
+                                        <div>
+                                            <input asp-for="FlatSize.Name" value="@Model.FlatSizes[i].Name" />
+                                        </div>
+                                        <div>
+                                            <input asp-for="FlatSize.Height" value="@Model.FlatSizes[i].Height" />
+                                        </div>
+                                        <div>
+                                            <input asp-for="FlatSize.Width" value="@Model.FlatSizes[i].Width" />
+                                        </div>
+                                        <div>
+                                            <input asp-for="FlatSize.MultiplierMin" value="@Model.FlatSizes[i].MultiplierMin" />
+                                        </div>
+                                        <div>
+                                            <input asp-for="FlatSize.MultiplierMax" value="@Model.FlatSizes[i].MultiplierMax" />
+                                        </div>
+                                        <div>
+                                            <input asp-for="FlatSize.QuantityMin" value="@Model.FlatSizes[i].QuantityMin" />
+                                        </div>
+                                        <div>
+                                            <input asp-for="FlatSize.QuantityMax" value="@Model.FlatSizes[i].QuantityMax" />
+                                        </div>
+                                        <div>
+                                            <input type="submit" value="Save" class="btn btn-primary tbButton" />
+                                        </div>
+                                    </form>
+                                }
+                            }
+                        </div>
+                    </div>
+                    <!-- Wide Format Create -->
+                    <div class="customDivTable">
+                        <h3>Create</h3>
+                        <div id="AspeosFlatsize" class="customDivTable">
+                            <div class="customDivTableHead">
+                                <div>
+                                    <h5>Name</h5>
+                                </div>
+                                <div>
+                                    <h5>Height</h5>
+                                </div>
+                                <div>
+                                    <h5>Width</h5>
+                                </div>
+                                <div>
+                                    <h5>Multiplier Min</h5>
+                                </div>
+                                <div>
+                                    <h5>Multiplier Max</h5>
+                                </div>
+                                <div>
+                                    <h5>Quantity Min</h5>
+                                </div>
+                                <div>
+                                    <h5>Quantity Max</h5>
+                                </div>
+                                <div>
+                                </div>
+                            </div>
+                            <div class="customDivTableBody">
+                                <form method="post" asp-page-handler="FlatsizeCreate">
+                                    <input asp-for="FlatSize.Id" type="hidden" />
+                                    <input asp-for="FlatSize.ForCalculation" value="3" type="hidden" />
+                                    <div>
+                                        <input asp-for="FlatSize.Name" />
+                                    </div>
+                                    <div>
+                                        <input asp-for="FlatSize.Height" />
+                                    </div>
+                                    <div>
+                                        <input asp-for="FlatSize.Width" />
+                                    </div>
+                                    <div>
+                                        <input asp-for="FlatSize.MultiplierMin" />
+                                    </div>
+                                    <div>
+                                        <input asp-for="FlatSize.MultiplierMax" />
+                                    </div>
+                                    <div>
+                                        <input asp-for="FlatSize.QuantityMin" />
+                                    </div>
+                                    <div>
+                                        <input asp-for="FlatSize.QuantityMax" />
+                                    </div>
+                                    <div>
+                                        <input type="submit" value="Create" class="btn btn-primary tbButton" />
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
             </div>

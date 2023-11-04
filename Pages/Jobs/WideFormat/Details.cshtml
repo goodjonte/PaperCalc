@@ -1,0 +1,245 @@
+﻿@page
+@model PaperCalc.Pages.Jobs.WideFormat.DetailsModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<form method="post" class="calculationForm">
+
+    <h4 class="calculationTitle">Details</h4>
+
+    <div class="detailsTable">
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.Calculation.ShortestEdge)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.Calculation.ShortestEdge)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.Calculation.LongestEdge)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.Calculation.LongestEdge)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.Calculation.LongRoll)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.Calculation.LongRoll)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.Calculation.MetresUsed)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.Calculation.MetresUsed)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.Calculation.CutsNeeded)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.Calculation.CutsNeeded)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.Calculation.CreasesNeeded)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.Calculation.CreasesNeeded)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.Calculation.FoldsNeeded)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.Calculation.FoldsNeeded)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.Calculation.PaperCost)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.Calculation.PaperCost)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.Calculation.InkCost)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.Calculation.InkCost)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.Calculation.MaterialCost)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.Calculation.MaterialCost)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.Calculation.FinishingCost)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.Calculation.FinishingCost)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.Calculation.Multiplier)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.Calculation.Multiplier)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.Calculation.Buffer)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.Calculation.Buffer)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.Calculation.MaterialCharge)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.Calculation.MaterialCharge)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.Calculation.FinishingCharge)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.Calculation.FinishingCharge)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.Calculation.Cost)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.Calculation.Cost)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.Calculation.Charge)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.Calculation.Charge)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.Calculation.MaterialProfit)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.Calculation.MaterialProfit)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.Calculation.FinishingProfit)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.Calculation.FinishingProfit)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.Calculation.Profit)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.Calculation.Profit)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.Calculation.JobCost)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.Calculation.JobCost)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.Calculation.FinalJobCost)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.Calculation.FinalJobCost)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.Calculation.FinalJobCostWithGST)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.Calculation.FinalJobCostWithGST)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.Calculation.CostPerUnit)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.Calculation.CostPerUnit)
+            </h2>
+        </div>
+
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.Calculation.Description)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.Calculation.Description)
+            </h2>
+        </div>
+    </div>
+
+    <a class="btn btn-primary calculationSubmitButton marginAuto" asp-page="../Details" asp-route-id="@Model.Connection.JobId">back to list</a>
+
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

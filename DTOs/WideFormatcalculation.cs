@@ -35,10 +35,10 @@ namespace PaperCalc.DTOs
         public WideFormatStock Paper { get; set; }
 
         //Calculations
-        private double ShortestEdge { get { return FlatSize.Width < FlatSize.Height ? FlatSize.Width : FlatSize.Height; } }
-        private double LongestEdge { get { return FlatSize.Width < FlatSize.Height ? FlatSize.Height : FlatSize.Width; } }
-        private bool LongRoll { get { return ShortestEdge > 594; } }
-        private double MetresUsed
+        public double ShortestEdge { get { return FlatSize.Width < FlatSize.Height ? FlatSize.Width : FlatSize.Height; } }
+        public double LongestEdge { get { return FlatSize.Width < FlatSize.Height ? FlatSize.Height : FlatSize.Width; } }
+        public bool LongRoll { get { return ShortestEdge > 594; } }
+        public double MetresUsed
         {
             get
             {
@@ -52,14 +52,14 @@ namespace PaperCalc.DTOs
                 }
             }
         }
-        private double CutsNeeded { get { return Inputs.Quantity * Inputs.Pages * 4; } } // On sheets one stock item requires no cuts - need to sort something for this
-        private double CreasesNeeded { get { return Inputs.Creases > 0 ? Inputs.Quantity * Inputs.Pages * Inputs.Creases : 0; } }
-        private double FoldsNeeded { get { return Inputs.Folds > 0 ? Inputs.Quantity * Inputs.Pages * Inputs.Folds : 0; } }
+        public double CutsNeeded { get { return Inputs.Quantity * Inputs.Pages * 4; } } // On sheets one stock item requires no cuts - need to sort something for this
+        public double CreasesNeeded { get { return Inputs.Creases > 0 ? Inputs.Quantity * Inputs.Pages * Inputs.Creases : 0; } }
+        public double FoldsNeeded { get { return Inputs.Folds > 0 ? Inputs.Quantity * Inputs.Pages * Inputs.Folds : 0; } }
 
 
         //Cost Totals
         public double PaperCost { get { return Paper.PricePerMeter * MetresUsed; } }
-        private double InkCost { get { return Inputs.Colour ? 2.24 * MetresUsed : 2.24 * MetresUsed * 0.85; } } // HardCoded Ink Coverage Per Meter (2.24) - Add to Settings
+        public double InkCost { get { return Inputs.Colour ? 2.24 * MetresUsed : 2.24 * MetresUsed * 0.85; } } // HardCoded Ink Coverage Per Meter (2.24) - Add to Settings
         public double MaterialCost { get { return PaperCost + InkCost; } }
         public double FinishingCost { get { return (CreasesNeeded * 0.15) + (CutsNeeded * 0.15) + (FoldsNeeded * 0.15); } } // HardCoded creasing,custs,folds cost - Add to Settings
 

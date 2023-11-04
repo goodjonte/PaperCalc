@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PaperCalc.Data;
 
@@ -11,9 +12,11 @@ using PaperCalc.Data;
 namespace PaperCalc.Migrations
 {
     [DbContext(typeof(PaperCalcContext))]
-    partial class PaperCalcContextModelSnapshot : ModelSnapshot
+    [Migration("20231104035313_wide")]
+    partial class wide
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -443,59 +446,6 @@ namespace PaperCalc.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("User");
-                });
-
-            modelBuilder.Entity("PaperCalc.Models.WideFormatFormInputs", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<bool>("Colour")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("Creases")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("CustomFlatSize")
-                        .HasColumnType("bit");
-
-                    b.Property<double>("DesignCost")
-                        .HasColumnType("float");
-
-                    b.Property<double>("FileHandlingCost")
-                        .HasColumnType("float");
-
-                    b.Property<Guid>("FlatSizeId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("Folds")
-                        .HasColumnType("int");
-
-                    b.Property<double?>("Height")
-                        .HasColumnType("float");
-
-                    b.Property<double>("Kinds")
-                        .HasColumnType("float");
-
-                    b.Property<double>("Pages")
-                        .HasColumnType("float");
-
-                    b.Property<double>("Quantity")
-                        .HasColumnType("float");
-
-                    b.Property<double>("SetupCost")
-                        .HasColumnType("float");
-
-                    b.Property<Guid>("StockId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<double?>("Width")
-                        .HasColumnType("float");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("WideFormatFormInputs");
                 });
 
             modelBuilder.Entity("PaperCalc.Models.WideFormatStock", b =>
