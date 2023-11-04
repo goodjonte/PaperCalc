@@ -55,8 +55,19 @@ namespace PaperCalc.Models
         public double HeightOf100Sheets { get; set; }
         public double HeightOfASheet { get { return HeightOf100Sheets / 100; } }
     }
-    public class EpsonStock : Stock
+    public class WideFormatStock : Stock
     {
+        public double RollWidth { get; set; } //milimeters
+        public double RollPrice { get; set; }
+        public double RollLength { get; set; } //meters
+        public double PricePerMeter { get { return RollPrice / RollLength; } }
+        private bool FitsA0 { get { return RollWidth > 840; } }
+        private double PricePerMillimeter { get { return PricePerMeter / 1000; } }
+        public double A0Price { get { return FitsA0 ? PricePerMillimeter * 1189 : 0;  } }
+        public double A1Price { get { return FitsA0 ? PricePerMillimeter * 594 : PricePerMillimeter * 841; } }
+        public double A2Price { get { return PricePerMillimeter * 420; } }
+
+
     }
 
     //----- Other Items Stock Classes -----//

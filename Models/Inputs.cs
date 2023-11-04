@@ -55,4 +55,19 @@
         public int Staples { get; set; }
         public int HolePunches { get; set; }
     }
+
+    public class WideFormatFormInputs : Inputs
+    {
+        public bool CustomFlatSize { get; set; }
+        public double Kinds { get; set; }
+        public double Pages { get; set; }
+        public Guid FlatSizeId { get; set; }
+        public double? Height { get; set; }
+        public double? Width { get; set; }
+        public Guid StockId { get; set; }
+        //public Guid? BindingCoildStockId { get; set; }
+        public bool Colour { get; set; }
+        public int Folds { get; set; }
+        public int Creases { get; set; }
+    }
 }
