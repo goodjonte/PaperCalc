@@ -2,7 +2,7 @@
 <Settings>
   <MinimumJobCost>15</MinimumJobCost>
   <KindsMultiplier>0.8</KindsMultiplier>
-  <Gst>0.15</Gst>
+  <Gst>1.15</Gst>
   <Buffer>
     <High>1.5</High>
     <Standard>1.1</Standard>
