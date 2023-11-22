@@ -248,24 +248,6 @@
         </div>
     </div>
 
-    <button class="btn btn-success calculationSubmitButton">generate quote</button>
+    <button type="submit" class="btn btn-success calculationSubmitButton marginAuto">generate quote</button>
 
 </form>
-
-@*@{ if (Model.Calculation != null)
-    {
-        <div id="calculationPost">
-
-            <dl id="calculationTotals">
-
-                <dt>Job Cost:</dt>
-                <dd>@Html.DisplayFor(model => Model.Calculation.FinalJobCost)</dd>
-
-                <dt>Job Cost (GST Inc):</dt>
-                <dd>@Html.DisplayFor(model => Model.Calculation.FinalJobCostWithGST)</dd>
-
-            </dl>
-
-        </div>
-    }
-}*@
