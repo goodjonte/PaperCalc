@@ -26,6 +26,8 @@ namespace PaperCalc.DTOs
 
             Inputs.Height = FlatSize.Height;
             Inputs.Width = FlatSize.Width;
+
+            Inputs.Kinds = 1; //setting to 1 as we are not using this feature for now
         }
 
         //Required Classes
@@ -60,7 +62,7 @@ namespace PaperCalc.DTOs
         public double TotalInners { get { return BookletInnersused * Inputs.Quantity; } }
         public double BookletThickness { get { return ((InnerStock.HeightOfASheet * BookletInnersused) + CoverStock.HeightOfASheet ) * 2; } }
         public double TotalThickness { get { return BookletThickness * Inputs.Quantity; } }
-        public double BookletsPerBundle { get { return Math.Floor(5 / BookletThickness); } }
+        public double BookletsPerBundle { get { return Math.Floor(8 / BookletThickness); } }
         public double Bundles { get { return Math.Ceiling(Inputs.Quantity / BookletsPerBundle); } }
 
         public double CutsRequired { get { return Bundles * 3; } }
@@ -137,17 +139,17 @@ namespace PaperCalc.DTOs
         {
             get
             {
-                double jobCost = TotalCharge + Inputs.FileHandlingCost + Inputs.DesignCost + Inputs.SetupCost + 4;//4 if for packaging cost, we can make this a setting
+                double jobCost = TotalCharge + Inputs.FileHandlingCost + Inputs.DesignCost + Inputs.SetupCost;//4 if for packaging cost, we can make this a setting
                 return jobCost < 15 ? 15 : jobCost;//Hardcoded Minimum Charge
             }
         }
         [DisplayFormat(DataFormatString = "{0:c}")]
         public double FinalJobCost { get { return Inputs.Kinds < 2 ? JobCost : JobCost * Inputs.Kinds * 0.80; } }
         [DisplayFormat(DataFormatString = "{0:c}")]
-        public double FinalJobCostWithGST { get { return JobCost * 1.15; } }
+        public double FinalJobCostWithGST { get { return JobCost * Settings.Gst; } }
         [DisplayFormat(DataFormatString = "{0:c}")]
         public double CostPerUnit { get { return FinalJobCostWithGST / Inputs.Quantity; } }
-        public string? Description // TODO
+        public string? Description
         {
             get
             {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -19,13 +20,16 @@ namespace PaperCalc.Pages.Jobs
             _context = context;
         }
 
-        public IList<Job> Job { get;set; } = default!;
+        public List<Job> Jobs { get;set; } = default!;
 
         public async Task OnGetAsync()
         {
             if (_context.Job != null)
             {
-                Job = await _context.Job.ToListAsync();
+                Jobs = await _context.Job.ToListAsync();
+
+                //Sort list by newest
+                Jobs.Sort((x, y) => y.Created.CompareTo(x.Created));
             }
         }
     }

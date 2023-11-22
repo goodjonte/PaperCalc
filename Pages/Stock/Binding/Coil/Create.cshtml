@@ -17,7 +17,7 @@
         </div>
         <div class="editFormRow borderBottom">
             <div class="form-group">
-                <label asp-for="BindingCoilsStock.BindingCoilType" class="control-label"></label>
+                <label asp-for="BindingCoilsStock.BindingCoilType" class="control-label">coil type<span class="requiredStar">*</span></label>
                 <select asp-for="BindingCoilsStock.BindingCoilType" class="form-control">
                     <option value="None">None</option>
                     <option value="Plastic">Plastic</option>
@@ -26,12 +26,12 @@
                 <span asp-validation-for="BindingCoilsStock.BindingCoilType" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="BindingCoilsStock.RingsRatio" class="control-label"></label>
+                <label asp-for="BindingCoilsStock.RingsRatio" class="control-label">ring ratio<span class="requiredStar">*</span></label>
                 <input asp-for="BindingCoilsStock.RingsRatio" class="form-control" />
                 <span asp-validation-for="BindingCoilsStock.RingsRatio" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="BindingCoilsStock.SheetsHeld" class="control-label"></label>
+                <label asp-for="BindingCoilsStock.SheetsHeld" class="control-label">sheets held<span class="requiredStar">*</span></label>
                 <input asp-for="BindingCoilsStock.SheetsHeld" class="form-control" />
                 <span asp-validation-for="BindingCoilsStock.SheetsHeld" class="text-danger"></span>
             </div>
@@ -42,17 +42,17 @@
         </div>
         <div class="editFormRow borderBottom">
             <div class="form-group">
-                <label asp-for="BindingCoilsStock.CoilSize" class="control-label"></label>
+                <label asp-for="BindingCoilsStock.CoilSize" class="control-label">coil size<span class="requiredStar">*</span></label>
                 <input asp-for="BindingCoilsStock.CoilSize" class="form-control" />
                 <span asp-validation-for="BindingCoilsStock.CoilSize" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="BindingCoilsStock.CoilsPerPack" class="control-label"></label>
+                <label asp-for="BindingCoilsStock.CoilsPerPack" class="control-label">coils per pack<span class="requiredStar">*</span></label>
                 <input asp-for="BindingCoilsStock.CoilsPerPack" class="form-control" />
                 <span asp-validation-for="BindingCoilsStock.CoilsPerPack" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="BindingCoilsStock.PricePerPack" class="control-label"></label>
+                <label asp-for="BindingCoilsStock.PricePerPack" class="control-label">price per pack<span class="requiredStar">*</span></label>
                 <input asp-for="BindingCoilsStock.PricePerPack" class="form-control" />
                 <span asp-validation-for="BindingCoilsStock.PricePerPack" class="text-danger"></span>
             </div>

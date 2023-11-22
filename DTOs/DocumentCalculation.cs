@@ -27,6 +27,8 @@ namespace PaperCalc.DTOs
 
             Inputs.Height = FlatSize.Height;
             Inputs.Width = FlatSize.Width;
+
+            Inputs.Kinds = 1; //setting to 1 as we are not using this feature for now
         }
 
         //Classes Required For Calculation
@@ -226,14 +228,14 @@ namespace PaperCalc.DTOs
         public double JobCost {
             get
             {
-                double jobCost = FinalCharge + Inputs.FileHandlingCost + Inputs.DesignCost + Inputs.SetupCost + 4;//4 if for packaging cost, we can make this a setting
+                double jobCost = FinalCharge + Inputs.FileHandlingCost + Inputs.DesignCost + Inputs.SetupCost;//4 if for packaging cost, we can make this a setting
                 return jobCost < 15 ? 15 : jobCost;//Hardcoded Minimum Charge
             }
         }
         [DisplayFormat(DataFormatString = "{0:c}")]
-        public double FinalJobCost { get { return Inputs.Kinds < 2 ? JobCost : JobCost * Inputs.Kinds * 0.80; } }
+        public double FinalJobCost { get { return Inputs.Kinds == 1 ? JobCost : JobCost * Inputs.Kinds * 0.80; } }
         [DisplayFormat(DataFormatString = "{0:c}")]
-        public double FinalJobCostWithGST { get { return FinalJobCost * 1.15; } }
+        public double FinalJobCostWithGST { get { return FinalJobCost * Settings.Gst; } }
         [DisplayFormat(DataFormatString = "{0:c}")]
         public double CostPerUnit { get { return FinalJobCostWithGST / Inputs.Quantity; } }
         public string? Description

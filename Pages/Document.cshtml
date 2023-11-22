@@ -186,7 +186,9 @@
                     <option value="3">3</option>
                 </select>
             </div>
-            <div class="inputForRow">
+
+            <!-- Binding here - currently hidden until feature is fully implemented-->
+            <div class="inputForRow hidden">
                 <label>hole punches</label>
                 <select class="custom-select" asp-for="Inputs.Binding">
                     <option value="None">none</option>
@@ -195,7 +197,7 @@
                 </select>
             </div>
         </div>
-        <div class="checkboxesForRow"
+        <div class="checkboxesForRow hidden">
             <label class="checkbox">
                 lammination
                 <input asp-for="Inputs.Lamination" type="checkbox" value="true" />
@@ -238,7 +240,8 @@
                 <label>pages<span class="requiredStar">*</span></label>
                 <input type="number" placeholder="0" asp-for="Inputs.Pages">
             </div>
-            <div class="inputForRow">
+            <div class="inputForRow"></div>
+            <div class="inputForRow hidden">
                 <label>kinds<span class="requiredStar">*</span></label>
                 <input placeholder="1" type="number" asp-for="Inputs.Kinds">
             </div>

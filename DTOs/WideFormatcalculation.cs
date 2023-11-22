@@ -25,6 +25,8 @@ namespace PaperCalc.DTOs
 
             Inputs.Height = FlatSize.Height;
             Inputs.Width = FlatSize.Width;
+
+            Inputs.Kinds = 1; //setting to 1 as we are not using this feature for now
         }
 
         //Required Classes
@@ -52,7 +54,7 @@ namespace PaperCalc.DTOs
                 }
             }
         }
-        public double CutsNeeded { get { return Inputs.Quantity * Inputs.Pages * 4; } } // On sheets one stock item requires no cuts - need to sort something for this
+        public double CutsNeeded { get { return Paper.Weight == 80 && Paper.CoatType == CoatType.Uncoated ? 0 : Inputs.Quantity * Inputs.Pages * 4; } } // On sheets one stock item requires no cuts - now sorted but not perfect
         public double CreasesNeeded { get { return Inputs.Creases > 0 ? Inputs.Quantity * Inputs.Pages * Inputs.Creases : 0; } }
         public double FoldsNeeded { get { return Inputs.Folds > 0 ? Inputs.Quantity * Inputs.Pages * Inputs.Folds : 0; } }
 
@@ -90,14 +92,14 @@ namespace PaperCalc.DTOs
         {
             get
             {
-                double jobCost = Charge + Inputs.FileHandlingCost + Inputs.DesignCost + Inputs.SetupCost + 4;//4 if for packaging cost, we can make this a setting
-                return jobCost < 15 ? 15 : jobCost;//Hardcoded Minimum Charge
+                double jobCost = Charge + Inputs.FileHandlingCost + Inputs.DesignCost + Inputs.SetupCost;//4 if for packaging cost, we can make this a setting
+                return jobCost < Settings.MinimumJobCost ? Settings.MinimumJobCost : jobCost;
             }
         }
         [DisplayFormat(DataFormatString = "{0:c}")]
         public double FinalJobCost { get { return Inputs.Kinds < 2 ? JobCost : JobCost * Inputs.Kinds * 0.80; } }
         [DisplayFormat(DataFormatString = "{0:c}")]
-        public double FinalJobCostWithGST { get { return JobCost * 1.15; } }
+        public double FinalJobCostWithGST { get { return JobCost * Settings.Gst; } }
         [DisplayFormat(DataFormatString = "{0:c}")]
         public double CostPerUnit { get { return FinalJobCostWithGST / Inputs.Quantity; } }
 

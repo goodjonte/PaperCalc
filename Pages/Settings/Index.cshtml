@@ -24,40 +24,68 @@
         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
             <form method="post" asp-page-handler="SaveSettings">
 
-                <div class="input-group mb-3 settingsBasicInput">
-                    <div class="input-group-prepend">
-                        <label class="input-group-text" id="basic-addon1" asp-for="Settings.MinimumJobCost"></label>
+                <div>
+                    <h3>General</h3>
+
+                    <div class="input-group mb-3 settingsBasicInput">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" id="basic-addon1" asp-for="Settings.MinimumJobCost"></label>
+                        </div>
+                        <input type="number" class="form-control inputCurve" step="any" asp-for="Settings.MinimumJobCost">
                     </div>
-                    <input type="number" class="form-control inputCurve" step="any" asp-for="Settings.MinimumJobCost">
+                    <div class="input-group mb-3 settingsBasicInput">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" id="basic-addon1" asp-for="Settings.Gst"></label>
+                        </div>
+                        <input type="number" class="form-control inputCurve" step="any" asp-for="Settings.Gst">
+                    </div>
+                    <div class="input-group mb-3 settingsBasicInput">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" id="basic-addon1" asp-for="Settings.ClickRateBase"></label>
+                        </div>
+                        <input type="number" class="form-control inputCurve" step="any" asp-for="Settings.ClickRateBase">
+                    </div>
                 </div>
 
-                <div class="input-group mb-3 settingsBasicInput">
-                    <div class="input-group-prepend">
-                        <label class="input-group-text" id="basic-addon1" asp-for="Settings.KindsMultiplier"></label>
+                <div>
+                    <h3>Sra3</h3>
+                    <div class="input-group mb-3 settingsBasicInput">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" id="basic-addon1" asp-for="Settings.KindsMultiplier"></label>
+                        </div>
+                        <input type="number" class="form-control inputCurve" step="any" asp-for="Settings.KindsMultiplier">
                     </div>
-                    <input type="number" class="form-control inputCurve" step="any" asp-for="Settings.KindsMultiplier">
+                    <div class="input-group mb-3 settingsBasicInput">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" id="basic-addon1" asp-for="Settings.Buffer"></label>
+                        </div>
+                        <input type="number" class="form-control inputCurve" step="any" asp-for="Settings.Buffer">
+                    </div>
+                    <div class="input-group mb-3 settingsBasicInput">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" id="basic-addon1" asp-for="Settings.BufferHigh"></label>
+                        </div>
+                        <input type="number" class="form-control inputCurve" step="any" asp-for="Settings.BufferHigh">
+                    </div>
                 </div>
+                <div>
+                    <h3>Documents</h3>
+                </div>
+                <div>
+                    <h3>Booklets</h3>
+                </div>
+                <div>
+                    <h3>Wide Format</h3>
+                </div>
+                
 
-                <div class="input-group mb-3 settingsBasicInput">
-                    <div class="input-group-prepend">
-                        <label class="input-group-text" id="basic-addon1" asp-for="Settings.Gst"></label>
-                    </div>
-                    <input type="number" class="form-control inputCurve" step="any" asp-for="Settings.Gst">
-                </div>
+                
 
-                <div class="input-group mb-3 settingsBasicInput">
-                    <div class="input-group-prepend">
-                        <label class="input-group-text" id="basic-addon1" asp-for="Settings.Buffer"></label>
-                    </div>
-                    <input type="number" class="form-control inputCurve" step="any" asp-for="Settings.Buffer">
-                </div>
+                
 
-                <div class="input-group mb-3 settingsBasicInput">
-                    <div class="input-group-prepend">
-                        <label class="input-group-text" id="basic-addon1" asp-for="Settings.BufferHigh"></label>
-                    </div>
-                    <input type="number" class="form-control inputCurve" step="any" asp-for="Settings.BufferHigh">
-                </div>
+                
+
+                
 
                 <div class="input-group mb-3 settingsBasicInput">
                     <div class="input-group-prepend">
@@ -87,12 +115,7 @@
                     <input type="number" class="form-control inputCurve" step="any" asp-for="Settings.HolePunchingBase">
                 </div>
 
-                <div class="input-group mb-3 settingsBasicInput">
-                    <div class="input-group-prepend">
-                        <label class="input-group-text" id="basic-addon1" asp-for="Settings.ClickRateBase"></label>
-                    </div>
-                    <input type="number" class="form-control inputCurve" step="any" asp-for="Settings.ClickRateBase">
-                </div>
+                
 
                 <div class="form-group settingsSubmit">
                     <input type="submit" value="Save" class="btn btn-primary" />

@@ -28,7 +28,7 @@
                 <span asp-validation-for="DocumentsStock.StockBrand" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DocumentsStock.StockType" class="control-label">coating<span class="requiredStar">*</span></label>
+                <label asp-for="DocumentsStock.StockType" class="control-label">stock type<span class="requiredStar">*</span></label>
                 <select asp-for="DocumentsStock.StockType" class="form-control custom-select">
                     <option value="">Select a Coating Type...</option>
                     <option value="Adhesive">Adhesive</option>
@@ -73,10 +73,8 @@
                 <label asp-for="DocumentsStock.CoatType" class="control-label">coating<span class="requiredStar">*</span></label>
                 <select asp-for="DocumentsStock.CoatType" class="form-control custom-select">
                     <option value="">Select a Coating Type...</option>
-                    <option value="Adhesive">Adhesive</option>
                     <option value="Coated">Coated</option>
                     <option value="Uncoated">Uncoated</option>
-                    <option value="Synthetic">Synthetic</option>
                     <option value="Matt">Matt</option>
                     <option value="Satin">Satin</option>
                     <option value="Gloss">Gloss</option>

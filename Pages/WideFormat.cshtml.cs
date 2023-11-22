@@ -19,6 +19,8 @@ namespace PaperCalc.Pages
             _configuration = config;
             Inputs = new();
             Jobs = _context.Job.ToList();
+            //Sort Jobs by newest
+            Jobs.Sort((x, y) => y.Created.CompareTo(x.Created));
             FlatSizes = _context.FlatSizes.Where(x => x.ForCalculation == CalculationType.WideFormat).ToList();
             Stock = _context.WideFormatStock.ToList();
         }
@@ -78,6 +80,7 @@ namespace PaperCalc.Pages
                 Job newJob = new()
                 {
                     Id = Guid.NewGuid(),
+                    Created = DateTime.Now,
                     JobTitle = Job.JobTitle,
                     ClientName = Job.ClientName,
                     Buissnessname = Job.Buissnessname

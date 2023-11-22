@@ -226,7 +226,7 @@
                 </select>
             </div>
         </div>
-        <div class="checkboxesForRow">
+        <div class="checkboxesForRow hidden">
             <label class="checkbox">
                 lammination
                 <input asp-for="Inputs.Lamination" type="checkbox" value="true" />
@@ -252,30 +252,6 @@
             <div class="inputForRow">
                 <label>setup</label>
                 <input placeholder="$00.00" asp-for="Inputs.SetupCost" type="number" />
-            </div>
-        </div>
-    </div>
-
-    <!-- Delivery & Turnaround -->
-    <div class="inputRow inputRowWithBorder">
-        <div class="inputRowTitle">
-            <h3>delivery & turnaround</h3>
-        </div>
-        <div class="inputsForRow">
-            <div class="inputForRow">
-                <label>address</label>
-                <input placeholder="address" type="text" />
-            </div>
-            <div class="inputForRow">
-                <label>cost</label>
-                <input placeholder="$00.00" type="number" />
-            </div>
-            <div class="inputForRow">
-                <label>turnaround </label>
-                <div class="inputWithCheckbox">
-                    <input class="turnaroundInput" type="number" />
-                    <label class="labelWithinInput">urgent job</label>
-                </div>
             </div>
         </div>
     </div>

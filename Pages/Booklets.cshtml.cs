@@ -21,6 +21,8 @@ namespace PaperCalc.Pages
             _configuration = config;
             Inputs = new();
             Jobs = _context.Job.ToList();
+            //Sort list by newest
+            Jobs.Sort((x, y) => y.Created.CompareTo(x.Created));
         }
         public PaperCalc.DTOs.Settings? Settings { get; set; }
         [BindProperty]
@@ -61,6 +63,7 @@ namespace PaperCalc.Pages
                 Job newJob = new()
                 {
                     Id = Guid.NewGuid(),
+                    Created = DateTime.Now,
                     JobTitle = Job.JobTitle,
                     ClientName = Job.ClientName,
                     Buissnessname = Job.Buissnessname

@@ -12,8 +12,8 @@ using PaperCalc.Data;
 namespace PaperCalc.Migrations
 {
     [DbContext(typeof(PaperCalcContext))]
-    [Migration("20231104035408_wider")]
-    partial class wider
+    [Migration("20231121021023_jobcreationdate")]
+    partial class jobcreationdate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -312,6 +312,9 @@ namespace PaperCalc.Migrations
                     b.Property<string>("ClientName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("JobTitle")
                         .IsRequired()

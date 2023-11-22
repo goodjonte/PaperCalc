@@ -29,8 +29,11 @@ namespace PaperCalc.DTOs
             if (landscaperows * landscapecolums > portraitrows * portraicolums)
             {
                 PerSra3 = (int)landscaperows * (int)landscapecolums;
+            }else
+            {
+                PerSra3 = (int)portraitrows * (int)portraicolums;
             }
-            PerSra3 = (int)portraitrows * (int)portraicolums;
+            
 
             //Set Sheets Used
             SheetsUsed = Math.Ceiling(Quantity / PerSra3);
@@ -76,7 +79,7 @@ namespace PaperCalc.DTOs
             {
                 CutsRequired = Quantity * 4;
             }
-            CuttingLabour = CutsRequired * 2;
+            CuttingLabour = CutsRequired * 2; //Need to update to new labour values
         }
     }
 }
