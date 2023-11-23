@@ -43,8 +43,7 @@ namespace PaperCalc.DTOs
         {
             get
             {
-                double clickrate = 0.01; //HardCoded for now - need to add clickrate model etc
-                clickrate = Inputs.Colour ? clickrate * 2 : clickrate;
+                double clickrate = Inputs.Colour ? Settings.A4ColourClick : Settings.A4BlackClick;
                 clickrate = Inputs.DoubleSided ? clickrate * 2 : clickrate;
                 return clickrate;
             }
@@ -54,7 +53,7 @@ namespace PaperCalc.DTOs
             get
             {
                 //calculation is Inputs.DoubleSided ? Inputs.Pages / 2 : Inputs.Pages - But we need to round up to a even number
-                return Math.Round((Inputs.DoubleSided ? Inputs.Pages / 2 : Inputs.Pages), MidpointRounding.AwayFromZero);
+                return Inputs.DoubleSided ? Math.Round(Inputs.Pages / 2, MidpointRounding.AwayFromZero) : Inputs.Pages;
             }
         }
         public double SheetsUsed
@@ -143,15 +142,18 @@ namespace PaperCalc.DTOs
 
             }
         }
-        public double BindingCost
+        public double BindingLabourCharge
         {
             get
             {
-                if (Inputs.Binding == BindingCoilType.None)
-                {
-                    return 0;
-                }
-                return BindingPunches / (180 / 60);
+                return Inputs.Binding == BindingCoilType.None ? 0 : BindingPunches * Settings.BindingPunchChargePA;
+            }
+        }
+        public double BindingLabourCost
+        {
+            get
+            {
+                return Inputs.Binding == BindingCoilType.None ? 0 : BindingPunches * Settings.BindingPunchCostPA;
             }
         }
         public double FoldingCost
@@ -160,7 +162,7 @@ namespace PaperCalc.DTOs
             {
                 if (Inputs.Folds > 0)
                 {
-                    return Inputs.Folds * 0.05 * SheetsUsed; //hardcoded - we talked about making this cheaper each time
+                    return Inputs.Folds * 0.05 * SheetsUsed;
                 }
                 return 0;
             }
@@ -171,7 +173,7 @@ namespace PaperCalc.DTOs
             {
                 if (Inputs.HolePunches > 0)
                 {
-                    return Inputs.HolePunches * SheetsUsed / 25; //hardcoded - we talked about making this cheaper each time
+                    return Inputs.HolePunches * SheetsUsed / 25;
                 }
                 return 0;
             }
@@ -182,7 +184,7 @@ namespace PaperCalc.DTOs
             {
                 if (Inputs.Staples > 0)
                 {
-                    return Math.Ceiling(Inputs.Quantity * Inputs.Staples * 0.05); //hardcoded - we talked about making this cheaper each time
+                    return Math.Ceiling(Inputs.Quantity * Inputs.Staples * 0.05);
                 }
                 return 0;
             }
@@ -195,13 +197,13 @@ namespace PaperCalc.DTOs
         public double FinishingCost {
             get
             {
-                if(Double.IsNaN((FoldingCost / (250 / 60)) +(HolePunchesCost / (50 / 60)) + BindingCost + StaplesCost)) { return 0; }
-                return (FoldingCost / (250/60)) + (HolePunchesCost / (50 / 60)) + BindingCost + StaplesCost;
+                if(Double.IsNaN((FoldingCost / (250 / 60)) +(HolePunchesCost / (50 / 60)) + BindingLabourCost + StaplesCost)) { return 0; }
+                return (FoldingCost / (250/60)) + (HolePunchesCost / (50 / 60)) + BindingLabourCost + StaplesCost;
             }
         }
 
         //Factors
-        public double Buffer { get { return SheetsUsed < 50 ? 2 : 1.1; } }
+        public double Buffer { get { return SheetsUsed < Settings.DocumentsBufferDecider ? Settings.DocumentsBufferHigh : Settings.DocumentsBuffer; } }
         public double Multiplier {
             get
             {
@@ -211,7 +213,7 @@ namespace PaperCalc.DTOs
 
         //Charge Totals
         public double MaterialCharge { get { return (PaperCost + ClickCost + MaterialCost) * (Buffer * Multiplier); } }
-        public double LabourCharge { get { return FoldingCost + HolePunchesCost + StaplesCost + BindingPunches; } }
+        public double LabourCharge { get { return FoldingCost + HolePunchesCost + StaplesCost + BindingLabourCharge; } }
 
         //Totals
         public double TotalCost { get { return MaterialCost + FinishingCost; } }
@@ -229,11 +231,11 @@ namespace PaperCalc.DTOs
             get
             {
                 double jobCost = FinalCharge + Inputs.FileHandlingCost + Inputs.DesignCost + Inputs.SetupCost;//4 if for packaging cost, we can make this a setting
-                return jobCost < 15 ? 15 : jobCost;//Hardcoded Minimum Charge
+                return jobCost < Settings.MinimumJobCost ? Settings.MinimumJobCost : jobCost;
             }
         }
         [DisplayFormat(DataFormatString = "{0:c}")]
-        public double FinalJobCost { get { return Inputs.Kinds == 1 ? JobCost : JobCost * Inputs.Kinds * 0.80; } }
+        public double FinalJobCost { get { return Inputs.Kinds == 1 ? JobCost : JobCost * Inputs.Kinds * Settings.KindsMultiplier; } }
         [DisplayFormat(DataFormatString = "{0:c}")]
         public double FinalJobCostWithGST { get { return FinalJobCost * Settings.Gst; } }
         [DisplayFormat(DataFormatString = "{0:c}")]

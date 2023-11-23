@@ -43,21 +43,20 @@ namespace PaperCalc.DTOs
         {
             get
             {
-                double clickrate = 0.02; //HardCoded for now - need to add clickrate model etc
-                clickrate = Inputs.Colour ? clickrate * 2 : clickrate;
-                clickrate = clickrate * 2;//Double sided is always true for booklets so me multiply again
+                double clickrate = Inputs.Colour ? Settings.A3ColourClick : Settings.A3BlackClick;
+                clickrate = clickrate * 2;//Double sided is always true for booklets so we multiply
                 return clickrate;
             }
         }
+
+        public double TotalPages { get { return Math.Ceiling(Inputs.Pages / 4) * 4; } } // Round upto nearest multiple of 4
         public double PaperCostPerBooklet
         {
             get
             {
-                return CoverStock.SheetCost + (InnerStock.SheetCost * (Inputs.Pages - 4) / 4);
+                return CoverStock.SheetCost + (InnerStock.SheetCost * (TotalPages - 4) / 4);
             }
         }
-
-        public double TotalPages { get { return Math.Ceiling(Inputs.Pages / 4) * 4; } }
         public double BookletInnersused { get { return (TotalPages - 4) / 4; } }
         public double TotalInners { get { return BookletInnersused * Inputs.Quantity; } }
         public double BookletThickness { get { return ((InnerStock.HeightOfASheet * BookletInnersused) + CoverStock.HeightOfASheet ) * 2; } }
@@ -74,7 +73,7 @@ namespace PaperCalc.DTOs
             get
             {
                 if (Inputs.HolePunches < 1) return 0;
-                return (Inputs.HolePunches * Inputs.Quantity / 25) < 1 ? 1 : (Inputs.HolePunches * Inputs.Quantity / 25);
+                return Math.Ceiling(Inputs.HolePunches * Inputs.Quantity / 25);
             }
         }
 
@@ -85,7 +84,7 @@ namespace PaperCalc.DTOs
         public double LabourCost { get { return CutsRequired / 1.5; } }
 
         //Factors
-        public double Buffer { get { return (TotalInners + Inputs.Quantity) < 32 ? 2 : 1.5; } }
+        public double Buffer { get { return (TotalInners + Inputs.Quantity) < Settings.BookletsBufferDecider ? Settings.BookletsBufferHigh : Settings.BookletsBuffer; } }
         public double Multiplier
         {
             get
@@ -140,11 +139,11 @@ namespace PaperCalc.DTOs
             get
             {
                 double jobCost = TotalCharge + Inputs.FileHandlingCost + Inputs.DesignCost + Inputs.SetupCost;//4 if for packaging cost, we can make this a setting
-                return jobCost < 15 ? 15 : jobCost;//Hardcoded Minimum Charge
+                return jobCost < Settings.MinimumJobCost ? Settings.MinimumJobCost : jobCost;//Hardcoded Minimum Charge
             }
         }
         [DisplayFormat(DataFormatString = "{0:c}")]
-        public double FinalJobCost { get { return Inputs.Kinds < 2 ? JobCost : JobCost * Inputs.Kinds * 0.80; } }
+        public double FinalJobCost { get { return Inputs.Kinds == 1 ? JobCost : JobCost * Inputs.Kinds * Settings.KindsMultiplier; } }
         [DisplayFormat(DataFormatString = "{0:c}")]
         public double FinalJobCostWithGST { get { return JobCost * Settings.Gst; } }
         [DisplayFormat(DataFormatString = "{0:c}")]

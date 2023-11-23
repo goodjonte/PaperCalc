@@ -44,10 +44,8 @@ namespace PaperCalc.DTOs
         {
             get
             {
-                double clickrate = Settings.ClickRateBase;
-                clickrate = Inputs.Colour ? clickrate * 2 : clickrate;
-                clickrate = Inputs.DoubleSided ? clickrate * 2 : clickrate;
-                return clickrate;
+                double clickrate = Inputs.Colour ? Settings.A3ColourClick : Settings.A3BlackClick;
+                return Inputs.DoubleSided ? clickrate * 2 : clickrate; ;
             }
         }
         public double CreasingCost
@@ -56,7 +54,7 @@ namespace PaperCalc.DTOs
             {
                 if(Inputs.Creases > 0)
                 {
-                    return Inputs.Creases * Settings.CreasingBase * Inputs.Quantity;
+                    return Math.Ceiling(Inputs.Creases * Settings.CreasesChargePA * Inputs.Quantity);
                 }
                 return 0;
             }
@@ -67,7 +65,7 @@ namespace PaperCalc.DTOs
             {
                 if (Inputs.Folds > 0)
                 {
-                    return Inputs.Folds * Settings.FoldingBase * Inputs.Quantity;
+                    return Math.Ceiling(Inputs.Folds * Settings.FoldsChargePA * Inputs.Quantity);
                 }
                 return 0;
             }
@@ -78,7 +76,7 @@ namespace PaperCalc.DTOs
             {
                 if (Inputs.HolePunches > 0)
                 {
-                    return Inputs.HolePunches * Inputs.Quantity / Settings.HolePunchingBase;
+                    return Math.Ceiling((Inputs.HolePunches * Inputs.Quantity / 15) * 2);
                 }
                 return 0;
             }
@@ -89,7 +87,7 @@ namespace PaperCalc.DTOs
             {
                 if (Inputs.Staples > 0)
                 {
-                    return Inputs.Quantity * Inputs.Staples * Settings.StaplingBase;
+                    return Math.Ceiling(Inputs.Quantity * Inputs.Staples * 0.05);
                 }
                 return 0;
             }
@@ -108,12 +106,12 @@ namespace PaperCalc.DTOs
                 }
                 else
                 {
-                    return (CuttingCalculation.CutsRequired / (60 / 60)) + ((CreasingCost + FoldingCost) / (200 / 60)) + (HolePunchesCost * (50 / 60) + StaplesCost);
+                    return (CuttingCalculation.CutsRequired * Settings.GuillotineChargePA) + ((CreasingCost + FoldingCost) / (200 / 60)) + (HolePunchesCost * (50 / 60) + StaplesCost);
                 }
             }
         }
         //Factors
-        public double Buffer { get { return CuttingCalculation.SheetsUsed < 10 ? Settings.BufferHigh : Settings.Buffer; } }
+        public double Buffer { get { return CuttingCalculation.SheetsUsed < Settings.Sra3BufferDecider ? Settings.Sra3BufferHigh : Settings.Sra3Buffer; } }
         public double Multiplier {
             get
             {
@@ -145,13 +143,13 @@ namespace PaperCalc.DTOs
 
                 return FlatSize.CalculateMultiplier(Inputs.Quantity);
             }
-        } //TODO - can use my method or his
+        }
         //Charges
         public double MaterialCharge { get { return MaterialCost * Buffer * Multiplier; } }
         public double LabourCharge {
             get
             {
-                return CuttingCalculation.CuttingLabour + CreasingCost + FoldingCost + HolePunchesCost + StaplesCost; 
+                return CuttingCalculation.CuttingLabour + CreasingCost + FoldingCost + HolePunchesCost + StaplesCost;
             }
         }
 
@@ -191,7 +189,7 @@ namespace PaperCalc.DTOs
         {
             get
             {
-                return JobCost / Inputs.Quantity;
+                return FinalJobCostWithGst / Inputs.Quantity;
             }
         }
         [DisplayFormat(DataFormatString = "{0:c}")]

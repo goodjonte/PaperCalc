@@ -824,6 +824,10 @@ td, th {
 .editStockForm{
     width: 100%;
 }
+.settingsStockForm {
+    width: 75%;
+    margin: auto;
+}
 .editFormRow {
     width: 100%;
     display: flex;

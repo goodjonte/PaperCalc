@@ -8,121 +8,414 @@
 
     <!-- Bootstrap tabs -->
     <ul class="nav nav-tabs" id="myTab" role="tablist">
+
+        <!-- General Values -->
         <li class="nav-item" role="presentation">
             <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Values</button>
         </li>
+
+        <!-- Labour -->
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="labour-tab" data-bs-toggle="tab" data-bs-target="#labour" type="button" role="tab" aria-controls="labour" aria-selected="false">Labour</button>
+        </li>
+
+        <!-- FlatSizes -->
         <li class="nav-item" role="presentation">
             <button class="nav-link" id="flatsize-tab" data-bs-toggle="tab" data-bs-target="#flatsize" type="button" role="tab" aria-controls="flatsize" aria-selected="false">Flat Sizes</button>
         </li>
+
+        <!-- Users -->
         <li class="nav-item" role="presentation">
             <button class="nav-link" id="userTab-tab" data-bs-toggle="tab" data-bs-target="#userTab" type="button" role="tab" aria-controls="userTab" aria-selected="false">Users</button>
         </li>
+
     </ul>
     <!-- Tabs -->
     <div class="tab-content" id="myTabContent">
-        <!-- Values Tab -->
-        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+
+        <!-- Values Tab Start -->
+        <div class="tab-pane fade show active settingsStockForm" id="home" role="tabpanel" aria-labelledby="home-tab">
             <form method="post" asp-page-handler="SaveSettings">
+                <input asp-for="Settings.HourlyRate" class="form-control" type="hidden" />
+                <input asp-for="Settings.ManualCuts" class="form-control" type="hidden" />
+                <input asp-for="Settings.GuillotineCuts" class="form-control" type="hidden" />
+                <input asp-for="Settings.ManualDrills" class="form-control" type="hidden" />
+                <input asp-for="Settings.Creases" class="form-control" type="hidden" />
+                <input asp-for="Settings.Folds" class="form-control" type="hidden" />
+                <input asp-for="Settings.BindingPunch" class="form-control" type="hidden" />
+                <input asp-for="Settings.Tape" class="form-control" type="hidden" />
 
-                <div>
+                <div class="editRowTitle">
                     <h3>General</h3>
+                </div>
+                <div class="editFormRow borderBottom">
+                    <div class="form-group">
+                        <label class="control-label" asp-for="Settings.MinimumJobCost"></label>
+                        <input asp-for="Settings.MinimumJobCost" class="form-control" />
+                        <span asp-validation-for="Settings.MinimumJobCost" class="text-danger"></span>
+                    </div>
 
-                    <div class="input-group mb-3 settingsBasicInput">
-                        <div class="input-group-prepend">
-                            <label class="input-group-text" id="basic-addon1" asp-for="Settings.MinimumJobCost"></label>
-                        </div>
-                        <input type="number" class="form-control inputCurve" step="any" asp-for="Settings.MinimumJobCost">
+                    <div class="form-group">
+                        <label class="control-label" asp-for="Settings.Gst"></label>
+                        <input asp-for="Settings.Gst" class="form-control" />
+                        <span asp-validation-for="Settings.Gst" class="text-danger"></span>
                     </div>
-                    <div class="input-group mb-3 settingsBasicInput">
-                        <div class="input-group-prepend">
-                            <label class="input-group-text" id="basic-addon1" asp-for="Settings.Gst"></label>
-                        </div>
-                        <input type="number" class="form-control inputCurve" step="any" asp-for="Settings.Gst">
-                    </div>
-                    <div class="input-group mb-3 settingsBasicInput">
-                        <div class="input-group-prepend">
-                            <label class="input-group-text" id="basic-addon1" asp-for="Settings.ClickRateBase"></label>
-                        </div>
-                        <input type="number" class="form-control inputCurve" step="any" asp-for="Settings.ClickRateBase">
+
+                    <div class="form-group">
+                        <label class="control-label" asp-for="Settings.KindsMultiplier"></label>
+                        <input asp-for="Settings.KindsMultiplier" class="form-control" />
+                        <span asp-validation-for="Settings.KindsMultiplier" class="text-danger"></span>
                     </div>
                 </div>
 
-                <div>
-                    <h3>Sra3</h3>
-                    <div class="input-group mb-3 settingsBasicInput">
-                        <div class="input-group-prepend">
-                            <label class="input-group-text" id="basic-addon1" asp-for="Settings.KindsMultiplier"></label>
-                        </div>
-                        <input type="number" class="form-control inputCurve" step="any" asp-for="Settings.KindsMultiplier">
+                <div class="editRowTitle">
+                    <h3>Sra3 Buffer</h3>
+                </div>
+                <div class="editFormRow borderBottom">
+                    <div class="form-group">
+                        <label class="control-label" asp-for="Settings.Sra3BufferDecider"></label>
+                        <input asp-for="Settings.Sra3BufferDecider" class="form-control" />
+                        <span asp-validation-for="Settings.Sra3BufferDecider" class="text-danger"></span>
                     </div>
-                    <div class="input-group mb-3 settingsBasicInput">
-                        <div class="input-group-prepend">
-                            <label class="input-group-text" id="basic-addon1" asp-for="Settings.Buffer"></label>
-                        </div>
-                        <input type="number" class="form-control inputCurve" step="any" asp-for="Settings.Buffer">
+
+                    <div class="form-group">
+                        <label class="control-label" asp-for="Settings.Sra3Buffer"></label>
+                        <input asp-for="Settings.Sra3Buffer" class="form-control" />
+                        <span asp-validation-for="Settings.Sra3Buffer" class="text-danger"></span>
                     </div>
-                    <div class="input-group mb-3 settingsBasicInput">
-                        <div class="input-group-prepend">
-                            <label class="input-group-text" id="basic-addon1" asp-for="Settings.BufferHigh"></label>
-                        </div>
-                        <input type="number" class="form-control inputCurve" step="any" asp-for="Settings.BufferHigh">
+
+                    <div class="form-group">
+                        <label class="control-label" asp-for="Settings.Sra3BufferHigh"></label>
+                        <input asp-for="Settings.Sra3BufferHigh" class="form-control" />
+                        <span asp-validation-for="Settings.Sra3BufferHigh" class="text-danger"></span>
                     </div>
                 </div>
-                <div>
-                    <h3>Documents</h3>
+
+                <div class="editRowTitle">
+                    <h3>Documents Buffer</h3>
                 </div>
-                <div>
-                    <h3>Booklets</h3>
-                </div>
-                <div>
-                    <h3>Wide Format</h3>
-                </div>
-                
-
-                
-
-                
-
-                
-
-                
-
-                <div class="input-group mb-3 settingsBasicInput">
-                    <div class="input-group-prepend">
-                        <label class="input-group-text" id="basic-addon1" asp-for="Settings.CreasingBase"></label>
+                <div class="editFormRow borderBottom">
+                    <div class="form-group">
+                        <label class="control-label" asp-for="Settings.DocumentsBufferDecider"></label>
+                        <input asp-for="Settings.DocumentsBufferDecider" class="form-control" />
+                        <span asp-validation-for="Settings.DocumentsBufferDecider" class="text-danger"></span>
                     </div>
-                    <input type="number" class="form-control inputCurve" step="any" asp-for="Settings.CreasingBase">
-                </div>
 
-                <div class="input-group mb-3 settingsBasicInput">
-                    <div class="input-group-prepend">
-                        <label class="input-group-text" id="basic-addon1" asp-for="Settings.FoldingBase"></label>
+                    <div class="form-group">
+                        <label class="control-label" asp-for="Settings.DocumentsBuffer"></label>
+                        <input asp-for="Settings.DocumentsBuffer" class="form-control" />
+                        <span asp-validation-for="Settings.DocumentsBuffer" class="text-danger"></span>
                     </div>
-                    <input type="number" class="form-control inputCurve" step="any" asp-for="Settings.FoldingBase">
-                </div>
 
-                <div class="input-group mb-3 settingsBasicInput">
-                    <div class="input-group-prepend">
-                        <label class="input-group-text" id="basic-addon1" asp-for="Settings.StaplingBase"></label>
+                    <div class="form-group">
+                        <label class="control-label" asp-for="Settings.DocumentsBufferHigh"></label>
+                        <input asp-for="Settings.DocumentsBufferHigh" class="form-control" />
+                        <span asp-validation-for="Settings.DocumentsBufferHigh" class="text-danger"></span>
                     </div>
-                    <input type="number" class="form-control inputCurve" step="any" asp-for="Settings.StaplingBase">
                 </div>
 
-                <div class="input-group mb-3 settingsBasicInput">
-                    <div class="input-group-prepend">
-                        <label class="input-group-text" id="basic-addon1" asp-for="Settings.HolePunchingBase"></label>
+                <div class="editRowTitle">
+                    <h3>Booklets Buffer</h3>
+                </div>
+                <div class="editFormRow borderBottom">
+                    <div class="form-group">
+                        <label class="control-label" asp-for="Settings.BookletsBufferDecider"></label>
+                        <input asp-for="Settings.BookletsBufferDecider" class="form-control" />
+                        <span asp-validation-for="Settings.BookletsBufferDecider" class="text-danger"></span>
                     </div>
-                    <input type="number" class="form-control inputCurve" step="any" asp-for="Settings.HolePunchingBase">
+
+                    <div class="form-group">
+                        <label class="control-label" asp-for="Settings.BookletsBuffer"></label>
+                        <input asp-for="Settings.BookletsBuffer" class="form-control" />
+                        <span asp-validation-for="Settings.BookletsBuffer" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label" asp-for="Settings.BookletsBufferHigh"></label>
+                        <input asp-for="Settings.BookletsBufferHigh" class="form-control" />
+                        <span asp-validation-for="Settings.BookletsBufferHigh" class="text-danger"></span>
+                    </div>
                 </div>
 
-                
+                <div class="editRowTitle">
+                    <h3>Wide Format Buffer</h3>
+                </div>
+                <div class="editFormRow borderBottom">
+                    <div class="form-group">
+                        <label class="control-label" asp-for="Settings.WideFormatBufferDecider"></label>
+                        <input asp-for="Settings.WideFormatBufferDecider" class="form-control" />
+                        <span asp-validation-for="Settings.WideFormatBufferDecider" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label" asp-for="Settings.WideFormatBuffer"></label>
+                        <input asp-for="Settings.WideFormatBuffer" class="form-control" />
+                        <span asp-validation-for="Settings.WideFormatBuffer" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label" asp-for="Settings.WideFormatBufferHigh"></label>
+                        <input asp-for="Settings.WideFormatBufferHigh" class="form-control" />
+                        <span asp-validation-for="Settings.WideFormatBufferHigh" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="editRowTitle">
+                    <h3>Wide Format Ink</h3>
+                </div>
+                <div class="editFormRow">
+                    <div class="form-group">
+                        <label class="control-label" asp-for="Settings.InkCostPerYear"></label>
+                        <input oninput="calculateInk()" asp-for="Settings.InkCostPerYear" class="form-control" />
+                        <span asp-validation-for="Settings.InkCostPerYear" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label" asp-for="Settings.InkA0PerYear"></label>
+                        <input oninput="calculateInk()" asp-for="Settings.InkA0PerYear" class="form-control" />
+                        <span asp-validation-for="Settings.InkA0PerYear" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label" asp-for="Settings.InkCoveragePerMeter"></label>
+                        <input id="inkInput" value="" class="form-control" disabled />
+                        <span asp-validation-for="Settings.InkCoveragePerMeter" class="text-danger"></span>
+                        <script>
+                            calculateInk()
+                            function calculateInk() {
+                                var costPerYear = document.getElementById("Settings_InkCostPerYear").value;
+                                var a0PerYear = document.getElementById("Settings_InkA0PerYear").value;
+
+                                let inkCoverage = costPerYear / (a0PerYear * 1189 / 1000)
+
+                                document.getElementById("inkInput").value = Math.round(inkCoverage * 100) / 100;
+                            }
+                        </script>
+                    </div>
+                </div>
+                <div class="editFormRow borderBottom">
+                    <div class="form-group">
+                        <label class="control-label" asp-for="Settings.InkPercentBW"></label>
+                        <input asp-for="Settings.InkPercentBW" class="form-control" />
+                        <span asp-validation-for="Settings.InkPercentBW" class="text-danger"></span>
+                    </div>
+                </div>
 
                 <div class="form-group settingsSubmit">
                     <input type="submit" value="Save" class="btn btn-primary" />
                 </div>
             </form>
         </div>
-        <!-- FlatSizes Tab -->
+        <!-- Values Tab End -->
+        <!-- Labour Tab Start -->
+        <div class="tab-pane fade" id="labour" role="tabpanel" aria-labelledby="labour-tab">
+            <form method="post" asp-page-handler="SaveLabourSettings">
+                <input asp-for="Settings.InkPercentBW" class="form-control" type="hidden" />
+                <input asp-for="Settings.InkA0PerYear" class="form-control" type="hidden" />
+                <input asp-for="Settings.InkCostPerYear" class="form-control" type="hidden" />
+                <input asp-for="Settings.WideFormatBufferHigh" class="form-control" type="hidden" />
+                <input asp-for="Settings.WideFormatBuffer" class="form-control" type="hidden" />
+                <input asp-for="Settings.WideFormatBufferDecider" class="form-control" type="hidden" />
+                <input asp-for="Settings.BookletsBufferDecider" class="form-control" type="hidden" />
+                <input asp-for="Settings.BookletsBuffer" class="form-control" type="hidden" />
+                <input asp-for="Settings.BookletsBufferHigh" class="form-control" type="hidden" />
+                <input asp-for="Settings.Sra3BufferDecider" class="form-control" type="hidden" />
+                <input asp-for="Settings.Sra3Buffer" class="form-control" type="hidden" />
+                <input asp-for="Settings.Sra3BufferHigh" class="form-control" type="hidden" />
+                <input asp-for="Settings.DocumentsBufferDecider" class="form-control" type="hidden" />
+                <input asp-for="Settings.DocumentsBuffer" class="form-control" type="hidden" />
+                <input asp-for="Settings.DocumentsBufferHigh" class="form-control" type="hidden" />
+                <input asp-for="Settings.MinimumJobCost" class="form-control" type="hidden"/>
+                <input asp-for="Settings.Gst" class="form-control" type="hidden" />
+                <input asp-for="Settings.KindsMultiplier" class="form-control" type="hidden" />
+
+
+        <div class="editRowTitle">
+            <h3>Labour</h3>
+        </div>
+        <div class="editFormRow borderBottom">
+            <div class="form-group">
+            </div>
+
+            <div class="form-group">
+                <label class="control-label" asp-for="Settings.HourlyRate"></label>
+                <input asp-for="Settings.HourlyRate" class="form-control" />
+                <span asp-validation-for="Settings.HourlyRate" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+            </div>
+        </div>
+
+        <div class="editRowTitle">
+            <h3>Manual Cuts</h3>
+        </div>
+        <div class="editFormRow borderBottom">
+            <div class="form-group">
+                <label class="control-label" asp-for="Settings.ManualCuts"></label>
+                <input asp-for="Settings.ManualCuts" class="form-control" />
+                <span asp-validation-for="Settings.ManualCuts" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label" asp-for="Settings.ManualCutsCostPA"></label>
+                <input asp-for="Settings.ManualCutsCostPA" class="form-control" disabled />
+                <span asp-validation-for="Settings.ManualCutsCostPA" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label" asp-for="Settings.ManualCutsChargePA"></label>
+                <input asp-for="Settings.ManualCutsChargePA" class="form-control" disabled />
+                <span asp-validation-for="Settings.ManualCutsChargePA" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="editRowTitle">
+            <h3>Guillotine Cuts</h3>
+        </div>
+        <div class="editFormRow borderBottom">
+            <div class="form-group">
+                <label class="control-label" asp-for="Settings.GuillotineCuts"></label>
+                <input asp-for="Settings.GuillotineCuts" class="form-control" />
+                <span asp-validation-for="Settings.GuillotineCuts" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label" asp-for="Settings.GuillotineCostPA"></label>
+                <input asp-for="Settings.GuillotineCostPA" class="form-control" disabled />
+                <span asp-validation-for="Settings.GuillotineCostPA" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label" asp-for="Settings.GuillotineChargePA"></label>
+                <input asp-for="Settings.GuillotineChargePA" class="form-control" disabled />
+                <span asp-validation-for="Settings.GuillotineChargePA" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="editRowTitle">
+            <h3>Manual Drills</h3>
+        </div>
+        <div class="editFormRow borderBottom">
+            <div class="form-group">
+                <label class="control-label" asp-for="Settings.ManualDrills"></label>
+                <input asp-for="Settings.ManualDrills" class="form-control" />
+                <span asp-validation-for="Settings.ManualDrills" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label" asp-for="Settings.ManualDrillsCostPA"></label>
+                <input asp-for="Settings.ManualDrillsCostPA" class="form-control" disabled />
+                <span asp-validation-for="Settings.ManualDrillsCostPA" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label" asp-for="Settings.ManualDrillsChargePA"></label>
+                <input asp-for="Settings.ManualDrillsChargePA" class="form-control" disabled />
+                <span asp-validation-for="Settings.ManualDrillsChargePA" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="editRowTitle">
+            <h3>Creases</h3>
+        </div>
+        <div class="editFormRow borderBottom">
+            <div class="form-group">
+                <label class="control-label" asp-for="Settings.Creases"></label>
+                <input asp-for="Settings.Creases" class="form-control" />
+                <span asp-validation-for="Settings.Creases" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label" asp-for="Settings.CreasesCostPA"></label>
+                <input asp-for="Settings.CreasesCostPA" class="form-control" disabled />
+                <span asp-validation-for="Settings.CreasesCostPA" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label" asp-for="Settings.CreasesChargePA"></label>
+                <input asp-for="Settings.CreasesChargePA" class="form-control" disabled />
+                <span asp-validation-for="Settings.CreasesChargePA" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="editRowTitle">
+            <h3>Folds</h3>
+        </div>
+        <div class="editFormRow borderBottom">
+            <div class="form-group">
+                <label class="control-label" asp-for="Settings.Folds"></label>
+                <input asp-for="Settings.Folds" class="form-control" />
+                <span asp-validation-for="Settings.Folds" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label" asp-for="Settings.FoldsCostPA"></label>
+                <input asp-for="Settings.FoldsCostPA" class="form-control" disabled />
+                <span asp-validation-for="Settings.FoldsCostPA" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label" asp-for="Settings.FoldsChargePA"></label>
+                <input asp-for="Settings.FoldsChargePA" class="form-control" disabled />
+                <span asp-validation-for="Settings.FoldsChargePA" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="editRowTitle">
+            <h3>Binding Punch</h3>
+        </div>
+        <div class="editFormRow borderBottom">
+            <div class="form-group">
+                <label class="control-label" asp-for="Settings.BindingPunch"></label>
+                <input asp-for="Settings.BindingPunch" class="form-control" />
+                <span asp-validation-for="Settings.BindingPunch" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label" asp-for="Settings.BindingPunchCostPA"></label>
+                <input asp-for="Settings.BindingPunchCostPA" class="form-control" disabled />
+                <span asp-validation-for="Settings.BindingPunchCostPA" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label" asp-for="Settings.BindingPunchChargePA"></label>
+                <input asp-for="Settings.BindingPunchChargePA" class="form-control" disabled />
+                <span asp-validation-for="Settings.BindingPunchChargePA" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="editRowTitle">
+            <h3>Double Sided Tape (m)</h3>
+        </div>
+        <div class="editFormRow borderBottom">
+            <div class="form-group">
+                <label class="control-label" asp-for="Settings.Tape"></label>
+                <input asp-for="Settings.Tape" class="form-control" />
+                <span asp-validation-for="Settings.Tape" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label" asp-for="Settings.TapeCostPA"></label>
+                <input asp-for="Settings.TapeCostPA" class="form-control" disabled />
+                <span asp-validation-for="Settings.TapeCostPA" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label" asp-for="Settings.TapeChargePA"></label>
+                <input asp-for="Settings.TapeChargePA" class="form-control" disabled />
+                <span asp-validation-for="Settings.TapeChargePA" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group settingsSubmit">
+            <input type="submit" value="Save" class="btn btn-primary" />
+        </div>
+        </form>
+
+    </div>
+        <!-- Labour Tab End -->
+        <!-- FlatSizes Tab Start -->
         <div class="tab-pane fade" id="flatsize" role="tabpanel" aria-labelledby="flatsize-tab">
             <ul class="nav nav-tabs" id="flatsizeTabs" role="tablist">
                 <li class="nav-item" role="presentation">
@@ -663,7 +956,8 @@
 
             </div>
         </div>
-        <!-- Users Tab -->
+        <!-- FlatSizes Tab End -->
+        <!-- Users Tab Start -->
         <div class="tab-pane fade" id="userTab" role="tabpanel" aria-labelledby="userTab-tab">
             <div id="CreateUser">
                 <h2>Create A User</h2>
@@ -688,6 +982,7 @@
                 </form>
             </div>
         </div>
+        <!-- Users Tab End -->
     </div>
 </div>
 

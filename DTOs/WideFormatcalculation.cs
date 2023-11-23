@@ -54,25 +54,24 @@ namespace PaperCalc.DTOs
                 }
             }
         }
-        public double CutsNeeded { get { return Paper.Weight == 80 && Paper.CoatType == CoatType.Uncoated ? 0 : Inputs.Quantity * Inputs.Pages * 4; } } // On sheets one stock item requires no cuts - now sorted but not perfect
+        public double CutsNeeded { get { return Paper.Weight == 80 && Paper.CoatType == CoatType.Uncoated ? 0 : Inputs.Quantity * Inputs.Pages * 4; } }
         public double CreasesNeeded { get { return Inputs.Creases > 0 ? Inputs.Quantity * Inputs.Pages * Inputs.Creases : 0; } }
         public double FoldsNeeded { get { return Inputs.Folds > 0 ? Inputs.Quantity * Inputs.Pages * Inputs.Folds : 0; } }
 
 
         //Cost Totals
         public double PaperCost { get { return Paper.PricePerMeter * MetresUsed; } }
-        public double InkCost { get { return Inputs.Colour ? 2.24 * MetresUsed : 2.24 * MetresUsed * 0.85; } } // HardCoded Ink Coverage Per Meter (2.24) - Add to Settings
+        public double InkCost { get { return Inputs.Colour ? Settings.InkCoveragePerMeter * MetresUsed : Settings.InkCoveragePerMeter * MetresUsed * Settings.InkPercentBW; } }
         public double MaterialCost { get { return PaperCost + InkCost; } }
-        public double FinishingCost { get { return (CreasesNeeded * 0.15) + (CutsNeeded * 0.15) + (FoldsNeeded * 0.15); } } // HardCoded creasing,custs,folds cost - Add to Settings
-
+        public double FinishingCost { get { return (CreasesNeeded * Settings.CreasesCostPA) + (CutsNeeded * Settings.ManualCutsCostPA) + (FoldsNeeded * Settings.FoldsCostPA); } }
         //Factors
         public double Multiplier { get { return FlatSize.CalculateMultiplier(Inputs.Quantity * Inputs.Pages); } }
-        public double Buffer { get { return (Inputs.Quantity * Inputs.Pages) < 2 ? 2 : 1.5; } }
+        public double Buffer { get { return (Inputs.Quantity * Inputs.Pages) < Settings.WideFormatBufferDecider ? Settings.WideFormatBufferHigh : Settings.WideFormatBuffer; } }
 
 
         //Charge Totals
         public double MaterialCharge { get { return MaterialCost * Buffer * Multiplier; } }
-        public double FinishingCharge { get { return (CreasesNeeded * 0.25) + (CutsNeeded * 0.25) + (FoldsNeeded * 0.25); } } // HardCoded creasing,custs,folds charge - Add to Settings
+        public double FinishingCharge { get { return (CreasesNeeded * Settings.CreasesChargePA) + (CutsNeeded * Settings.ManualCutsChargePA) + (FoldsNeeded * Settings.FoldsChargePA); } }
 
 
         //Totals
@@ -97,7 +96,7 @@ namespace PaperCalc.DTOs
             }
         }
         [DisplayFormat(DataFormatString = "{0:c}")]
-        public double FinalJobCost { get { return Inputs.Kinds < 2 ? JobCost : JobCost * Inputs.Kinds * 0.80; } }
+        public double FinalJobCost { get { return Inputs.Kinds == 1 ? JobCost : JobCost * Inputs.Kinds * Settings.KindsMultiplier; } }
         [DisplayFormat(DataFormatString = "{0:c}")]
         public double FinalJobCostWithGST { get { return JobCost * Settings.Gst; } }
         [DisplayFormat(DataFormatString = "{0:c}")]

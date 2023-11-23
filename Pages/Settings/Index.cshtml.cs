@@ -57,6 +57,13 @@ namespace PaperCalc.Pages.Settings
             return RedirectToPage("./Index");
         }
 
+        //Post Methods
+        public ActionResult OnPostSaveLabourSettings()
+        {
+            Settings.SaveSettings(_env.ContentRootPath);
+            return RedirectToPage("./Index");
+        }
+
         //FlatSize Methods
         public IActionResult OnPostFlatsizeEdit()
         {
