@@ -105,16 +105,34 @@ namespace PaperCalc.DTOs
                 }
                 var validType = Context.BindingCoilsStock.Where(bc => bc.BindingCoilType == Inputs.Binding);
                 BindingCoilsStock? HigestestLessThanBc = null;
-                foreach(var bc in validType)
+                BindingCoilsStock? Highest = null;
+                foreach (var bc in validType)
                 {
-                    if(HigestestLessThanBc == null)
-                    {
-                        HigestestLessThanBc = bc;
+                    if (Highest == null) {
+                        Highest = bc;
                     }
-                    else if(bc.SheetsHeld > SheetsUsed && bc.SheetsHeld < HigestestLessThanBc.SheetsHeld)
+                    if (Highest != null && bc.SheetsHeld > Highest.SheetsHeld)
                     {
-                        HigestestLessThanBc = bc;
+                        Highest = bc;
                     }
+
+
+                    if (bc.SheetsHeld > OutPutPages)
+                    {
+                        if(HigestestLessThanBc == null)
+                        {
+                            HigestestLessThanBc = bc;
+                        }
+                        else if(bc.SheetsHeld > OutPutPages && bc.SheetsHeld < HigestestLessThanBc.SheetsHeld)
+                        {
+                            HigestestLessThanBc = bc;
+                        }
+                        
+                    }
+                }
+                if(Highest != null && OutPutPages > Highest.SheetsHeld)
+                {
+                    return Highest;
                 }
                 return HigestestLessThanBc;
             }
@@ -253,7 +271,7 @@ namespace PaperCalc.DTOs
                 string staple = Inputs.Staples > 0 ? $"{Inputs.Staples} x Staple, " : "";
                 string lamination = Inputs.Lamination ? ", Laminated" : "";
 
-                string bindingCoil = Inputs.Binding != BindingCoilType.None ? $"{BindingCoil.CoilSize}mm {BindingCoil.BindingCoilType} bound" : "";
+                string bindingCoil = BindingCoil != null ? $"{BindingCoil.CoilSize}mm {BindingCoil.BindingCoilType} bound" : "";
 
                 return $"@{Inputs.Quantity}qty - {fold}{holePunches}{staple}{bindingCoil} {size} document with {OutPutPages} pages {stock}{sides}{colour}{lamination}";
             }

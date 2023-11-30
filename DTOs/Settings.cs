@@ -60,13 +60,13 @@ namespace PaperCalc.DTOs
         public double BookletsBufferHigh { get; set; }
 
         //Click Rates
-        [Display(Name = "A4 B&W Click Rate")]
+        [Display(Name = "A4 B&W")]
         public double A4BlackClick { get; set; }
-        [Display(Name = "A3 B&W Click Rate")]
+        [Display(Name = "A3 B&W")]
         public double A3BlackClick { get { return A4BlackClick * 2; } }
-        [Display(Name = "A4 Colour Click Rate")]
+        [Display(Name = "A4 Colour")]
         public double A4ColourClick { get; set; }
-        [Display(Name = "A3 Colour Click Rate")]
+        [Display(Name = "A3 Colour")]
         public double A3ColourClick { get { return A4ColourClick * 2; } }
 
 

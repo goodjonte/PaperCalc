@@ -105,6 +105,7 @@ namespace PaperCalc.Models
         public double CoilSize { get; set; }
         public double CoilsPerPack { get; set; }
         public double PricePerPack { get; set; }
+        [DisplayFormat(DataFormatString = "{0:c}")]
         public double PricePerCoil { get { return Math.Round(PricePerPack / CoilsPerPack, 2); } }
         public string? Description { get { return $"{CoilSize}mm  {BindingCoilType} bound"; } }
     }

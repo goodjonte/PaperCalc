@@ -4,8 +4,8 @@
   <KindsMultiplier>0.8</KindsMultiplier>
   <Gst>1.15</Gst>
   <ClickRates>
-    <A4Black>0</A4Black>
-    <A4Colour>0</A4Colour>
+    <A4Black>0.0112</A4Black>
+    <A4Colour>0.0784</A4Colour>
   </ClickRates>
   <WideFormat>
     <ink>

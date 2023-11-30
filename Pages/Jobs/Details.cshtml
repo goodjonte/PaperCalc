@@ -48,6 +48,14 @@
                 @Html.DisplayFor(model => model.Job.Buissnessname)
             </h2>
         </div>
+        <div class="detailsTableRow">
+            <h1>
+                @Html.DisplayNameFor(model => model.Job.Created)
+            </h1>
+            <h2>
+                @Html.DisplayFor(model => model.Job.Created)
+            </h2>
+        </div>
         <div class="fullWidth">
             <button class="btn btn-success center" onclick="editJobDetails()">edit</button>
         </div>
@@ -56,6 +64,7 @@
     <!-- Details Table Editable-->
     <form asp-page-handler="SaveJobDetails" id="editDetailsTable" class="detailsTable hidden">
         <input type="hidden" asp-for="Job.Id" />
+        <input type="hidden" asp-for="Job.Created" />
 
         <div class="detailsTableRow">
             <h1>

@@ -7,6 +7,8 @@ namespace PaperCalc.Models
     public class Job
     {
         public Guid Id { get; set; }
+        [Display(Name = "date created")]
+        [DataType(DataType.Date)]
         public DateTime Created { get; set; }
         [Display(Name = "job title")]
         public string JobTitle { get; set; } = default!;

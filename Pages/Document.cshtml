@@ -187,9 +187,11 @@
                 </select>
             </div>
 
-            <!-- Binding here - currently hidden until feature is fully implemented-->
-            <div class="inputForRow hidden">
-                <label>hole punches</label>
+            
+        </div>
+        <div class="inputsForRow">
+            <div class="inputForRow">
+                <label>binding</label>
                 <select class="custom-select" asp-for="Inputs.Binding">
                     <option value="None">none</option>
                     <option value="Plastic">Plastic</option>
@@ -204,50 +206,49 @@
                 <span class="checkmark"></span>
             </label>
         </div>
-    </div>
 
-    <!-- Additional Costs -->
-    <div class="inputRow inputRowWithBorder">
-        <div class="inputRowTitle">
-            <h3>additional costs</h3>
+        <!-- Additional Costs -->
+        <div class="inputRow inputRowWithBorder">
+            <div class="inputRowTitle">
+                <h3>additional costs</h3>
+            </div>
+            <div class="inputsForRow">
+                <div class="inputForRow">
+                    <label>design</label>
+                    <input placeholder="$00.00" type="text" asp-for="Inputs.DesignCost" />
+                </div>
+                <div class="inputForRow">
+                    <label>file handling</label>
+                    <input type="number" placeholder="$00.00" asp-for="Inputs.FileHandlingCost">
+                </div>
+                <div class="inputForRow">
+                    <label>setup</label>
+                    <input placeholder="$00.00" type="text" asp-for="Inputs.SetupCost" />
+                </div>
+            </div>
         </div>
-        <div class="inputsForRow">
-            <div class="inputForRow">
-                <label>design</label>
-                <input placeholder="$00.00" type="text" asp-for="Inputs.DesignCost" />
-            </div>
-            <div class="inputForRow">
-                <label>file handling</label>
-                <input type="number" placeholder="$00.00" asp-for="Inputs.FileHandlingCost">
-            </div>
-            <div class="inputForRow">
-                <label>setup</label>
-                <input placeholder="$00.00" type="text" asp-for="Inputs.SetupCost" />
-            </div>
-        </div>
-    </div>
 
-    <div class="inputRow">
-        <div class="inputRowTitle">
-            <h3>quantitys</h3>
+        <div class="inputRow">
+            <div class="inputRowTitle">
+                <h3>quantitys</h3>
+            </div>
+            <div class="inputsForRow">
+                <div class="inputForRow">
+                    <label>copy quantity<span class="requiredStar">*</span></label>
+                    <input type="number" placeholder="0" asp-for="Inputs.Quantity">
+                </div>
+                <div class="inputForRow">
+                    <label>pages<span class="requiredStar">*</span></label>
+                    <input type="number" placeholder="0" asp-for="Inputs.Pages">
+                </div>
+                <div class="inputForRow"></div>
+                <div class="inputForRow hidden">
+                    <label>kinds<span class="requiredStar">*</span></label>
+                    <input placeholder="1" type="number" asp-for="Inputs.Kinds">
+                </div>
+            </div>
         </div>
-        <div class="inputsForRow">
-            <div class="inputForRow">
-                <label>copy quantity<span class="requiredStar">*</span></label>
-                <input type="number" placeholder="0" asp-for="Inputs.Quantity">
-            </div>
-            <div class="inputForRow">
-                <label>pages<span class="requiredStar">*</span></label>
-                <input type="number" placeholder="0" asp-for="Inputs.Pages">
-            </div>
-            <div class="inputForRow"></div>
-            <div class="inputForRow hidden">
-                <label>kinds<span class="requiredStar">*</span></label>
-                <input placeholder="1" type="number" asp-for="Inputs.Kinds">
-            </div>
-        </div>
-    </div>
 
-    <button type="submit" class="btn btn-success calculationSubmitButton marginAuto">generate quote</button>
+        <button type="submit" class="btn btn-success calculationSubmitButton marginAuto">generate quote</button>
 
 </form>
