@@ -169,7 +169,7 @@ namespace PaperCalc.DTOs
             {
                 if (Inputs.Quantity < 1) return 0;
                 if (FlatSize == null) return 0;
-                if (Inputs.Quantity > FlatSize.QuantityMax) //This is a shortcut fix for now ideally we want to make temp calc this calc possibly
+                if (Inputs.CustomFlatSize == false && Inputs.Quantity > FlatSize.QuantityMax) //This is a shortcut fix for now ideally we want to make temp calc this calc possibly
                 {
                     var tempJob = Inputs;
                     tempJob.Quantity = FlatSize.QuantityMax;
@@ -199,7 +199,7 @@ namespace PaperCalc.DTOs
         {
             get
             {
-                string size = FlatSize != null ? FlatSize.Name : "Custom";
+                string size = Inputs.CustomFlatSize ? "Custom" : FlatSize.Name;
                 string stock = $"{Sra3Stock.CoatType} {Sra3Stock.StockType} - {Sra3Stock.Weight}gsm";
                 string sides = Inputs.DoubleSided ? "D/S" : "S/S";
                 string colour = Inputs.Colour ? "Colour" : "B&W";

@@ -115,7 +115,7 @@
         <div class="inputsForRow">
             <div class="inputForRow">
                 <label>flat size<span class="requiredStar">*</span></label>
-                <select id="FlatSizeSelect" class="custom-select" asp-for="Inputs.FlatSizeId">
+                <select onchange="checkCustom()" id="FlatSizeSelect" class="custom-select" asp-for="Inputs.FlatSizeId">
                     <option class="defaultOption" value="">select a size...</option>
                     @{
                         foreach (PaperCalc.Models.FlatSize fs in Model.FlatSizes)
@@ -150,6 +150,23 @@
                 </select>
             </div>
         </div>
+        <script>
+            var hiddenCustom = true;
+
+            function checkCustom() {
+                var value = document.getElementById("FlatSizeSelect").value;
+
+                if (hiddenCustom && value == "custom") {
+                    document.getElementById("hiddenSizeInputs").classList.remove("hidden");
+                    document.getElementById("Inputs_CustomFlatSize").value = "true";
+                    hiddenCustom = false;
+                } else if (hiddenCustom == false && value != "custom") {
+                    document.getElementById("hiddenSizeInputs").classList.add("hidden")
+                    document.getElementById("Inputs_CustomFlatSize").value = "false";
+                    hiddenCustom = true;
+                }
+            }
+        </script>
         <div id="hiddenSizeInputs" class="inputsForRow hidden">
             <input asp-for="Inputs.CustomFlatSize" value="false" type="hidden" />
             <div class="inputForRow">

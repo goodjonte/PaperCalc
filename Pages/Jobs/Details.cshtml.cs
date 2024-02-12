@@ -22,6 +22,8 @@ namespace PaperCalc.Pages.Jobs
         }
         [BindProperty]
         public Job Job { get; set; } = default!;
+        [BindProperty]
+        public int numberOfProducts { get; set; }
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
@@ -40,6 +42,12 @@ namespace PaperCalc.Pages.Jobs
                 Job = job;
                 Job.GetItems(_context, _env.ContentRootPath);
             }
+
+            numberOfProducts = Job.Sra3Items.Count > 0 ? 1 : 0;
+            numberOfProducts = Job.BookletItems.Count > 0 ? numberOfProducts + 1 : numberOfProducts;
+            numberOfProducts = Job.DocumentItems.Count > 0 ? numberOfProducts + 1 : numberOfProducts;
+            numberOfProducts = Job.WideFormatItems.Count > 0 ? numberOfProducts + 1 : numberOfProducts;
+
             return Page();
         }
 

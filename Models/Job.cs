@@ -7,6 +7,23 @@ namespace PaperCalc.Models
     public class Job
     {
         public Guid Id { get; set; }
+        //Display id is used just for quote pdf, is the first 6 digits of guid
+        public string DisplayId { 
+            get {
+                string guid = Id.ToString();
+                string guidNumbers = "";
+
+                for(int i=0; i < guid.Length; i++)
+                {
+                    if (char.IsDigit(guid[i]))
+                    {
+                        guidNumbers = guidNumbers + guid[i];
+                    }
+                    if (guidNumbers.Length > 5) break;
+                }
+                return guidNumbers;
+            } 
+        }
         [Display(Name = "date created")]
         [DataType(DataType.Date)]
         public DateTime Created { get; set; }

@@ -368,5 +368,387 @@
 </div>
 
 <div class="stockDetailsButtons">
-    <a class="btn btn-primary" asp-page="./Index">back to stock</a>
+    <a class="btn btn-primary" asp-page="./Index">back to jobs</a>
+</div>
+
+<div class="stockDetailsButtons">
+    <!-- PDF Libary Stuff-->
+    
+    <script>
+        const { PDFDocument } = PDFLib;
+
+        function openForm() {
+            document.getElementById("quoteForm").classList.remove("hidden");
+            document.getElementById("genQuoteButton").classList.add("hidden");
+        }
+        function closeForm() {
+            document.getElementById("quoteForm").classList.add("hidden");
+            document.getElementById("genQuoteButton").classList.remove("hidden");
+        }
+
+        async function generateQuote() {
+            console.log("quoting...");
+
+            if (document.getElementById("staffName").value == "") {
+                document.getElementById("staffName").value = "Create Studio";
+            }
+
+            const formUrl = window.location.protocol + "//" + window.location.host + '/newtemp.pdf'
+            const formPdfBytes = await fetch(formUrl).then(res => res.arrayBuffer())
+            const pdfDoc = await PDFDocument.load(formPdfBytes);
+
+            // Get the form containing all the fields
+            const form = pdfDoc.getForm()
+
+            // Get all fields in the PDF by their names
+            const quoteNum = form.getTextField('Quote No')
+            const date = form.getTextField('Date')
+            const customerName = form.getTextField('Customer Name')
+            const businessName = form.getTextField('Business Name')
+            const staffName = form.getTextField('Staff Name')
+
+            //product 1
+            const prod1Name = form.getTextField('Product1 Name')
+            const prod1NDescription = form.getTextField('Product1 Description')
+            const prod1Notes = form.getTextField('Product1 Notes')
+
+            const prod1quan1 = form.getTextField('Product1 Quantity1')
+            const prod1quan1Unit = form.getTextField('Product1 Quantity1 Unit')
+            const prod1quan1Sub = form.getTextField('Product1 Quantity1 Sub')
+            const prod1quan1Gst = form.getTextField('Product1 Quantity1 GST')
+            const prod1quan1Total = form.getTextField('Product1 Quantity1 Total')
+
+            const prod1quan2 = form.getTextField('Product1 Quantity2')
+            const prod1quan2Unit = form.getTextField('Product1 Quantity2 Unit')
+            const prod1quan2Sub = form.getTextField('Product1 Quantity2 Sub')
+            const prod1quan2Gst = form.getTextField('Product1 Quantity2 GST')
+            const prod1quan2Total = form.getTextField('Product1 Quantity2 Total')
+
+            const prod1quan3 = form.getTextField('Product1 Quantity3')
+            const prod1quan3Unit = form.getTextField('Product1 Quantity3 Unit')
+            const prod1quan3Sub = form.getTextField('Product1 Quantity3 Sub')
+            const prod1quan3Gst = form.getTextField('Product1 Quantity3 GST')
+            const prod1quan3Total = form.getTextField('Product1 Quantity3 Total')
+
+            const prod1quan4 = form.getTextField('Product1 Quantity4')
+            const prod1quan4Unit = form.getTextField('Product1 Quantity4 Unit')
+            const prod1quan4Sub = form.getTextField('Product1 Quantity4 Sub')
+            const prod1quan4Gst = form.getTextField('Product1 Quantity4 GST')
+            const prod1quan4Total = form.getTextField('Product1 Quantity4 Total')
+
+            const prod1quan5 = form.getTextField('Product1 Quantity5')
+            const prod1quan5Unit = form.getTextField('Product1 Quantity5 Unit')
+            const prod1quan5Sub = form.getTextField('Product1 Quantity5 Sub')
+            const prod1quan5Gst = form.getTextField('Product1 Quantity5 GST')
+            const prod1quan5Total = form.getTextField('Product1 Quantity5 Total')
+
+            //product 2
+            const prod2Name = form.getTextField('Product2 Name')
+            const prod2NDescription = form.getTextField('Product2 Decription')
+            const prod2Notes = form.getTextField('Product3 Notes')
+
+            const prod2quan1 = form.getTextField('Product2 Quantity1')
+            const prod2quan1Unit = form.getTextField('Product2 Quantity1 Unit')
+            const prod2quan1Sub = form.getTextField('Product2 Quantity1 Sub')
+            const prod2quan1Gst = form.getTextField('Product2 Quantity1 GST')
+            const prod2quan1Total = form.getTextField('Product2 Quantity1 Total')
+
+            const prod2quan2 = form.getTextField('Product2 Quantity2')
+            const prod2quan2Unit = form.getTextField('Product2 Quantity2 Unit')
+            const prod2quan2Sub = form.getTextField('Product2 Quantity2 Sub')
+            const prod2quan2Gst = form.getTextField('Product2 Quantity2 GST')
+            const prod2quan2Total = form.getTextField('Product2 Quantity2 Total')
+
+            const prod2quan3 = form.getTextField('Product2 Quantity3')
+            const prod2quan3Unit = form.getTextField('Product2 Quantity3 Unit')
+            const prod2quan3Sub = form.getTextField('Product2 Quantity3 Sub')
+            const prod2quan3Gst = form.getTextField('Product2 Quantity3 GST')
+            const prod2quan3Total = form.getTextField('Product2 Quantity3 Total')
+
+            const prod2quan4 = form.getTextField('Product2 Quantity4')
+            const prod2quan4Unit = form.getTextField('Product2 Quantity4 Unit')
+            const prod2quan4Sub = form.getTextField('Product2 Quantity4 Sub')
+            const prod2quan4Gst = form.getTextField('Product2 Quantity4 GST')
+            const prod2quan4Total = form.getTextField('Product2 Quantity4 Total')
+
+            const prod2quan5 = form.getTextField('Product2 Quantity5')
+            const prod2quan5Unit = form.getTextField('Product2 Quantity5 Unit')
+            const prod2quan5Sub = form.getTextField('Product2 Quantity5 Sub')
+            const prod2quan5Gst = form.getTextField('Product2 Quantity5 GST')
+            const prod2quan5Total = form.getTextField('Product2 Quantity5 Total')
+
+            //product 3
+            const prod3Name = form.getTextField('Product3 Name');
+            const prod3Description = form.getTextField('Product3 Description');
+            const prod3Notes = form.getTextField('Product3 Notes');
+
+            const prod3quan1 = form.getTextField('Product3 Quantity1');
+            const prod3quan1Unit = form.getTextField('Product3 Quantity1 Unit');
+            const prod3quan1Sub = form.getTextField('Product3 Quantity1 Sub');
+            const prod3quan1Gst = form.getTextField('Product3 Quantity1 GST');
+            const prod3quan1Total = form.getTextField('Product3 Quantity1 Total');
+
+            const prod3quan2 = form.getTextField('Product3 Quantity2');
+            const prod3quan2Unit = form.getTextField('Product3 Quantity2 Unit');
+            const prod3quan2Sub = form.getTextField('Product3 Quantity2 Sub');
+            const prod3quan2Gst = form.getTextField('Product3 Quantity2 GST');
+            const prod3quan2Total = form.getTextField('Product3 Quantity2 Total');
+
+            const prod3quan3 = form.getTextField('Product3 Quantity3');
+            const prod3quan3Unit = form.getTextField('Product3 Quantity3 Unit');
+            const prod3quan3Sub = form.getTextField('Product3 Quantity3 Sub');
+            const prod3quan3Gst = form.getTextField('Product3 Quantity3 GST');
+            const prod3quan3Total = form.getTextField('Product3 Quantity3 Total');
+
+            const prod3quan4 = form.getTextField('Product3 Quantity4');
+            const prod3quan4Unit = form.getTextField('Product3 Quantity4 Unit');
+            const prod3quan4Sub = form.getTextField('Product3 Quantity4 Sub');
+            const prod3quan4Gst = form.getTextField('Product3 Quantity4 GST');
+            const prod3quan4Total = form.getTextField('Product3 Quantity4 Total');
+
+            const prod3quan5 = form.getTextField('Product3 Quantity5');
+            const prod3quan5Unit = form.getTextField('Product3 Quantity5 Unit');
+            const prod3quan5Sub = form.getTextField('Product3 Quantity5 Sub');
+            const prod3quan5Gst = form.getTextField('Product3 Quantity5 GST');
+            const prod3quan5Total = form.getTextField('Product3 Quantity5 Total');
+
+
+            //product 4
+            const prod4Name = form.getTextField('Product4 Name');
+            const prod4Description = form.getTextField('Product4 Decription');
+            const prod4Notes = form.getTextField('Product4 Notes');
+
+            const prod4quan1 = form.getTextField('Product4 Quantity1');
+            const prod4quan1Unit = form.getTextField('Product4 Quantity1 Unit');
+            const prod4quan1Sub = form.getTextField('Product4 Quantity1 Sub');
+            const prod4quan1Gst = form.getTextField('Product4 Quantity1 GST');
+            const prod4quan1Total = form.getTextField('Product4 Quantity1 Total');
+
+            const prod4quan2 = form.getTextField('Product4 Quantity2');
+            const prod4quan2Unit = form.getTextField('Product4 Quantity2 Unit');
+            const prod4quan2Sub = form.getTextField('Product4 Quantity2 Sub');
+            const prod4quan2Gst = form.getTextField('Product4 Quantity2 GST');
+            const prod4quan2Total = form.getTextField('Product4 Quantity2 Total');
+
+            const prod4quan3 = form.getTextField('Product4 Quantity3');
+            const prod4quan3Unit = form.getTextField('Product4 Quantity3 Unit');
+            const prod4quan3Sub = form.getTextField('Product4 Quantity3 Sub');
+            const prod4quan3Gst = form.getTextField('Product4 Quantity3 GST');
+            const prod4quan3Total = form.getTextField('Product4 Quantity3 Total');
+
+            const prod4quan4 = form.getTextField('Product4 Quantity4');
+            const prod4quan4Unit = form.getTextField('Product4 Quantity4 Unit');
+            const prod4quan4Sub = form.getTextField('Product4 Quantity4 Sub');
+            const prod4quan4Gst = form.getTextField('Product4 Quantity4 GST');
+            const prod4quan4Total = form.getTextField('Product4 Quantity4 Total');
+
+            const prod4quan5 = form.getTextField('Product4 Quantity5');
+            const prod4quan5Unit = form.getTextField('Product4 Quantity5 Unit');
+            const prod4quan5Sub = form.getTextField('Product4 Quantity5 Sub');
+            const prod4quan5Gst = form.getTextField('Product4 Quantity5 GST');
+            const prod4quan5Total = form.getTextField('Product4 Quantity5 Total');
+
+            // Fill in the basic info fields '12/12/2024'
+            var dateNow = new Date();
+            date.setText(dateNow.getDate() + "/" + (dateNow.getMonth() + 1) + "/" + dateNow.getFullYear())
+            quoteNum.setText(document.getElementById("quoteNum").value)
+            customerName.setText(document.getElementById("customerName").value)
+            businessName.setText(document.getElementById("businessName").value)
+            staffName.setText(document.getElementById("staffName").value)
+
+            //remove unneeded pages
+            var pageNumbers = parseInt(document.getElementById("neededPages").value)
+            switch (pageNumbers) {
+                case 1:
+                    pdfDoc.removePage(1)
+                    pdfDoc.removePage(1)
+                    break;
+                case 13:
+                    pdfDoc.removePage(1)
+                    break;
+                case 12:
+                    pdfDoc.removePage(2)
+                    break;
+                default:
+                    console.log("removed no pages")
+                    break;
+            }
+
+            var productNumbers = [];
+            for (let i = 0; i < 4; i++) {
+                if (document.getElementById("item" + (i+1)).value > 0) {
+                    productNumbers.push(i + 1);
+                }
+            }
+
+            for (let x = 0; x < productNumbers.length; x++) {
+                if (pageNumbers != 13) {
+                    form.getTextField('Product' + (x + 1) + ' Name').setText(document.getElementById("prod" + productNumbers[x] + "Name").value)
+                    if ((x + 1) == 2 || (x + 1) == 4) { //this litterally just fixes a typo in pdf
+                        form.getTextField('Product' + (x + 1) + ' Decription').setText(document.getElementById("prod" + productNumbers[x] + "Description").value)
+                    } else {
+                        form.getTextField('Product' + (x + 1) + ' Description').setText(document.getElementById("prod" + productNumbers[x] + "Description").value)
+                    }
+                    form.getTextField('Product' + (x + 1) + ' Notes').setText(document.getElementById("prod" + productNumbers[x] + "Notes").value)
+
+                    for (let z = 0; z < document.getElementById("item" + productNumbers[x]).value; z++) {
+                        form.getTextField('Product' + (x + 1) + ' Quantity' + (z + 1) + '').setText(document.getElementsByClassName("prod" + productNumbers[x] + "quan")[z].value)
+                        form.getTextField('Product' + (x + 1) + ' Quantity' + (z + 1) + ' Unit').setText(document.getElementsByClassName("prod" + productNumbers[x] + "quanUnit")[z].value)
+                        form.getTextField('Product' + (x + 1) + ' Quantity' + (z + 1) + ' Sub').setText(document.getElementsByClassName("prod" + productNumbers[x] + "quanSub")[z].value)
+                        form.getTextField('Product' + (x + 1) + ' Quantity' + (z + 1) + ' GST').setText(document.getElementsByClassName("prod" + productNumbers[x] + "quanGST")[z].value)
+                        form.getTextField('Product' + (x + 1) + ' Quantity' + (z + 1) + ' Total').setText(document.getElementsByClassName("prod" + productNumbers[x] + "quanTotal")[z].value)
+                    }
+
+                } else {
+                    if (x == 0) {
+                        form.getTextField('Product' + 1 + ' Name').setText(document.getElementById("prod" + productNumbers[x] + "Name").value)
+                        form.getTextField('Product' + 1 + ' Description').setText(document.getElementById("prod" + productNumbers[x] + "Description").value)
+                        form.getTextField('Product' + 1 + ' Notes').setText(document.getElementById("prod" + productNumbers[x] + "Notes").value)
+
+                        for (let z = 0; z < document.getElementById("item" + productNumbers[x]).value; z++) {
+                            form.getTextField('Product' + 1 + ' Quantity' + (z + 1) + '').setText(document.getElementsByClassName("prod" + productNumbers[x] + "quan")[z].value)
+                            form.getTextField('Product' + 1 + ' Quantity' + (z + 1) + ' Unit').setText(document.getElementsByClassName("prod" + productNumbers[x] + "quanUnit")[z].value)
+                            form.getTextField('Product' + 1 + ' Quantity' + (z + 1) + ' Sub').setText(document.getElementsByClassName("prod" + productNumbers[x] + "quanSub")[z].value)
+                            form.getTextField('Product' + 1 + ' Quantity' + (z + 1) + ' GST').setText(document.getElementsByClassName("prod" + productNumbers[x] + "quanGST")[z].value)
+                            form.getTextField('Product' + 1 + ' Quantity' + (z + 1) + ' Total').setText(document.getElementsByClassName("prod" + productNumbers[x] + "quanTotal")[z].value)
+                        }
+
+                    } else {
+                        form.getTextField('Product' + 4 + ' Name').setText(document.getElementById("prod" + productNumbers[x] + "Name").value)
+                        form.getTextField('Product' + 4 + ' Decription').setText(document.getElementById("prod" + productNumbers[x] + "Description").value)
+                        form.getTextField('Product' + 4 + ' Notes').setText(document.getElementById("prod" + productNumbers[x] + "Notes").value)
+                        for (let z = 0; z < document.getElementById("item" + productNumbers[x]).value; z++) {
+                            form.getTextField('Product' + 4 + ' Quantity' + (z + 1) + '').setText(document.getElementsByClassName("prod" + productNumbers[x] + "quan")[z].value)
+                            form.getTextField('Product' + 4 + ' Quantity' + (z + 1) + ' Unit').setText(document.getElementsByClassName("prod" + productNumbers[x] + "quanUnit")[z].value)
+                            form.getTextField('Product' + 4 + ' Quantity' + (z + 1) + ' Sub').setText(document.getElementsByClassName("prod" + productNumbers[x] + "quanSub")[z].value)
+                            form.getTextField('Product' + 4 + ' Quantity' + (z + 1) + ' GST').setText(document.getElementsByClassName("prod" + productNumbers[x] + "quanGST")[z].value)
+                            form.getTextField('Product' + 4 + ' Quantity' + (z + 1) + ' Total').setText(document.getElementsByClassName("prod" + productNumbers[x] + "quanTotal")[z].value)
+                        }
+                    }
+                }
+                
+            }
+
+            //flattern form
+            form.flatten();
+
+            // Serialize the PDFDocument to bytes (a Uint8Array)
+            const pdfBytes = await pdfDoc.save()
+
+            var blob = new Blob([pdfBytes], { type: "application/pdf" });// change resultByte to bytes
+            var link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.download = "quote.pdf";
+            link.click();
+            console.log("done");
+            closeForm();
+        }
+    </script>
+    <a class="btn btn-primary mtb10" id="genQuoteButton" onclick="openForm()">create document</a>
+
+    <form id="quoteForm" class="hidden">
+
+        <div class="inputForRow singleInput">
+            <label>staff name</label>
+            <input placeholder="Create Studio" id="staffName" type="text" />
+        </div>
+
+        <a class="btn btn-primary mtb10" onclick="generateQuote()">create</a>
+    </form>
+
+</div>
+
+<!-- Values for pdf -->
+<div class="hidden">
+    <input id="customerName" value="@Model.Job.ClientName" />
+    <input id="businessName" value="@Model.Job.Buissnessname" />
+
+    <input id="quoteNum" value="@Model.Job.DisplayId" />
+
+    <input id="item1" value="@Model.Job.Sra3Items.Count" />
+    <input id="item2" value="@Model.Job.DocumentItems.Count" />
+    <input id="item3" value="@Model.Job.BookletItems.Count" />
+    <input id="item4" value="@Model.Job.WideFormatItems.Count" />
+
+    @{
+        if (Model.numberOfProducts == 1)
+        {
+            <input id="neededPages" value="1" />
+        }
+        if (Model.numberOfProducts == 2)
+        {
+            <input id="neededPages" value="13" />
+        }
+        if (Model.numberOfProducts == 3)
+        {
+            <input id="neededPages" value="12" />
+        }
+        if (Model.numberOfProducts == 4)
+        {
+            <input id="neededPages" value="123" />
+        }
+    }
+    @{
+        if (Model.Job.Sra3Items.Count > 0)
+        {
+            <input id="prod1Name" value="@Model.Job.JobTitle" />
+            <input id="prod1Description" value="desc" />
+            <input id="prod1Notes" value="notes" />
+
+            for (int i = 0; i < Model.Job.Sra3Items.Count; i++)
+            {
+                <input class="prod1quan" value="@Model.Job.Sra3Items[i].Inputs.Quantity" alt="@i" />
+                <input class="prod1quanUnit" value="@Model.Job.Sra3Items[i].Calc.CostPerunit" alt="@i" />
+                <input class="prod1quanSub" value="@Model.Job.Sra3Items[i].Calc.FinalJobCost" alt="@i" />
+                <input class="prod1quanGST" value="@Model.Job.Sra3Items[i].Calc.GST" alt="@i" />
+                <input class="prod1quanTotal" value="@Model.Job.Sra3Items[i].Calc.FinalJobCostWithGst" alt="@i" />
+            }
+        }
+        if (Model.Job.DocumentItems.Count > 0)
+        {
+            <input id="prod2Name" value="@Model.Job.JobTitle" />
+            <input id="prod2Description" value="desc" />
+            <input id="prod2Notes" value="notes" />
+
+            for (int i = 0; i < Model.Job.DocumentItems.Count; i++)
+            {
+                <input class="prod2quan" value="@Model.Job.DocumentItems[i].Inputs.Quantity" alt="@i" />
+                <input class="prod2quanUnit" value="@Model.Job.DocumentItems[i].Calc.CostPerUnit" alt="@i" />
+                <input class="prod2quanSub" value="@Model.Job.DocumentItems[i].Calc.FinalJobCost" alt="@i" />
+                <input class="prod2quanGST" value="@(Model.Job.DocumentItems[i].Calc.FinalJobCostWithGST - Model.Job.DocumentItems[i].Calc.FinalJobCost) " alt="@i" />
+                <input class="prod2quanTotal" value="@Model.Job.DocumentItems[i].Calc.FinalJobCostWithGST" alt="@i" />
+            }
+        }
+        if (Model.Job.BookletItems.Count > 0)
+        {
+            <input id="prod3Name" value="@Model.Job.JobTitle" />
+            <input id="prod3Description" value="desc" />
+            <input id="prod3Notes" value="notes" />
+
+            for (int i = 0; i < Model.Job.BookletItems.Count; i++)
+            {
+                <input class="prod3quan" value="@Model.Job.BookletItems[i].Inputs.Quantity" alt="@i" />
+                <input class="prod3quanUnit" value="@Model.Job.BookletItems[i].Calc.CostPerUnit" alt="@i" />
+                <input class="prod3quanSub" value="@Model.Job.BookletItems[i].Calc.FinalJobCost" alt="@i" />
+                <input class="prod3quanGST" value="@(Model.Job.BookletItems[i].Calc.FinalJobCostWithGST - Model.Job.BookletItems[i].Calc.FinalJobCost) " alt="@i" />
+                <input class="prod3quanTotal" value="@Model.Job.BookletItems[i].Calc.FinalJobCostWithGST" alt="@i" />
+            }
+        }
+        if (Model.Job.WideFormatItems.Count > 0)
+        {
+            <input id="prod4Name" value="@Model.Job.JobTitle" />
+            <input id="prod4Description" value="desc" />
+            <input id="prod4Notes" value="notes" />
+
+            for (int i = 0; i < Model.Job.WideFormatItems.Count; i++)
+            {
+                <input class="prod4quan" value="@Model.Job.WideFormatItems[i].Inputs.Quantity" alt="@i" />
+                <input class="prod4quanUnit" value="@Model.Job.WideFormatItems[i].Calc.CostPerUnit" alt="@i" />
+                <input class="prod4quanSub" value="@Model.Job.WideFormatItems[i].Calc.FinalJobCost" alt="@i" />
+                <input class="prod4quanGST" value="@(Model.Job.WideFormatItems[i].Calc.FinalJobCostWithGST - Model.Job.WideFormatItems[i].Calc.FinalJobCost) " alt="@i" />
+                <input class="prod4quanTotal" value="@Model.Job.WideFormatItems[i].Calc.FinalJobCostWithGST" alt="@i" />
+            }
+        }
+    };
+
 </div>
