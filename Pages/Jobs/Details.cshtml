@@ -593,10 +593,10 @@
 
                     for (let z = 0; z < document.getElementById("item" + productNumbers[x]).value; z++) {
                         form.getTextField('Product' + (x + 1) + ' Quantity' + (z + 1) + '').setText(document.getElementsByClassName("prod" + productNumbers[x] + "quan")[z].value)
-                        form.getTextField('Product' + (x + 1) + ' Quantity' + (z + 1) + ' Unit').setText(document.getElementsByClassName("prod" + productNumbers[x] + "quanUnit")[z].value)
-                        form.getTextField('Product' + (x + 1) + ' Quantity' + (z + 1) + ' Sub').setText(document.getElementsByClassName("prod" + productNumbers[x] + "quanSub")[z].value)
-                        form.getTextField('Product' + (x + 1) + ' Quantity' + (z + 1) + ' GST').setText(document.getElementsByClassName("prod" + productNumbers[x] + "quanGST")[z].value)
-                        form.getTextField('Product' + (x + 1) + ' Quantity' + (z + 1) + ' Total').setText(document.getElementsByClassName("prod" + productNumbers[x] + "quanTotal")[z].value)
+                        form.getTextField('Product' + (x + 1) + ' Quantity' + (z + 1) + ' Unit').setText((Math.round(document.getElementsByClassName("prod" + productNumbers[x] + "quanUnit")[z].value * 100) / 100).toString())
+                        form.getTextField('Product' + (x + 1) + ' Quantity' + (z + 1) + ' Sub').setText((Math.round(document.getElementsByClassName("prod" + productNumbers[x] + "quanSub")[z].value * 100) / 100).toString())
+                        form.getTextField('Product' + (x + 1) + ' Quantity' + (z + 1) + ' GST').setText((Math.round(document.getElementsByClassName("prod" + productNumbers[x] + "quanGST")[z].value * 100) / 100).toString())
+                        form.getTextField('Product' + (x + 1) + ' Quantity' + (z + 1) + ' Total').setText((Math.round(document.getElementsByClassName("prod" + productNumbers[x] + "quanTotal")[z].value * 100) / 100).toString())
                     }
 
                 } else {
@@ -607,10 +607,10 @@
 
                         for (let z = 0; z < document.getElementById("item" + productNumbers[x]).value; z++) {
                             form.getTextField('Product' + 1 + ' Quantity' + (z + 1) + '').setText(document.getElementsByClassName("prod" + productNumbers[x] + "quan")[z].value)
-                            form.getTextField('Product' + 1 + ' Quantity' + (z + 1) + ' Unit').setText(document.getElementsByClassName("prod" + productNumbers[x] + "quanUnit")[z].value)
-                            form.getTextField('Product' + 1 + ' Quantity' + (z + 1) + ' Sub').setText(document.getElementsByClassName("prod" + productNumbers[x] + "quanSub")[z].value)
-                            form.getTextField('Product' + 1 + ' Quantity' + (z + 1) + ' GST').setText(document.getElementsByClassName("prod" + productNumbers[x] + "quanGST")[z].value)
-                            form.getTextField('Product' + 1 + ' Quantity' + (z + 1) + ' Total').setText(document.getElementsByClassName("prod" + productNumbers[x] + "quanTotal")[z].value)
+                            form.getTextField('Product' + 1 + ' Quantity' + (z + 1) + ' Unit').setText((Math.round(document.getElementsByClassName("prod" + productNumbers[x] + "quanUnit")[z].value * 100) / 100).toString())
+                            form.getTextField('Product' + 1 + ' Quantity' + (z + 1) + ' Sub').setText((Math.round(document.getElementsByClassName("prod" + productNumbers[x] + "quanSub")[z].value * 100) / 100).toString())
+                            form.getTextField('Product' + 1 + ' Quantity' + (z + 1) + ' GST').setText((Math.round(document.getElementsByClassName("prod" + productNumbers[x] + "quanGST")[z].value * 100) / 100).toString())
+                            form.getTextField('Product' + 1 + ' Quantity' + (z + 1) + ' Total').setText((Math.round(document.getElementsByClassName("prod" + productNumbers[x] + "quanTotal")[z].value * 100) / 100).toString())
                         }
 
                     } else {
@@ -619,10 +619,10 @@
                         form.getTextField('Product' + 4 + ' Notes').setText(document.getElementById("prod" + productNumbers[x] + "Notes").value)
                         for (let z = 0; z < document.getElementById("item" + productNumbers[x]).value; z++) {
                             form.getTextField('Product' + 4 + ' Quantity' + (z + 1) + '').setText(document.getElementsByClassName("prod" + productNumbers[x] + "quan")[z].value)
-                            form.getTextField('Product' + 4 + ' Quantity' + (z + 1) + ' Unit').setText(document.getElementsByClassName("prod" + productNumbers[x] + "quanUnit")[z].value)
-                            form.getTextField('Product' + 4 + ' Quantity' + (z + 1) + ' Sub').setText(document.getElementsByClassName("prod" + productNumbers[x] + "quanSub")[z].value)
-                            form.getTextField('Product' + 4 + ' Quantity' + (z + 1) + ' GST').setText(document.getElementsByClassName("prod" + productNumbers[x] + "quanGST")[z].value)
-                            form.getTextField('Product' + 4 + ' Quantity' + (z + 1) + ' Total').setText(document.getElementsByClassName("prod" + productNumbers[x] + "quanTotal")[z].value)
+                            form.getTextField('Product' + 4 + ' Quantity' + (z + 1) + ' Unit').setText((Math.round(document.getElementsByClassName("prod" + productNumbers[x] + "quanUnit")[z].value * 100) / 100).toString())
+                            form.getTextField('Product' + 4 + ' Quantity' + (z + 1) + ' Sub').setText((Math.round(document.getElementsByClassName("prod" + productNumbers[x] + "quanSub")[z].value * 100) / 100).toString())
+                            form.getTextField('Product' + 4 + ' Quantity' + (z + 1) + ' GST').setText((Math.round(document.getElementsByClassName("prod" + productNumbers[x] + "quanGST")[z].value * 100) / 100).toString())
+                            form.getTextField('Product' + 4 + ' Quantity' + (z + 1) + ' Total').setText((Math.round(document.getElementsByClassName("prod" + productNumbers[x] + "quanTotal")[z].value * 100) / 100).toString())
                         }
                     }
                 }
@@ -652,6 +652,52 @@
             <label>staff name</label>
             <input placeholder="Create Studio" id="staffName" type="text" />
         </div>
+        @{
+            if (Model.Job.Sra3Items.Count > 0)
+            {
+                <div class="inputForRow singleInput">
+                    <label>sra3 product description:</label>
+                    <input id="prod1Description" value="" />
+                </div>
+                <div class="inputForRow singleInput">
+                    <label>sra3 notes:</label>
+                    <input id="prod1Notes" value="" />
+                </div>
+            }
+            if (Model.Job.DocumentItems.Count > 0)
+            {
+                <div class="inputForRow singleInput">
+                    <label>document product description:</label>
+                    <input id="prod2Description" value="" />
+                </div>
+                <div class="inputForRow singleInput">
+                    <label>document notes:</label>
+                    <input id="prod2Notes" value="" />
+                </div>
+            }
+            if (Model.Job.BookletItems.Count > 0)
+            {
+                <div class="inputForRow singleInput">
+                    <label>booklet product description:</label>
+                    <input id="prod3Description" value="" />
+                </div>
+                <div class="inputForRow singleInput">
+                    <label>booket notes:</label>
+                    <input id="prod3Notes" value="" />
+                </div>
+            }
+            if (Model.Job.WideFormatItems.Count > 0)
+            {
+                <div class="inputForRow singleInput">
+                    <label>wide format product description:</label>
+                    <input id="prod4Description" value="" />
+                </div>
+                <div class="inputForRow singleInput">
+                    <label>wide format notes:</label>
+                    <input id="prod4Notes" value="" />
+                </div>
+            }
+        }
 
         <a class="btn btn-primary mtb10" onclick="generateQuote()">create</a>
     </form>
@@ -692,8 +738,6 @@
         if (Model.Job.Sra3Items.Count > 0)
         {
             <input id="prod1Name" value="@Model.Job.JobTitle" />
-            <input id="prod1Description" value="desc" />
-            <input id="prod1Notes" value="notes" />
 
             for (int i = 0; i < Model.Job.Sra3Items.Count; i++)
             {
@@ -707,8 +751,6 @@
         if (Model.Job.DocumentItems.Count > 0)
         {
             <input id="prod2Name" value="@Model.Job.JobTitle" />
-            <input id="prod2Description" value="desc" />
-            <input id="prod2Notes" value="notes" />
 
             for (int i = 0; i < Model.Job.DocumentItems.Count; i++)
             {
@@ -722,8 +764,6 @@
         if (Model.Job.BookletItems.Count > 0)
         {
             <input id="prod3Name" value="@Model.Job.JobTitle" />
-            <input id="prod3Description" value="desc" />
-            <input id="prod3Notes" value="notes" />
 
             for (int i = 0; i < Model.Job.BookletItems.Count; i++)
             {
@@ -737,8 +777,6 @@
         if (Model.Job.WideFormatItems.Count > 0)
         {
             <input id="prod4Name" value="@Model.Job.JobTitle" />
-            <input id="prod4Description" value="desc" />
-            <input id="prod4Notes" value="notes" />
 
             for (int i = 0; i < Model.Job.WideFormatItems.Count; i++)
             {
